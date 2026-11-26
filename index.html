@@ -105,6 +105,20 @@ img{max-width:100%}
 [hidden]{display:none!important}
 button,input,textarea,select{font-family:inherit;font-size:inherit}
 .wrap{max-width:1120px;margin:0 auto}
+/* tropical afternoon: banana-leaf shadow drifting over the top of the page (day only) */
+.leaf-shade{position:absolute;top:0;right:0;width:min(72vw,980px);height:620px;pointer-events:none;z-index:20;overflow:hidden;opacity:.2;mix-blend-mode:multiply}
+.leaf-svg{position:absolute;top:40px;right:-30px;width:100%;height:auto;overflow:visible}
+.leaf-svg .leaf{transform-box:view-box;transform-origin:900px 0}
+@media (prefers-reduced-motion:no-preference){
+  .leaf-svg .l1{animation:leaf-sway 9s ease-in-out infinite alternate}
+  .leaf-svg .l2{animation:leaf-sway 11s ease-in-out -4s infinite alternate}
+  .leaf-svg .l3{animation:leaf-sway 7s ease-in-out -2s infinite alternate}
+}
+@keyframes leaf-sway{from{transform:rotate(-1.6deg)}to{transform:rotate(2.2deg)}}
+:root[data-theme="dark"] .leaf-shade{display:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .leaf-shade{display:none}}
+@media (max-width:640px){.leaf-shade{width:100vw;height:420px;opacity:.14}}
+
 a{color:inherit}
 :focus-visible{outline:2px solid var(--cobalt);outline-offset:3px}
 html[data-lang="zh"] .en{display:none!important}
@@ -212,9 +226,9 @@ h1 .o{color:var(--stool)}
 }
 .tile .no{
   position:absolute;left:6px;bottom:5px;z-index:4;
-  font-family:var(--mono);font-size:10.5px;line-height:1;letter-spacing:.02em;
-  color:#1d2b2a;
-  padding:3px 5px;border-radius:2px;
+  font-family:"Patrick Hand",var(--hand);font-size:16px;line-height:1;letter-spacing:.01em;
+  color:#b4332c;
+  padding:2px 6px 1px;border-radius:2px;transform:rotate(-4deg);transform-origin:left bottom;
   background:rgba(251,250,244,.9);
   backdrop-filter:blur(2px);
   opacity:0;transition:opacity .18s ease;
@@ -811,6 +825,7 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
 </style>
 </head>
 <body>
+<div class="leaf-shade" aria-hidden="true"><svg class="leaf-svg" viewBox="0 0 900 560" preserveAspectRatio="xMaxYMin meet" xmlns="http://www.w3.org/2000/svg"><defs><filter id="leafblur" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="5"/></filter></defs><g filter="url(#leafblur)" fill="#1d3a2f" stroke="#1d3a2f"><g class="leaf l1"><path d="M900.0,-20.0 L887.5,-14.5 L874.8,-8.9 L862.1,-3.2 L849.3,2.5 L836.4,8.3 L823.4,14.1 L810.4,20.0 L797.2,26.0 L784.0,32.0 L770.6,38.1 L757.2,44.3 L743.7,50.5 L730.1,56.8 L716.4,63.1 L702.7,69.5 L688.8,76.0 L674.9,82.5 L660.8,89.1 L646.7,95.8 L632.5,102.5 L618.2,109.3 L603.8,116.1 L589.4,123.0 L574.8,130.0 L560.2,137.0 L545.4,144.1 L530.6,151.3 L515.7,158.5 L500.7,165.8 L485.6,173.1 L470.5,180.5 L455.2,188.0 L439.9,195.5 L424.4,203.1 L408.9,210.8 L393.3,218.5 L377.6,226.3 L361.8,234.1 L346.0,242.0 L330.0,250.0" fill="none" stroke-width="7" stroke-linecap="round"/><path d="M879.9,-11.1 L855.5,-0.3 Q808.7,1.6 776.5,-3.1 L806.0,-2.5 Z M879.9,-11.1 L855.5,-0.3 Q829.7,31.6 818.5,57.0 L835.9,30.4 Z M849.3,2.5 L822.2,14.7 Q799.4,55.9 791.1,90.6 L811.5,63.5 Z M816.0,17.5 L792.9,28.0 Q741.4,15.2 704.6,-4.2 L729.9,-9.8 Z M816.0,17.5 L792.9,28.0 Q770.6,75.8 762.9,117.0 L779.1,91.5 Z M786.5,30.9 L764.7,40.8 Q713.6,21.7 677.1,-4.0 L703.9,-2.8 Z M786.5,30.9 L764.7,40.8 Q740.0,91.7 729.8,135.9 L750.1,122.9 Z M758.3,43.8 L738.0,53.1 Q717.8,105.8 712.1,151.7 L731.8,141.1 Z M731.5,56.2 L699.4,71.1 Q639.0,49.7 593.1,21.7 L629.9,17.0 Z M731.5,56.2 L699.4,71.1 Q673.7,130.3 662.5,182.8 L693.0,164.3 Z M692.7,74.2 L656.8,91.0 Q601.4,71.5 560.5,45.2 L592.0,18.9 Z M692.7,74.2 L656.8,91.0 Q642.4,146.2 642.4,194.7 L675.6,172.0 Z M650.0,94.2 L614.9,110.9 Q558.8,86.8 517.1,55.9 L553.4,41.6 Z M650.0,94.2 L614.9,110.9 Q595.2,168.5 590.1,219.3 L626.1,204.3 Z M608.0,114.2 L568.1,133.2 Q517.1,112.0 480.6,83.9 L519.1,62.1 Z M608.0,114.2 L568.1,133.2 Q543.9,192.7 534.1,245.3 L574.5,227.3 Z M561.1,136.6 L533.7,149.8 Q480.9,138.0 442.4,119.3 L463.8,93.6 Z M561.1,136.6 L533.7,149.8 Q506.2,200.5 493.2,244.3 L523.3,236.8 Z M526.5,153.2 L502.5,164.9 Q454.3,150.5 420.4,129.1 L443.7,116.0 Z M526.5,153.2 L502.5,164.9 Q474.7,216.3 461.2,260.7 L486.7,252.0 Z M495.3,168.4 L453.0,189.1 Q399.6,189.9 360.5,183.7 L395.9,149.0 Z M495.3,168.4 L453.0,189.1 Q427.4,226.1 416.2,256.1 L464.8,248.3 Z M445.7,192.7 L418.3,206.1 Q379.4,208.8 354.9,204.5 L375.8,177.9 Z M445.7,192.7 L418.3,206.1 Q380.9,241.8 357.8,270.5 L390.3,267.4 Z M410.8,209.8 L371.6,229.3 Q338.7,245.6 320.1,254.8 L347.2,211.0 Z M410.8,209.8 L371.6,229.3 Q329.3,250.2 301.4,264.0 L353.0,269.6 Z M364.0,233.0 L342.8,243.6 Q309.8,260.1 291.1,269.4 L312.4,258.8 Z" stroke="none"/></g><g class="leaf l2"><path d="M900.0,40.0 L891.0,50.5 L882.0,61.0 L873.1,71.6 L864.2,82.1 L855.3,92.7 L846.4,103.2 L837.6,113.8 L828.8,124.4 L820.0,135.0 L811.2,145.6 L802.5,156.3 L793.8,166.9 L785.1,177.6 L776.5,188.2 L767.8,198.9 L759.2,209.6 L750.6,220.3 L742.1,231.0 L733.5,241.8 L725.0,252.5 L716.5,263.3 L708.0,274.0 L699.6,284.8 L691.2,295.6 L682.8,306.4 L674.5,317.2 L666.1,328.1 L657.8,338.9 L649.5,349.8 L641.2,360.6 L633.0,371.5 L624.8,382.4 L616.6,393.3 L608.4,404.2 L600.3,415.2 L592.2,426.1 L584.1,437.1 L576.1,448.0 L568.0,459.0 L560.0,470.0" fill="none" stroke-width="7" stroke-linecap="round"/><path d="M885.6,56.8 L870.1,75.1 Q838.7,90.4 817.7,93.5 L841.0,81.9 Z M885.6,56.8 L870.1,75.1 Q860.5,109.3 861.3,131.3 L867.2,104.9 Z M865.9,80.1 L841.0,109.7 Q800.3,122.7 769.8,123.5 L805.7,103.2 Z M865.9,80.1 L841.0,109.7 Q832.0,159.5 833.3,197.0 L843.5,155.2 Z M836.8,114.8 L817.9,137.5 Q774.0,148.0 740.3,146.2 L765.2,128.5 Z M836.8,114.8 L817.9,137.5 Q818.4,179.9 829.1,209.9 L846.1,185.6 Z M813.7,142.6 L788.2,173.7 Q741.4,177.2 704.8,168.2 L739.4,144.6 Z M813.7,142.6 L788.2,173.7 Q790.3,227.6 802.6,269.1 L822.4,233.4 Z M784.1,178.8 L768.3,198.2 Q715.1,204.5 672.0,198.4 L695.4,185.2 Z M784.1,178.8 L768.3,198.2 Q768.6,252.2 779.0,293.7 L793.4,273.2 Z M764.2,203.4 L738.7,235.2 Q682.8,242.8 636.8,237.9 L663.9,207.3 Z M764.2,203.4 L738.7,235.2 Q746.7,283.1 764.7,318.4 L790.3,286.6 Z M734.6,240.4 L722.3,255.9 Q665.6,266.5 618.9,264.6 L634.8,251.9 Z M734.6,240.4 L722.3,255.9 Q726.4,314.6 740.4,360.7 L752.7,345.2 Z M718.2,261.1 L701.5,282.5 Q653.8,288.8 616.0,282.6 L630.7,259.6 Z M718.2,261.1 L701.5,282.5 Q707.4,335.2 723.3,375.3 L742.7,355.9 Z M697.4,287.6 L676.9,314.1 Q624.5,327.7 581.9,328.7 L603.2,302.9 Z M697.4,287.6 L676.9,314.1 Q681.3,360.7 695.5,394.7 L722.7,373.5 Z M672.9,319.2 L650.8,348.1 Q605.3,359.6 569.5,358.3 L585.4,324.6 Z M672.9,319.2 L650.8,348.1 Q652.3,392.2 663.6,423.6 L694.9,401.7 Z M646.8,353.3 L633.6,370.8 Q594.3,383.3 564.6,383.1 L571.3,360.7 Z M646.8,353.3 L633.6,370.8 Q630.2,413.6 636.4,443.7 L657.6,432.3 Z M629.6,376.0 L611.0,400.8 Q574.0,422.9 546.7,432.1 L559.8,403.1 Z M629.6,376.0 L611.0,400.8 Q597.5,443.8 593.6,474.0 L625.0,458.7 Z M607.1,406.1 L585.0,435.9 Q562.9,462.9 550.3,477.1 L554.0,433.7 Z M607.1,406.1 L585.0,435.9 Q566.3,463.8 557.2,479.0 L597.7,462.8 Z M581.1,441.1 L566.4,461.2 Q541.1,495.8 525.2,517.4 L539.9,497.4 Z M581.1,441.1 L566.4,461.2 Q543.7,492.2 530.5,510.2 L545.2,490.2 Z" stroke="none"/></g><g class="leaf l3"><path d="M860.0,-30.0 L855.9,-26.5 L851.8,-23.2 L847.4,-19.9 L843.0,-16.7 L838.4,-13.6 L833.7,-10.6 L828.9,-7.6 L824.0,-4.8 L818.9,-2.0 L813.8,0.6 L808.4,3.2 L803.0,5.7 L797.4,8.1 L791.8,10.4 L785.9,12.7 L780.0,14.8 L773.9,16.9 L767.8,18.8 L761.4,20.7 L755.0,22.5 L748.4,24.2 L741.8,25.8 L734.9,27.4 L728.0,28.8 L720.9,30.2 L713.8,31.4 L706.4,32.6 L699.0,33.7 L691.4,34.7 L683.8,35.6 L675.9,36.5 L668.0,37.2 L659.9,37.9 L651.8,38.4 L643.4,38.9 L635.0,39.3 L626.4,39.6 L617.8,39.8 L608.9,40.0 L600.0,40.0" fill="none" stroke-width="7" stroke-linecap="round"/><path d="M853.4,-24.5 L843.7,-17.2 Q825.8,9.5 820.6,26.5 L824.8,11.9 Z M841.6,-15.7 L833.8,-10.6 Q803.0,-9.0 785.6,-16.1 L796.4,-16.8 Z M841.6,-15.7 L833.8,-10.6 Q821.8,16.5 823.3,34.8 L827.1,23.7 Z M831.5,-9.2 L820.1,-2.7 Q785.7,-6.3 765.2,-17.8 L781.2,-16.3 Z M831.5,-9.2 L820.1,-2.7 Q806.5,28.9 806.7,52.6 L814.3,39.4 Z M817.7,-1.4 L805.0,4.8 Q770.1,-3.9 749.5,-19.6 L764.9,-20.1 Z M817.7,-1.4 L805.0,4.8 Q788.9,39.3 787.3,66.9 L796.3,53.3 Z M802.4,6.0 L786.5,12.5 Q747.9,1.4 724.1,-15.8 L742.2,-16.9 Z M802.4,6.0 L786.5,12.5 Q769.7,44.2 767.7,70.0 L782.4,60.5 Z M783.6,13.5 L774.5,16.7 Q737.4,2.1 715.4,-17.8 L726.4,-15.5 Z M783.6,13.5 L774.5,16.7 Q755.4,51.0 751.4,80.0 L758.8,71.7 Z M771.5,17.6 L761.3,20.7 Q724.0,6.7 702.0,-12.0 L710.5,-20.8 Z M771.5,17.6 L761.3,20.7 Q740.0,55.9 733.9,86.4 L742.9,79.2 Z M758.3,21.6 L747.4,24.5 Q716.5,7.4 701.0,-13.7 L711.3,-18.7 Z M758.3,21.6 L747.4,24.5 Q725.8,54.0 719.6,79.4 L732.1,82.9 Z M744.2,25.2 L729.8,28.4 Q711.0,56.9 707.8,81.9 L722.9,81.8 Z M726.5,29.1 L705.0,32.8 Q675.9,18.3 662.7,1.0 L682.1,-14.3 Z M701.4,33.4 L681.2,35.9 Q648.2,23.6 630.9,9.4 L650.5,1.7 Z M701.4,33.4 L681.2,35.9 Q652.1,55.3 638.8,72.6 L659.9,77.5 Z M677.5,36.3 L659.0,37.9 Q628.7,29.8 614.3,20.2 L632.1,10.8 Z M677.5,36.3 L659.0,37.9 Q631.1,52.9 619.2,66.4 L638.1,69.2 Z M655.1,38.2 L632.6,39.4 Q601.6,37.6 586.5,34.9 L608.1,18.2 Z M655.1,38.2 L632.6,39.4 Q601.5,44.8 586.3,49.4 L609.4,61.4 Z M628.5,39.5 L612.6,39.9 Q587.7,40.5 578.9,40.7 L594.7,36.6 Z M628.5,39.5 L612.6,39.9 Q586.1,40.5 575.6,40.8 L591.6,43.8 Z" stroke="none"/></g></g></svg></div>
 
 <div class="wrap">
   <header class="bar">
@@ -856,8 +871,9 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
     <div class="story-board-grid">
       <div>
         <h2><span class="zh">故事</span><span class="en">The story</span></h2>
-        <p class="h2en"><span class="zh">六月之后</span><span class="en">After June</span></p>
+        <p class="h2en"><span class="zh">一月到十二月</span><span class="en">January to December</span></p>
         <div class="story">
+          <p><span class="zh">一月，阿夏排完队回来，那张用纸巾占住的凳子上已经坐了阿杰。两人吵了一架，最后一人坐一半。阿杰家在这里卖沙爹，档主是他爸爸陈伯。阿姨们早听说今年有评审要来，在黑板上开了赌局：背大相机的游客一赔二，天天看报纸的林先生一赔四，从外地来、一个人吃三盘的阿夏一赔九。阿夏每次吃完，都在一本红笔记本上写几行。</span><span class="en">In January, Summer comes back from the queue to find Kelvin sitting on the stool she saved with her tissues. They argue, and end up sharing it. Kelvin’s family runs the satay stall here; his father, Uncle Tan, works the grill. The aunties have heard a critic is coming this year, and they open a book on the blackboard: the tourist with the big camera at two to one, Mr Lim with his newspaper at four to one, and Summer, from far away and eating three plates on her own, at nine to one. After every meal Summer writes a few lines in a red notebook.</span></p>
           <p><span class="zh">六月，一家水獭冲进小贩中心，拖走了阿夏的包。红笔记本掉出来，赔率一赔九的那一注中了，大家这才知道她就是评审。九月中秋，阿杰提着灯笼请她吃豆花，求她给自家沙爹写一个差评。好评一出来，档口挂上推荐灯笼，队就会排起来，摊子关不掉，他也就走不成。</span><span class="en">In June a family of otters rushes into the hawker centre and drags off Summer’s bag. Her red notebook falls out. The long-shot bet, at one to nine, wins, and everyone sees that she is the critic. At the Mid-Autumn Festival, Kelvin brings her a lantern and a bowl of tau huay, and asks her to give the family satay a bad review. Once that review is public, the queue will start, the stall will be unable to close, and he will be unable to leave.</span></p>
             <p><span class="zh">十二月最后一个星期五，轮到沙爹摊。陈伯其实第一天就认出了她。今晚他故意把沙爹烤咸，好让儿子能去伦敦。父子俩都瞒着对方，都在为对方放手。</span><span class="en">On the last Friday in December, it is the satay stall’s turn. Uncle Tan recognised her on the first day. Tonight he salts the satay on purpose, so his son can go to London. Father and son each hide this from the other, and each is trying to let the other go.</span></p>
         </div>
@@ -2549,11 +2565,10 @@ function syncPlayer(){
   }
 }
 
-/* Month pages call this with the month index; the finale with "stay".
-   Leaving a month pauses that month's song; the finale song keeps playing. */
+/* Month pages call this with the month index; the endings with their key.
+   A song keeps playing when you move to another month; its ▶ in the stall list shows ❚❚. */
 function bindPlayer(key){
   key=String(key);
-  if(/^\d+$/.test(key) && audioKey!==null && /^\d+$/.test(audioKey) && audioKey!==key && !audio.paused) audio.pause();
   const p=playerEl(key);
   if(!p) return;
   const box=p.querySelector(".pl-lyrics");
@@ -2679,12 +2694,9 @@ function renderMenuBoard(){
   menuEl.querySelectorAll(".m-play[data-play]").forEach(btn=>{
     btn.addEventListener("click",()=>{
       const key=btn.dataset.play;
-      if(audioKey===key && !audio.paused){ audio.pause(); return; }
-      if(key==="stay"){
-        end("stay");
-        document.getElementById("ending").scrollIntoView({behavior:"smooth",block:"start"});
-      }else{
-        pick(+key,true);
+      if(audioKey===key){
+        if(audio.paused) audio.play().catch(()=>{}); else audio.pause();
+        return;
       }
       loadTrack(key);
       audio.play().catch(()=>{});
@@ -2964,8 +2976,6 @@ function end(k){
         ${TRACKS.last?`<div style="margin-top:10px">${playerHtml("last")}</div>`:`<div class="libretto">${renderLyrics(LAST_ORDER_LYRICS)}</div>`}
       </details>
     </div>`;
-  /* players for the ending not shown any more stop playing */
-  if(audioKey && END_TITLES[audioKey] && audioKey!==k && audioKey!=="last" && !audio.paused) audio.pause();
   if(TRACKS[k]) bindPlayer(k);
   if(TRACKS.last) bindPlayer("last");
   try{localStorage.setItem("nc-end",k);}catch(e){}
