@@ -544,6 +544,27 @@ h2{font-family:var(--zh);font-weight:600;font-size:22px;letter-spacing:.12em;mar
 .menu-list{list-style:none;margin:0;padding:0}
 .menu-item{border-bottom:1px dashed color-mix(in srgb,var(--rule) 75%,transparent)}
 .menu-item:last-child{border-bottom:0}
+.menu-item{display:flex;align-items:center;gap:6px}
+.menu-item .menu-btn{flex:1;min-width:0}
+.m-play{
+  all:unset;box-sizing:border-box;flex:none;width:28px;height:28px;border-radius:50%;cursor:pointer;
+  border:1px solid var(--stool);color:var(--stool);display:grid;place-items:center;
+  transition:background-color .16s,color .16s;
+}
+.m-play:hover,.m-play.playing{background:var(--stool);color:#fff}
+.m-play:focus-visible{outline:2px solid var(--cobalt);outline-offset:2px}
+.m-play.none{border-color:transparent;cursor:default;background:none}
+.m-play .ip{width:0;height:0;border-left:8px solid currentColor;border-top:5px solid transparent;border-bottom:5px solid transparent;margin-left:2px}
+.m-play .ia{display:none;width:8px;height:9px;border-left:3px solid currentColor;border-right:3px solid currentColor}
+.m-play.playing .ip{display:none}
+.m-play.playing .ia{display:block}
+.menu-foot .foot-play{display:inline-flex;align-items:center;gap:8px}
+.menu-foot .m-play{width:24px;height:24px}
+@media (max-width:640px){
+  .menu-item{gap:4px}
+  .menu-item .menu-btn{grid-template-columns:3.2em max-content minmax(6px,1fr) minmax(0,auto);gap:2px 6px;padding:7px 2px}
+  .menu-item .menu-btn .m-song{font-size:14px;white-space:normal;line-height:1.25;min-width:0}
+}
 .menu-btn{
   all:unset;box-sizing:border-box;width:100%;cursor:pointer;
   display:grid;grid-template-columns:3.4em minmax(0,1fr) minmax(14px,.7fr) auto;gap:2px 8px;align-items:baseline;
@@ -2547,6 +2568,7 @@ let rafId=0;
 function tick(){ syncPlayer(); rafId=audio.paused?0:requestAnimationFrame(tick); }
 audio.addEventListener("play",()=>{ if(!rafId) rafId=requestAnimationFrame(tick); });
 ["pause","ended","seeked","loadedmetadata"].forEach(ev=>audio.addEventListener(ev,syncPlayer));
+["play","pause","ended"].forEach(ev=>audio.addEventListener(ev,()=>syncMenuPlay()));
 
 const floor=document.getElementById("floor"),
       stool=document.getElementById("stool"),
@@ -2616,7 +2638,10 @@ function renderMenuBoard(){
     const items=slice.map((m,idx)=>{
       const k=offset+idx;
       const d=tx(m.dish,m.dishEn);
-      return `<li class="menu-item"><button type="button" class="menu-btn${k===current?" active":""}" data-jump="${k}"><span class="m-no">${m.no}</span><span class="m-dish">${d}</span><span class="m-dots" aria-hidden="true"></span><span class="m-song">${m.song}</span></button></li>`;
+      const play=TRACKS[k]
+        ? `<button type="button" class="m-play" data-play="${k}" aria-label="${tx(`播放《${m.song}》`,`Play “${m.song}”`)}"><span class="ip"></span><span class="ia"></span></button>`
+        : `<span class="m-play none" aria-hidden="true"></span>`;
+      return `<li class="menu-item"><button type="button" class="menu-btn${k===current?" active":""}" data-jump="${k}"><span class="m-no">${m.no}</span><span class="m-dish">${d}</span><span class="m-dots" aria-hidden="true"></span><span class="m-song">${m.song}</span></button>${play}</li>`;
     }).join("");
     return `<div class="menu-act"><h3>${title}</h3><ul class="menu-list">${items}</ul></div>`;
   };
@@ -2626,11 +2651,36 @@ function renderMenuBoard(){
       ${renderAct(MONTHS.slice(6,12),6,tx("下半场 · 七月至十二月","Act II · Jul – Dec"))}
     </div>
     <div class="menu-foot">
-      <span>${tx("终曲序列：《留下》 / 《回去》 → 《Last Order》","Finale: Stay / Go Home → Last Order")}</span>
+      <span class="foot-play"><button type="button" class="m-play" data-play="stay" aria-label="${tx("播放《留下》","Play “Stay”")}"><span class="ip"></span><span class="ia"></span></button>${tx("终曲序列：《留下》 / 《回去》 → 《Last Order》","Finale: Stay / Go Home → Last Order")}</span>
       <a href="#ending">${tx("跳去选结局 →","Choose the ending →")}</a>
     </div>`;
   menuEl.querySelectorAll(".menu-btn").forEach(btn=>{
     btn.addEventListener("click",()=>pick(+btn.dataset.jump,true));
+  });
+  menuEl.querySelectorAll(".m-play[data-play]").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const key=btn.dataset.play;
+      if(audioKey===key && !audio.paused){ audio.pause(); return; }
+      if(key==="stay"){
+        end("stay");
+        document.getElementById("ending").scrollIntoView({behavior:"smooth",block:"start"});
+      }else{
+        pick(+key,true);
+      }
+      loadTrack(key);
+      audio.play().catch(()=>{});
+    });
+  });
+  syncMenuPlay();
+}
+/* Menu ▶ buttons show ❚❚ for the song that is playing */
+function syncMenuPlay(){
+  if(!menuEl) return;
+  menuEl.querySelectorAll(".m-play[data-play]").forEach(b=>{
+    const on=b.dataset.play===audioKey && !audio.paused;
+    b.classList.toggle("playing",on);
+    const name=b.dataset.play==="stay"?tx("留下","Stay"):MONTHS[+b.dataset.play].song;
+    b.setAttribute("aria-label",on?tx(`暂停《${name}》`,`Pause “${name}”`):tx(`播放《${name}》`,`Play “${name}”`));
   });
 }
 
