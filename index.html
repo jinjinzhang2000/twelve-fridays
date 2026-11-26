@@ -34,6 +34,7 @@ try{
   --mustard:#d6a136;
   --rose:#e4a3a9;
   --stool:#d23a2f;
+  --acc:var(--stool);
   --stool-2:#a92a22;
   --tissue:#ffffff;
   --board-bg:#1b2625;
@@ -207,7 +208,7 @@ h1 .o{color:var(--stool)}
   box-shadow:inset 0 0 0 .6px rgba(29,43,42,.12);
 }
 .tile.on::after{
-  box-shadow:inset 0 0 0 1.5px rgba(251,250,244,.92);
+  box-shadow:inset 0 0 0 1.5px rgba(251,250,244,.92),inset 0 0 0 4.5px var(--acc);
 }
 .tile .no{
   position:absolute;left:6px;bottom:5px;z-index:4;
@@ -375,7 +376,7 @@ html[data-lang="en"] .nb-photo figcaption{font-family:"Patrick Hand",cursive;fon
 /* right column of month panel */
 .month-detail{min-width:0}
 .month .head{display:flex;gap:16px;align-items:flex-start}
-.month .m{font-family:var(--en);font-size:58px;line-height:.92;color:var(--stool);font-variant-numeric:tabular-nums;padding-top:2px}
+.month .m{font-family:var(--en);font-size:58px;line-height:.92;color:color-mix(in srgb,var(--acc) 78%,var(--ink));transition:color .3s ease;font-variant-numeric:tabular-nums;padding-top:2px}
 .month .title-wrap{min-width:0;flex:1}
 .dish-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
 .month .t{font-family:var(--zh);font-weight:600;font-size:clamp(26px,3vw,36px);letter-spacing:.06em;line-height:1.2}
@@ -385,7 +386,7 @@ html[data-lang="en"] .nb-photo figcaption{font-family:"Patrick Hand",cursive;fon
 .stall-sign{
   display:inline-flex;align-items:center;gap:6px;
   font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;
-  background:var(--paper);border:1px solid var(--rule);border-left:3px solid var(--stool);
+  background:var(--paper);border:1px solid var(--rule);border-left:3px solid var(--acc);
   padding:2px 8px;border-radius:2px;color:var(--ink);
 }
 .fest-line{
@@ -418,7 +419,7 @@ html[data-lang="en"] .nb-photo figcaption{font-family:"Patrick Hand",cursive;fon
 .listen-pop a:hover{background:var(--plaster-2)}
 
 /* self-hosted take with line-synced lyrics */
-.player{margin-top:16px;max-width:46em;background:var(--paper);border:1px solid var(--rule);border-left:3px solid var(--stool);border-radius:3px}
+.player{margin-top:16px;max-width:46em;background:var(--paper);border:1px solid var(--rule);border-left:3px solid var(--acc);border-radius:3px}
 .pl-bar{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;column-gap:14px;row-gap:6px;align-items:center;padding:14px 16px 12px}
 .pl-btn{grid-row:1 / span 2;width:44px;height:44px;border-radius:50%;border:0;cursor:pointer;background:var(--stool);color:#fff;display:grid;place-items:center;flex:none;transition:background-color .2s}
 .pl-btn:hover{background:var(--stool-2)}
@@ -2712,6 +2713,7 @@ function pick(i,scrollPanel){
   const prevM=MONTHS[(current+11)%12];
   const nextM=MONTHS[(current+1)%12];
 
+  document.documentElement.style.setProperty("--acc",`var(--${m.c[0]})`);
   stool.style.setProperty("--c",current%4);
   stool.style.setProperty("--r",Math.floor(current/4));
   garland(m.g);
