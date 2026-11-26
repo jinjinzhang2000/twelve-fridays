@@ -450,7 +450,6 @@ html[data-lang="en"] .pl-meta b{font-family:var(--en);font-weight:400}
 .pl-gl{font-size:12.5px;line-height:1.5;margin-top:1px;opacity:.72}
 .pl-lyrics li.on .pl-gl{opacity:.85;color:var(--ink-2)}
 html[data-lang="en"] .pl-gl{font-style:italic}
-.pl-lyrics li.cue{font-family:var(--mono);font-size:11.5px;line-height:1.6;letter-spacing:.02em;border-left-style:dashed}
 .pl-lyrics li.pl-who{cursor:default;background:none;border-left-color:transparent;font-family:var(--zh);font-size:12px;font-weight:600;letter-spacing:.05em;line-height:1.4;color:var(--stool);padding-top:10px;padding-bottom:0}
 .pl-lyrics li.pl-who:first-child{padding-top:2px}
 .pl-lyrics li.pl-who.aunty{color:var(--cobalt)}
@@ -1325,8 +1324,8 @@ const MONTH_AUDIO=[
  [["00197909-d10f-45c1-b187-2f6984d253cd","3:17"],["b30d118d-9057-4dda-81d0-256172f09e5d","3:20"]]
 ];
 /* Self-hosted takes with line-synced lyrics (Suno aligned_lyrics, read 2026-11-26).
-   Each line: [start s, end s, sung text, singer when it changes]. The Sentosa take was generated from
-   mis-encoded Chinese, so its Chinese passages are sung as gibberish; "〔…〕" lines stand in for them. */
+   Each line: [start s, end s, sung text, singer when it changes]. Some v4 takes were generated from
+   mis-encoded Chinese; lines sung as gibberish are left out, and "……" marks a half-line. */
 const TRACKS={
  2:{src:"audio/03-can-or-not.mp3",suno:"775795cb-ae1c-40c8-bf1f-4c7851899a0b",take:"v4b",lines:[
   [17.47,20.28,"Come come come, place your bets!","阿姨"],
@@ -1395,25 +1394,17 @@ const TRACKS={
   [27.25,30.23,"Teh peng! I know how to order iced also"],
   [30.73,34.36,"You’re so proud of yourself, I order one more"],
   [34.95,37.82,"Dinosaur! Dinosaur!","两人与阿姨"],
-  [38.00,41.70,"〔恐龙·麦芽粉〕"],
   [41.85,44.70,"Dinosaur! Dinosaur!"],
   [44.89,47.77,"One scoop, two scoop, pile it up"],
-  [48.00,52.00,"〔恐龙·买单〕"],
   [63.00,65.58,"Kopi-O kosong peng, black, iced, no sugar","阿姨"],
   [65.81,69.73,"Teh-C siew dai, what you said just now I already remember"],
   [69.78,73.57,"I stand here thirty years lah"],
-  [73.70,76.40,"〔恐龙·都知道〕"],
   [76.52,79.50,"Dinosaur! Dinosaur!","两人与阿姨"],
-  [79.60,83.30,"〔恐龙·麦芽粉〕"],
   [83.40,86.37,"Dinosaur! Dinosaur!"],
   [86.54,88.86,"One scoop, two scoop, pile it up"],
-  [89.00,93.00,"〔恐龙·买单〕"],
-  [93.50,104.00,"〔恐龙·更大的那一杯〕","半拍摇摆"],
-  [104.30,107.63,"Put one scoop of ice cream on top of the mountain"],
+  [104.30,107.63,"Put one scoop of ice cream on top of the mountain","半拍摇摆"],
   [108.00,110.91,"No festival in May, no fireworks"],
-  [111.20,117.50,"〔恐龙·吵架〕"],
   [118.30,121.50,"Dinosaur! Dinosaur!","两人笑着合唱"],
-  [121.60,132.00,"〔恐龙·麦芽粉〕"],
   [132.25,135.09,"Dinosaur! Dinosaur!"],
   [135.50,137.72,"Whoever laughs first pays"],
   [139.14,142.05,"Dinosaur! Dinosaur!"],
@@ -1421,22 +1412,17 @@ const TRACKS={
  ]},
  5:{src:"audio/06-whos-the-inspector.mp3",suno:"51f33eba-dfe3-47db-a86e-c1b0c9d8ab21",take:"v4",lines:[
   [18.40,22.00,"Six months gone, the blackboard is full of names","四位阿姨"],
-  [22.20,25.80,"〔督察·名单〕"],
   [25.89,30.37,"The stingray hisses under the banana leaf"],
   [30.64,33.46,"Who’s eating, who’s writing, who’s lying"],
   [33.92,37.37,"Who’s the inspector? Who’s the inspector?","众人"],
-  [37.50,41.70,"〔督察·眯眼〕"],
   [41.83,46.09,"Who’s the inspector? The devil hides under the leaf"],
   [46.73,49.53,"Tonight we flip it open"],
-  [49.60,51.70,"〔督察·每月一次〕","阿杰"],
-  [51.80,54.59,"Every time you order a stall you’ve never tried"],
-  [54.70,57.10,"〔督察·写字很快〕"],
+  [51.80,54.59,"Every time you order a stall you’ve never tried","阿杰"],
   [57.26,59.75,"And your notebook is red"],
   [61.69,63.47,"Red notebooks are everywhere","阿夏"],
   [63.47,65.65,"You’re nosy, you’re not the police"],
   [65.76,68.95,"Eh! Otters! The otters are in!","阿姨"],
   [69.70,71.97,"One, two, three, four, five otters","众人"],
-  [72.10,79.30,"〔督察·抢包〕"],
   [79.49,83.13,"The bag falls, the notebook falls open"],
   [83.18,89.86,"“Stingray, spicy just right, just a little short”"],
   [91.29,96.30,"It’s her! It’s her! ……"],
@@ -1453,7 +1439,6 @@ const TRACKS={
   [43.22,46.02,"Come and dance, come and dance"],
   [46.47,50.79,"The sand is hot and the sea is blue"],
   [50.90,54.50,"Sentosa, Sentosa, ……"],
-  [55.00,83.50,"〔主歌乱码〕","阿杰"],
   [84.20,91.72,"You go round the map, I go round the days","阿夏"],
   [91.86,97.46,"Every day there’s something new to eat"],
   [99.25,104.78,"Look at that aunty singing in the sea"],
@@ -1462,7 +1447,6 @@ const TRACKS={
   [117.39,120.23,"Come and dance, come and dance"],
   [120.61,123.92,"The sand is hot and the sea is blue"],
   [124.10,129.71,"Sentosa, Sentosa, ……"],
-  [130.00,158.50,"〔桥段乱码〕","阿杰"],
   [159.83,162.80,"Mari menari, mari menari","众人"],
   [162.96,165.91,"Come and dance, come and dance"],
   [166.51,169.44,"Boats sail out, ……"],
@@ -1631,17 +1615,15 @@ const TRACK_GLOSS={
  "Mari menari, mari menari":["马来语：来跳舞吧，来跳舞吧","Malay: come and dance, come and dance"],
  "Come and dance, come and dance":["来跳舞吧，来跳舞吧",null],
  "The sand is hot and the sea is blue":["沙子烫脚，海是蓝的",null],
- "Sentosa, Sentosa, ……":["后半句唱成了乱码，原词是「一天刚刚好」","The rest is sung as gibberish. The written words: “a day is just right”"],
+ "Sentosa, Sentosa, ……":["圣淘沙，圣淘沙……",null],
  "You go round the map, I go round the days":["你绕着地图走，我绕着日子走",null],
  "Every day there’s something new to eat":["每天都有新的东西吃",null],
  "Look at that aunty singing in the sea":["看那个在海里唱歌的阿姨",null],
  "And the otters are on holiday too":["水獭也在放假",null],
- "Boats sail out, ……":["船开出去了，后半句是乱码，原词是「我们留下」","Boats sail out — the rest is gibberish. The written words: “we stay”"],
+ "Boats sail out, ……":["船开出去了……",null],
  "Sentosa, Sentosa, see you next year":["圣淘沙，圣淘沙，明年见",null],
  "Terima kasih, laut":["马来语：谢谢你，大海","Malay: thank you, sea"],
  "See you next year":["明年见",null],
- "〔主歌乱码〕":["这段主歌 Suno 唱成了乱码。原词：你说这里像天堂／我从小来，来了一百次／同一片海，同一座桥／这个岛骑车一天就绕完","Suno sang this verse as gibberish. The written words: You say this place is paradise / I’ve come here since I was small, a hundred times / The same sea, the same bridge / You can cycle round this island in a day"],
- "〔桥段乱码〕":["这段桥段 Suno 唱成了乱码。原词：有时候我站在海边／看那些船一艘一艘开出去／我想知道它们去的地方／有没有冬天","Suno sang this bridge as gibberish. The written words: Sometimes I stand by the sea / Watching the boats go out one by one / I want to know if the places they go / Have winter"],
 
  "中秋晚上 燈籠掛滿晒":["中秋夜里，灯笼挂满了","Mid-Autumn night, lanterns hung everywhere"],
  "兔仔 楊桃 仲有一盞係飛機":["兔子、杨桃，还有一盏是飞机","Rabbits, starfruit, and one shaped like a plane"],
@@ -1679,35 +1661,25 @@ const TRACK_GLOSS={
  "Put one scoop of ice cream on top of the mountain":["在山顶再放一球冰淇淋",null],
  "No festival in May, no fireworks":["五月没有节日，也没有烟花",null],
  "Whoever laughs first pays":["谁先笑谁买单",null],
- "〔恐龙·麦芽粉〕":["这句唱成了乱码。原词：麦芽粉堆成一座山","Sung as gibberish. The written words: Milo powder piled into a mountain"],
- "〔恐龙·买单〕":["这句唱成了乱码。原词：谁点得最地道 谁今天买单","Sung as gibberish. The written words: Whoever orders most like a local pays today"],
- "〔恐龙·都知道〕":["这句唱成了乱码。原词：你们两个点什么 我都知道","Sung as gibberish. The written words: Whatever you two order, I already know"],
- "〔恐龙·更大的那一杯〕":["这句唱成了乱码。原词：还有比恐龙更大的那一杯","Sung as gibberish. The written words: There’s a cup even bigger than the dinosaur"],
- "〔恐龙·吵架〕":["这句唱成了乱码。原词：只有我们两个 在这里吵架","Sung as gibberish. The written words: Just the two of us, arguing here"],
 
  "Six months gone, the blackboard is full of names":["半年过去，黑板上写满了名字",null],
- "〔督察·名单〕":["这句唱成了乱码。原词：游客 老师 外地来的女生","Sung as gibberish. The written words: The tourist, the teacher, the girl from overseas"],
  "The stingray hisses under the banana leaf":["魔鬼鱼在蕉叶底下滋滋响",null],
  "Who’s eating, who’s writing, who’s lying":["谁在吃，谁在写，谁在撒谎",null],
  "Who’s the inspector? Who’s the inspector?":["谁是评审？谁是评审？",null],
- "〔督察·眯眼〕":["这句唱成了乱码。原词：吃一口 停一停 眼睛眯起来","Sung as gibberish. The written words: Take a bite, stop, eyes narrowing"],
  "Who’s the inspector? The devil hides under the leaf":["谁是评审？魔鬼藏在叶子底下",null],
  "Tonight we flip it open":["今晚我们把它掀开",null],
- "〔督察·每月一次〕":["这句唱成了乱码。原词：你每个月只来一次","Sung as gibberish. The written words: You only come once a month"],
  "Every time you order a stall you’ve never tried":["每次都点一档你没吃过的",null],
- "〔督察·写字很快〕":["这句唱成了乱码。原词：你写字很快 写完就合上","Sung as gibberish. The written words: You write fast and shut it the moment you finish"],
  "And your notebook is red":["而且你的本子是红的",null],
  "Red notebooks are everywhere":["红本子到处都有",null],
  "You’re nosy, you’re not the police":["你多管闲事，你又不是警察",null],
  "Eh! Otters! The otters are in!":["哎！水獭！水獭进来了！",null],
  "One, two, three, four, five otters":["一、二、三、四、五只水獭",null],
- "〔督察·抢包〕":["这句唱成了乱码。原词：抢了包就跑 跑过每一张桌","Sung as gibberish. The written words: Grab the bag and run, past every table"],
  "The bag falls, the notebook falls open":["包掉了，本子摔开了",null],
- "“Stingray, spicy just right, just a little short”":["本子上写着：「魔鬼鱼，辣度刚好，就差一点」。前一句「翻开那一页 写着」唱成了乱码","The line before it (“Open to that page, it says”) is sung as gibberish"],
- "It’s her! It’s her! ……":["是她！是她！后半句「一赔九！」和下一句「用纸巾占座的那一个」唱成了乱码","The rest (“nine to one!”) and the next line (“the one who saved her seat with tissues”) are sung as gibberish"],
+ "“Stingray, spicy just right, just a little short”":["「魔鬼鱼，辣度刚好，就差一点」",null],
+ "It’s her! It’s her! ……":["是她！是她！……",null],
  "It’s her! The devil’s not under the leaf":["是她！魔鬼不在叶子底下",null],
  "It’s in her notebook":["在她的本子里",null],
- "……! Tonight I pay!":["前半句「一赔九！」唱成了乱码。今晚我请客！","The first words (“nine to one!”) are sung as gibberish"],
+ "……! Tonight I pay!":["……今晚我请客！",null],
 
  "屠妖节的灯 一路亮到小印度":[null,"The Deepavali lights run all the way to Little India"],
  "今晚全家吃螃蟹":[null,"Tonight the whole family eats crab"],
@@ -2474,7 +2446,6 @@ function playerHtml(key){
   const items=t.lines.map((l,k)=>{
     const who=l[3]?`<li class="pl-who ${WHO_CLS[l[3]]||""}" aria-hidden="true">${tx(l[3],WHO_EN[l[3]]||l[3])}</li>`:"";
     const gl=trackGloss(l[2]);
-    if(l[2].startsWith("〔")) return who+`<li data-k="${k}" class="cue">${gl}</li>`;
     return who+`<li data-k="${k}"><span class="pl-orig">${l[2]}</span>${gl?`<span class="pl-gl">${gl}</span>`:""}</li>`;
   }).join("");
   return `<div class="player" data-key="${key}">
