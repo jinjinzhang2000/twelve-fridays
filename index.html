@@ -2457,7 +2457,8 @@ let audioKey=null, userScrollAt=0;
 const TRACK_DUR={2:140,3:200,4:160.8,5:139.6,6:190.8,8:167.6,9:145,10:247.2,stay:84.8};
 function lineStart(l){return l[0];}
 function fmt(s){s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0");}
-function trackTitle(key){return key==="stay"?"Stay":MONTHS[key].song;}
+const END_TITLES={stay:["留下","Stay"],go:["回去","Go Home"],last:["收摊之前","Last Order"]};
+function trackTitle(key){return END_TITLES[key]?END_TITLES[key][1]:MONTHS[key].song;}
 function playerEl(key){return document.querySelector(`.player[data-key="${key}"]`);}
 
 function playerHtml(key){
@@ -2496,8 +2497,8 @@ function loadTrack(key){
   audio.src=TRACKS[key].src;
   audioKey=key;
   if("mediaSession" in navigator){
-    const art=key==="stay"?"dishes/12-satay.jpg":DISH_SRC[key];
-    const album=key==="stay"?tx("结局 A · 留下","Ending A · Stay"):tx(MONTHS[key].dish,MONTHS[key].dishEn);
+    const art=END_TITLES[key]?"dishes/12-satay.jpg":DISH_SRC[key];
+    const album=END_TITLES[key]?tx(END_TITLES[key][0],END_TITLES[key][1]):tx(MONTHS[key].dish,MONTHS[key].dishEn);
     try{navigator.mediaSession.metadata=new MediaMetadata({title:trackTitle(key),artist:"Newton Circus · 十二个星期五",album,artwork:[{src:art,sizes:"512x512",type:"image/jpeg"}]});}catch(e){}
   }
 }
@@ -2679,7 +2680,7 @@ function syncMenuPlay(){
   menuEl.querySelectorAll(".m-play[data-play]").forEach(b=>{
     const on=b.dataset.play===audioKey && !audio.paused;
     b.classList.toggle("playing",on);
-    const name=b.dataset.play==="stay"?tx("留下","Stay"):MONTHS[+b.dataset.play].song;
+    const name=END_TITLES[b.dataset.play]?tx(END_TITLES[b.dataset.play][0],END_TITLES[b.dataset.play][1]):MONTHS[+b.dataset.play].song;
     b.setAttribute("aria-label",on?tx(`暂停《${name}》`,`Pause “${name}”`):tx(`播放《${name}》`,`Play “${name}”`));
   });
 }
@@ -2793,10 +2794,10 @@ function pick(i,scrollPanel){
           ${playerHtml(current)}
           <div class="prose">${paras(scene)}</div>
 
-          <details class="lyrics">
+          ${TRACKS[current]?"":`<details class="lyrics">
             <summary><span>${tx("歌词 · 双栏场刊本","Lyrics · bilingual playbill")}</span><span class="ly-hint">${tx("左原词 · 右旁注","sung text + margin gloss")}</span></summary>
             <div class="libretto">${renderLyrics(m.lyrics)}</div>
-          </details>
+          </details>`}
 
           <div class="month-foot">
             <span>${foot}</span>
@@ -2931,19 +2932,22 @@ function end(k){
         <span>${tx(d.songMeta[0],d.songMeta[1])}</span>
       </div>
       ${listenRow(END_AUDIO[k],d.songSub)}
-      ${TRACKS[k]?`<div style="margin:-2px 0 14px">${playerHtml(k)}</div>`:""}
-      <div class="libretto" style="margin-top:0;margin-bottom:14px">${renderLyrics(d.lyrics)}</div>
+      ${TRACKS[k]
+        ? `<div style="margin:-2px 0 14px">${playerHtml(k)}</div>`
+        : `<div class="libretto" style="margin-top:0;margin-bottom:14px">${renderLyrics(d.lyrics)}</div>`}
       <details class="end-curtain">
         <summary>
           <span>${tx("14 · 收摊之前 · Last Order（全员谢幕大合唱）","14 · Last Order (Full-company curtain call)")}</span>
           <span class="ly-hint">${tx("十二档厨房打击乐齐奏 · 126 BPM","12-stall percussion · 126 BPM")}</span>
         </summary>
         <div style="margin-top:10px">${listenRow(END_AUDIO.last,"Last Order")}</div>
-        <div class="libretto">${renderLyrics(LAST_ORDER_LYRICS)}</div>
+        ${TRACKS.last?`<div style="margin-top:10px">${playerHtml("last")}</div>`:`<div class="libretto">${renderLyrics(LAST_ORDER_LYRICS)}</div>`}
       </details>
     </div>`;
+  /* players for the ending not shown any more stop playing */
+  if(audioKey && END_TITLES[audioKey] && audioKey!==k && audioKey!=="last" && !audio.paused) audio.pause();
   if(TRACKS[k]) bindPlayer(k);
-  else if(audioKey==="stay" && !audio.paused) audio.pause();
+  if(TRACKS.last) bindPlayer("last");
   try{localStorage.setItem("nc-end",k);}catch(e){}
 }
 bs.onclick=()=>end("stay");
