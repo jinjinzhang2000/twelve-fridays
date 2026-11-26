@@ -21,12 +21,12 @@ try{
 <style>
 /* Daylight after tropical rain (16:00) by default; switches to hawker centre at night (21:00) via toggle or OS dark mode. */
 :root{
-  --plaster:#f2f5ef;      /* lime-washed wall after rain */
-  --plaster-2:#e6ece3;
-  --paper:#f9faf6;
+  --plaster:#f3f0e3;      /* lime-washed wall after rain, warm afternoon light */
+  --plaster-2:#e7e4d4;
+  --paper:#faf6ed;
   --ink:#1d2b2a;          /* deep teal-black */
   --ink-2:#55635f;
-  --rule:#cfd8cf;
+  --rule:#d4d3c4;
   --tile:#fbfaf4;
   --celadon:#6fa596;
   --cobalt:#2e4c86;
@@ -48,18 +48,18 @@ try{
   --hand:"LXGW WenKai TC","Kaiti SC","STKaiti","KaiTi","Patrick Hand",serif;
 }
 /* Subtle 12-month afternoon light progression across one long tropical afternoon */
-:root[data-m="0"]{--plaster:#f2f5ef;--plaster-2:#e6ece3}
-:root[data-m="1"]{--plaster:#f6f1ea;--plaster-2:#ece4d9}
-:root[data-m="2"]{--plaster:#f4f1e9;--plaster-2:#e9e4d7}
-:root[data-m="3"]{--plaster:#ebf1f1;--plaster-2:#dde7e8}
-:root[data-m="4"]{--plaster:#f4f4ec;--plaster-2:#e8e8dc}
-:root[data-m="5"]{--plaster:#f2efec;--plaster-2:#e6e1dc}
-:root[data-m="6"]{--plaster:#f6f5eb;--plaster-2:#eae8d9}
-:root[data-m="7"]{--plaster:#f5eff0;--plaster-2:#eae1e3}
-:root[data-m="8"]{--plaster:#f5f2e9;--plaster-2:#eae5d8}
-:root[data-m="9"]{--plaster:#f6efe9;--plaster-2:#ebe1d8}
-:root[data-m="10"]{--plaster:#eaf0ef;--plaster-2:#dce5e4}
-:root[data-m="11"]{--plaster:#f3eee6;--plaster-2:#e7dfd3}
+:root[data-m="0"]{--plaster:#f3f0e3;--plaster-2:#e7e4d4}
+:root[data-m="1"]{--plaster:#f6eddf;--plaster-2:#ebdfcd}
+:root[data-m="2"]{--plaster:#f5edde;--plaster-2:#e9dfcb}
+:root[data-m="3"]{--plaster:#efede4;--plaster-2:#e1e1d7}
+:root[data-m="4"]{--plaster:#f5efe0;--plaster-2:#e9e2cf}
+:root[data-m="5"]{--plaster:#f3ebe0;--plaster-2:#e7ddcf}
+:root[data-m="6"]{--plaster:#f6f0e0;--plaster-2:#eae2cd}
+:root[data-m="7"]{--plaster:#f5ebe3;--plaster-2:#eaddd4}
+:root[data-m="8"]{--plaster:#f5eede;--plaster-2:#eae0cc}
+:root[data-m="9"]{--plaster:#f6ebde;--plaster-2:#ebddcc}
+:root[data-m="10"]{--plaster:#eeece3;--plaster-2:#e0e0d4}
+:root[data-m="11"]{--plaster:#f4ebdc;--plaster-2:#e8dbc8}
 
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --plaster:#1c1814;--plaster-2:#261f1a;--paper:#2c261f;--ink:#f6f1e8;--ink-2:#cbbba8;--rule:#40362e;
@@ -154,6 +154,11 @@ html[data-lang="en"] .chalk{font-family:var(--mono)}
 .bar b a{text-decoration:none}
 .bar b a:hover{color:var(--stool)}
 .bar-r{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+/* hawker-centre ceiling fan, seen from below */
+.fan-wrap{display:inline-flex;width:34px;height:34px;color:var(--ink-2);opacity:.9}
+.fan{width:100%;height:100%;display:block;overflow:visible}
+@media (prefers-reduced-motion:no-preference){.fan{animation:fan-spin 2.6s linear infinite}}
+@keyframes fan-spin{to{transform:rotate(360deg)}}
 .mode-btn{
   all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:7px;
   font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink);
@@ -831,6 +836,7 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
   <header class="bar">
     <b><a href="https://gaussianmusic.com/">Gaussian’s music</a></b>
     <div class="bar-r">
+      <span class="fan-wrap" aria-hidden="true"><svg class="fan" viewBox="-20 -20 40 40"><g fill="currentColor"><path d="M-2.4,-3 C-4.6,-8 -4.2,-15.5 -1.2,-18.2 C1.6,-19 4.2,-15.6 3.6,-10.5 C3.1,-6.8 1.9,-4.4 2.4,-3 Z"/><g transform="rotate(120)"><path d="M-2.4,-3 C-4.6,-8 -4.2,-15.5 -1.2,-18.2 C1.6,-19 4.2,-15.6 3.6,-10.5 C3.1,-6.8 1.9,-4.4 2.4,-3 Z"/></g><g transform="rotate(240)"><path d="M-2.4,-3 C-4.6,-8 -4.2,-15.5 -1.2,-18.2 C1.6,-19 4.2,-15.6 3.6,-10.5 C3.1,-6.8 1.9,-4.4 2.4,-3 Z"/></g><circle r="4.2"/></g><circle r="1.6" fill="var(--plaster)"/></svg></span>
       <div class="langs" role="group" aria-label="Language">
         <button type="button" id="lang-zh" aria-pressed="true">中文</button>
         <button type="button" id="lang-en" aria-pressed="false">EN</button>
