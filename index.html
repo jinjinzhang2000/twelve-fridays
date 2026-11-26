@@ -294,6 +294,8 @@ h1 .o{color:var(--stool)}
 /* Left: Private Red Notebook + Public Aunties' Blackboard. Right: Scene & Playbill Libretto. */
 .month-grid{display:grid;grid-template-columns:minmax(0,348px) minmax(0,1fr);gap:28px 44px;align-items:start}
 .ledger-col{display:grid;gap:18px}
+@media(min-width:961px){.ledger-col{grid-area:1 / 1}.month-detail{grid-area:1 / 2}}
+@media(min-width:721px) and (max-width:960px){.ledger-col{grid-row:1}}
 
 /* red notebook: hard-pen field notes on exercise paper + lived physical traces */
 .notebook{
@@ -629,6 +631,7 @@ h2{font-family:var(--zh);font-weight:600;font-size:22px;letter-spacing:.12em;mar
 .m-panel .lib-row{grid-template-columns:1fr;gap:1px}
 .m-panel .lib-lines{font-size:14.5px;line-height:1.7}
 .m-close{all:unset;box-sizing:border-box;display:block;margin:6px 0 0 auto;min-height:32px;padding:6px 4px;cursor:pointer;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink-2)}
+.pl-expand.m-close{display:none}
 .m-close:hover{color:var(--stool);text-decoration:underline}
 .m-close:focus-visible,.m-ly:focus-visible{outline:2px solid var(--cobalt);outline-offset:2px}
 @media (max-width:640px){
@@ -921,11 +924,46 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
   .hero h1{font-size:clamp(38px,10vw,62px);line-height:1.07}
   .hero .zhname{font-size:21px}
   .hero .lede{line-height:1.65;margin-bottom:4px}
+  .month-grid{display:flex;flex-direction:column;align-items:stretch;gap:20px}
   .month-detail,.month-detail .blocks{display:contents}
-  .month-detail .head{grid-row:1}
-  .month-detail .player{grid-row:2}
-  .ledger-col{grid-row:2}
-  .month-grid:has(.month-detail .player) .ledger-col{grid-row:3}
+  .month-detail .head{gap:10px}
+  .month-detail .player,.month-detail .prose,.month-detail .lyrics{margin-top:0}
+  .month .month-foot{margin-top:0}
+  .month .song{flex-basis:100%;min-width:0;overflow-wrap:anywhere}
+  .month .dish-sub{font-size:14px}
+  .fest-line{font-size:13px;line-height:1.55}
+  .month .prose p,.story p,.end-card .ec-prose,.notes-body dd{font-size:17px;line-height:1.8}
+  .cast p,.cast-otters p,.end-card .ec-note{font-size:16px;line-height:1.65}
+  .notebook blockquote{font-size:17.5px}
+  .nb-trace.rain{right:-8px}
+  .month .lyrics summary{padding-block:8px;gap:8px}
+  .lyrics summary .ly-hint{display:none}
+  .libretto{padding:12px}
+  .lib-lines,.m-panel .lib-lines{font-size:16px;line-height:1.65}
+  .lib-row:not(.single){grid-template-columns:minmax(0,1fr)}
+  .lib-gloss,.pl-gl{font-size:14px;line-height:1.5;opacity:1}
+  .lib-gloss:empty{display:none}
+  .lib-lines{gap:5px}
+  .m-static{max-height:none}
+  .player .pl-lyrics{max-height:min(360px,48vh);mask-image:none;overscroll-behavior:auto;padding-block:8px 12px}
+  .pl-lyrics li:not(.pl-who){font-size:16px;line-height:1.65;padding-block:6px;overflow-wrap:anywhere}
+  .pl-lyrics li.pl-who{font-size:13px}
+  .player .pl-expand.m-close{display:block;min-height:44px;margin:0 12px 0 auto;padding:4px 0}
+  .player .pl-expand[aria-expanded="true"] + .pl-lyrics{max-height:none;overflow:visible}
+  .pl-bar{padding-inline:10px;column-gap:8px}
+  .pl-volr{width:44px}
+  .pl-mute{width:44px;height:44px}
+  .menu-item{gap:4px 8px}
+  .menu-item .menu-btn{grid-template-columns:3.3em minmax(0,1fr);align-items:start;gap:2px 8px;padding:8px 4px;min-height:54px}
+  .menu-btn .m-no{grid-row:span 2;padding-top:2px}
+  .menu-btn .m-dots{display:none}
+  .menu-item .menu-btn .m-dish{font-size:15px;line-height:1.4;white-space:normal;overflow:visible}
+  .menu-item .menu-btn .m-song{font-size:15px;line-height:1.4;text-align:left;white-space:normal;overflow-wrap:anywhere}
+  .menu-item .m-play,.menu-foot .m-play,.mnav-btn,.listen summary,a.play,.m-close{min-height:44px}
+  .menu-item .m-play,.menu-foot .m-play{min-width:44px}
+  .mnav-mid{font-size:11px}
+  .month-nav .mnav-btn{line-height:1.35}
+  .menu-foot .fp{gap:4px}
   .tile .no{font-size:11px}
 }
 </style>
@@ -2629,6 +2667,7 @@ function playerHtml(key){
         <input class="pl-volr" type="range" min="0" max="1" step="0.05" value="1" aria-label="${tx("音量","Volume")}">
       </div>
     </div>
+    <button type="button" class="m-close pl-expand" aria-expanded="false">${tx("展开全文歌词","Expand full lyrics")}</button>
     <ol class="pl-lyrics" aria-label="${tx("同步歌词（点一句跳到那里）","Synced lyrics (click a line to jump)")}">${items}</ol>
   </div>`;
 }
@@ -2679,7 +2718,7 @@ function syncOne(p){
     if(prev) prev.classList.remove("on");
     if(next){
       next.classList.add("on");
-      if(Date.now()-userScrollAt>2500){
+      if(box.scrollHeight>box.clientHeight && Date.now()-userScrollAt>2500){
         const top=next.offsetTop-box.clientHeight*0.38;
         const reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
         box.scrollTo({top:Math.max(0,top),behavior:reduce?"auto":"smooth"});
@@ -2699,6 +2738,17 @@ function bindPlayer(key){
   p.querySelector(".pl-btn").onclick=()=>{
     loadTrack(key);
     if(audio.paused) audio.play().catch(()=>{}); else audio.pause();
+  };
+  const expand=p.querySelector(".pl-expand");
+  expand.onclick=()=>{
+    const open=expand.getAttribute("aria-expanded")!=="true";
+    expand.setAttribute("aria-expanded",String(open));
+    expand.textContent=open?tx("收起全文歌词","Collapse full lyrics"):tx("展开全文歌词","Expand full lyrics");
+    if(!open){
+      const active=box.querySelector("li.on");
+      if(active) box.scrollTop=Math.max(0,active.offsetTop-box.clientHeight*.38);
+    }
+    expand.scrollIntoView({block:"nearest",behavior:"instant"});
   };
   const seek=p.querySelector(".pl-seek");
   seek.oninput=()=>{
@@ -2989,25 +3039,6 @@ function pick(i,scrollPanel){
     </div>
 
     <div class="month-grid">
-      <div class="ledger-col">
-        <div class="nb-stack">
-        <div class="notebook">
-          ${nb.trace}
-          <div class="nb-label"><span>${tx("阿夏的红笔记本","Summer’s red notebook")}</span><span>${m.no} · p.${String(current+1).padStart(2,"0")}</span></div>
-          <figure class="nb-photo">
-          <img src="${DISH_SRC[current]}" alt="${tx("这个月的菜："+m.dish,"This month’s dish: "+m.dishEn)}" decoding="async">
-          <figcaption>${dish}</figcaption>
-          </figure>
-          <div class="nb-score-row">
-            <div class="nb-score" aria-label="${tx(dish+" "+m.score+" 分",dish+" "+m.score+" out of 10")}">${nb.ring}<b>${m.score}</b><span>${tx("分","/ 10")}</span></div>
-            ${nb.tag?`<span class="nb-tag">${nb.tag}</span>`:""}
-          </div>
-          <blockquote>${note}</blockquote>
-        </div>
-        </div>
-        <div class="board" id="board"></div>
-      </div>
-
       <div class="month-detail">
         <div class="head">
           <div class="m">${String(current+1).padStart(2,"0")}</div>
@@ -3043,6 +3074,24 @@ function pick(i,scrollPanel){
             ${nextBtn}
           </div>
         </div>
+      </div>
+      <div class="ledger-col">
+        <div class="nb-stack">
+        <div class="notebook">
+          ${nb.trace}
+          <div class="nb-label"><span>${tx("阿夏的红笔记本","Summer’s red notebook")}</span><span>${m.no} · p.${String(current+1).padStart(2,"0")}</span></div>
+          <figure class="nb-photo">
+          <img src="${DISH_SRC[current]}" alt="${tx("这个月的菜："+m.dish,"This month’s dish: "+m.dishEn)}" decoding="async">
+          <figcaption>${dish}</figcaption>
+          </figure>
+          <div class="nb-score-row">
+            <div class="nb-score" aria-label="${tx(dish+" "+m.score+" 分",dish+" "+m.score+" out of 10")}">${nb.ring}<b>${m.score}</b><span>${tx("分","/ 10")}</span></div>
+            ${nb.tag?`<span class="nb-tag">${nb.tag}</span>`:""}
+          </div>
+          <blockquote>${note}</blockquote>
+        </div>
+        </div>
+        <div class="board" id="board"></div>
       </div>
     </div>`;
 
