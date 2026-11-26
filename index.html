@@ -1,0 +1,2341 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Newton Circus site mockup (design draft, not a live page). Fonts load from Google Fonts; the live site would self-host and subset them like the home page. -->
+<title>Newton Circus · 十二个星期五</title>
+<meta name="description" content="原创音乐剧《Newton Circus：十二个星期五》——一座新加坡小贩中心、十二道菜、一包纸巾占住的同一个座位。">
+<script>
+try{
+  const t=localStorage.getItem("nc-theme");
+  if(t==="light"||t==="dark") document.documentElement.dataset.theme=t;
+  const l=localStorage.getItem("nc-lang");
+  document.documentElement.dataset.lang=(l==="en")?"en":"zh";
+  document.documentElement.lang=(l==="en")?"en":"zh-Hans";
+}catch(e){}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=DM+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;600&family=LXGW+WenKai+TC&family=Patrick+Hand&display=swap">
+<style>
+/* Daylight after tropical rain (16:00) by default; switches to hawker centre at night (21:00) via toggle or OS dark mode. */
+:root{
+  --plaster:#f2f5ef;      /* lime-washed wall after rain */
+  --plaster-2:#e6ece3;
+  --paper:#f9faf6;
+  --ink:#1d2b2a;          /* deep teal-black */
+  --ink-2:#55635f;
+  --rule:#cfd8cf;
+  --tile:#fbfaf4;
+  --celadon:#6fa596;
+  --cobalt:#2e4c86;
+  --coral:#d9675b;
+  --mustard:#d6a136;
+  --rose:#e4a3a9;
+  --stool:#d23a2f;
+  --stool-2:#a92a22;
+  --tissue:#ffffff;
+  --board-bg:#1b2625;
+  --board-fg:#edf2eb;
+  --board-dim:rgba(237,242,235,.64);
+  --glow:transparent;
+  --shadow:rgba(29,43,42,.18);
+  --en:"Young Serif","Iowan Old Style",Georgia,serif;
+  --zh:"Noto Serif SC","Songti SC","STSong",serif;
+  --mono:"DM Mono",ui-monospace,Menlo,monospace;
+  --hand:"LXGW WenKai TC","Kaiti SC","STKaiti","KaiTi","Patrick Hand",serif;
+}
+/* Subtle 12-month afternoon light progression across one long tropical afternoon */
+:root[data-m="0"]{--plaster:#f2f5ef;--plaster-2:#e6ece3}
+:root[data-m="1"]{--plaster:#f6f1ea;--plaster-2:#ece4d9}
+:root[data-m="2"]{--plaster:#f4f1e9;--plaster-2:#e9e4d7}
+:root[data-m="3"]{--plaster:#ebf1f1;--plaster-2:#dde7e8}
+:root[data-m="4"]{--plaster:#f4f4ec;--plaster-2:#e8e8dc}
+:root[data-m="5"]{--plaster:#f2efec;--plaster-2:#e6e1dc}
+:root[data-m="6"]{--plaster:#f6f5eb;--plaster-2:#eae8d9}
+:root[data-m="7"]{--plaster:#f5eff0;--plaster-2:#eae1e3}
+:root[data-m="8"]{--plaster:#f5f2e9;--plaster-2:#eae5d8}
+:root[data-m="9"]{--plaster:#f6efe9;--plaster-2:#ebe1d8}
+:root[data-m="10"]{--plaster:#eaf0ef;--plaster-2:#dce5e4}
+:root[data-m="11"]{--plaster:#f3eee6;--plaster-2:#e7dfd3}
+
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --plaster:#0f1b1c;--plaster-2:#142223;--paper:#162526;--ink:#e9efe8;--ink-2:#9db0aa;--rule:#2a3c3c;
+  --tile:#1b2a2b;--celadon:#7fb8a7;--cobalt:#7d9be0;--coral:#e98477;--mustard:#f0bf5a;--rose:#d79aa1;
+  --stool:#e04a3d;--stool-2:#b3352b;--tissue:#f4f4ef;
+  --board-bg:#0a1213;--board-fg:#edf2eb;--board-dim:rgba(237,242,235,.62);
+  --glow:rgba(240,191,90,.55);--shadow:rgba(0,0,0,.48);color-scheme:dark;
+}
+:root:not([data-theme="light"])[data-m="1"],:root:not([data-theme="light"])[data-m="9"]{--plaster:#141a1b;--plaster-2:#1b2223}
+:root:not([data-theme="light"])[data-m="3"],:root:not([data-theme="light"])[data-m="10"]{--plaster:#0d191d;--plaster-2:#132227}
+:root:not([data-theme="light"])[data-m="7"]{--plaster:#14181d;--plaster-2:#1b2027}
+:root:not([data-theme="light"])[data-m="11"]{--plaster:#141a18;--plaster-2:#1b2320}
+}
+:root[data-theme="dark"]{
+  --plaster:#0f1b1c;--plaster-2:#142223;--paper:#162526;--ink:#e9efe8;--ink-2:#9db0aa;--rule:#2a3c3c;
+  --tile:#1b2a2b;--celadon:#7fb8a7;--cobalt:#7d9be0;--coral:#e98477;--mustard:#f0bf5a;--rose:#d79aa1;
+  --stool:#e04a3d;--stool-2:#b3352b;--tissue:#f4f4ef;
+  --board-bg:#0a1213;--board-fg:#edf2eb;--board-dim:rgba(237,242,235,.62);
+  --glow:rgba(240,191,90,.55);--shadow:rgba(0,0,0,.48);color-scheme:dark;
+}
+:root[data-theme="dark"][data-m="1"],:root[data-theme="dark"][data-m="9"]{--plaster:#141a1b;--plaster-2:#1b2223}
+:root[data-theme="dark"][data-m="3"],:root[data-theme="dark"][data-m="10"]{--plaster:#0d191d;--plaster-2:#132227}
+:root[data-theme="dark"][data-m="7"]{--plaster:#14181d;--plaster-2:#1b2027}
+:root[data-theme="dark"][data-m="11"]{--plaster:#141a18;--plaster-2:#1b2320}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--plaster);
+  color:var(--ink);
+  font-family:var(--zh);
+  font-size:16px;
+  font-weight:400;
+  line-height:1.85;
+  overflow-x:clip;
+  -webkit-font-smoothing:antialiased;
+  transition:background-color .55s ease,color .35s ease;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+img{max-width:100%}
+[hidden]{display:none!important}
+button,input,textarea,select{font-family:inherit;font-size:inherit}
+.wrap{max-width:1120px;margin:0 auto}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cobalt);outline-offset:3px}
+html[data-lang="zh"] .en{display:none!important}
+html[data-lang="en"] .zh{display:none!important}
+html[data-lang="en"]{
+  --en:"Young Serif","Iowan Old Style",Georgia,"Songti SC","STSong",serif;
+  --zh:"Young Serif","Iowan Old Style",Georgia,"Songti SC","STSong",serif;
+  --mono:"Young Serif","Iowan Old Style",Georgia,"Songti SC","STSong",serif;
+}
+html[data-lang="en"] body{font-family:var(--en)}
+html[data-lang="en"] .cast i{display:none}
+
+/* subtle plaster grain on desktop */
+@media (min-width:900px) and (pointer:fine){
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:40;opacity:.038;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+}
+
+/* top bar */
+.bar{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding-block:16px;font-size:14px;color:var(--ink-2);
+  border-bottom:1px solid color-mix(in srgb,var(--rule) 55%,transparent);
+}
+.bar b{font-family:var(--en);font-weight:400;color:var(--ink);font-size:16px;letter-spacing:.01em}
+.bar b a{text-decoration:none}
+.bar b a:hover{color:var(--stool)}
+.bar-r{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.mode-btn{
+  all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink);
+  border:1px solid var(--rule);background:var(--paper);border-radius:99px;
+  padding:5px 11px;transition:border-color .2s,background-color .2s;
+}
+.mode-btn:hover{border-color:var(--ink-2)}
+.mode-dot{width:8px;height:8px;border-radius:50%;background:var(--mustard);box-shadow:0 0 8px var(--glow);flex:none}
+.langs{display:flex;border:1px solid var(--rule);border-radius:99px;overflow:hidden;background:var(--paper)}
+.langs button{all:unset;cursor:pointer;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;padding:5px 11px;color:var(--ink-2)}
+.langs button[aria-pressed="true"]{background:var(--ink);color:var(--plaster)}
+
+/* garland */
+.garland-wrap{position:relative;margin-top:6px;min-height:68px}
+.garland{display:block;width:100%;height:auto;max-height:76px;overflow:visible}
+.garland .wire{fill:none;stroke:var(--ink-2);stroke-width:1;opacity:.5}
+.garland .lit{filter:drop-shadow(0 0 6px var(--glow))}
+@media (prefers-reduced-motion:no-preference){
+  .garland.swap{animation:garland-in .45s ease}
+}
+@keyframes garland-in{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:52px;align-items:center;padding-block:22px 40px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+h1{font-family:var(--en);font-weight:400;font-size:clamp(52px,7.8vw,100px);line-height:.92;letter-spacing:-.02em;margin:14px 0 10px;text-wrap:balance}
+h1 .o{color:var(--stool)}
+.zhname{font-family:var(--zh);font-weight:600;font-size:clamp(22px,2.6vw,30px);letter-spacing:.18em;margin:0 0 20px}
+.lede{max-width:30em;color:var(--ink-2);margin:0 0 22px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--mono);font-size:12px;color:var(--ink-2);letter-spacing:.04em;padding-top:14px;border-top:1px solid var(--rule)}
+
+/* Continuous photorealistic Peranakan ceramic tile floor (4x3 mortar-aligned) */
+.floor-box{position:relative}
+.floor{
+  position:relative;display:grid;grid-template-columns:repeat(4,1fr);
+  border-radius:3px;overflow:hidden;
+  background:var(--tile) url("dishes/00-floor-sym.jpg") center/100% 100% no-repeat;
+  box-shadow:0 0 0 1px rgba(29,43,42,.16),0 30px 60px -30px var(--shadow);
+  transition:filter .45s ease;
+}
+:root[data-theme="dark"] .floor{filter:brightness(.82) contrast(1.04) saturate(.94)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .floor{filter:brightness(.82) contrast(1.04) saturate(.94)}}
+
+.tile{
+  all:unset;cursor:pointer;display:block;aspect-ratio:1;position:relative;overflow:hidden;
+  transition:background-color .25s ease;
+}
+.tile:hover:not(.on),.tile:focus-visible:not(.on){background:rgba(255,255,255,.16)}
+.tile .paw-overlay{
+  position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;
+  mix-blend-mode:multiply;opacity:.72;transition:opacity .3s ease;
+}
+.tile.on .paw-overlay{opacity:0}
+.tile .dish{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;z-index:2;pointer-events:none;
+  transform:scale(1.03);transition:opacity .38s ease,transform .45s ease;
+}
+:root[data-theme="dark"] .tile.on .dish{filter:brightness(1.14) contrast(1.02)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tile.on .dish{filter:brightness(1.14) contrast(1.02)}}
+.tile.on .dish{opacity:1;transform:scale(1)}
+.tile::after{
+  content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
+  box-shadow:inset 0 0 0 .6px rgba(29,43,42,.12);
+}
+.tile.on::after{
+  box-shadow:inset 0 0 0 2px rgba(251,250,244,.86),inset 0 0 0 3px rgba(29,43,42,.28);
+}
+.tile .no{
+  position:absolute;left:6px;bottom:5px;z-index:4;
+  font-family:var(--mono);font-size:10.5px;line-height:1;letter-spacing:.02em;
+  color:#1d2b2a;
+  padding:3px 5px;border-radius:2px;
+  background:rgba(251,250,244,.88);
+  backdrop-filter:blur(2px);
+}
+.tile.on .no{color:#fff;background:rgba(20,28,27,.68)}
+.tile .act-mark{
+  position:absolute;right:6px;top:6px;z-index:4;
+  width:5px;height:5px;border-radius:50%;background:var(--stool);opacity:.75;
+}
+.tile.on .act-mark{opacity:0}
+
+.stool{
+  position:absolute;left:0;top:0;width:25%;height:33.3333%;pointer-events:none;z-index:5;
+  transform:translate(calc(var(--c,0)*100%),calc(var(--r,0)*100%));
+  transition:transform .68s cubic-bezier(.55,.06,.22,1);
+}
+.stool svg{position:absolute;right:4%;bottom:5%;width:42%;height:42%;filter:drop-shadow(0 6px 7px rgba(20,24,22,.34))}
+.hint{
+  margin-top:11px;font-size:13px;color:var(--ink-2);
+  display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;
+}
+.hint .kbd{font-family:var(--mono);font-size:11px;opacity:.75}
+
+/* month panel */
+.month{
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  padding-block:28px 32px;margin-bottom:84px;
+}
+.month-nav{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  margin-bottom:24px;padding-bottom:14px;border-bottom:1px dashed var(--rule);
+  font-family:var(--mono);font-size:12px;color:var(--ink-2);
+}
+.mnav-btn{
+  all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+  color:var(--ink);padding:4px 0;font-family:var(--zh);font-size:13.5px;
+  transition:color .2s;
+}
+.mnav-btn:hover{color:var(--stool)}
+.mnav-mid{display:flex;align-items:center;gap:10px;text-align:center}
+.act-badge{
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+  padding:2px 8px;border:1px solid var(--rule);border-radius:99px;color:var(--ink-2);
+}
+.act-badge.finale{border-color:var(--coral);color:var(--coral)}
+
+/* Left: Private Red Notebook + Public Aunties' Blackboard. Right: Scene & Playbill Libretto. */
+.month-grid{display:grid;grid-template-columns:minmax(0,348px) minmax(0,1fr);gap:28px 44px;align-items:start}
+.ledger-col{display:grid;gap:18px}
+
+/* red notebook: hard-pen field notes on exercise paper + lived physical traces */
+.notebook{
+  --nb-line:30px;
+  --nb-ink:#262322;
+  position:relative;overflow:hidden;
+  color:var(--nb-ink);
+  background-color:#f5efe3;
+  background-image:repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(var(--nb-line) - 1px),
+    rgba(88,120,168,.34) calc(var(--nb-line) - 1px),
+    rgba(88,120,168,.34) var(--nb-line)
+  );
+  background-origin:content-box;
+  background-clip:content-box;
+  border:1px solid #dfd3bf;
+  border-left:4px solid #b4362d;
+  border-radius:2px 4px 3px 2px;
+  box-shadow:inset 8px 0 12px -10px rgba(90,55,30,.32),0 16px 28px -22px rgba(40,28,16,.38);
+  padding:4px 16px 10px 42px;
+  font-family:var(--hand);
+}
+.notebook::before{
+  content:"";position:absolute;left:28px;top:0;bottom:0;width:1px;
+  background:rgba(190,62,52,.65);pointer-events:none;
+}
+.notebook::after{
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;opacity:.14;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode:multiply;
+}
+.notebook .nb-label,
+.notebook .nb-score-row,
+.notebook blockquote,
+.notebook .nb-margin{
+  position:relative;z-index:2;
+  margin:0;line-height:var(--nb-line);
+}
+.notebook .nb-label{
+  display:flex;justify-content:space-between;gap:8px;
+  font-size:13.5px;letter-spacing:.03em;
+  color:rgba(38,35,34,.68);
+}
+.notebook .nb-score-row{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  min-height:var(--nb-line);
+}
+.notebook .nb-score{
+  position:relative;display:inline-flex;align-items:baseline;gap:3px;color:#b4332c;
+  padding:0 10px 0 8px;
+}
+.notebook .nb-score b{
+  font-family:"Patrick Hand",cursive;font-weight:400;font-size:26px;line-height:var(--nb-line);
+}
+.notebook .nb-score span{font-family:inherit;font-size:15px;color:#b4332c}
+.notebook .nb-ring{
+  position:absolute;left:-2px;top:1px;width:calc(100% + 4px);height:28px;pointer-events:none;opacity:.82;
+}
+.notebook .nb-tag{
+  font-size:13px;color:rgba(38,35,34,.58);
+}
+.notebook .nb-tag s{color:rgba(180,51,44,.75);margin-right:5px}
+.notebook blockquote{font-family:inherit;font-size:16.5px;line-height:var(--nb-line);color:var(--nb-ink)}
+.notebook blockquote u{text-decoration:none;border-bottom:1.5px solid rgba(180,51,44,.65);padding-bottom:1px}
+html[data-lang="en"] .notebook{font-family:"Patrick Hand",cursive}
+html[data-lang="en"] .notebook blockquote{font-size:17.5px}
+
+/* this month's dish, a snapshot taped onto the top of the notebook */
+.nb-stack{position:relative}
+.nb-photo{
+  position:relative;z-index:3;
+  width:62%;margin:6px 14px -12px auto;
+  padding:7px 7px 4px;background:#fbf8f1;
+  rotate:2deg;
+  box-shadow:0 12px 20px -14px rgba(40,28,16,.55),0 1px 2px rgba(40,28,16,.18);
+}
+.nb-photo::before{
+  content:"";position:absolute;top:-9px;left:50%;width:66px;height:20px;
+  transform:translateX(-50%) rotate(-4deg);
+  background:rgba(236,226,196,.78);
+  box-shadow:0 1px 2px rgba(40,28,16,.12);
+}
+.nb-photo img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover}
+.nb-photo figcaption{
+  font-family:var(--hand);font-size:13.5px;line-height:1.6;text-align:center;
+  color:rgba(38,35,34,.72);padding-top:2px;
+}
+html[data-lang="en"] .nb-photo figcaption{font-family:"Patrick Hand",cursive;font-size:15px}
+
+/* Lived physical traces on specific Fridays */
+.nb-trace{position:absolute;pointer-events:none;z-index:1}
+.nb-trace.rain{
+  right:-18px;bottom:-18px;width:136px;height:118px;border-radius:58% 42% 48% 52%;
+  background:radial-gradient(circle at 58% 58%,rgba(116,152,175,.22) 0%,rgba(116,152,175,.12) 52%,rgba(88,122,150,.24) 64%,transparent 70%);
+}
+.nb-trace.chilli{
+  right:14px;bottom:10px;width:54px;height:40px;
+  background:
+    radial-gradient(circle at 36% 58%,rgba(208,68,28,.34) 0 4.5px,rgba(218,108,38,.14) 5px 8px,transparent 9px),
+    radial-gradient(circle at 74% 32%,rgba(208,68,28,.28) 0 2.5px,transparent 4px);
+}
+.nb-trace.paw{
+  right:10px;bottom:8px;width:68px;height:52px;opacity:.22;
+}
+
+/* right column of month panel */
+.month-detail{min-width:0}
+.month .head{display:flex;gap:16px;align-items:flex-start}
+.month .m{font-family:var(--en);font-size:58px;line-height:.92;color:var(--stool);font-variant-numeric:tabular-nums;padding-top:2px}
+.month .title-wrap{min-width:0;flex:1}
+.dish-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.month .t{font-family:var(--zh);font-weight:600;font-size:clamp(26px,3vw,36px);letter-spacing:.06em;line-height:1.2}
+.month .dish-sub{font-family:var(--en);font-size:16px;color:var(--ink-2)}
+.songline{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:6px}
+.month .song{font-family:var(--en);font-size:21px;line-height:1.2;color:var(--ink)}
+.stall-sign{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;
+  background:var(--paper);border:1px solid var(--rule);border-left:3px solid var(--stool);
+  padding:2px 8px;border-radius:2px;color:var(--ink);
+}
+.fest-line{
+  display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin-top:8px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--ink-2);
+}
+.fest-ico{display:inline-flex;align-items:center;width:16px;height:16px;flex:none}
+.fest-ico svg{width:16px;height:16px;display:block}
+.genre-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.pill{
+  font-family:var(--mono);font-size:11.5px;line-height:1.3;color:var(--ink-2);
+  background:var(--plaster-2);border:1px solid var(--rule);border-radius:2px;
+  padding:3px 8px;
+}
+
+.play{
+  font-family:var(--zh);font-size:13px;font-weight:600;line-height:1;letter-spacing:.06em;
+  color:var(--ink);background:transparent;border:1px solid var(--ink);border-radius:99px;
+  padding:6px 12px 6px 10px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;
+  transition:background-color .2s,color .2s;
+}
+.play:hover{background:var(--ink);color:var(--plaster)}
+.play .tri{width:0;height:0;border-left:7px solid currentColor;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent}
+
+.month h3,.lyrics summary{font-family:var(--zh);font-weight:600;font-size:15px;letter-spacing:.1em;margin:22px 0 8px}
+.month .prose{margin-top:18px}
+.month .prose p{font-family:var(--zh);font-size:16px;font-weight:400;line-height:1.88;margin:0 0 .9em;max-width:42em}
+.month .prose p:last-child{margin-bottom:0}
+
+/* Playbill libretto with quiet right-column cross-lingual & dialect glosses */
+.lyrics{margin-top:18px;max-width:46em;border-top:1px solid var(--rule)}
+.lyrics summary{display:flex;justify-content:space-between;align-items:center;gap:16px;cursor:pointer;list-style:none;padding-top:14px;margin:0}
+.lyrics summary::-webkit-details-marker{display:none}
+.lyrics summary .ly-hint{font-family:var(--mono);font-weight:400;font-size:11.5px;color:var(--ink-2);letter-spacing:.04em;margin-left:auto}
+.lyrics summary::after{content:"+";font-weight:400;font-size:18px;line-height:1;margin-left:6px}
+.lyrics[open] summary::after{content:"−"}
+.libretto{
+  margin-top:14px;padding:18px 20px;background:var(--paper);
+  border:1px solid var(--rule);border-radius:3px;
+}
+.lib-cue{
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-2);
+  margin:14px 0 10px;padding-left:10px;border-left:2px solid var(--celadon);
+}
+.lib-cue:first-child{margin-top:0}
+.lib-block{display:grid;grid-template-columns:5.6em minmax(0,1fr);gap:4px 14px;margin:13px 0}
+.lib-who{
+  font-size:12.5px;font-weight:600;letter-spacing:.05em;color:var(--stool);
+  padding-top:3px;
+}
+.lib-who.aunty{color:var(--cobalt)}
+.lib-who.uncle{color:var(--mustard)}
+.lib-who.all{color:var(--celadon)}
+.lib-lines{font-size:15px;line-height:1.82;color:var(--ink);display:grid;gap:3px}
+.lib-row{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:2px 16px;align-items:baseline}
+.lib-row.single{grid-template-columns:minmax(0,1fr)}
+.lib-orig{min-width:0}
+.lib-gloss{min-width:0;font-size:13px;line-height:1.55;color:var(--ink-2);opacity:.86}
+html[data-lang="en"] .lib-gloss{font-style:italic}
+
+.month-foot{
+  margin-top:22px;padding-top:14px;border-top:1px dashed var(--rule);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+  font-size:13.5px;color:var(--ink-2);
+}
+.jump-end{
+  text-decoration:none;color:var(--stool);font-weight:600;border-bottom:1px solid currentColor;padding-bottom:1px;
+}
+
+@media (prefers-reduced-motion:no-preference){
+  .month .notebook,.month .nb-photo,.month .board,.month .blocks{animation:plate-in .38s ease}
+}
+@keyframes plate-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+/* sections */
+section{margin-bottom:88px}
+h2{font-family:var(--zh);font-weight:600;font-size:22px;letter-spacing:.12em;margin:0 0 6px}
+.h2en{font-family:var(--en);font-size:15px;color:var(--ink-2);margin:0 0 26px}
+
+/* story + 12-stall hawker price-board tracklist side by side on desktop */
+.story-board-grid{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.06fr);
+  gap:40px 56px;align-items:start;
+}
+.story p{margin:0 0 1em;max-width:34em}
+.story p:last-of-type{margin-bottom:0}
+.spoiler-fold{margin-top:18px;border-top:1px solid var(--rule);max-width:34em}
+.spoiler-fold summary{
+  cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;
+  padding:12px 0 4px;font-size:14px;color:var(--ink-2);
+}
+.spoiler-fold summary::-webkit-details-marker{display:none}
+.spoiler-fold summary::after{content:"+";font-size:17px}
+.spoiler-fold[open] summary::after{content:"−"}
+.spoiler-fold .sp-body{padding-top:8px;font-size:15px;color:var(--ink-2)}
+.spoiler-fold .sp-body p{margin:0 0 .85em}
+
+/* Hawker stall menu / 12-song index */
+.menu-board{
+  background:var(--paper);border:1px solid var(--rule);border-top:3px solid var(--stool);
+  border-radius:3px;padding:18px 20px 16px;
+  box-shadow:0 16px 36px -28px var(--shadow);
+}
+.menu-acts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 22px}
+.menu-act h3{
+  font-family:var(--mono);font-weight:500;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-2);margin:0 0 8px;padding-bottom:6px;border-bottom:1px solid var(--rule);
+}
+.menu-list{list-style:none;margin:0;padding:0}
+.menu-item{border-bottom:1px dashed color-mix(in srgb,var(--rule) 75%,transparent)}
+.menu-item:last-child{border-bottom:0}
+.menu-btn{
+  all:unset;box-sizing:border-box;width:100%;cursor:pointer;
+  display:grid;grid-template-columns:3.5em minmax(0,1fr) auto;gap:2px 8px;align-items:baseline;
+  padding:7px 4px;border-radius:2px;transition:background-color .16s,color .16s;
+}
+.menu-btn:hover{background:var(--plaster-2)}
+.menu-btn.active{background:color-mix(in srgb,var(--stool) 10%,transparent)}
+.menu-btn .m-no{font-family:var(--mono);font-size:11px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.menu-btn.active .m-no{color:var(--stool);font-weight:500}
+.menu-btn .m-dish{font-size:14px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.menu-btn .m-song{font-family:var(--en);font-size:13px;color:var(--ink-2);text-align:right}
+.menu-foot{
+  margin-top:12px;padding-top:10px;border-top:1px solid var(--rule);
+  display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-2);
+}
+.menu-foot a{text-decoration:none;color:var(--stool)}
+.menu-foot a:hover{text-decoration:underline}
+
+/* Cast: pencil sketches blended directly onto the limewash wall (no product-card frame) */
+.cast{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:36px 22px}
+.cast > div{padding-top:0;min-width:0}
+.cast .frame{
+  position:relative;overflow:hidden;margin:0 0 10px;
+  background:transparent;
+}
+.cast .photo{
+  display:block;width:100%;aspect-ratio:3/4;object-fit:contain;object-position:center bottom;
+  mix-blend-mode:multiply;
+  filter:contrast(1.04);
+  transition:transform .35s ease,filter .35s ease;
+}
+:root[data-theme="dark"] .cast .photo{
+  mix-blend-mode:screen;
+  filter:invert(.92) sepia(.14) saturate(.35) brightness(.94);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cast .photo{
+  mix-blend-mode:screen;
+  filter:invert(.92) sepia(.14) saturate(.35) brightness(.94);
+}}
+.cast > div:hover .photo{transform:translateY(-2px)}
+.cast .tag{
+  display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
+  color:var(--ink-2);margin-bottom:4px;
+}
+.cast b{display:block;font-weight:600;border-top:1px solid var(--rule);padding-top:10px}
+.cast i{font-style:normal;font-family:var(--en);font-size:14px;color:var(--ink-2);margin-left:6px}
+.cast p{margin:4px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink-2)}
+
+/* dynamic aunties blackboard (paired right beneath the red notebook in each month) */
+.board{
+  background:var(--board-bg);color:var(--board-fg);border-radius:4px;
+  padding:18px 20px 16px;font-family:var(--mono);font-size:13px;
+  box-shadow:0 18px 38px -26px var(--shadow),inset 0 0 0 1px rgba(255,255,255,.08);
+  position:relative;
+}
+.board-kicker{
+  display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--board-dim);
+  margin-bottom:4px;
+}
+.board-top{
+  display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;
+  padding-bottom:10px;margin-bottom:12px;
+  border-bottom:1px solid rgba(255,255,255,.16);
+}
+.board-top .b-month{font-size:12px;color:var(--mustard);letter-spacing:.05em}
+.board-top .b-status{font-family:var(--zh);font-size:12px;color:var(--board-fg);opacity:.88}
+.board h3{font-family:var(--zh);font-weight:600;font-size:14.5px;margin:0 0 8px;letter-spacing:.06em;color:var(--board-fg)}
+.board h3 + ul{margin-bottom:14px}
+.board ul{list-style:none;margin:0 0 12px;padding:0}
+.board li{border-bottom:1px dashed rgba(237,242,235,.2)}
+.bet-row{
+  all:unset;box-sizing:border-box;width:100%;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  padding:7px 4px;color:var(--board-fg);transition:background-color .18s;
+}
+.bet-row:hover:not(:disabled){background:rgba(255,255,255,.06)}
+.bet-row:disabled{cursor:default}
+.bet-row .odds{color:var(--mustard);font-variant-numeric:tabular-nums;white-space:nowrap}
+.bet-row.picked .label-txt::before{content:"○ ";color:var(--mustard)}
+.bet-row.picked .odds{
+  outline:1.5px solid var(--mustard);outline-offset:3px;border-radius:99px;padding:0 4px;
+}
+.chalk{
+  display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  padding:6.5px 2px;color:var(--board-fg);font-family:var(--zh);font-size:13.5px;
+}
+.chalk .mark{font-family:var(--mono);font-size:12px;color:var(--mustard);text-align:right}
+.chalk.strike span:first-child{text-decoration:line-through;opacity:.45}
+.chalk.strike .mark{opacity:.55}
+.bet-row.struck .label-txt{text-decoration:line-through;opacity:.45}
+.bet-row.struck .odds{opacity:.4}
+.bet-row.won .label-txt{color:#ffd275}
+.bet-row.won .odds{color:#ff8f83;font-weight:500}
+.board-reply{
+  min-height:1.5em;font-family:var(--zh);font-size:13px;color:#ffd275;
+  margin:2px 0 6px;
+}
+.board small{display:block;font-family:var(--zh);font-size:12px;color:var(--board-dim);line-height:1.55}
+
+/* Dual ending with full Finale Reprise + Last Order company curtain call */
+.ends{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:820px}
+.ends button{
+  all:unset;cursor:pointer;border:1px solid var(--ink);padding:18px 22px;border-radius:3px;
+  transition:background-color .22s,color .22s,transform .15s;
+}
+.ends button:hover{background:color-mix(in srgb,var(--ink) 7%,transparent)}
+.ends button b{display:block;font-size:21px;letter-spacing:.2em}
+.ends button span{font-family:var(--en);color:var(--ink-2);font-size:14px}
+.ends button[aria-pressed="true"]{background:var(--ink);color:var(--plaster)}
+.ends button[aria-pressed="true"] span{color:var(--plaster);opacity:.72}
+
+.end-wrap{margin-top:22px;max-width:820px;display:grid;gap:18px}
+.end-wrap[hidden]{display:none!important}
+.end-card{
+  background:var(--paper);
+  border:1px solid var(--rule);border-left:3px solid var(--stool);border-radius:3px;
+  padding:22px 24px;display:grid;grid-template-columns:88px minmax(0,1fr);gap:18px 22px;align-items:center;
+}
+.end-card .mini-stool{width:84px;height:84px;margin:0 auto;filter:drop-shadow(0 6px 8px var(--shadow))}
+.end-card .ec-kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--stool);margin-bottom:6px}
+.end-card .ec-prose{margin:0 0 10px;font-size:16px;line-height:1.85;color:var(--ink)}
+.end-card .ec-note{margin:0;font-size:14px;color:var(--ink-2)}
+.end-song{
+  background:var(--paper);border:1px solid var(--rule);border-radius:3px;padding:18px 22px;
+}
+.end-song-head{
+  display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;
+  padding-bottom:12px;margin-bottom:14px;border-bottom:1px dashed var(--rule);
+}
+.end-song-head b{font-size:18px;letter-spacing:.06em}
+.end-song-head b em{font-style:normal;font-family:var(--en);font-weight:400;color:var(--ink-2);margin-left:8px}
+.end-song-head span{font-family:var(--mono);font-size:11.5px;color:var(--ink-2)}
+.end-curtain{border-top:1px solid var(--rule);padding-top:4px}
+.listen-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+a.play{text-decoration:none;min-height:32px}
+.end-curtain summary{
+  cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:12px 0 4px;font-weight:600;font-size:15.5px;letter-spacing:.06em;
+}
+.end-curtain summary::-webkit-details-marker{display:none}
+.end-curtain summary .ly-hint{font-family:var(--mono);font-weight:400;font-size:11.5px;color:var(--ink-2);margin-left:auto}
+.end-curtain summary::after{content:"+";font-weight:400;font-size:18px;margin-left:6px}
+.end-curtain[open] summary::after{content:"−"}
+
+/* folded colophon / design notes */
+.notes-bar{background:var(--plaster-2);border-top:1px solid var(--rule)}
+.notes-fold{padding-block:26px}
+.notes-fold > summary{
+  cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+}
+.notes-fold > summary::-webkit-details-marker{display:none}
+.notes-fold > summary .nf-title{font-family:var(--zh);font-weight:600;font-size:17px;letter-spacing:.1em;color:var(--coral)}
+.notes-fold > summary .nf-en{font-family:var(--en);font-size:14px;color:var(--ink-2);margin-left:10px}
+.notes-fold > summary::after{content:"展开 +";font-family:var(--mono);font-size:12px;color:var(--ink-2);white-space:nowrap}
+.notes-fold[open] > summary::after{content:"收起 −"}
+.notes-body{padding-top:26px}
+.cmp{width:100%;border-collapse:collapse;font-size:14.5px;min-width:620px}
+.cmp th,.cmp td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--rule)}
+.cmp th{font-weight:600;color:var(--ink-2);font-size:13px}
+.cmp td:last-child{color:var(--ink);font-weight:600}
+.scroll{overflow-x:auto}
+.swatches{display:flex;flex-wrap:wrap;gap:14px;margin:8px 0 24px}
+.sw{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-2)}
+.sw i{width:26px;height:26px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--rule)}
+.dl{display:grid;grid-template-columns:8em minmax(0,1fr);gap:10px 20px;max-width:900px}
+.dl dt{font-weight:600}
+.dl dd{margin:0;color:var(--ink-2)}
+pre{white-space:pre-wrap;font-family:var(--mono);font-size:12.5px;line-height:1.6;background:var(--tile);border:1px solid var(--rule);padding:16px 18px;border-radius:3px;margin:10px 0}
+.copy-btn{all:unset;cursor:pointer;font-family:var(--mono);font-size:12px;border:1px solid var(--ink-2);padding:5px 12px;border-radius:2px}
+.copy-btn:hover{background:var(--ink);color:var(--plaster)}
+footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px solid var(--rule)}
+
+@media (max-width:960px){
+  .story-board-grid{grid-template-columns:1fr;gap:42px}
+  .month-grid{grid-template-columns:1fr;gap:24px}
+  .ledger-col{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
+}
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:26px}
+  .month .m{font-size:44px}
+  .cast{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 18px}
+}
+@media (max-width:720px){
+  .bar{flex-wrap:wrap;align-items:center;gap:6px 12px;padding-block:10px 8px}
+  .bar-r{width:100%;justify-content:space-between;gap:8px 14px}
+  .garland-wrap{min-height:54px}
+  .garland{height:54px;max-height:54px}
+  .hero{padding-block:10px 24px}
+  .kicker{letter-spacing:.04em;line-height:1.6}
+  .zhname{letter-spacing:.08em;margin-bottom:14px}
+  h1{font-size:clamp(42px,13vw,64px)}
+  .month{padding-block:20px 24px;margin-bottom:56px}
+  .ledger-col{grid-template-columns:1fr}
+  .month .m{font-size:40px}
+  .play{min-height:40px;padding:0 14px 0 12px}
+  .lyrics summary{min-height:44px}
+  .lib-block{grid-template-columns:1fr;gap:2px}
+  .lib-row{grid-template-columns:1fr;gap:1px}
+  .lib-gloss{padding-left:0;margin-bottom:4px}
+  .libretto{padding:14px 14px}
+  .menu-acts{grid-template-columns:1fr}
+  section{margin-bottom:56px}
+  .cast{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 16px}
+  .cast i{display:block;margin:2px 0 0;font-size:13px}
+  .board{padding:16px 16px}
+  .tile .no{font-size:11px}
+  .hint .kbd{display:none}
+  .end-card{grid-template-columns:1fr;padding:18px 16px}
+  .end-card .mini-stool{margin:0}
+  .end-song{padding:16px 14px}
+}
+@media (max-width:520px){
+  .ends{grid-template-columns:1fr}
+  .dl{grid-template-columns:1fr;gap:2px}
+  .dl dd{margin-bottom:12px}
+  .mnav-mid .act-badge{display:none}
+}
+.tile:focus-visible,.ends button:focus-visible,.copy-btn:focus-visible,.mode-btn:focus-visible,.langs button:focus-visible,.mnav-btn:focus-visible,.bet-row:focus-visible,.menu-btn:focus-visible{outline:2px solid var(--cobalt);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.stool,.tile .dish,.cast .photo,.garland.swap,body{transition:none;animation:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="bar">
+    <b><a href="https://gaussianmusic.com/">Gaussian’s music</a></b>
+    <div class="bar-r">
+      <div class="langs" role="group" aria-label="Language">
+        <button type="button" id="lang-zh" aria-pressed="true">中文</button>
+        <button type="button" id="lang-en" aria-pressed="false">EN</button>
+      </div>
+      <button type="button" class="mode-btn" id="mode-btn">
+        <span class="mode-dot" aria-hidden="true"></span>
+        <span id="mode-label">雨后 16:00</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="garland-wrap">
+    <svg class="garland" id="garland" viewBox="0 0 1200 76" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+  </div>
+
+  <div class="hero">
+    <div>
+      <div class="kicker"><span class="zh">Singapore · 一座小贩中心 · 一个座位</span><span class="en">Singapore · one hawker centre · one seat</span></div>
+      <h1>Newt<span class="o">o</span>n<br>Circus</h1>
+      <p class="zhname"><span class="zh">十二个星期五</span><span class="en">Twelve Fridays</span></p>
+      <p class="lede"><span class="zh">阿夏来新加坡当一年美食评审，身份不能让人知道。每个月她挑一个星期五去 Newton 小贩中心，给一个摊打分，每次都用一包纸巾占同一张凳子。新加坡没有四季，分月份就看头顶挂的东西：过年挂红灯笼，斋月挂新月，国庆挂小旗，圣诞挂星星灯。</span><span class="en">Summer comes to Singapore for a year as a food critic, and no one is supposed to know who she is. Once a month, on a Friday, she returns to Newton Food Centre, reviews one stall, and keeps the same stool with a packet of tissues. Singapore has no spring or winter, so the year is marked by whatever is hung overhead.</span></p>
+      <div class="meta"><span class="zh">原创音乐剧</span><span class="en">An original musical</span><span>华语 · English · Singlish</span><span class="zh">12 首歌 · 双结局</span><span class="en">12 songs · two endings</span></div>
+    </div>
+    <div class="floor-box">
+      <div class="floor" id="floor" role="group" aria-label="十二个星期五，点一块花砖切换月份"></div>
+      <div class="stool" id="stool" aria-hidden="true"></div>
+      <div class="hint">
+        <span class="zh">点一块花砖，红凳就挪到那个星期五，头顶的挂饰、桌上的菜和这一幕都跟着换。</span>
+        <span class="en">Tap a tile. The red stool moves to that Friday, and the garland, the dish and the scene go with it.</span>
+        <span class="kbd"><span class="zh">← / → 翻月</span><span class="en">← / → change month</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="month" id="month" aria-live="polite"></div>
+
+  <section>
+    <div class="story-board-grid">
+      <div>
+        <h2><span class="zh">故事</span><span class="en">The story</span></h2>
+        <p class="h2en"><span class="zh">The story</span><span class="en">At the start</span></p>
+        <div class="story">
+          <p><span class="zh">阿夏第一次来 Newton。她把一包纸巾放在凳子上占座，然后去买甘蔗水。回来时，本地人阿杰已经坐在那里。他说，纸巾占座只算十五分钟。两个人为这条规矩吵了一架，最后一人坐半张椅子。</span><span class="en">The first time Summer comes to Newton, she puts a packet of tissues on a stool to save it, then goes to buy sugarcane juice. When she comes back, Kelvin, who lives here, is already sitting down. He says a packet of tissues only holds a seat for fifteen minutes. They argue the rule out, and end up sharing the chair.</span></p>
+          <p><span class="zh">阿杰是沙爹摊老板陈伯的儿子。他觉得新加坡很小，从东边到西边坐出租车只要四十块，所以一心想去伦敦。阿夏觉得这里很大，光一盘炒粿条就混着四种语言，一年都吃不完。陈伯烤了四十年沙爹，手里那把蒲扇一直没放下。</span><span class="en">Kelvin is the son of Uncle Tan, who runs the satay stall. Singapore feels small to him: a taxi from east to west costs forty dollars, and he wants to go to London. To Summer it feels large. One plate of noodles holds four languages, and a year is not enough to eat through them. Uncle Tan has grilled satay for forty years and has never put down his fan.</span></p>
+          <p><span class="zh">四位阿姨分别管饮料、端盘子、看天气和收摊。她们在黑板上打赌：小贩中心里藏着一个美食评审，到底是谁。水獭一家有两只大的、三只小的。它们会跟着唱歌，也会把没人看着的包拖走。</span><span class="en">Four aunties look after drinks, plates, the weather and closing time. On the blackboard they are betting on who the hidden food critic is. The otter family is two adults and three young. They sing along, and they also drag off any bag left unwatched.</span></p>
+        </div>
+        <details class="spoiler-fold">
+          <summary><span class="zh">后来的事（有剧透）</span><span class="en">The later part, including the turns</span></summary>
+          <div class="sp-body">
+            <p><span class="zh">六月，一家水獭冲进小贩中心，拖走了阿夏的包。红笔记本掉出来，赔率一赔九的那一注中了，大家这才知道她就是评审。九月中秋，阿杰提着灯笼请她吃豆花，求她给自家沙爹写一个差评。好评一出来，档口挂上推荐灯笼，队就会排起来，摊子关不掉，他也就走不成。</span><span class="en">In June a family of otters rushes into the hawker centre and drags off Summer’s bag. Her red notebook falls out. The long-shot bet, at one to nine, wins, and everyone sees that she is the critic. At the Mid-Autumn Festival, Kelvin brings her a lantern and a bowl of tau huay, and asks her to give the family satay a bad review. Once that review is public, the queue will start, the stall will be unable to close, and he will be unable to leave.</span></p>
+            <p><span class="zh">十二月最后一个星期五，轮到沙爹摊。陈伯其实第一天就认出了她。今晚他故意把沙爹烤咸，好让儿子能去伦敦。父子俩都瞒着对方，都在为对方放手。</span><span class="en">On the last Friday in December, it is the satay stall’s turn. Uncle Tan recognised her on the first day. Tonight he salts the satay on purpose, so his son can go to London. Father and son each hide this from the other, and each is trying to let the other go.</span></p>
+          </div>
+        </details>
+      </div>
+
+      <div>
+        <h2><span class="zh">十二个档口</span><span class="en">Twelve stalls</span></h2>
+        <p class="h2en"><span class="zh">按月份排的曲目 · 点一首就跳到那个星期五</span><span class="en">The year’s menu · select any stall to visit that Friday</span></p>
+        <div class="menu-board" id="menu-board"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="zh">人物</span><span class="en">The table</span></h2>
+    <p class="h2en"><span class="zh">Who’s at the table</span><span class="en">Who’s at the table</span></p>
+    <div class="cast">
+      <div>
+        <div class="frame"><img class="photo" src="people/sketch-xia-v4.jpg?v=4" alt="背影：年轻女子一手拿纸巾包、一手拿薄笔记本和笔"></div>
+        <span class="tag"><span class="zh">座位 · 纸巾与红本子</span><span class="en">The seat · tissues and a red notebook</span></span>
+        <b><span class="zh">阿夏</span><span class="en">Summer</span><i>Summer</i></b>
+        <p><span class="zh">从外地来的美食评审，不能暴露身份。她想留在这里。</span><span class="en">A food critic from abroad. No one can know who she is. She wants to stay.</span></p>
+      </div>
+      <div>
+        <div class="frame"><img class="photo" src="people/sketch-jie-v4.jpg?v=4" alt="背影：穿背心和拖鞋的年轻人拿着蒲扇，脚边一缕炭烟"></div>
+        <span class="tag"><span class="zh">蒲扇 · 炭烟里的背影</span><span class="en">The fan · a back in the charcoal smoke</span></span>
+        <b><span class="zh">阿杰</span><span class="en">Kelvin</span><i>Kelvin</i></b>
+        <p><span class="zh">沙爹摊老板的儿子。他想离开新加坡。</span><span class="en">The satay man’s son. He wants to leave Singapore.</span></p>
+      </div>
+      <div>
+        <div class="frame"><img class="photo" src="people/sketch-uncle-v4.jpg?v=4" alt="背影：微驼的老人肩搭毛巾，站在一盆木炭旁"></div>
+        <span class="tag"><span class="zh">炭炉 · 四十年没收摊</span><span class="en">The charcoal · forty years without closing</span></span>
+        <b><span class="zh">陈伯</span><span class="en">Uncle Tan</span><i>Uncle Tan</i></b>
+        <p><span class="zh">烤了四十年沙爹。想退休，又想把摊子留给儿子。</span><span class="en">He has grilled satay for forty years. He wants to retire, and he also wants to leave the stall to his son.</span></p>
+      </div>
+      <div>
+        <div class="frame"><img class="photo" src="people/sketch-aunties-v4.jpg?v=4" alt="四位衣着各异的小贩中心阿姨背影，托盘上放着咖啡壶与两只咖啡杯"></div>
+        <span class="tag"><span class="zh">咖啡壶 · 记得所有点法</span><span class="en">The kopi pot · every order remembered</span></span>
+        <b><span class="zh">四位阿姨</span><span class="en">The Aunties</span><i>The Aunties</i></b>
+        <p><span class="zh">记得每个人的咖啡怎么点。看天气比预报还准。什么都敢赌。</span><span class="en">They remember how everyone takes their coffee. They read the weather better than the forecast. They will bet on anything.</span></p>
+      </div>
+      <div>
+        <div class="frame"><img class="photo" src="people/sketch-otters-v4.jpg?v=4" alt="两只大水獭带着三只小水獭拖走帆布包，笔记本从包口滑出"></div>
+        <span class="tag"><span class="zh">河道 · 两大三小</span><span class="en">The river · two big, three small</span></span>
+        <b><span class="zh">水獭一家</span><span class="en">The Otters</span><i>The Otters</i></b>
+        <p><span class="zh">两只大的，三只小的。在剧里负责合唱，也会偷包。</span><span class="en">Two adults and three young. In the show they sing with the company, and they also steal bags.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ending">
+    <h2><span class="zh">结局由你选</span><span class="en">You choose the ending</span></h2>
+    <p class="h2en">Last order. Stay, or go?</p>
+    <div class="ends">
+      <button type="button" id="end-stay" aria-pressed="false"><b><span class="zh">留下</span><span class="en">Stay</span></b><span class="zh">Stay</span></button>
+      <button type="button" id="end-go" aria-pressed="false"><b><span class="zh">回去</span><span class="en">Go home</span></b><span class="zh">Go home</span></button>
+    </div>
+    <div class="end-wrap" id="end-wrap" hidden></div>
+  </section>
+</div>
+
+<div class="notes-bar">
+  <div class="wrap">
+    <details class="notes-fold">
+      <summary>
+        <span><span class="nf-title"><span class="zh">幕后手记 · 设计说明</span><span class="en">Colophon</span></span><span class="nf-en"><span class="zh">For Gaussian: why it looks like this</span><span class="en">Why the page looks like this</span></span></span>
+      </summary>
+      <div class="notes-body">
+        <div class="zh">
+        <dl class="dl">
+          <dt>主意象</dt><dd>不画热闹的人群，只铺一整片雨后微湿的娘惹花砖，上面一张红塑料凳、一包斜放的纸巾，全部从正上方俯拍。东西越少越安静，热闹留给歌，不放进画面。</dd>
+          <dt>十二块地砖</dt><dd>十二格用的是同一块实拍釉面花砖（从 <code>dishes/00-floor-4x3.jpg</code> 里裁出来，铺成 <code>dishes/00-floor-sym.jpg</code>）：每格正中一朵完整的圆花，四角的小花在格子交界处拼成整朵，横竖都对称，上面只留一层很淡的午后斜光；第 6 格留着水獭的湿脚印。下面左边是阿夏的红笔记本和阿姨的黑板，一本私人、一块公开，放在一起看，本子上用胶带贴着这个月那道菜的照片；右边是剧情和双栏混语场刊。</dd>
+          <dt>纸面痕迹</dt><dd>红笔记本用硬笔手写体，分数用圆珠笔圈出来，纸面跟着剧情留下痕迹：二月划掉了瞎编的职业，四月页角被雨水晕开，六月沾了水獭脚印，十月溅上两点红辣油，十二月在最后一句底下重重画了线。</dd>
+          <dt>头顶的挂饰与光线</dt><dd>新加坡没有四季，靠头顶挂的东西记月份。石灰墙的底色也随十二个月一点点变暖，从雨后放晴的下午，走到年底炭火的暖光。右上角随时可以切到「夜市 21:00」。</dd>
+          <dt>人物</dt><dd>人物不画正脸，也不加卡片边框。五张铅笔背影用正片叠底直接印在石灰墙上（切到夜市时变成浅浅的粉笔线），每人带着自己的东西：纸巾和薄本子；背心、拖鞋和蒲扇；木炭盆；托盘上的咖啡壶和杯子；两大三小的水獭拖着帆布包，红本子从包里滑了出来。</dd>
+          <dt>双结局终曲</dt><dd>选「留下」或「回去」，会翻开最后一张座位卡，同时展开对应的镜像重唱《Stay》或《Go Home》。两条路最后都接到全员谢幕曲《Last Order》，十二个档口的厨房乐器一起响。</dd>
+        </dl>
+        <h3 style="margin-top:34px;font-size:17px">配色：娘惹花砖</h3>
+        <div class="swatches">
+          <span class="sw"><i style="background:var(--plaster)"></i>石灰墙</span>
+          <span class="sw"><i style="background:var(--celadon)"></i>青瓷绿</span>
+          <span class="sw"><i style="background:var(--cobalt)"></i>钴蓝</span>
+          <span class="sw"><i style="background:var(--coral)"></i>珊瑚红</span>
+          <span class="sw"><i style="background:var(--mustard)"></i>芥末黄</span>
+          <span class="sw"><i style="background:var(--stool)"></i>塑料凳红</span>
+        </div>
+        <h3 style="font-size:17px">和前三部的网站比</h3>
+        <div class="scroll">
+          <table class="cmp">
+            <tr><th></th><th>MASTERS</th><th>一整圈</th><th>Newton Circus</th></tr>
+            <tr><td>时间</td><td>三十年</td><td>三十四年</td><td>一年，十二个星期五</td></tr>
+            <tr><td>主图</td><td>屋顶上的三个人</td><td>山手线的圆</td><td>一个凳子、一包纸巾、十二块砖</td></tr>
+            <tr><td>形状</td><td>磁带</td><td>圆</td><td>方格（地砖）</td></tr>
+            <tr><td>光线</td><td>夜</td><td>夜</td><td>雨后下午（可切夜市）</td></tr>
+            <tr><td>结局</td><td>一个</td><td>一个</td><td>两个，听众选</td></tr>
+          </table>
+        </div>
+        <h3 style="margin-top:34px;font-size:17px">主图静物 prompt</h3>
+        <p style="color:var(--ink-2);margin:0">不拍人群全景，从正上方拍雨后地砖上的一张红凳和一包纸巾，和页面上那十二格实拍花砖对得上。</p>
+        </div>
+        <div class="en">
+        <dl class="dl">
+          <dt>The image</dt><dd>No crowd. One continuous floor of wet Peranakan tiles, one red stool from above, one crooked packet of tissues. The noise lives in the songs.</dd>
+          <dt>Twelve tiles</dt><dd>One real glazed Peranakan tile, cut from <code>dishes/00-floor-4x3.jpg</code> and laid twelve times as <code>dishes/00-floor-sym.jpg</code>: a whole medallion centred in every square, the corner rosettes meeting where the squares join, symmetrical both ways under a faint wash of afternoon light. June carries wet otter prints. Below, Summer’s private red notebook, with that month’s dish photo taped to it, and the aunties’ public chalkboard sit together beside the scene and bilingual libretto.</dd>
+          <dt>Paper traces</dt><dd>The exercise-book page carries hard-pen script, circled scores, and physical traces of the year: a crossed-out alibi in February, a rain-blurred corner in April, otter smudges in June, chilli flecks in October, and an underlined plea in December.</dd>
+          <dt>Garland and light</dt><dd>With no seasons, the year is counted by what hangs overhead, while the limewash wall shifts subtly through twelve afternoon tints toward December’s charcoal warmth. Switch to the 21:00 night market at top right.</dd>
+          <dt>People</dt><dd>No front-facing faces and no card borders. Five graphite back-views blend directly into the plaster wall (turning to chalk lines at night), each with its object: tissues and notebook, singlet and palm fan, charcoal basin, kopi tray, and two adult otters with three pups dragging off the canvas bag.</dd>
+          <dt>Two endings</dt><dd>Choosing Stay or Go Home opens both the final seat card and its mirror reprise (<em>Stay</em> or <em>Go Home</em>), before both paths converge in the full-company curtain call <em>Last Order</em>.</dd>
+        </dl>
+        <h3 style="margin-top:34px;font-size:17px">Peranakan tile colours</h3>
+        <div class="swatches">
+          <span class="sw"><i style="background:var(--plaster)"></i>limewash</span>
+          <span class="sw"><i style="background:var(--celadon)"></i>celadon</span>
+          <span class="sw"><i style="background:var(--cobalt)"></i>cobalt</span>
+          <span class="sw"><i style="background:var(--coral)"></i>coral</span>
+          <span class="sw"><i style="background:var(--mustard)"></i>mustard</span>
+          <span class="sw"><i style="background:var(--stool)"></i>plastic-stool red</span>
+        </div>
+        <h3 style="font-size:17px">Beside the earlier three sites</h3>
+        <div class="scroll">
+          <table class="cmp">
+            <tr><th></th><th>MASTERS</th><th>The Full Circle</th><th>Newton Circus</th></tr>
+            <tr><td>Time</td><td>Thirty years</td><td>Thirty-four years</td><td>One year, twelve Fridays</td></tr>
+            <tr><td>Image</td><td>Three people on a roof</td><td>The Yamanote circle</td><td>A stool, tissues, twelve tiles</td></tr>
+            <tr><td>Shape</td><td>A cassette</td><td>A circle</td><td>A square (floor tile)</td></tr>
+            <tr><td>Light</td><td>Night</td><td>Night</td><td>After rain (or the night market)</td></tr>
+            <tr><td>Ending</td><td>One</td><td>One</td><td>Two, and the listener chooses</td></tr>
+          </table>
+        </div>
+        <h3 style="margin-top:34px;font-size:17px">Key-art prompt</h3>
+        <p style="color:var(--ink-2);margin:0">Leave the crowd. Shoot an overhead still life on wet Peranakan tiles — one red plastic stool and one crooked packet of tissues, answering the twelve ceramic floor tiles above.</p>
+        </div>
+<pre id="prompt">Editorial still-life photograph, shot directly from above, 4:5 vertical.
+
+A single red plastic hawker-centre stool, seen from straight overhead, standing on a floor of hand-painted Peranakan tiles in celadon green, cobalt blue, coral and mustard on an off-white ground. On the stool lies a small unopened packet of white tissues, placed slightly crooked, the way people in Singapore use it to save a seat. A tropical rainstorm has just ended: a few raindrops bead on the stool and the tiles, one fallen white frangipani flower lies near a stool leg, and the soft shadow of a palm frond falls across one corner. Late-afternoon light after rain, clear and gentle.
+
+Lots of empty tile floor around the stool, the stool slightly below centre, quiet and generous negative space at the top for a title. Calm, elegant, cheerful, precise. Natural colours, fine film grain, shallow shadows.
+
+No people, no hands, no text, no logos, no food.</pre>
+        <button type="button" class="copy-btn" id="copy"><span class="zh">复制 prompt</span><span class="en">Copy prompt</span></button>
+      </div>
+    </details>
+  </div>
+</div>
+
+<div class="wrap"><footer>© 2026 Gaussian’s music · <span class="zh">设计稿，非正式页面</span><span class="en">a design draft, not the live page</span></footer></div>
+
+<script>
+const MONTHS=[
+ {no:"#01-01",dish:"甘蔗水",dishEn:"Sugarcane Juice",fest:"一月 · 刚落地",song:"Chope",g:"bulbs",
+  c:["celadon","coral","mustard"],n:8,act:"上半场 · Act I",
+  tags:["Calypso · 钢鼓","手摇压蔗机","112 BPM"],
+  score:7,
+  note:"甘蔗压了两遍才甜。第一遍只有青草味和渣，第二遍才有甜味，颜色浅黄绿，有点浑，杯口一圈细泡沫。只加了一块冰，甜味来得慢。凳子上那包纸巾替我占住了半张椅子，另外半张坐着一个爱管闲事的本地男生。",
+  noteEn:"The sugarcane was pressed twice before it turned sweet. The first press was only grass and fibre. The second was sweet, pale yellow-green and a little cloudy, with a thin ring of foam. There was one piece of ice, and the sweetness came slowly. The packet of tissues on the stool took half my chair. A nosy local boy took the other half.",
+  scene:[
+    "阿夏下午四点落地，雨刚停，Newton 小贩中心的灯一盏一盏亮起来。她在人群里找空椅子。这里没有服务员帮你留座，把纸巾、伞或围巾往凳子上一放，人就可以去排队，回来座位还算你的。阿姨告诉她，甘蔗要压两遍才甜，又教她先占座。她去排队，回来时，阿杰已经坐在那张凳子上了。",
+    "阿杰说，纸巾占座只算十五分钟，她却去了半个小时。她反问这条规矩写在哪本书上。她飞了大半个地球才到这里，只想有张椅子坐下来吃口东西；他个子那么高，站着吃也行。两个人从占座的规矩一路吵到谁该让，阿姨们已经在赌他们最后会不会坐到一起。吵完，椅子一人坐一半。歌是轻快的卡里普索，节奏像手摇压蔗机一圈圈转，翻来覆去唱的就是占座那个词：Chope。"
+  ],
+  festEn:"January · just landed", actEn:"Act I",
+  tagsEn:["Calypso · steel pan","Hand-cranked press","112 BPM"],
+  sceneEn:[
+    "Summer lands at four in the afternoon. The rain has just stopped, and the lights at Newton come on one stall at a time. She looks for an empty chair. There are no waiters to save seats. Put down tissues, an umbrella or a scarf, and you can go and queue; the seat is still yours when you come back. Sugarcane juice has to be pressed twice before it is sweet. An auntie tells her that, and also tells her to save the seat first. She goes to queue. When she comes back, Kelvin is already on the stool.",
+    "Kelvin says tissues only hold a seat for fifteen minutes, and she was gone for half an hour. She asks which book that rule is written in. She says she only wants to borrow one chair for the year, and he is tall enough to eat standing up. They argue from the seating rule to which of them should give way. The aunties are already betting on whether the two of them will sit together. After the argument, they share the chair. The song is a light calypso, with a rhythm like a hand-turned sugarcane press, and the word it keeps singing is chope: save the seat."
+  ],
+  lyrics:[
+    {cue:"钢鼓轻起，沙锤像手摇压蔗机一下一下转开"},
+    {who:"阿夏",lines:["The plane touched down at four, the rain had just let go","Newton’s lights came on, one stall at a time","They press the sugarcane twice before it’s sweet","And I’m walking through the crowd looking for one empty chair"]},
+    {who:"阿姨",cls:"aunty",lines:["（随口喊）Girl ah, you want seat? Chope first lah!"]},
+    {who:"阿夏",lines:["Chope! Chope! 一包纸巾放上去","Chope! Chope! 一包纸巾放上去","This seat is mine, I’ll be right back"]},
+    {who:"阿杰",lines:["Excuse me miss, 纸巾只管十五分钟","你去排沙爹 排了整整半小时","这里的规矩 你还不太懂","Tissue paper cannot chope forever one"]},
+    {who:"阿夏",lines:["Who wrote that rule? Show me the book","I flew across the whole world to get here","Just lend me one chair for one year","You’re so tall, you can eat standing up"]},
+    {who:"阿夏 / 阿杰",cls:"all",lines:["Chope! Chope!（Cannot!）一包纸巾放上去","Chope! Chope!（Cannot lah!）一包纸巾放上去","This seat is mine（算我的!）","等我回来（不等!）I’ll be right back"]},
+    {who:"四位阿姨",cls:"aunty",lines:["Aiyah, stop fighting lah, 甘蔗压两遍才甜","First time meet must quarrel one round, then you know each other","One bet three! One bet three!","Let’s see whether these two sit the same chair or not"]},
+    {who:"两人合唱",cls:"all",lines:["Chope! Chope! 一包纸巾放上去","Chope! Chope! 一包纸巾放上去","这张椅子 一半是你","Half is yours, 一半是我"]},
+    {cue:"压蔗机慢慢停下，冰块轻碰，钢鼓散开"}
+  ]},
+
+ {no:"#01-02",dish:"蚝煎",dishEn:"Orh Luak",fest:"二月 · 农历新年",song:"What Do You Do?",g:"lantern",
+  c:["coral","mustard","celadon"],n:6,act:"上半场 · Act I",
+  tags:["潮闽小调 · 二胡唢呐","铁板滋滋声","124 BPM"],
+  score:9,
+  note:"这盘蚝煎边上脆，中间软。牡蛎包在淀粉和鸡蛋里，咬下去有海水的味道。酱不多，有光泽，带一点酸，只放了几片香菜，要趁热吃。我又叫了一盘。陈伯说我写字时眼睛会眯起来，像那些给菜打分的人。下次我得背过身去写，别让他看见。",
+  noteEn:"The oyster omelette is crisp at the edge and soft in the middle. The oysters are set in starch and egg, and they taste of seawater. There is not much sauce. It is glossy, a little sour, with only a few leaves of coriander, and it has to be eaten hot. I ordered another plate. Uncle Tan says my eyes narrow when I write, the way people do when they are marking food. Next time I will turn my back, so he cannot see.",
+  scene:[
+    "农历新年，鱼生摆上桌，大家举起筷子往高处捞，捞得越高越起劲，讨的是一个好年。旁边的潮州福建档口在做蚝煎，铁板一响，人就围过去。过年时，问人做什么工作比问名字还常见。陈伯看阿夏一个人来过年，也这样问了她。",
+    "她先说自己做物流，马上改口说是小学老师，又说是夜班护士，周末还去植物园数兰花。她说得越来越快，自己也圆不回来。阿姨们小声传：她的笔记本里写满了蚝煎。陈伯说新年吃饱就好，不多问。他只加了一句：她写字时眼睛会眯起来，跟那些打分的人一样。他没有把「评审」两个字说出来。阿夏又叫了一盘蚝煎。歌里铁板滋滋响，二胡唢呐跟着热闹，可大家一起唱的是捞鱼生，因为这一晚是过年。"
+  ],
+  festEn:"February · Lunar New Year", actEn:"Act I",
+  tagsEn:["Teochew–Hokkien · erhu and suona","Sizzling griddle","124 BPM"],
+  sceneEn:[
+    "Chinese New Year. The raw-fish salad is on the table. The higher people lift their chopsticks, the harder they toss it, wishing for a good year. At the Teochew stall next door they are frying oyster omelette. The griddle sounds, and people gather. At New Year, asking what someone does for a living is more ordinary than asking their name. Uncle Tan sees Summer spending the holiday alone, and asks.",
+    "She says she works in logistics, then that she is a primary-school teacher, then a night-shift nurse who counts orchids at the Botanic Gardens on weekends. She talks faster and faster, and cannot keep the story straight. The aunties whisper that her notebook is full of oyster omelette. Uncle Tan says that at New Year it is enough to eat, and he does not ask more. He only adds that her eyes narrow when she writes, like people who give marks. He never says the word critic. She orders another plate. The song has the sound of the griddle, with erhu and suona, but what everyone sings together is the New Year fish toss, because the night is the new year."
+  ],
+  lyrics:[
+    {cue:"锣鼓、二胡与唢呐热闹开场，铁板滋滋作响"},
+    {who:"陈伯",cls:"uncle",lines:["Happy New Year, Huat ah! 鱼生摆上桌了","Everybody take chopsticks, 捞高高 lah","Miss, you come alone for Chinese New Year ah?","So tell uncle, 你是做什么的?"]},
+    {who:"众人",cls:"all",lines:["捞起! 捞起! 风生水起","捞起! 捞起! 越捞越高","What do you do? What do you do?","Chopsticks up high, tell the truth!"]},
+    {who:"阿夏",lines:["（越说越快）I do logistics. No wait, I’m a primary school teacher","Actually I’m a nurse, I work night shifts","On weekends I go to the Botanic Gardens to count orchids"]},
+    {who:"四位阿姨",cls:"aunty",lines:["（窃窃私语）Logistics? Teacher? Nurse? Count orchids?","Wah, her notebook full of 蚝煎 leh"]},
+    {who:"众人",cls:"all",lines:["捞起! 捞起! 风生水起","捞起! 捞起! 越捞越高","What do you do? What do you do?","Chopsticks up high, tell the truth!"]},
+    {who:"陈伯",cls:"uncle",lines:["没关系 没关系 过年不问那么多","Eat until full is good enough","只是你写字的时候 眼睛眯起来","Same as those people who give marks, you know"]},
+    {who:"阿夏",lines:["（对摊主）Uncle, one more plate of 蚝煎, please"]},
+    {who:"四位阿姨",cls:"aunty",lines:["Second plate! Write down, write down!"]},
+    {who:"众人",cls:"all",lines:["捞起! 捞起! 捞到天上","捞起! 捞起! 年年有余","What do you do? 过年不用讲","Huat ah! Huat ah! Huat ah!"]},
+    {cue:"一声锣响，铁板余烟散尽"}
+  ]},
+
+ {no:"#01-03",dish:"印度煎饼",dishEn:"Roti Prata",fest:"三月 · 斋月夜市",song:"Can or Not?",g:"crescent",
+  c:["cobalt","mustard","rose"],n:8,act:"上半场 · Act I",
+  tags:["Tamil Kuthu · 塔布拉鼓","甩面团重拍","140 BPM"],
+  score:8,
+  note:"印度煎饼外圈烙出深色的泡。撕开能看见一层层薄皮，至少六层，还烫，有油香。旁边一小钢碗鱼咖喱，橙红色，面上浮着一层红油。",
+  noteEn:"The prata has dark blisters around the edge. Torn open, you can see the thin layers, six at least. It is still hot and smells of oil. Beside it is a small steel bowl of fish curry, orange, with a layer of red oil on top.",
+  scene:[
+    "斋月的夜市开到很晚。师傅把面团在手上转圆，再甩到热铁板上，旁边配一小碗咖喱。阿姨们记得每个人怎么吃、多久来一次，哪个摊好吃，她们往往比任何榜单都先知道。今晚她们拉人下注，赌的是：有个人每吃完一个摊就在本子上记一笔，这个人到底是谁。",
+    "黑板上开了三注：拿大相机的游客，每道菜都拍，拍完不吃，一赔二；天天来的林老师，吃饭一定看报纸，一赔四；那个外地女生用纸巾占座，一个人吃三样，最不像评审，一赔九。阿夏说她只是饿。面团甩了一圈又一圈，啪地落到铁板上，再翻一面，鼓声跟着面团转，谁都不许先把答案说出来。副歌唱的是 Can or not，阿姨们平时问一件事成不成，就是这么问的。"
+  ],
+  festEn:"March · Ramadan bazaar", actEn:"Act I",
+  tagsEn:["Tamil kuthu · thavil","Dough-slap downbeat","140 BPM"],
+  sceneEn:[
+    "The Ramadan night market stays open late. The cook spins the dough in his hands and slaps it onto the hot iron, with a small bowl of curry beside it. The aunties remember how everyone eats and how often they come, usually before any list does. Tonight they pull people in to bet. Someone eats one stall and writes one line, and they want to know whether the line is good or bad.",
+    "Three bets go up on the blackboard. The tourist with the big camera photographs every dish and eats nothing: one to two. Mr Lim comes every day and always reads the paper with his meal: one to four. The girl from abroad saves her seat with tissues and eats three dishes alone. She looks least like a critic: one to nine. Summer says she is only hungry. The dough is swung once, then again, and nobody is allowed to say the answer yet. It lands on the iron with a slap and is flipped. The drums follow the dough. The chorus of the song is “Can or not?”, the words the aunties use when they ask whether something will happen."
+  ],
+  lyrics:[
+    {cue:"Thavil 鼓点急促响起，呐笛盘旋，面团啪啪摔在铁板上"},
+    {who:"阿姨",cls:"aunty",lines:["Come come come, place your bets!","This year got one mystery person, secretly come give marks","Eat one stall, write one line","好也好 坏也好 we all must know"]},
+    {who:"阿姨与食客",cls:"all",lines:["Can or not? Can or not?","猜中有钱拿 猜错请喝茶","Can or not? Can or not?","One bet two! One bet four! One bet nine!"]},
+    {who:"阿姨",cls:"aunty",lines:["Number one, that tourist with the big camera","Take everything, eat nothing, 一赔二","Number two, Mr Lim, come every day","Eat also must read newspaper, 一赔四","Number three, that girl from far far away","一包纸巾占座 one person eat three plates","Don’t look like one leh, 一赔九"]},
+    {who:"阿夏",lines:["（申辩）Me? I’m just very hungry!"]},
+    {who:"阿姨与食客",cls:"all",lines:["Can or not? Can or not?","猜中有钱拿 猜错请喝茶","Can or not? Can or not?","One bet two! One bet four! One bet nine!"]},
+    {who:"煎饼师傅",cls:"uncle",lines:["面团甩一圈 甩两圈 甩上天","Answer still not landed, nobody say anything","啪! Land on the griddle","啪! Flip over again"]},
+    {who:"众人",cls:"all",lines:["Can or not? Can lah!","Can or not? Cannot lah!","Can or not? Can or not?","One bet nine! One bet nine!"]},
+    {cue:"最后一声面团啪地落地"}
+  ]},
+
+ {no:"#01-04",dish:"冰咖啡",dishEn:"Kopi Peng",fest:"四月 · 季风转换",song:"Four O’Clock Rain",g:"rain4",
+  c:["cobalt","celadon","coral"],n:4,act:"上半场 · Act I",
+  tags:["印尼情歌 · 钢琴与尼龙吉他","塑料袋冰块声","76 BPM"],
+  score:8,
+  note:"冰咖啡装在透明塑料袋里，用红橡皮筋扎口，插一根吸管。咖啡是深褐色，炼乳在里面拉出一条浅色。袋子一晃，冰块就响，袋外全是水珠。苦味收得干净，甜味只在那一条奶里。笔记本的纸角被雨打湿了。明天四点，我不带伞。",
+  noteEn:"The iced coffee is in a clear plastic bag, tied with a red rubber band, with one straw. The coffee is dark brown, and the evaporated milk makes a pale streak through it. Shake the bag and the ice rattles. The outside of the bag is covered in water. The bitterness finishes cleanly. The sweetness is only in that streak of milk. Rain wet the corner of my notebook. Tomorrow at four, I will not bring an umbrella.",
+  scene:[
+    "季风转换的那几个星期，雨常常下午四点来，来得快，去得也快。三点五十九分，天还是蓝的。四点整，雨下来了，一秒不差。阿夏站在车站，没带伞。手里那袋冰咖啡还是老样子，扎着口，插着吸管，晃来晃去。",
+    "阿杰说，这里的雨比地铁准时，也比老板准时。他的伞还有一半空着，叫她站进来。他又说咖啡要「拉」：两只壶拉开距离来倒，才会起泡，喝起来才滑。她想，人和人也是这样，隔开一点距离反而好。雨停之前，两个人都没再说话，只听见袋子里的冰块响。她说，明天也不带伞。这首歌很慢，钢琴和吉他和着雨声。"
+  ],
+  festEn:"April · the monsoon turns", actEn:"Act I",
+  tagsEn:["Indonesian ballad · piano and nylon guitar","Ice in a plastic bag","76 BPM"],
+  sceneEn:[
+    "In the weeks when the monsoon turns, rain often arrives at four in the afternoon, quickly, and leaves just as quickly. At 3:59 the sky is still blue. At four exactly the rain comes down, not one second off. Summer is at the bus stop with no umbrella. The iced coffee is the old way of carrying it: a tied plastic bag, a straw, swinging in her hand.",
+    "Kelvin says the rain here is more punctual than the train, and more punctual than a boss. Half his umbrella is still empty, and he tells her to step under it. He also says the coffee has to be “pulled”: poured from one pot into another across a gap, so it foams and turns smooth. Some people are like that too. They are better with a little distance. Before the rain stops, neither of them speaks. All they hear is the ice in the bag. This song is slow, piano and guitar under the rain. She says she will not bring an umbrella tomorrow."
+  ],
+  lyrics:[
+    {cue:"钢琴与尼龙吉他轻轻落拍，第一批雨点敲下来"},
+    {who:"阿夏",lines:["Three fifty-nine and the sky is still blue","At four o’clock exactly the rain comes down, not one second late","I’m standing at the bus stop without an umbrella","My iced coffee swaying slowly in the bag"]},
+    {who:"阿杰",lines:["新加坡的雨 是全世界最准时的","比地铁准 比老板准","我有一把伞 还空着一半","你要不要 站进来一点"]},
+    {who:"两人合唱",cls:"all",lines:["Hujan jam empat, hujan jam empat","Four o’clock rain, it comes in a rush and leaves in a rush","Half an umbrella apart, 刚好听见你在笑"]},
+    {who:"阿夏",lines:["You said the coffee must be pulled, high up high","From one pot into another pot","That’s how it gets its foam, that’s how it turns smooth","I think some people are like that too"]},
+    {who:"两人合唱",cls:"all",lines:["Hujan jam empat, hujan jam empat","Four o’clock rain, it comes in a rush and leaves in a rush","Half an umbrella apart, 刚好听见你在笑"]},
+    {who:"轻声对唱",cls:"all",lines:["Before the rain stops, we don’t say a word","只听见冰块 在袋子里 叮当 叮当"]},
+    {who:"两人合唱",cls:"all",lines:["Hujan jam empat, hujan jam empat","Tomorrow it will come again, 四点整 一秒都不差","Four o’clock rain, 我明天 不带伞"]},
+    {cue:"雨停了，只剩钢琴最后几个单音"}
+  ]},
+
+ {no:"#01-05",dish:"美禄恐龙",dishEn:"Milo Dinosaur",fest:"五月 · 没有节日",song:"Dinosaur",g:"none",
+  c:["mustard","cobalt","celadon"],n:12,act:"上半场 · Act I",
+  tags:["1950s 南洋咖啡店摇摆","手风琴 · 勺敲玻璃杯","140 BPM"],
+  score:7,
+  note:"这是一杯美禄恐龙。杯子是直筒的，冰放得很多。干的美禄粉堆得高出杯口，颜色比下面的饮料浅，轻轻一碰就会掉渣。吸管插进去，粉山塌了半座，沉进饮料里，底下变得更浓。粉上面还可以再加一球冰淇淋。和阿杰比谁会点本地咖啡，我输了，钱是我付的。",
+  noteEn:"This is a Milo dinosaur. The glass is straight-sided and full of ice. Dry Milo powder is piled above the rim, paler than the drink underneath, and it sheds if you touch it. When the straw goes in, half the pile collapses into the drink and the bottom turns thicker. You can still put a scoop of ice cream on what is left. I lost the contest with Kelvin over who could order like a local, so I paid.",
+  scene:[
+    "五月没有节日，头顶什么都不挂，小贩中心照样坐满。Kopi-O、kosong、peng、siew dai、gau 是海南咖啡店的点单叫法，加不加糖、奶、冰，要浓要淡，几个词就说清楚了，菜单上一般不写这么细。阿杰要她点一杯本地人才点的：Kopi-O kosong peng，黑咖啡，不加糖，加冰。他说外面来的人学不会。",
+    "阿夏回他：Teh-C siew dai，少糖，加炼乳；Kopi gau，还要更浓；Teh peng，冰茶她也会。两人越点越快，看谁更像本地人，输的人买单。阿姨在这柜台站了三十年，他们点什么，她一听就懂。最后点到美禄恐龙才停：冰美禄上堆一座干粉，粉上还可以再加一球冰淇淋。这个月没有烟火，热闹的只有他们俩斗嘴。谁先笑出声，谁付钱。这首歌是老咖啡店的摇摆乐，勺子敲着杯子，副歌唱的就是这杯饮料的外号：恐龙。"
+  ],
+  festEn:"May · no festival", actEn:"Act I",
+  tagsEn:["1950s Nanyang kopitiam swing","Spoon on a glass","140 BPM"],
+  sceneEn:[
+    "May has no festival, so nothing is hung overhead, and the hawker centre is full anyway. Kopi-O, kosong, peng, siew dai and gau are the old coffee-shop order words. Sugar, milk, ice and strength are all packed into them, and the menu often does not spell this out. Kelvin wants her to order the way only locals do: Kopi-O kosong peng, black coffee, no sugar, with ice. He says people from outside never learn it.",
+    "Summer answers: Teh-C siew dai, less sugar, with evaporated milk; Kopi gau, even stronger; Teh peng, iced tea, which she can order too. They go faster and faster, to see who sounds more local. The loser pays. The auntie has stood at this counter for thirty years and can hear every order. They only stop at the Milo dinosaur: iced Milo with a pile of dry powder, and room for one more scoop of ice cream on top. There are no fireworks this month, only the two of them arguing. Whoever laughs first pays. The song is old coffee-shop swing, a spoon tapping the glass, and the chorus is the drink’s nickname: dinosaur."
+  ],
+  lyrics:[
+    {cue:"大乐队齐奏，手风琴、低音号踩拍，长勺叮当敲在玻璃杯上"},
+    {who:"阿杰",lines:["Uncle! Kopi-O kosong peng!","Black coffee, no sugar, with ice","This is how the locals order, you cannot learn one","Go on, you order one, let me hear"]},
+    {who:"阿夏",lines:["Teh-C siew dai! Less sugar, evaporated milk","Kopi gau! Stronger, even stronger","Teh peng! I know how to order iced also","You’re so proud of yourself, I order one more"]},
+    {who:"两人与阿姨",cls:"all",lines:["Dinosaur! Dinosaur!","麦芽粉堆成一座山","Dinosaur! Dinosaur!","One scoop, two scoop, pile it up","谁点得最地道 谁今天买单"]},
+    {who:"阿姨",cls:"aunty",lines:["Kopi-O kosong peng, black, iced, no sugar","Teh-C siew dai, what you said just now I already remember","I stand here thirty years lah","你们两个点什么 我都知道"]},
+    {who:"半拍摇摆",cls:"all",lines:["还有比恐龙更大的那一杯","Put one scoop of ice cream on top of the mountain","No festival in May, no fireworks","只有我们两个 在这里吵架"]},
+    {who:"两人笑着合唱",cls:"all",lines:["Dinosaur! Dinosaur!","麦芽粉堆成一座山","Dinosaur! Dinosaur!","Whoever laughs first pays"]},
+    {cue:"勺子叮的一声，低音号落拍"}
+  ]},
+
+ {no:"#01-06",dish:"烤魔鬼鱼",dishEn:"Sambal Stingray",fest:"六月 · 半年",song:"Who’s the Inspector?",g:"intermission",
+  c:["coral","cobalt","mustard"],n:8,paw:true,act:"上半场终 · Act I Finale",
+  tags:["马来 Zapin · 探案拨弦","香蕉叶焦响","118 BPM"],
+  score:8,
+  note:"整条魔鬼鱼铺在香蕉叶上，叶子边烤焦了。上面的叁巴辣椒酱磨得很粗，颜色亮红，还能看见籽，辣味是慢慢上来的。鱼边有焦黑，肉是白的，很结实。我写下：辣得刚好，只差一点。后来水獭把这一页摊开，所有人都看见了。",
+  noteEn:"The whole stingray is laid on a banana leaf, and the edge of the leaf is burnt. The sambal on top is coarse and bright red, with the seeds still visible, and the heat comes on slowly. The rim of the fish is charred. The flesh is white and firm. I wrote: spicy just right, only a little short. Later the otters opened this page, and everyone saw it.",
+  scene:[
+    "半年过去了。黑板上写满了名字：游客、老师、外地来的女生。魔鬼鱼铺在香蕉叶上，叁巴抹得很厚，叶子一揭开，辣味就上来。阿杰盯着她说：你每个月只来一次，每次都换一个没吃过的摊，字写得很快，写完就合上，而且你那本笔记本是红的。",
+    "她说红笔记本满街都是，他爱管闲事，也不等于他是警察。这些年水獭沿着河走进小贩中心，人们赶它们，也把它们当成城里的一景。阿姨忽然喊：水獭进来了。一家水獭拖起她的包就跑，从一排排桌子前窜过去。包掉在地上，笔记本翻开，那一页写着：魔鬼鱼，辣得刚好，只差一点。这句话写得太平，一看就是专业的口气。所有人都看向她，一赔九那注中了。阿姨说，今晚她请客。这首歌是马来舞曲，节奏越来越紧，像在追查谁是评审。上半场到这里结束。"
+  ],
+  festEn:"June · halfway", actEn:"Act I finale",
+  tagsEn:["Malay zapin · detective pizzicato","Banana leaf on the grill","118 BPM"],
+  sceneEn:[
+    "Half a year has gone. The blackboard is full of names: the tourist, the teacher, the girl from abroad. The stingray is on a banana leaf, the sambal spread thick. Lift the leaf and the chilli comes up. Kelvin watches her and says: you come only once a month, each time a stall you have never tried, you write fast, and you close the book as soon as you finish. The notebook is red.",
+    "She says red notebooks are everywhere. Being nosy does not make him the police. These years the otters have come up the river into the hawker centre. People chase them off, and also treat them as part of the city. An auntie suddenly shouts: the otters are in. A family of them runs off with the bag, past table after table. The bag drops. The notebook falls open. The page says: stingray, spicy just right, only a little short. The sentence is plain. The crowd points at her. The one-to-nine bet wins. The auntie says tonight is on her. The song is a Malay dance tune that tightens, as if it is searching for the critic. The first half ends here."
+  ],
+  lyrics:[
+    {cue:"甘布斯琴、塔布拉鼓配探案拨弦，香蕉叶在炭板上滋滋焦响"},
+    {who:"四位阿姨",cls:"aunty",lines:["Six months gone, the blackboard is full of names","游客 老师 外地来的女生","The stingray hisses under the banana leaf","Who’s eating, who’s writing, who’s lying"]},
+    {who:"众人",cls:"all",lines:["Who’s the inspector? Who’s the inspector?","吃一口 停一停 眼睛眯起来","Who’s the inspector? The devil hides under the leaf","Tonight we flip it open"]},
+    {who:"阿杰",lines:["你每个月只来一次","Every time you order a stall you’ve never tried","你写字很快 写完就合上","And your notebook is red"]},
+    {who:"阿夏",lines:["Red notebooks are everywhere","You’re nosy, you’re not the police"]},
+    {who:"阿姨",cls:"aunty",lines:["（惊呼）Eh! Otters! The otters are in!"]},
+    {cue:"Zapin 骤然加速，全场追逐"},
+    {who:"众人",cls:"all",lines:["One, two, three, four, five otters","抢了包就跑 跑过每一张桌","The bag falls, the notebook falls open","翻开那一页 写着——","“Stingray, spicy just right, just a little short”","It’s her! It’s her! 一赔九!","用纸巾占座的那一个","It’s her! The devil’s not under the leaf","It’s in her notebook"]},
+    {who:"阿姨",cls:"aunty",lines:["（拍掌笑）一赔九! Tonight I pay!"]},
+    {cue:"甘布斯琴重重收尾——上半场落幕"}
+  ]},
+
+ {no:"#01-07",dish:"椰浆饭",dishEn:"Nasi Lemak",fest:"七月 · 学校假期",song:"Sentosa",g:"waves",
+  c:["celadon","cobalt","rose"],n:6,act:"下半场 · Act II",
+  tags:["马来 Joget · 乌克丽丽","手鼓与海浪","124 BPM"],
+  score:8,
+  note:"香蕉叶还是温的。饭是白的，有椰子香，并不油。半个煎蛋，蛋白边是脆的，蛋黄还亮。江鱼仔又小又脆，花生还带着皮，三片黄瓜是凉的，叁巴辣椒酱抹在叶子角上。他看着海上的船，第一次问我：船开去的地方有没有冬天。",
+  noteEn:"The banana leaf is still warm. The rice is white, smells of coconut, and is not greasy. Half a fried egg, with a crisp edge and a yolk that is still bright. The anchovies are tiny and crisp, the peanuts still have their skins, the three slices of cucumber are cool, and the sambal is smeared in the corner of the leaf. He looks at the boats and asks me, for the first time, whether there is winter where they are going.",
+  scene:[
+    "七月学校放假，整座岛都在休假。椰浆饭用香蕉叶包好带走，里面有椰子饭、参巴、江鱼仔、花生、黄瓜和蛋，一人一包。过一座桥就是圣淘沙。第一次去的人看到的是风景，从小去到大的人，看到的还是那片海。阿夏说，这里像天堂。",
+    "阿杰说他从小去到大，去过一百次了，同一片海，同一座桥，这个岛骑自行车一天就绕完。阿夏说，他绕的是地图，她过的是日子，每天都还有没吃过的东西。他站在海边看船开出去，想知道船去的地方有没有冬天。船走了，他还站在岸上。也是在这片海边，他第一次说出口：这个岛太小了。这首歌很晴朗，用乌克丽丽、小提琴和手鼓伴奏，一群人跟着唱，合唱里有人用马来语谢谢这片海，说明年见。"
+  ],
+  festEn:"July · school holidays", actEn:"Act II",
+  tagsEn:["Malay joget · ukulele","Frame drum and the sea","124 BPM"],
+  sceneEn:[
+    "School is out in July, and the whole island is on holiday. Nasi lemak is wrapped in banana leaf to take away: coconut rice, sambal, anchovies, peanuts, cucumber and egg, one packet each. Cross a bridge and you are at Sentosa. A first visit sees a view. Someone who has gone there since childhood sees the same sea again. Summer says it is like heaven.",
+    "Kelvin says he has gone since he was small, a hundred times. The same sea, the same bridge. You can cycle round the island in a day. Summer says he goes round the map, while she goes round the days, and every day there is still something she has not eaten. He stands by the sea and watches the boats leave, wondering if there is winter where they go. The boats leave. The people stay on shore. The song is sunny, with ukulele, violin and a hand drum, and a crowd sings along. In the chorus someone thanks the sea in Malay and says see you next year. That the island feels too small is something he says out loud here, by the water, for the first time."
+  ],
+  lyrics:[
+    {cue:"Rebana 手鼓、克朗钟乌克丽丽与小提琴在阳光下响起"},
+    {who:"阿夏",lines:["It’s July, school’s out, the whole island is on holiday","Take a ride, cross the bridge","And there’s the beach","Nasi lemak wrapped in a leaf, one for each of us"]},
+    {who:"众人",cls:"all",lines:["Mari menari, mari menari","Come and dance, come and dance","The sand is hot and the sea is blue","Sentosa, Sentosa, 一天刚刚好"]},
+    {who:"阿杰",lines:["你说这里像天堂","我从小来 来了一百次","同一片海 同一座桥","这个岛 骑车一天就绕完"]},
+    {who:"阿夏",lines:["You go round the map, I go round the days","Every day there’s something new to eat","Look at that aunty singing in the sea","And the otters are on holiday too"]},
+    {who:"阿杰",lines:["（轻声）有时候我站在海边","看那些船 一艘一艘开出去","我想知道 它们去的地方","有没有冬天"]},
+    {who:"众人",cls:"all",lines:["Mari menari, mari menari","Come and dance, come and dance","Boats sail out, 我们留下","Sentosa, Sentosa, see you next year","Terima kasih, laut — See you next year"]}
+  ]},
+
+ {no:"#01-08",dish:"炒粿条",dishEn:"Char Kway Teow",fest:"八月 · 国庆与中元歌台",song:"Small Island",g:"flags",
+  c:["coral","celadon","mustard"],n:5,act:"下半场 · Act II",
+  tags:["闽南歌台流行 · 电子合成器","猛火锅铲声","132 BPM"],
+  score:9,
+  note:"炒粿条的河粉很宽，酱油黑得发亮，站在两米外就闻得到锅气。虾是粉色的，腊肠切得薄，有点甜，豆芽还是脆的，蛋碎在面里。要趁热吃，凉了锅气就没了。我们各唱各的。他说这座岛小，我说这座岛大。",
+  noteEn:"The rice noodles in the char kway teow are wide, and the soy is so dark it shines. You can smell the wok from two metres away. The prawns are pink, the sausage is sliced thin and a little sweet, the bean sprouts are still crisp, and the egg is broken through the noodles. It has to be eaten hot. Once it cools, the breath of the wok is gone. We each sang our own words. He said the island is small. I said the island is big.",
+  scene:[
+    "八月九日是国庆，红白两色的烟火升起来，大家一起唱。同一晚，中元节的歌台搭在空地和组屋楼下。主持人嗓门很大，台上的人穿亮片，台下真的有人跟着唱。炒粿条是福建档口的猛火菜：宽河粉、黑酱油、虾和腊肠，一盘面里混着好几种语言的叫法。从东到西坐出租车四十块，本地人常拿这个价钱说这座岛有多小。阿杰学着主持人的嗓门问：吃饱了没有？他一转身就碰上老同学，觉得这里的一切早就被安排好了，想去一个没人叫得出他名字的地方。",
+    "他说岛小。她说岛大，吃三十年也吃不完，每个转角都还有她没试过的档口。她想留下来。这首歌就是歌台的声音：电子鼓、亮闪闪的合成器，火一猛锅铲就越敲越密，两个人的句子也越抢越快。一个唱小，一个唱大，谁也不肯改词。他问：我走了以后，谁陪你吃粿条？"
+  ],
+  festEn:"August · National Day and getai", actEn:"Act II",
+  tagsEn:["Hokkien getai pop · sparkly synth","Wok-clang percussion","132 BPM"],
+  sceneEn:[
+    "9 August is National Day. The fireworks are red and white, and everyone sings. The same night, a Hungry Ghost getai stage goes up on open ground and under the apartment blocks. The host is loud, the singers on stage wear sequins, and people below really do sing along. Char kway teow is a Hokkien stall’s high-flame dish: wide rice noodles, dark soy, prawns and sausage, and you can hear several languages in one plate. A taxi from east to west costs forty dollars, which is how locals measure how small the island is. Kelvin copies the host’s voice and asks: have you eaten? He turns around and runs into an old classmate. He feels as if everything has been arranged in advance, and he wants a place where nobody can say his name.",
+    "He says the island is small. She says the island is big. Once the flame is high, the breath of the wok rises. You could eat for thirty years and not finish it, and every corner still has a stall she has not tried. She wants to stay. The song sounds like the getai itself: electronic drums, a glittering synth, the spatula knocking faster, and the two of them talking faster with it. One sings small, one sings big, and neither changes their own words. He asks: after I leave, who will eat kway teow with you?"
+  ],
+  lyrics:[
+    {cue:"电子鼓、闪亮合成器配急促锅铲声，歌台霓虹全亮"},
+    {who:"阿杰",lines:["（学歌台司仪）Wah lau eh! 食饱未?","八月九号 烟火放上天","红红白白 逐家做伙唱","But look lah, this island so small","从东到西 搭德士四十块","Small island! Small island!","一个转身 就拄着同学","Small island! Everything planned already","我想欲去一个 无知明仔载的所在"]},
+    {who:"阿夏",lines:["你讲细 我讲大","One plate of kway teow, four languages inside","猛火一炒 锅气冲天","Eat thirty years also cannot finish","Big island! Big island!","Every corner got one stall I never try","Big island! One year how enough","我想欲留佇这个样样都有的所在"]},
+    {who:"歌台歌手",cls:"aunty",lines:["台顶唱 台下跟咧唱","Some people want go, some people want stay","锅铲越炒越紧 越炒越芳","Tonight no big no small, 做伙唱"]},
+    {who:"两人叠唱",cls:"all",lines:["Small island!（Big island!）","一个转身（每个转角）","Small island!（Big island!）","我想去（我想留）sing until the end"]},
+    {who:"阿杰",lines:["（烟火声落，轻声）Eh, after I go, 啥人陪你食粿条?"]}
+  ]},
+
+ {no:"#01-09",dish:"豆花",dishEn:"Tau Huay",fest:"九月 · 中秋",song:"Lanterns",g:"moon",
+  c:["mustard","coral","cobalt"],n:8,act:"下半场 · Act II",
+  tags:["1960s 粤语时代曲 · 弦乐单簧管","瓷勺碰碗","84 BPM"],
+  score:7,
+  note:"这碗豆花不是光滑的一整块，是用勺子从桶里舀出来的，已经碎成象牙色的软块，一碰就散。缝里浸着淡金色的糖水，上面有几颗煮过的黄豆。勺子放进去会沉下去。甜味很淡，豆的香味在后面。他求我不要给沙爹摊挂推荐的灯笼。沙爹的评语，我还没写。",
+  noteEn:"This tau huay is not one smooth piece. It was scooped from the tub, so it is already broken into soft ivory lumps that fall apart if you touch them. Pale gold syrup sits in the cracks, with a few cooked soybeans on top. The spoon sinks when you put it in. The sweetness is light, and the smell of the beans comes after. He asked me not to hang a recommendation lantern on the satay stall. I have not written the satay review yet.",
+  scene:[
+    "中秋节。灯笼挂到小贩中心和组屋楼下，有兔子，有杨桃，还有一盏做成飞机的样子。卖豆花的广东阿婆一边从木桶里舀豆花，一边哼着六十年代的粤语老歌。豆花很滑，一动就散开。阿杰提着那盏飞机灯笼走到阿夏桌前，请她吃一碗。",
+    "沙爹摊是他父亲的。在小贩中心，好评一贴出来，人人看得见，很快就会排起长队。队一长，摊主想关档也关不掉。阿杰顺着阿婆哼的调子跟了半句粤语，又换回自己的话，求她写一个差评，别让推荐的灯笼挂到他家档口上。灯笼一挂，天天有人排队，摊子关不掉，他就走不成。她说她不能撒谎。那是她吃过最好的沙爹，就像今晚的月亮明明是圆的，她不能写成不圆。瓷勺在碗底碰了一下。她说，让她再想想。"
+  ],
+  festEn:"September · Mid-Autumn", actEn:"Act II",
+  tagsEn:["1960s Cantopop · strings and clarinet","Spoon on porcelain","84 BPM"],
+  sceneEn:[
+    "It is the Mid-Autumn Festival. Lanterns are hung at the hawker centre and under the apartment blocks: a rabbit, a starfruit, and one shaped like an aeroplane. At the tau huay stall, the Cantonese grandma hums a 1960s Hong Kong ballad while scooping soft curds from a wooden tub. Touch it and it comes apart. Kelvin brings the aeroplane lantern to Summer’s table and orders her a bowl.",
+    "The satay stall belongs to his father. In a hawker centre, a public review soon turns into a daily queue, and once the queue is there, a stallholder can never bring himself to close. Kelvin borrows one Cantonese phrase from the aunty’s tune, then drops back into his own Mandarin to ask her for a bad review: do not hang the lantern, or the stall will never close and he will never leave. She refuses in English. Tonight’s moon is round, and she cannot write that it is not. The porcelain spoon settles in the bowl. She asks for time to think."
+  ],
+  lyrics:[
+    {cue:"丝滑弦乐与单簧管三拍子摇曳，瓷勺轻碰碗沿"},
+    {who:"豆花阿婆",cls:"aunty",lines:["（粤语轻哼）中秋晚上 燈籠掛滿晒","兔仔 楊桃 仲有一盞係飛機","豆腐花 剛舀起 一郁就散","趁熱食啦 後生仔 坐埋一齊"]},
+    {who:"阿杰",lines:["这盏飞机灯笼 我提来给你","阿婆讲得对 豆花一碰就散","我今晚有句话 比豆花还难讲","那边沙爹摊 是我爸的"]},
+    {who:"阿杰",lines:["唔好掛燈籠 不要给他灯笼","一盏灯笼挂上去 天天有人排队","队一排长 档口就收不掉","档口收不掉 我就走不了"]},
+    {who:"阿夏",lines:["You know I can’t lie","That’s the best satay I’ve ever had","You’re asking me to write it’s not good","It’s like asking me to write that tonight’s moon isn’t round"]},
+    {who:"阿婆与两人",cls:"all",lines:["（阿婆）糖水落少少 豆味在後頭","The moon is round, 瓷勺沉进碗底","我们看着同一碗 想着各自的路"]},
+    {who:"阿杰 / 阿夏",cls:"all",lines:["唔好掛燈籠 不要给他灯笼（Let me think）","一盏灯笼挂上去 天天有人排队（Let me think）"]},
+    {cue:"单簧管收住，瓷勺轻轻落在碗底"}
+  ]},
+
+ {no:"#01-10",dish:"辣椒螃蟹",dishEn:"Chilli Crab",fest:"十月 · 屠妖节",song:"Spicy",g:"diya",
+  c:["rose","mustard","cobalt"],n:10,act:"下半场 · Act II",
+  tags:["1980s 新加坡摇滚 · 热铜管","木槌敲蟹壳","150 BPM"],
+  score:9,
+  note:"一整只辣椒螃蟹，壳是红的。酱很厚，是辣椒和番茄熬的，挂在蟹腿上，也挂在旁边的炸馒头上。馒头撕开是白的、软的，有一点甜，就是用来蘸酱的。辣过之后有番茄的酸和甜。蟹壳要敲开才吃得到肉。伦敦来的那封信摊在桌子边上。陈伯气还没消，又叫了一盘馒头。",
+  noteEn:"A whole chilli crab, with a red shell. The sauce is thick, chilli cooked down with tomato, and it clings to the legs and also to the fried buns beside it. Torn open, the bun is white, soft and a little sweet. It is there to dip in the sauce. After the heat comes the sour and sweet of the tomato. You have to crack the shell to get at the meat. The letter from London is open at the edge of the table. Uncle Tan is still angry, and he orders another plate of buns.",
+  scene:[
+    "屠妖节。油灯从小贩中心一路点到小印度。辣椒螃蟹是新加坡自己琢磨出来的吃法，厚厚的酱用来蘸炸馒头，一桌人可以吃很久。家里的大事，常常就在小贩中心的饭桌上说，趁菜还烫。今晚全家吃螃蟹。陈伯看见儿子手里捏着一封信。",
+    "信是伦敦来的，那边要阿杰下个月就去报到。他本来想吃完螃蟹再讲，酱太辣，话没忍住。陈伯问：人走了，摊子怎么办？四十年，一把扇子一盆炭，儿子出生那天他都没收摊。他还问，那么冷的地方，螃蟹有没有辣椒酱。两个人满手都是红酱，眼眶辣红了也没法伸手擦。阿夏没有讲道理，只把纸巾递过去、把白馒头撕开，叫他们趁热把螃蟹吃完。这首歌是八十年代的新加坡流行摇滚，铜管很响，木槌敲蟹壳当节奏。架吵完了，陈伯的气还没消，又叫了一份馒头。"
+  ],
+  festEn:"October · Deepavali", actEn:"Act II",
+  tagsEn:["1980s Singapore pop-rock · hot brass","Mallets on crab shell","150 BPM"],
+  sceneEn:[
+    "It is Deepavali. Oil lamps run from the hawker centre all the way to Little India. Chilli crab is a dish invented in Singapore. The thick sauce is for dipping fried buns, and a table can sit with it for a long time. Big family matters are often said right at the hawker table while the food is still hot. Tonight the whole family eats crab. Uncle Tan sees a letter in his son’s hand.",
+    "The letter is from London. They want Kelvin next month. He meant to wait until the crab was finished, only the sauce is too hot to hold the words in. Uncle Tan asks what happens to forty years of charcoal and one palm fan, and whether a place that cold even serves chilli sauce. Both men have red sauce all over their fingers; neither can wipe his eyes. Summer offers tissues and tears open a bun so they finish the crab before it cools. The song is 1980s Singapore pop-rock with loud brass and mallets cracking shell. When the shouting stops, Uncle Tan orders another plate of buns."
+  ],
+  lyrics:[
+    {cue:"铜管轰然炸开，鼓点与木槌敲裂蟹壳交错"},
+    {who:"陈伯",cls:"uncle",lines:["屠妖节的灯 一路亮到小印度","今晚全家吃螃蟹","Chilli sauce must eat with fried mantou","儿子 你手上拿的是什么信?"]},
+    {who:"阿杰",lines:["Dad, it’s London. They want me","下个月就要报到","我本来想吃完螃蟹才讲","But this sauce is too spicy, I cannot hold it in"]},
+    {who:"四声部叠唱",cls:"all",lines:["Spicy! Spicy! 辣到眼泪流下来","（陈伯）你走了 摊子怎么办?","Spicy! Spicy! Crab walks sideways","（阿杰）You never ask what I want!","（阿夏）Careful, the letter!","（阿姨）哎呀 信上滴到酱啦!"]},
+    {who:"陈伯",cls:"uncle",lines:["四十年 一把扇子 一盆炭","你出生那天 我都没有收摊","Now you say you want go such a cold place","那边的螃蟹 有没有辣椒酱?"]},
+    {who:"阿夏",lines:["Both of your hands are covered in red","Nobody can wipe their eyes like that","Here, take a tissue, tear the mantou","Finish the crab before the sauce goes cold"]},
+    {who:"众人翻倍加速",cls:"all",lines:["敲! 敲! 敲开壳!","Quarrel finish, still must eat!"]},
+    {who:"陈伯",cls:"uncle",lines:["（余怒未消）馒头 再来一份!"]},
+    {cue:"铜管干脆利落截停"}
+  ]},
+
+ {no:"#01-11",dish:"榴莲",dishEn:"Durian",fest:"十一月 · 雨季",song:"新谣",g:"monsoon",
+  c:["cobalt","rose","celadon"],n:6,act:"下半场 · Act II",
+  tags:["慢布鲁斯 → 1980s 新谣","指弹木吉他 · 掰开榴莲壳","76 BPM"],
+  score:8,
+  note:"榴莲壳又厚又多刺，拿错了会扎手。顺着壳上那条浅白线掰开，肉是亮黄色的，像软膏，有一瓣已经松了。有人觉得臭，有人觉得香。吃进嘴里是甜的，有一点酒味和奶油味，籽要吐掉。我这才知道，陈伯十九岁时也有过一张去台北的票。他说，吃完榴莲不要喝冰水。",
+  noteEn:"The durian husk is thick and covered in spines. Hold it wrong and it pricks you. Split it along the pale seam and the flesh inside is bright yellow, like a soft paste, with one pod already loose. Some find it foul, some fragrant. In the mouth it is sweet, with a hint of wine and cream, and you spit out the seed. Only now do I learn that Uncle Tan, at nineteen, also held a ticket to Taipei. He says: after durian, do not drink ice water.",
+  scene:[
+    "十一月是雨季，下午和夜里都会下雨。榴莲把人分成两拨：一拨说香，一拨说臭到整节车厢都不能待。壳上全是刺，拿错会扎手，顺着壳缝那条白线掰开，里面是甜的。陈伯说，这跟他自己一样。阿夏今天话很少。他问她是不是想家。",
+    "他说自己十九岁也想离开。那时他有一把吉他，一张去台北的票，想去那边唱歌。那会儿的年轻人在学校的树下写自己的歌，唱自己的街道，后来这种歌叫新谣。父亲老了，扇子交到他手里，他就再也没放下。他当年没用上的那张台北的票，和阿杰现在捏在手里的伦敦机票，其实是同一回事。这首歌先是沙哑的慢布鲁斯，换一把吉他，就变成他年轻时在树下弹的指弹木吉他。他只唱剥壳、闻味、扎手，没有讲一句大道理。阿夏问他后不后悔。他说没有，只是下雨的晚上会想，台北的雨是不是也这么准时。吃完，他还是叮嘱：不要喝冰水。"
+  ],
+  festEn:"November · the rainy season", actEn:"Act II",
+  tagsEn:["Slow blues into 1980s xinyao","Fingerpicked guitar, a husk cracking","76 BPM"],
+  sceneEn:[
+    "November is the rainy season. It rains in the afternoon and again at night. Durian splits people in two: fragrant to some, unbearable across a whole carriage to others. Hold the spiny husk wrong and it pricks your hand; follow the faint white seam and it parts cleanly into sweet yellow flesh. Uncle Tan says he is like that himself. Summer is quiet today, and he asks if she is homesick.",
+    "At nineteen he wanted to leave too, with a guitar and a ticket to Taipei. Under the school trees they wrote songs about their own streets, later called xinyao. Then his father grew old, put the fan in his hand, and he never set it down. The song begins as a rough slow blues and turns into clear fingerpicked guitar. The chorus stays on the fruit itself — the smell down the street, the white seam on the shell, the pricked thumb — without turning it into a moral. Asked if he regrets staying, he says no; only on rainy nights he wonders whether Taipei’s rain is this punctual too. At the end he still reminds her: no ice water after durian."
+  ],
+  lyrics:[
+    {cue:"沙哑的慢布鲁斯吉他响起，咔一声掰开带刺的榴莲壳"},
+    {who:"陈伯",cls:"uncle",lines:["榴莲 外面都是刺","拿不好 手会被扎到","有人说它臭 有人说它香","我说 跟我一样","小姐 你今天话很少","十一月 雨季来了 你想家吧","我十九岁那年 也想走","一把吉他 一张车票 要去台北唱歌"]},
+    {cue:"布鲁斯退去，换上清亮指弹木吉他——新谣响起"},
+    {who:"陈伯",cls:"uncle",lines:["那时候 我们在学校的树下","写自己的歌 唱自己的街","后来我爸爸老了","扇子交到我手里 我就没有放下"]},
+    {who:"陈伯 / 阿夏",cls:"all",lines:["外面都是刺 里面很甜","隔着一条街 都闻得见","顺着那条白线 轻轻一掰","扎过手的人 才吃到里面"]},
+    {who:"阿夏",lines:["When I’m homesick, I come here","Because here someone remembers how I order","Uncle, you didn’t leave","But you don’t regret it, do you?"]},
+    {who:"陈伯",cls:"uncle",lines:["没有后悔 只是有时候 下雨的晚上","会想 台北的雨","是不是也这么准时"]},
+    {who:"陈伯 / 阿夏",cls:"all",lines:["外面都是刺 里面很甜","隔着一条街 都闻得见","顺着那条白线 轻轻一掰","扎过手的人 才吃到里面"]},
+    {who:"陈伯",cls:"uncle",lines:["（木吉他尾音里叮嘱）吃完榴莲 不要喝冰水哦"]}
+  ]},
+
+ {no:"#01-12",dish:"沙爹",dishEn:"Satay",fest:"十二月 · 圣诞灯",song:"Count the Sticks",g:"stars",
+  c:["celadon","coral","mustard"],n:8,act:"终场 · Finale",
+  tags:["爪哇甘美兰 · 铁片琴","扇炭火的呼吸","88 BPM"],
+  score:4,
+  note:"沙爹一共八串。边上烤焦了，里面还嫩，有炭火的香味，肉不柴。花生酱又厚又咸，不会甜得发腻。旁边是压紧的白米饭糕、凉黄瓜和带辣味的生洋葱。可是肉本身是咸的。这个摊四十年都没有咸过。我写下：今晚太咸。我在这里吃了十二个星期五，沙爹从来不是这样。<u>请把这个位子留给我。</u>",
+  noteEn:"There are eight sticks of satay. The edges are charred, the inside is still tender, it smells of charcoal, and the meat is not dry. The peanut sauce is thick and salty, not so sweet that it cloys. Beside it are pressed white rice cakes, cool cucumber, and raw onion with a bite. But the meat itself is salty. This stall has not been salty in forty years. I wrote: too salty tonight. I have eaten here for twelve Fridays, and the satay was never like this. <u>Please keep this seat for me.</u>",
+  scene:[
+    "十二月不下雪，圣诞灯挂在棕榈树上。沙爹从爪哇传来，在炭火上烤，师傅用扇子一下一下把火扇匀。签子吃完可以拿来数。这是最后一个星期五，也是最后一个摊。阿夏坐回那张椅子，纸巾已经有人替她放好了。她咬一口，是咸的。这个摊四十年没有咸过。她抬头看陈伯，陈伯不看她。",
+    "她把签子当成月份来数，从一月的甘蔗一直数到十一月的榴莲，数到第十二根停住。陈伯这才开口：第一天看她把纸巾放得那么端正，就认出了她；今晚盐放重一点，档口不挂灯笼，明天儿子就可以飞。阿杰拿起一串咸沙爹，一口气吃完，没喝水。他说九月他也求过她，别把沙爹写好；又说这串一点都不咸，爸烤了四十年，手从来没抖过。阿夏在红本子最后一页写下：今晚太咸，但十二个星期五从来不是这样，请把这个位子留给我。全场合唱：这里没有冬天，一年就像一个很长的下午。阿姨敲响厨房铃，喊出 Last order。留下还是回去，由你来选。"
+  ],
+  festEn:"December · Christmas lights", actEn:"Finale",
+  tagsEn:["Javanese gamelan · metallophones","A fan over charcoal","88 BPM"],
+  sceneEn:[
+    "December has no snow. Christmas lights hang in the palm trees. On the last Friday, at the last stall, Summer sits down to find a packet of tissues already placed on her chair. She bites into the first stick of satay: it is salty. This stall has not been salty in forty years. She looks up, and Uncle Tan will not meet her eyes.",
+    "She counts the bamboo sticks as months, from January’s sugarcane to November’s durian, stopping at the twelfth. Uncle Tan admits he knew who she was from day one by how neatly she set her tissues down; a heavy hand with the salt tonight keeps the lantern away so his son can fly tomorrow. Kelvin picks up a salty skewer, finishes every bite without water, and says quietly that in September he begged her for a bad review too — and that tonight is not salty at all, because his father’s hand has never slipped in forty years. Summer writes her final line asking them to keep the seat. An auntie rings the bell and shouts Last order. Whether she stays or goes is left to you."
+  ],
+  lyrics:[
+    {cue:"一支甘美兰铁片琴响起，拍子稳稳如炭炉上的蒲扇呼吸"},
+    {who:"阿夏",lines:["December, Christmas lights on the palm trees","The last Friday, the last stall","I’m sitting in the same chair","The tissue has already been put down for me","The satay comes, one stick at a time","I take a bite, and it’s salty","Forty years it was never salty","I look up, and uncle won’t look at me"]},
+    {who:"阿夏",lines:["One stick, January, the sugarcane so sweet","Two sticks, February, the yusheng tossed so high","Three sticks, March, one bet nine on the blackboard","Four sticks, April, half an umbrella in the rain","Count the sticks, one stick for every Friday","Count the sticks, you only know how much you ate once it’s finished"]},
+    {who:"陈伯",cls:"uncle",lines:["第一天 我就认出是你","没人像你 把纸巾放得那么端正","今晚盐重一点 档口就不挂灯笼","没有灯笼 明天他就可以飞"]},
+    {who:"阿杰",lines:["爸 九月那天 我也求过她","求她千万别给你写好","（拿起一串吃完）这串我吃完了 一点都不咸","你烤了四十年 手从来没抖过"]},
+    {who:"众人齐数",cls:"all",lines:["五根 五月 恐龙山那么高","六根 六月 水獭偷走了包","七根 七月 海边的船开出去","八根 八月 烟花 小岛 大岛","九根 九月 豆花和灯笼","十根 十月 螃蟹吵到天亮","十一根 十一月 榴莲很甜","十二根……"]},
+    {who:"阿夏",lines:["（提笔写下）Tonight’s satay is too salty","But I’ve eaten twelve Fridays here","And it was never like this","Please, keep this seat for me"]},
+    {who:"全场合唱",cls:"all",lines:["No winter, no winter, there’s no winter here","一年 就像一个很长很长的下午","Count the sticks, twelve sticks","Last order? Not yet, not yet"]},
+    {who:"阿姨",cls:"aunty",lines:["（蒲扇停下，铃响一声，喊）Last order!"]}
+  ]}
+];
+
+/* v4b takes on Suno for the twelve Fridays (two takes each; links collected 2026-11-25) */
+const MONTH_AUDIO=[
+ [["f8d7be46-b746-48c3-ad60-554507e411d8","2:42"],["e8919168-2177-4705-b587-aba4f9a7b87c","2:44"]],
+ [["8259f498-144f-4209-94a3-f5928ede3caa","2:09"],["f283f758-5212-4854-95f2-15158cdb14a8","2:14"]],
+ [["cbeea20c-ec3f-4d4e-a91e-ca81fecab97e","1:56"],["775795cb-ae1c-40c8-bf1f-4c7851899a0b","2:20"]],
+ [["3666b70b-e4c1-448e-9c91-483ef18de806","2:54"],["8d4643d7-2925-4fc7-9a23-20f4aace0e5b","3:16"]],
+ [["61bec14e-19dc-4065-a439-8464de659897","2:24"],["47188483-1b6f-462c-b084-8841a1daaebf","2:25"]],
+ [["81111625-7e5d-42a5-8024-3b2c7bf4eeeb","2:12"],["3546716f-c99a-4c63-925a-28395b43a92f","2:13"]],
+ [["452323b8-7dd7-4381-9310-1e60db3250a9","2:38"],["1fae7962-b09c-4960-90ac-165bd29d5caa","2:49"]],
+ [["4ed82670-2965-4751-bc40-e87b03e4056f","2:04"],["fc1f163c-a04b-4195-810b-c46fc3bf2d32","2:10"]],
+ [["1083888e-b706-4548-a348-dff4c7aa78b9","2:48"],["0daae1ea-fadd-4f0f-b717-100da0b06606","2:57"]],
+ [["5dfe3602-9d31-4712-81ed-68f527daa592","1:44"],["009d7909-042c-40cb-8be9-969b9427911e","2:25"]],
+ [["a92c87da-2359-408d-88ed-dedf2bf91c81","3:27"],["e46f05b0-ff32-408d-b42d-9db1577117e2","4:07"]],
+ [["00197909-d10f-45c1-b187-2f6984d253cd","3:17"],["b30d118d-9057-4dda-81d0-256172f09e5d","3:20"]]
+];
+function listenLinks(takes,name){
+  return takes.map((t,i)=>`<a class="play" href="https://suno.com/song/${t[0]}" target="_blank" rel="noopener" aria-label="${tx(`在 Suno 试听《${name}》版本 ${"AB"[i]}（${t[1]}），新标签页打开`,`Listen to “${name}” take ${"AB"[i]} (${t[1]}) on Suno, opens in a new tab`)}"><span class="tri" aria-hidden="true"></span>${tx("试听","Listen")} ${"AB"[i]} · ${t[1]}</a>`).join("");
+}
+
+const DISH_SRC=[
+ "dishes/01-sugarcane.jpg",
+ "dishes/02-oyster-omelette.jpg",
+ "dishes/03-prata.jpg",
+ "dishes/04-iced-coffee.jpg",
+ "dishes/05-milo-dinosaur.jpg",
+ "dishes/06-stingray.jpg",
+ "dishes/07-nasi-lemak.jpg",
+ "dishes/08-char-kway-teow.jpg",
+ "dishes/09-tau-huay.jpg",
+ "dishes/10-chilli-crab.jpg",
+ "dishes/11-durian.jpg",
+ "dishes/12-satay.jpg"
+];
+
+function en(){return document.documentElement.dataset.lang==="en";}
+function tx(zh,enText){return en()?enText:zh;}
+function oddsText(s){
+  if(!en()) return s;
+  return s.replace(/赔/g,"to").replace("中!","won");
+}
+function boardData(i){
+  const row=(zh,enText,markZh,markEn,strike)=>({text:tx(zh,enText),mark:tx(markZh||"",markEn||""),strike:!!strike});
+  const months=[
+    {status:["一月 · 占座的规矩","January · the seating rule"],lines:[
+      row("纸巾占座，只算十五分钟","Tissues hold a seat for fifteen minutes","写在没人贴的地方","nowhere posted"),
+      row("新来的女生，甘蔗水","The new girl, sugarcane juice","要压两遍","pressed twice"),
+      row("阿杰还坐在那半边","Kelvin is still on the other half","同一张凳","the same stool")
+    ],foot:["椅子后来一人一半。评审两个字，今晚没有人写。","The chair ends up split. Nobody writes the word critic tonight."]},
+    {status:["二月 · 她说了四份工作","February · four jobs"],lines:[
+      row("物流","Logistics","","",true),
+      row("小学老师","Primary-school teacher","","",true),
+      row("夜班护士","Night-shift nurse","","",true),
+      row("周末去植物园数兰花","Counts orchids on weekends","","",true),
+      row("写字的时候，眼睛会眯起来","Her eyes narrow when she writes","这句留下","this one stays"),
+      row("蚝煎","Oyster omelette","第二盘","second plate")
+    ],foot:["陈伯看见了，没有把评审说出口。","Uncle Tan sees it, and does not say the word."]},
+    {status:["三月 · 三个名字，只写这一次","March · three names, written once"],groups:true,lines:[
+      row("游客","The tourist","菜都拍，拍完不吃","photographs, does not eat"),
+      row("林老师","Mr Lim","吃饭一定看报纸","always reads the paper"),
+      row("用纸巾占座的女生","The girl with the tissues","一个人吃三样","three dishes, alone")
+    ],foot:["面团还在天上。谁都不许先把答案说出来。","The dough is still in the air. Nobody is allowed to say the answer yet."]},
+    {status:["四月 · 比天气预报准","April · ahead of the forecast"],lines:[
+      row("三点五十九","3:59","天还是蓝的","the sky is still blue"),
+      row("四点整","Four o’clock","雨会来","the rain will come"),
+      row("一把伞","One umbrella","还空着一半","half of it empty"),
+      row("她说明天不带伞","She says: no umbrella tomorrow","还要回来","she is coming back")
+    ],foot:["雨停之前，两个人都没有说话。","Before the rain stops, neither of them speaks."]},
+    {status:["五月 · 一杯饮料，她点得一字不差","May · she finishes a drink"],lines:[
+      row("他点 Kopi-O kosong peng","He orders kopi-o kosong peng","黑，无糖，加冰","black, no sugar, iced"),
+      row("她点 Teh-C siew dai","She orders teh-c siew dai","少糖，炼乳","less sugar, milk"),
+      row("Kopi gau","Kopi gau","还要更浓","stronger"),
+      row("美禄恐龙","Milo dinosaur","粉堆过杯口","powder over the rim"),
+      row("谁先笑出声","Whoever laughs first","谁付钱","pays"),
+      row("这个月","This month","头顶什么都不挂","nothing overhead")
+    ],foot:["没有节日。她还是把这里的点单学会了。","No festival. She still learned how to order here."]},
+    {status:["六月 · 那一句太普通","June · the sentence is too plain"],groups:true,lines:[
+      row("笔记本上写着","The notebook says","辣得刚好，只差一点","spicy just right, a little short"),
+      row("这句话太平了","The line is too plain","所以是职业","so it is the job"),
+      row("今晚这顿","Tonight’s meal","收摊的请","the closing auntie pays")
+    ],foot:["游客和林老师两行划掉。这三个名字以后不再写。","The tourist and Mr Lim are crossed out. Those three names are not written again."]},
+    {status:["七月 · 同一片海","July · the same sea"],lines:[
+      row("她说","She says","像天堂","like heaven"),
+      row("他说","He says","来过一百次","a hundred times"),
+      row("同一片海，同一座桥","The same sea, the same bridge","一天绕得完","a day on a bicycle"),
+      row("船开去的地方","Where the boats go","有没有冬天","is there winter"),
+      row("阿姨","The aunties","不回答","do not answer")
+    ],foot:["一个人看见风景，一个人看见去过太多次的地方。","One of them sees a view. The other sees a place he has visited too often."]},
+    {status:["八月 · 两句都不改","August · neither line changes"],lines:[
+      row("从东到西","East to west","德士四十块","taxi, forty dollars"),
+      row("一盘炒粿条","One plate of kway teow","里面四种话","four languages in it"),
+      row("岛小","The island is small","他不改","he will not change it"),
+      row("岛大","The island is big","她不改","she will not change it"),
+      row("我走了以后","After I leave","谁陪你吃","who eats with you")
+    ],foot:["锅铲越敲越密。黑板上的两行并排留着。","The spatula knocks faster. Both lines stay on the board, side by side."]},
+    {status:["九月 · 一盏灯笼的后果","September · what one lantern does"],lines:[
+      row("一份好评","A good review","大家都能看见","everyone can see it"),
+      row("然后是灯笼","Then a lantern","挂到档口上","hung on the stall"),
+      row("然后是排队","Then a queue","天天有","every day"),
+      row("然后档口","Then the stall","自己关不掉","he cannot close it"),
+      row("然后人","Then the person","走不了","cannot leave"),
+      row("她能写的","What she can write","月亮是圆的","the moon is round"),
+      row("这一页","This page","先空着","left blank")
+    ],foot:["豆花阿婆哼着粤语老歌。阿杰跟了半句，她用英文拒绝撒谎。","The tau huay aunty hums in Cantonese. Kelvin borrows half a line; Summer refuses, in English, to lie."]},
+    {status:["十月 · 桌上的两样东西","October · two things on the table"],lines:[
+      row("一封信","A letter","伦敦，下个月报到","London, next month"),
+      row("一个摊子","A stall","四十年，一把扇子，一盆炭","forty years, one fan, one basin of charcoal"),
+      row("你出生那天","The day you were born","他也没有收摊","he did not close then either"),
+      row("那么冷的地方","A place that cold","螃蟹还有没有辣椒酱","is there chilli sauce"),
+      row("架吵完了","The quarrel is over","馒头再来一盘","another plate of buns")
+    ],foot:["家里的事，就在这张桌子上说完了。","The family matter stays at this table. Nobody moves it to another room."]},
+    {status:["十一月 · 两张还捏着的票","November · two tickets still held"],lines:[
+      row("十九岁","Age nineteen","台北，一把吉他","Taipei, a guitar"),
+      row("扇子交到手里","The fan put in his hand","没有再放下","never put down"),
+      row("另一张票","The other ticket","伦敦，还没走","London, not yet"),
+      row("想家就来这里","When homesick, she comes here","有人记得怎么点","someone remembers the order"),
+      row("吃完榴莲","After the durian","不要喝冰水","no ice water")
+    ],foot:["外面是刺，里面是甜。他没有把这句话当成道理。","Spines outside, sweet inside. He does not turn it into a lesson."]},
+    {status:["十二月 · 十二根签子","December · twelve sticks"],lines:[
+      row("纸巾","The tissues","已经替她放好","already put down for her"),
+      row("今晚的沙爹","Tonight’s satay","咸了","salty"),
+      row("这个摊","This stall","四十年没有咸过","not salty in forty years"),
+      row("十二根","Twelve sticks","数完才知道吃了什么","you only know when they are finished"),
+      row("这个位子","This seat","还留着","still kept"),
+      row("Last order","Last order","留下还是离开，还没写","stay or leave, not written yet")
+    ],foot:["父子俩都瞒着对方，都在为对方放手。","Father and son each hide it from the other, and each is letting the other go."]}
+  ];
+  const m=months[i];
+  const data={status:tx(m.status[0],m.status[1]),lines:m.lines,foot:tx(m.foot[0],m.foot[1]),groups:[]};
+  if(i===2){
+    data.groups=[{title:tx("谁在写字？今晚才开这一注","Who is writing? The book opens tonight"),items:[
+      {id:"t",label:tx("拿大相机的游客","The tourist with the big camera"),odds:"1 赔 2",reply:tx("菜都拍，拍完不吃。","Photographs every dish, then does not eat.")},
+      {id:"l",label:tx("天天来的林老师","Mr Lim, here every day"),odds:"1 赔 4",reply:tx("吃饭一定看报纸。","Always reads the paper with his meal.")},
+      {id:"x",label:tx("用纸巾占座的女生","The girl who saves a seat with tissues"),odds:"1 赔 9",reply:tx("一个人吃三样。阿姨说先别讲破。","Three dishes, alone. The aunties say not to say it yet.")}
+    ]}];
+  }
+  if(i===5){
+    data.groups=[{title:tx("这张单子今晚收掉","This list is closed tonight"),items:[
+      {id:"t",label:tx("拿大相机的游客","The tourist with the big camera"),odds:"1 赔 2",state:"struck"},
+      {id:"l",label:tx("天天来的林老师","Mr Lim, here every day"),odds:"1 赔 4",state:"struck"},
+      {id:"x",label:tx("用纸巾占座的女生","The girl who saves a seat with tissues"),odds:"1 赔 9 · 中",state:"won"}
+    ]}];
+  }
+  return data;
+}
+function pawOverlay(){
+  let s=`<svg class="paw-overlay" viewBox="0 0 100 100" aria-hidden="true">`;
+  for(const [x,y,r] of [[16,82,-32],[30,71,-28],[45,61,-31],[60,50,-29],[74,41,-32],[87,31,-28]]){
+    s+=`<g transform="translate(${x} ${y}) rotate(${r})" style="fill:#253330;opacity:.75"><ellipse cx="0" cy="1.8" rx="2.3" ry="1.8"/><circle cx="-2.1" cy="-1.3" r=".8"/><circle cx="0" cy="-2.1" r=".85"/><circle cx="2.1" cy="-1.3" r=".8"/></g>`;
+  }
+  return s+`</svg>`;
+}
+
+/* overhead red plastic hawker stool with a pocket tissue pack (ids are per-instance) */
+function makeStool(u){
+  return `<svg viewBox="0 0 100 100" aria-hidden="true">
+<defs>
+  <linearGradient id="sh-${u}" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" style="stop-color:#fff;stop-opacity:.30"/>
+    <stop offset=".45" style="stop-color:#fff;stop-opacity:0"/>
+    <stop offset="1" style="stop-color:#000;stop-opacity:.20"/>
+  </linearGradient>
+  <linearGradient id="tp-${u}" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" style="stop-color:var(--tissue)"/>
+    <stop offset="1" style="stop-color:var(--tissue);stop-opacity:.86"/>
+  </linearGradient>
+  <filter id="bl-${u}" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="1.6"/></filter>
+</defs>
+<g transform="rotate(-4 50 50)">
+  <g style="fill:var(--stool-2)">
+    <rect x="11" y="11" width="14" height="14" rx="4.5"/><rect x="75" y="11" width="14" height="14" rx="4.5"/>
+    <rect x="11" y="75" width="14" height="14" rx="4.5"/><rect x="75" y="75" width="14" height="14" rx="4.5"/>
+  </g>
+  <rect x="13" y="13" width="74" height="74" rx="17" style="fill:var(--stool)"/>
+  <rect x="13" y="13" width="74" height="74" rx="17" style="fill:url(#sh-${u})"/>
+  <rect x="19" y="19" width="62" height="62" rx="12" style="fill:none;stroke:var(--stool-2);stroke-width:1.3;opacity:.85"/>
+  <rect x="20" y="20" width="60" height="60" rx="11" style="fill:none;stroke:#fff;stroke-width:.6;opacity:.22"/>
+  <circle cx="50" cy="50" r="17" style="fill:none;stroke:var(--stool-2);stroke-width:.8;opacity:.35"/>
+  <rect x="41" y="25" width="18" height="4.6" rx="2.3" style="fill:#000;opacity:.32"/>
+  <line x1="42.6" y1="29.4" x2="57.4" y2="29.4" style="stroke:#fff;stroke-width:.5;opacity:.35;stroke-linecap:round"/>
+  <g transform="translate(53 57) rotate(11)">
+    <rect x="-16" y="-9.5" width="34" height="22" rx="5" style="fill:#000;opacity:.30" filter="url(#bl-${u})"/>
+    <rect x="-17" y="-11" width="34" height="22" rx="4.6" style="fill:url(#tp-${u})"/>
+    <rect x="-17" y="-11" width="34" height="22" rx="4.6" style="fill:none;stroke:#000;stroke-width:.45;opacity:.12"/>
+    <rect x="-14.6" y="-8.6" width="29.2" height="17.2" rx="3.2" style="fill:none;stroke:#000;stroke-width:.35;opacity:.07"/>
+    <path d="M-10.5,0 L10.5,0" style="stroke:#000;stroke-width:.6;opacity:.18;stroke-linecap:round"/>
+    <path d="M-4,0 C-3,-4.6 3.4,-5.2 4.6,0 Z" style="fill:var(--tissue);stroke:#000;stroke-width:.35;stroke-opacity:.16"/>
+    <path d="M-2.2,-1 C-1.2,-3 1.6,-3.2 2.6,-1" style="fill:none;stroke:#000;stroke-width:.3;opacity:.12"/>
+    <rect x="7" y="-2.6" width="8.4" height="5.2" rx="1.6" style="fill:var(--cobalt);opacity:.88"/>
+    <path d="M-13,7.4 L-4,7.4" style="stroke:var(--coral);stroke-width:.9;opacity:.55;stroke-linecap:round"/>
+  </g>
+</g></svg>`;
+}
+const STOOL=makeStool("h");
+
+/* Distinct, refined overhead garlands for all 12 months */
+function garland(type){
+  const Y=t=>(1-t)*(1-t)*10+2*(1-t)*t*42+t*t*10;
+  let s="", items=[];
+  const wire=!["rain4","monsoon","waves"].includes(type);
+  if(wire){
+    s+=`<path class="wire" d="M0,10 Q150,42 300,10 Q450,42 600,10 Q750,42 900,10 Q1050,42 1200,10"/>`;
+  }
+  for(let seg=0;seg<4;seg++) for(const t of [.22,.5,.78]) items.push([seg*300+t*300,Y(t),seg*3]);
+  const shape={
+    bulbs:(x,y)=>`<line x1="${x}" y1="${y}" x2="${x}" y2="${y+6}" class="wire"/><rect x="${x-2}" y="${y+5}" width="4" height="3" style="fill:var(--ink-2)"/><circle class="lit" cx="${x}" cy="${y+12}" r="4.8" style="fill:var(--mustard)"/>`,
+    lantern:(x,y)=>`<line x1="${x}" y1="${y}" x2="${x}" y2="${y+6}" class="wire"/><rect x="${x-4.5}" y="${y+5}" width="9" height="3" rx="1" style="fill:var(--mustard)"/><ellipse class="lit" cx="${x}" cy="${y+18}" rx="10" ry="11" style="fill:var(--coral)"/><path d="M${x-4},${y+8} q-3,10 0,20 M${x+4},${y+8} q3,10 0,20" style="fill:none;stroke:var(--mustard);stroke-width:.7;opacity:.65"/><rect x="${x-3.5}" y="${y+28}" width="7" height="2.4" style="fill:var(--mustard)"/><line x1="${x}" y1="${y+30}" x2="${x}" y2="${y+40}" style="stroke:var(--mustard);stroke-width:1.2"/>`,
+    crescent:(x,y,idx)=>idx%2===0
+      ? `<line x1="${x}" y1="${y}" x2="${x}" y2="${y+6}" class="wire"/><path class="lit" d="M${x+2},${y+7} a9,9 0 1,0 0,18 a7,7 0 1,1 0,-18z" style="fill:var(--mustard)"/>`
+      : `<line x1="${x}" y1="${y}" x2="${x}" y2="${y+6}" class="wire"/><polygon points="${x},${y+6} ${x+8},${y+15} ${x},${y+24} ${x-8},${y+15}" style="fill:var(--celadon);stroke:var(--tile);stroke-width:.8"/><path d="M${x-3},${y+12} L${x+3},${y+18} M${x+3},${y+12} L${x-3},${y+18}" style="stroke:var(--tile);stroke-width:.7;opacity:.75"/>`,
+    rain4:(x)=>{const yy=8+((x*7)%26);return `<line x1="${x+6}" y1="${yy}" x2="${x-4}" y2="${yy+26}" style="stroke:var(--cobalt);stroke-width:1.3;stroke-linecap:round;opacity:.55"/><line x1="${x+28}" y1="${yy+10}" x2="${x+20}" y2="${yy+32}" style="stroke:var(--celadon);stroke-width:1;stroke-linecap:round;opacity:.45"/>`},
+    none:()=>"",
+    intermission:(x,y,idx)=>idx%3===1
+      ? `<g transform="translate(${x} ${y+14}) rotate(-18)" style="fill:var(--ink-2);opacity:.7"><ellipse cx="0" cy="2" rx="3" ry="2.2"/><circle cx="-2.8" cy="-1.6" r="1"/><circle cx="0" cy="-2.6" r="1"/><circle cx="2.8" cy="-1.6" r="1"/></g>`
+      : `<line x1="${x}" y1="${y}" x2="${x}" y2="${y+6}" class="wire"/><circle class="lit" cx="${x}" cy="${y+11}" r="4.2" style="fill:var(--coral)"/>`,
+    waves:(x)=>`<path d="M${x-26},36 q13,-10 26,0 t26,0" style="fill:none;stroke:var(--celadon);stroke-width:1.8;stroke-linecap:round;opacity:.85"/><path d="M${x-14},46 q10,-6 20,0" style="fill:none;stroke:var(--cobalt);stroke-width:1.1;stroke-linecap:round;opacity:.45"/>`,
+    flags:(x,y,idx)=>`<path d="M${x-10},${y-1} L${x+10},${y-1} L${x},${y+22}z" style="fill:${idx%2?"var(--coral)":"var(--tile)"};stroke:var(--coral);stroke-width:1"/>`,
+    moon:(x,y,idx)=>idx%2===0
+      ? `<line x1="${x}" y1="${y}" x2="${x}" y2="${y+6}" class="wire"/><circle class="lit" cx="${x}" cy="${y+18}" r="10.5" style="fill:var(--mustard)"/><path d="M${x},${y+8} v20 M${x-6},${y+10} q-4,8 0,16 M${x+6},${y+10} q4,8 0,16" style="fill:none;stroke:var(--coral);stroke-width:.9;opacity:.75"/>`
+      : `<line x1="${x}" y1="${y}" x2="${x}" y2="${y+8}" class="wire"/><polygon class="lit" points="${x},${y+8} ${x+11},${y+16} ${x},${y+24} ${x-11},${y+16}" style="fill:var(--rose);stroke:var(--coral);stroke-width:.8"/>`,
+    diya:(x,y)=>`<line x1="${x}" y1="${y}" x2="${x}" y2="${y+8}" class="wire"/><path d="M${x-10},${y+20} q10,11 20,0z" style="fill:var(--coral)"/><path class="lit" d="M${x},${y+8} q4.5,6 0,12 q-4.5,-6 0,-12z" style="fill:var(--mustard)"/>`,
+    monsoon:(x)=>{const yy=4+((x*11)%20);return `<line x1="${x+10}" y1="${yy}" x2="${x-8}" y2="${yy+36}" style="stroke:var(--cobalt);stroke-width:1.5;stroke-linecap:round;opacity:.62"/><line x1="${x+34}" y1="${yy+12}" x2="${x+18}" y2="${yy+44}" style="stroke:var(--ink-2);stroke-width:1;stroke-linecap:round;opacity:.4"/>`},
+    stars:(x,y,idx)=>{
+      let p=[];for(let i=0;i<10;i++){const r=i%2?3.6:9.5,a=Math.PI/5*i-Math.PI/2;p.push((x+r*Math.cos(a)).toFixed(1)+","+(y+15+r*Math.sin(a)).toFixed(1));}
+      const fill=idx%3===0?"var(--celadon)":"var(--mustard)";
+      return `<line x1="${x}" y1="${y}" x2="${x}" y2="${y+5}" class="wire"/><polygon class="lit" points="${p.join(" ")}" style="fill:${fill}"/>`;
+    }
+  }[type];
+  items.forEach(([x,y],idx)=>{s+=shape(x,y,idx);});
+  if(type==="none"){
+    s+=`<text x="600" y="64" text-anchor="middle" style="font-family:var(--mono);font-size:12.5px;fill:var(--ink-2)">${tx("五月 · 没有节日，头顶什么都不挂","May. No festival. Nothing hangs overhead.")}</text>`;
+  }
+  const el=document.getElementById("garland");
+  el.classList.remove("swap");
+  void el.offsetWidth;
+  el.innerHTML=s;
+  el.classList.add("swap");
+}
+
+function miniFestIcon(type){
+  const map={
+    bulbs:`<circle cx="8" cy="8" r="4.5" style="fill:var(--mustard)"/>`,
+    lantern:`<ellipse cx="8" cy="8" rx="5.5" ry="6" style="fill:var(--coral)"/><line x1="8" y1="14" x2="8" y2="16" style="stroke:var(--mustard);stroke-width:1.5"/>`,
+    crescent:`<path d="M10,2.5 a5.8,5.8 0 1,0 0,11 a4.4,4.4 0 1,1 0,-11z" style="fill:var(--mustard)"/>`,
+    rain4:`<line x1="6" y1="3" x2="3.5" y2="12" style="stroke:var(--cobalt);stroke-width:1.5;stroke-linecap:round"/><line x1="12" y1="4" x2="9.5" y2="13" style="stroke:var(--celadon);stroke-width:1.5;stroke-linecap:round"/>`,
+    none:`<line x1="2" y1="8" x2="14" y2="8" style="stroke:var(--ink-2);stroke-width:1.2;stroke-dasharray:2 2"/>`,
+    intermission:`<ellipse cx="8" cy="10" rx="3.4" ry="2.5" style="fill:var(--coral)"/><circle cx="4.5" cy="5.5" r="1.2" style="fill:var(--coral)"/><circle cx="8" cy="4.4" r="1.2" style="fill:var(--coral)"/><circle cx="11.5" cy="5.5" r="1.2" style="fill:var(--coral)"/>`,
+    waves:`<path d="M1,9 q3.5,-4 7,0 t7,0" style="fill:none;stroke:var(--celadon);stroke-width:1.8;stroke-linecap:round"/>`,
+    flags:`<polygon points="2,3 14,3 8,14" style="fill:var(--coral)"/>`,
+    moon:`<circle cx="8" cy="8" r="5.5" style="fill:var(--mustard)"/>`,
+    diya:`<path d="M2.5,10 q5.5,6 11,0z" style="fill:var(--coral)"/><path d="M8,3 q2.6,3.5 0,6.5 q-2.6,-3 0,-6.5z" style="fill:var(--mustard)"/>`,
+    monsoon:`<line x1="6" y1="2" x2="2.5" y2="13" style="stroke:var(--cobalt);stroke-width:1.6;stroke-linecap:round"/><line x1="12.5" y1="3" x2="9" y2="14" style="stroke:var(--cobalt);stroke-width:1.6;stroke-linecap:round"/>`,
+    stars:`<polygon points="8,1.5 9.8,6 14.5,6.3 10.9,9.3 12,14 8,11.4 4,14 5.1,9.3 1.5,6.3 6.2,6" style="fill:var(--mustard)"/>`
+  };
+  return `<span class="fest-ico" aria-hidden="true"><svg viewBox="0 0 16 16">${map[type]||""}</svg></span>`;
+}
+
+const WHO_EN={
+  "阿夏":"Summer","阿杰":"Kelvin","陈伯":"Uncle Tan","阿姨":"Auntie","四位阿姨":"The Aunties",
+  "豆花阿婆":"Tau huay aunty","阿婆与两人":"Aunty and duet","陈伯 / 阿杰":"Uncle Tan / Kelvin",
+  "阿夏 / 阿杰":"Summer / Kelvin","阿姨与食客":"Aunties and the crowd",
+  "众人":"Everyone","煎饼师傅":"Prata cook","歌台歌手":"Getai singer","两人合唱":"Both",
+  "轻声对唱":"Soft duet","两人与阿姨":"Both and Auntie","半拍摇摆":"Half time",
+  "两人笑着合唱":"Both, laughing","阿杰 / 阿夏":"Kelvin / Summer","陈伯 / 阿夏":"Uncle Tan / Summer",
+  "四声部叠唱":"Four voices","众人翻倍加速":"Everyone, double time","两人叠唱":"Both at once",
+  "全场合唱":"Full company","众人齐数":"Everyone, counting","两人对唱":"Duet","对唱呼应":"Call and response"
+};
+const CUE_EN={
+  "钢鼓轻起，沙锤像手摇压蔗机一下一下转开":"Steel pan, soft. A shaker turns like a hand-cranked press.",
+  "压蔗机慢慢停下，冰块轻碰，钢鼓散开":"The press slows. Ice knocks. The steel pan fades.",
+  "锣鼓、二胡与唢呐热闹开场，铁板滋滋作响":"Gongs, erhu and suona. The griddle hisses.",
+  "一声锣响，铁板余烟散尽":"One gong. The griddle’s smoke thins out.",
+  "Thavil 鼓点急促响起，呐笛盘旋，面团啪啪摔在铁板上":"Thavil drums, nadaswaram, dough slapped onto the hot plate.",
+  "最后一声面团啪地落地":"One last slap of dough.",
+  "钢琴与尼龙吉他轻轻落拍，第一批雨点敲下来":"Piano and nylon guitar. The first raindrops.",
+  "雨停了，只剩钢琴最后几个单音":"The rain stops. Piano, alone.",
+  "大乐队齐奏，手风琴、低音号踩拍，长勺叮当敲在玻璃杯上":"Big-band hit, accordion, tuba, a spoon on a glass.",
+  "勺子叮的一声，低音号落拍":"One clink of the spoon. The tuba lands.",
+  "甘布斯琴、塔布拉鼓配探案拨弦，香蕉叶在炭板上滋滋焦响":"Gambus, tabla, detective pizzicato. A banana leaf hissing on the grill.",
+  "Zapin 骤然加速，全场追逐":"The zapin accelerates. The whole room gives chase.",
+  "甘布斯琴重重收尾——上半场落幕":"A final gambus chord. End of Act I.",
+  "Rebana 手鼓、克朗钟乌克丽丽与小提琴在阳光下响起":"Rebana, keroncong ukulele and violin, in the sun.",
+  "电子鼓、闪亮合成器配急促锅铲声，歌台霓虹全亮":"Electronic drums, sparkly synth, a fast wok. The getai lights are on.",
+  "丝滑弦乐与单簧管三拍子摇曳，瓷勺轻碰碗沿":"Silky strings, clarinet in three. A porcelain spoon on the bowl.",
+  "单簧管收住，瓷勺轻轻落在碗底":"The clarinet stops. The spoon settles in the bowl.",
+  "铜管轰然炸开，鼓点与木槌敲裂蟹壳交错":"Brass blast. Drums, and mallets cracking crab shell.",
+  "铜管干脆利落截停":"The brass cuts off clean.",
+  "沙哑的慢布鲁斯吉他响起，咔一声掰开带刺的榴莲壳":"A gravelly blues guitar. A durian husk cracks.",
+  "布鲁斯退去，换上清亮指弹木吉他——新谣响起":"The blues fades. Fingerpicked guitar — xinyao.",
+  "一支甘美兰铁片琴响起，拍子稳稳如炭炉上的蒲扇呼吸":"One metallophone. The pulse is a fan over charcoal.",
+  "立式钢琴与轻柔钢鼓呼应《Chope》动机，雨声渐歇":"Upright piano and soft steel pan echo Chope as the rain stops.",
+  "钢鼓的尾音接进《Last Order》":"The steel pan rings into Last Order.",
+  "尼龙吉他呼应《Four O’Clock Rain》，蒲扇轻扇炭火，冰块叮当":"Nylon guitar echoes Four O’Clock Rain; a palm fan breathes over charcoal.",
+  "甘美兰铃声接进《Last Order》":"A gamelan bell rings into Last Order.",
+  "厨房铃连响两声；压蔗机、铁板、长勺敲杯、猛火锅铲依次叠入":"The kitchen bell rings twice; press, griddle, spoon and wok enter one by one.",
+  "十二个档口的厨房乐器一起收住，最后玻璃杯轻轻一碰":"All twelve kitchen instruments hit together; one last clink of spoon on glass."
+};
+
+/* Quiet Playbill margin glosses: Chinese readers get glosses on English/dialect/Malay lines; English readers get glosses on Chinese/dialect/Malay lines. */
+const GLOSS_ZH={
+  "The plane touched down at four, the rain had just let go":"下午四点飞机落地，雨刚停",
+  "Newton’s lights came on, one stall at a time":"牛顿食阁的灯，一档接一档亮起",
+  "They press the sugarcane twice before it’s sweet":"甘蔗要压两遍才出甜味",
+  "And I’m walking through the crowd looking for one empty chair":"我在人群里找一张空椅子",
+  "（随口喊）Girl ah, you want seat? Chope first lah!":"姑娘，要位子？先拿纸巾占座啦！",
+  "This seat is mine, I’ll be right back":"这座位归我了，马上回来",
+  "Tissue paper cannot chope forever one":"一包纸巾哪能替你占一辈子",
+  "Who wrote that rule? Show me the book":"谁定的规矩？拿书给我看",
+  "I flew across the whole world to get here":"我飞了大半个地球才到这里",
+  "Just lend me one chair for one year":"这一年就借我一张椅子",
+  "You’re so tall, you can eat standing up":"你个子这么高，站着吃也行",
+  "Aiyah, stop fighting lah, 甘蔗压两遍才甜":"哎呀别吵啦，甘蔗压两遍才甜",
+  "First time meet must quarrel one round, then you know each other":"头一回见面先吵一架才算认识",
+  "One bet three! One bet three!":"一赔三！一赔三！",
+  "Let’s see whether these two sit the same chair or not":"赌这两个人最后坐不坐同一张椅",
+  "Half is yours, 一半是我":"一半归你，一半归我",
+  "Happy New Year, Huat ah! 鱼生摆上桌了":"新年快乐，发啊！（Huat：闽南话“发财”）",
+  "Everybody take chopsticks, 捞高高 lah":"人人拿起筷子，高高捞起",
+  "Miss, you come alone for Chinese New Year ah?":"小姐，一个人来过年啊？",
+  "What do you do? What do you do?":"你是做哪一行的？",
+  "Chopsticks up high, tell the truth!":"筷子举高高，说实话！",
+  "（越说越快）I do logistics. No wait, I’m a primary school teacher":"我做物流——不对，我是小学老师",
+  "Actually I’m a nurse, I work night shifts":"其实我是夜班护士",
+  "On weekends I go to the Botanic Gardens to count orchids":"周末还去植物园数兰花",
+  "（窃窃私语）Logistics? Teacher? Nurse? Count orchids?":"物流？老师？护士？数兰花？",
+  "Eat until full is good enough":"吃饱就好",
+  "Same as those people who give marks, you know":"跟那些专门来打分的人一模一样",
+  "（对摊主）Uncle, one more plate of 蚝煎, please":"阿伯，麻烦再来一盘蚝煎",
+  "Second plate! Write down, write down!":"第二盘了！记下来记下来！",
+  "Come come come, place your bets!":"来来来，下注了！",
+  "This year got one mystery person, secretly come give marks":"今年有个神秘人，悄悄来打分",
+  "Eat one stall, write one line":"吃一档，写一行",
+  "Can or not? Can or not?":"行不行？成不成？",
+  "Number one, that tourist with the big camera":"一号，背大相机的游客",
+  "Number two, Mr Lim, come every day":"二号，天天报到的林先生",
+  "Number three, that girl from far far away":"三号，老远飞来的那个女生",
+  "Don’t look like one leh, 一赔九":"看着最不像评审，一赔九",
+  "（申辩）Me? I’m just very hungry!":"我？我只是太饿了！",
+  "Answer still not landed, nobody say anything":"面团还没落铁板，谁都别说破",
+  "啪! Land on the griddle":"啪！落在热铁板上",
+  "啪! Flip over again":"啪！再翻一面",
+  "Three fifty-nine and the sky is still blue":"三点五十九分，天还是蓝的",
+  "At four o’clock exactly the rain comes down, not one second late":"四点整雨落下来，一秒不差",
+  "I’m standing at the bus stop without an umbrella":"我站在巴士站，没带伞",
+  "My iced coffee swaying slowly in the bag":"塑料袋里的冰咖啡轻轻晃着",
+  "Hujan jam empat, hujan jam empat":"马来语：下午四点的雨",
+  "Four o’clock rain, it comes in a rush and leaves in a rush":"四点的雨，来也匆匆，去也匆匆",
+  "Half an umbrella apart, 刚好听见你在笑":"隔着半把伞，刚好听见你在笑",
+  "You said the coffee must be pulled, high up high":"你说南洋咖啡得高高拉起",
+  "From one pot into another pot":"从这只长嘴壶，冲进那只壶",
+  "That’s how it gets its foam, that’s how it turns smooth":"那样才起泡，入口才顺滑",
+  "I think some people are like that too":"我想，有的人也是这样",
+  "Before the rain stops, we don’t say a word":"雨停之前，我们一句也没说",
+  "Uncle! Kopi-O kosong peng!":"海南咖啡行话：黑咖啡、无糖、加冰",
+  "This is how the locals order, you cannot learn one":"本地人都这么点，你学不会的",
+  "Go on, you order one, let me hear":"不信你点一杯给我听听",
+  "Teh-C siew dai! Less sugar, evaporated milk":"淡奶红茶、少糖！",
+  "Kopi gau! Stronger, even stronger":"厚咖啡！再浓一点！",
+  "Teh peng! I know how to order iced also":"冰奶茶！加冰我也会点",
+  "You’re so proud of yourself, I order one more":"看你得意的，我再加一杯",
+  "One scoop, two scoop, pile it up":"一勺、两勺，美禄粉堆高",
+  "Teh-C siew dai, what you said just now I already remember":"你刚才点的每一句，我都记着呢",
+  "I stand here thirty years lah":"我在这柜台站了三十年啦",
+  "Put one scoop of ice cream on top of the mountain":"在粉山上再加一球冰淇淋（哥斯拉）",
+  "No festival in May, no fireworks":"五月没节日，也没有烟花",
+  "Whoever laughs first pays":"谁先笑出声，今天谁买单",
+  "Six months gone, the blackboard is full of names":"半年过去，黑板上写满了名字",
+  "The stingray hisses under the banana leaf":"魔鬼鱼在香蕉叶底下滋滋作响",
+  "Who’s eating, who’s writing, who’s lying":"谁在吃，谁在记，谁在瞒",
+  "Who’s the inspector? Who’s the inspector?":"谁是评审？到底谁是评审？",
+  "Who’s the inspector? The devil hides under the leaf":"魔鬼鱼藏在叶下，秘密藏在谁手里",
+  "Every time you order a stall you’ve never tried":"每次都点一档没试过的菜",
+  "And your notebook is red":"而且你的本子是红色的",
+  "Red notebooks are everywhere":"红本子满街都是",
+  "You’re nosy, you’re not the police":"你只是爱管闲事，又不是警察",
+  "（惊呼）Eh! Otters! The otters are in!":"哎！水獭！水獭闯进来了！",
+  "The bag falls, the notebook falls open":"帆布包掉在地上，本子翻开了",
+  "“Stingray, spicy just right, just a little short”":"“魔鬼鱼，辣得刚好，只差一点”",
+  "It’s her! The devil’s not under the leaf":"是她！秘密不在香蕉叶底下",
+  "It’s in her notebook":"全在她的红本子里",
+  "（拍掌笑）一赔九! Tonight I pay!":"一赔九中了！今晚算我的！",
+  "It’s July, school’s out, the whole island is on holiday":"七月放暑假，整座岛都在度假",
+  "Nasi lemak wrapped in a leaf, one for each of us":"香蕉叶包的椰浆饭，一人一包",
+  "Mari menari, mari menari":"马来语：来跳舞吧，来跳舞吧",
+  "The sand is hot and the sea is blue":"沙子滚烫，海水湛蓝",
+  "You go round the map, I go round the days":"你绕的是地图，我过的是日子",
+  "Every day there’s something new to eat":"每天都还有没吃过的东西",
+  "Look at that aunty singing in the sea":"看那个泡在海里唱歌的阿姨",
+  "And the otters are on holiday too":"连水獭一家也来放假了",
+  "Terima kasih, laut — See you next year":"马来语：谢谢你，大海——明年见",
+  "（学歌台司仪）Wah lau eh! 食饱未?":"闽南话：哇唠哎！吃饱了没？",
+  "红红白白 逐家做伙唱":"闽南话：红白国旗色，大家一起唱",
+  "一个转身 就拄着同学":"闽南话：一转身就撞见老同学",
+  "我想欲去一个 无知明仔载的所在":"闽南话：我想去一个不知道明天会怎样的地方",
+  "你讲细 我讲大":"闽南话：你说岛小，我说岛大",
+  "One plate of kway teow, four languages inside":"一盘炒粿条，里头藏着四种话",
+  "Eat thirty years also cannot finish":"吃三十年也吃不完",
+  "Every corner got one stall I never try":"每个转角都有我没试过的档口",
+  "我想欲留佇这个样样都有的所在":"闽南话：我想留在这个什么都有的地方",
+  "台顶唱 台下跟咧唱":"闽南话：台上唱，台下跟着唱",
+  "锅铲越炒越紧 越炒越芳":"闽南话：锅铲越炒越快、越炒越香",
+  "（烟火声落，轻声）Eh, after I go, 啥人陪你食粿条?":"闽南话：喂，等我走了，谁陪你吃粿条？",
+  "（粤语轻哼）中秋晚上 燈籠掛滿晒":"粤语：中秋夜里，灯笼挂满了整片走廊",
+  "兔仔 楊桃 仲有一盞係飛機":"粤语：兔子、杨桃，还有一盏是飞机",
+  "豆腐花 剛舀起 一郁就散":"粤语：豆腐花刚舀起来，一碰就散",
+  "趁熱食啦 後生仔 坐埋一齊":"粤语：趁热吃吧，年轻人，坐到一块儿",
+  "唔好掛燈籠 不要给他灯笼":"粤语与华语：千万别给档口挂推荐灯笼",
+  "You know I can’t lie":"你知道我不能撒谎",
+  "That’s the best satay I’ve ever had":"那是我吃过最好的沙爹",
+  "You’re asking me to write it’s not good":"你却要我写它不好",
+  "It’s like asking me to write that tonight’s moon isn’t round":"就像要我写今晚的月亮不够圆",
+  "（阿婆）糖水落少少 豆味在後頭":"粤语：糖水少放一点，豆香留在后头",
+  "唔好掛燈籠 不要给他灯笼（Let me think）":"别挂灯笼（让我再想想）",
+  "Chilli sauce must eat with fried mantou":"辣椒蟹酱一定要配炸馒头",
+  "Dad, it’s London. They want me":"爸，是伦敦来的信，他们录用我了",
+  "But this sauce is too spicy, I cannot hold it in":"但这酱太辣，话实在憋不住了",
+  "Spicy! Spicy! Crab walks sideways":"好辣！螃蟹横着走，父子拧着吵",
+  "（阿杰）You never ask what I want!":"你从来没问过我想要什么！",
+  "（阿夏）Careful, the letter!":"小心那封信！",
+  "Now you say you want go such a cold place":"现在你说要去那么冷的地方",
+  "Both of your hands are covered in red":"你们俩满手都是红辣酱",
+  "Nobody can wipe their eyes like that":"这双手现在谁也没法擦眼泪",
+  "Here, take a tissue, tear the mantou":"给，拿张纸巾，先把白馒头撕开",
+  "Finish the crab before the sauce goes cold":"趁酱还没凉，先把螃蟹吃完",
+  "Quarrel finish, still must eat!":"架吵完了，饭还是要吃！",
+  "When I’m homesick, I come here":"想家的时候，我就来这里",
+  "Because here someone remembers how I order":"因为这里有人记得我怎么点单",
+  "Uncle, you didn’t leave":"阿伯，你当年没有走",
+  "But you don’t regret it, do you?":"可你也没有后悔，对吧？",
+  "December, Christmas lights on the palm trees":"十二月，圣诞灯挂在棕榈树上",
+  "The last Friday, the last stall":"最后一个星期五，最后一个档口",
+  "I’m sitting in the same chair":"我坐回同一张红凳",
+  "The tissue has already been put down for me":"纸巾已经有人提前替我放好了",
+  "I take a bite, and it’s salty":"咬下一口，肉是咸的",
+  "Forty years it was never salty":"四十年来从来没有咸过",
+  "I look up, and uncle won’t look at me":"我抬起头，陈伯躲开了我的眼睛",
+  "Count the sticks, one stick for every Friday":"数竹签吧，一根签子是一个星期五",
+  "Count the sticks, you only know how much you ate once it’s finished":"吃完了数签子，才知道这一年吃了多少",
+  "（提笔写下）Tonight’s satay is too salty":"今晚的沙爹太咸了",
+  "But I’ve eaten twelve Fridays here":"但我在这里吃了十二个星期五",
+  "And it was never like this":"它从来不是这个味道",
+  "Please, keep this seat for me":"请替我留住这个座位",
+  "No winter, no winter, there’s no winter here":"这里没有冬天",
+  "（蒲扇停下，铃响一声，喊）Last order!":"最后一轮点单！（即将收摊）",
+  "His plane took off at nine, into a sky with winter":"他的飞机九点起飞，飞向有冬天的天空",
+  "At four o’clock the rain came down and washed the tiles clean":"下午四点阵雨落下，把花砖洗得发亮",
+  "Uncle only lights the charcoal three nights a week now":"陈伯如今一周只开三晚炭炉",
+  "And saves the best sticks at the corner of the grill":"把最好的几串留在烤架边上",
+  "My red notebook is full, the last page is dry":"红笔记本写满了，最后一页雨水已干",
+  "I know how to order kopi without looking up":"我已经能不抬头就点出地道的咖啡",
+  "I put one fresh packet of tissues on your half of the stool":"我在你那半边凳子上放了一包新纸巾",
+  "Nobody here says fifteen minutes anymore":"这里再也没人提十五分钟的规矩了",
+  "（阿姨轻声）One bet three, she stayed lah":"一赔三中了，她留下来啦",
+  "This half is mine, the other half waits":"这半边坐着我，那半边等着",
+  "Until your winter takes a holiday":"等到你的冬天放假那天",
+  "（陈伯轻扇一下蒲扇）Girl ah, satay ready — tonight no extra salt":"姑娘，沙爹好了——今晚没多放盐",
+  "（阿姨轻声）One bet one, look who learned lah":"一赔一中了，看是谁学会占座啦",
+  "（阿姨笑）Eh boy, kopi-o kosong peng, on the house lah!":"小子，冰黑咖啡无糖，这杯算阿姨请！",
+  "Before we pull the shutter down, sit down eat one round!":"拉下铁闸收摊前，坐下来再吃一轮！",
+  "Twelve Fridays on a lime-washed wall":"石灰墙边的十二个星期五",
+  "One plate holds four languages, and we tasted them all":"一盘菜盛着四种语言，我们尝遍了一整年",
+  "捞起! 捞起! Hujan jam empat 准时落下来":"捞鱼生！下午四点的雨准时落下来",
+  "Mari menari, 做伙唱落去":"马来语与闽南话：来跳舞吧，一起唱下去",
+  "No winter on this island, only lanterns in the trees!":"岛上没有冬天，只有树梢换不完的灯！",
+  "Newton’s lights are still on — see you next Friday!":"牛顿食阁的灯还亮着——下个星期五见！",
+  "Chope! Chope! 一包纸巾放上去":"Chope：星式英语“占座”——放一包纸巾就占住位子",
+  "Excuse me miss, 纸巾只管十五分钟":"打扰一下小姐，纸巾占座只管十五分钟",
+  "Chope! Chope!（Cannot!）一包纸巾放上去":"占座！（不行！）一包纸巾放上去",
+  "Chope! Chope!（Cannot lah!）一包纸巾放上去":"占座！（不行啦！）一包纸巾放上去",
+  "This seat is mine（算我的!）":"这座位归我（算我的！）",
+  "等我回来（不等!）I’ll be right back":"等我回来（不等！）马上就回",
+  "Huat ah! Huat ah! Huat ah!":"闽南话：发啊！发财兴旺！",
+  "One bet two! One bet four! One bet nine!":"一赔二！一赔四！一赔九！",
+  "Can or not? Can lah!":"成不成？成啦！",
+  "Can or not? Cannot lah!":"成不成？不成啦！",
+  "One bet nine! One bet nine!":"一赔九！一赔九！",
+  "Black coffee, no sugar, with ice":"黑咖啡、不加糖、加冰",
+  "Dinosaur! Dinosaur!":"美禄恐龙！美禄恐龙！",
+  "Kopi-O kosong peng, black, iced, no sugar":"冰黑咖啡无糖——又黑又冰又不甜",
+  "Tonight we flip it open":"今晚我们就把底牌掀开",
+  "One, two, three, four, five otters":"一、二、三、四、五只水獭",
+  "Take a ride, cross the bridge":"搭一程车，跨过跨海大桥",
+  "And there’s the beach":"前头就是海滩",
+  "Come and dance, come and dance":"来跳舞吧，来跳舞吧",
+  "Sentosa, Sentosa, see you next year":"圣淘沙，明年再见",
+  "But look lah, this island so small":"可你看啦，这座岛这么小",
+  "Small island! Small island!":"小岛！小岛！",
+  "Small island! Everything planned already":"小岛！什么都提前安排好了",
+  "Big island! Big island!":"大岛！大岛！",
+  "Big island! One year how enough":"大岛！一年时间哪够逛完",
+  "Some people want go, some people want stay":"有人想走，有人想留",
+  "Small island!（Big island!）":"小岛！（大岛！）",
+  "The satay comes, one stick at a time":"沙爹端上桌，一串接一串",
+  "One stick, January, the sugarcane so sweet":"第一根签，一月，甘蔗水那么甜",
+  "Two sticks, February, the yusheng tossed so high":"第二根签，二月，鱼生捞得老高",
+  "Three sticks, March, one bet nine on the blackboard":"第三根签，三月，黑板上的一赔九",
+  "Four sticks, April, half an umbrella in the rain":"第四根签，四月，雨里的半把伞",
+  "Count the sticks, twelve sticks":"数一数竹签，整整十二根",
+  "Last order? Not yet, not yet":"收摊前最后一单？别急，还没吃完",
+  "Can or not? — Can lah!":"成不成？——成啦！",
+  "So tell uncle, 你是做什么的?":"跟阿伯说说，你是做哪一行的？",
+  "Wah, her notebook full of 蚝煎 leh":"哇，她本子上记满了蚝煎呢",
+  "What do you do? 过年不用讲":"做哪一行的？过年不用多问",
+  "好也好 坏也好 we all must know":"写好写坏，我们全都要知道",
+  "Take everything, eat nothing, 一赔二":"每道菜都拍、一口都不吃，一赔二",
+  "Eat also must read newspaper, 一赔四":"吃饭也非得看报纸，一赔四",
+  "一包纸巾占座 one person eat three plates":"一包纸巾占座，一个人吃三盘",
+  "Tomorrow it will come again, 四点整 一秒都不差":"明天它还会再来，四点整一秒不差",
+  "Four o’clock rain, 我明天 不带伞":"四点的雨——我明天故意不带伞",
+  "It’s her! It’s her! 一赔九!":"是她！就是她！一赔九中了！",
+  "Sentosa, Sentosa, 一天刚刚好":"圣淘沙，逛一天刚刚好",
+  "Boats sail out, 我们留下":"大船开出去，我们留在岸上",
+  "Tonight no big no small, 做伙唱":"今晚不分岛大岛小，大家一起唱",
+  "我想去（我想留）sing until the end":"我想去（我想留），一直唱到收场",
+  "The moon is round, 瓷勺沉进碗底":"今晚月亮很圆，瓷勺轻轻沉进碗底",
+  "Spicy! Spicy! 辣到眼泪流下来":"好辣！好辣！辣得眼泪掉下来",
+  "Last order! Last order! 甘蔗再压最后一遍":"最后一单！甘蔗再压最后一遍",
+  "Kopi-O, teh-C, 恐龙堆成山":"黑咖啡、淡奶红茶，美禄粉堆成山",
+  "Chope! Chope! 一包纸巾占住一张椅":"占座！一包纸巾占住一张椅",
+  "Small island! Big island! 同一张桌!":"小岛！大岛！坐回同一张桌！",
+  "Five little otters 排成一排走过!":"五只水獭排成一排走过！",
+  "Half the chair is yours, 纸巾我先替你放":"半张椅子归你，纸巾我先替你放着"
+};
+
+const GLOSS_EN={
+  "Chope! Chope! 一包纸巾放上去":"Chope: save the seat — put a packet of tissues down",
+  "Excuse me miss, 纸巾只管十五分钟":"Excuse me miss, tissues only hold a seat for fifteen minutes",
+  "你去排沙爹 排了整整半小时":"You queued half an hour at the satay stall",
+  "这里的规矩 你还不太懂":"You still don’t know the rules here",
+  "Chope! Chope!（Cannot!）一包纸巾放上去":"Chope! (Cannot!) Put a packet of tissues down",
+  "Chope! Chope!（Cannot lah!）一包纸巾放上去":"Chope! (No way!) Put a packet of tissues down",
+  "This seat is mine（算我的!）":"This seat is mine (It’s mine!)",
+  "等我回来（不等!）I’ll be right back":"Wait till I’m back (Not waiting!)",
+  "Aiyah, stop fighting lah, 甘蔗压两遍才甜":"Stop arguing — sugarcane has to be pressed twice to turn sweet",
+  "这张椅子 一半是你":"Half of this chair is yours",
+  "Half is yours, 一半是我":"Half is yours, half is mine",
+  "Happy New Year, Huat ah! 鱼生摆上桌了":"Prosperity! The New Year raw-fish salad is on the table",
+  "Everybody take chopsticks, 捞高高 lah":"Chopsticks up, toss it high",
+  "So tell uncle, 你是做什么的?":"So tell uncle: what do you do for a living?",
+  "捞起! 捞起! 风生水起":"Toss it high! Good fortune rises with it",
+  "捞起! 捞起! 越捞越高":"Higher and higher with every toss",
+  "Wah, her notebook full of 蚝煎 leh":"Her notebook is filled with oyster omelette",
+  "没关系 没关系 过年不问那么多":"Never mind — at New Year we don’t ask so much",
+  "只是你写字的时候 眼睛眯起来":"Only your eyes narrow whenever you write",
+  "捞起! 捞起! 捞到天上":"Toss it all the way to the sky",
+  "捞起! 捞起! 年年有余":"Plenty left over, year after year",
+  "What do you do? 过年不用讲":"What do you do? No need to say at New Year",
+  "好也好 坏也好 we all must know":"Good or bad, the whole market wants to know",
+  "猜中有钱拿 猜错请喝茶":"Guess right and collect; guess wrong and buy tea",
+  "Take everything, eat nothing, 一赔二":"Shoots every dish, eats nothing — one to two",
+  "Eat also must read newspaper, 一赔四":"Reads the paper with every meal — one to four",
+  "一包纸巾占座 one person eat three plates":"Saves a stool with tissues and eats three plates alone",
+  "Don’t look like one leh, 一赔九":"Looks least like a critic — one to nine",
+  "面团甩一圈 甩两圈 甩上天":"Spin the dough once, twice, high into the air",
+  "新加坡的雨 是全世界最准时的":"Singapore’s rain is the most punctual in the world",
+  "比地铁准 比老板准":"More punctual than the MRT, more punctual than a boss",
+  "我有一把伞 还空着一半":"I have an umbrella, and half of it is empty",
+  "你要不要 站进来一点":"Would you like to step a little closer?",
+  "Hujan jam empat, hujan jam empat":"Malay: four o’clock rain, four o’clock rain",
+  "Half an umbrella apart, 刚好听见你在笑":"Half an umbrella apart — just close enough to hear you laugh",
+  "只听见冰块 在袋子里 叮当 叮当":"Only the ice cubes clinking inside the plastic bag",
+  "Tomorrow it will come again, 四点整 一秒都不差":"Four sharp tomorrow, not one second off",
+  "Four o’clock rain, 我明天 不带伞":"Four o’clock rain — tomorrow I won’t bring an umbrella",
+  "麦芽粉堆成一座山":"Dry malt powder heaped into a mountain",
+  "谁点得最地道 谁今天买单":"Whoever orders more like a local — the other pays",
+  "你们两个点什么 我都知道":"I already know what both of you are ordering",
+  "还有比恐龙更大的那一杯":"There is one cup even taller than the dinosaur",
+  "只有我们两个 在这里吵架":"Only the two of us bickering here",
+  "游客 老师 外地来的女生":"The tourist, the teacher, the girl from abroad",
+  "吃一口 停一停 眼睛眯起来":"Takes a bite, pauses, narrows her eyes",
+  "你每个月只来一次":"You only come once a month",
+  "你写字很快 写完就合上":"You write fast and shut the book at once",
+  "抢了包就跑 跑过每一张桌":"Snatching the bag and bolting past every table",
+  "翻开那一页 写着——":"The notebook falls open to the page that reads—",
+  "It’s her! It’s her! 一赔九!":"It’s her! One to nine wins!",
+  "用纸巾占座的那一个":"The one who saves her stool with tissues",
+  "（拍掌笑）一赔九! Tonight I pay!":"One to nine! Tonight is on me!",
+  "Mari menari, mari menari":"Malay: come and dance, come and dance",
+  "Sentosa, Sentosa, 一天刚刚好":"Sentosa — one day is just enough",
+  "你说这里像天堂":"You say this place looks like paradise",
+  "我从小来 来了一百次":"I’ve come here a hundred times since I was small",
+  "同一片海 同一座桥":"The same sea, the same bridge",
+  "这个岛 骑车一天就绕完":"You can cycle round the whole island in a day",
+  "（轻声）有时候我站在海边":"Sometimes I stand by the water",
+  "看那些船 一艘一艘开出去":"Watching the ships sail out one by one",
+  "我想知道 它们去的地方":"Wondering whether the places they sail to",
+  "有没有冬天":"Have a winter",
+  "Boats sail out, 我们留下":"Boats sail out, and we remain onshore",
+  "Terima kasih, laut — See you next year":"Malay: thank you, sea — see you next year",
+  "（学歌台司仪）Wah lau eh! 食饱未?":"Hokkien: Have you eaten yet?",
+  "八月九号 烟火放上天":"Ninth of August, fireworks over the sky",
+  "红红白白 逐家做伙唱":"Hokkien: Red and white, everyone singing together",
+  "从东到西 搭德士四十块":"Forty dollars by taxi from east to west",
+  "一个转身 就拄着同学":"Hokkien: Turn around and you bump into an old classmate",
+  "我想欲去一个 无知明仔载的所在":"Hokkien: I want to go somewhere I don’t already know tomorrow",
+  "你讲细 我讲大":"Hokkien: You call it small, I call it vast",
+  "猛火一炒 锅气冲天":"One blast of the wok and the smoky aroma rises",
+  "我想欲留佇这个样样都有的所在":"Hokkien: I want to stay where everything fits on one table",
+  "台顶唱 台下跟咧唱":"Hokkien: Singing onstage, singing along below",
+  "锅铲越炒越紧 越炒越芳":"Hokkien: The faster the spatula clangs, the more fragrant it gets",
+  "Tonight no big no small, 做伙唱":"Tonight neither small nor big — sing together",
+  "一个转身（每个转角）":"One turn around (Every street corner)",
+  "我想去（我想留）sing until the end":"I want to leave (I want to stay) — sing until the end",
+  "（烟火声落，轻声）Eh, after I go, 啥人陪你食粿条?":"Hokkien: After I leave, who’s going to eat kway teow with you?",
+  "（粤语轻哼）中秋晚上 燈籠掛滿晒":"Cantonese: Mid-Autumn night, lanterns strung everywhere",
+  "兔仔 楊桃 仲有一盞係飛機":"Cantonese: A rabbit, a starfruit, and one shaped like a plane",
+  "豆腐花 剛舀起 一郁就散":"Cantonese: Freshly scooped tau huay — touch it and it breaks apart",
+  "趁熱食啦 後生仔 坐埋一齊":"Cantonese: Eat it warm, young folks, sit together",
+  "这盏飞机灯笼 我提来给你":"I brought this aeroplane lantern for you",
+  "阿婆讲得对 豆花一碰就散":"Grandma’s right — tau huay falls apart at a touch",
+  "我今晚有句话 比豆花还难讲":"Tonight I have something even harder to hold together",
+  "那边沙爹摊 是我爸的":"The satay stall over there belongs to my dad",
+  "唔好掛燈籠 不要给他灯笼":"Cantonese & Mandarin: Please don’t hang a lantern on his stall",
+  "一盏灯笼挂上去 天天有人排队":"Once a lantern goes up, people queue every day",
+  "队一排长 档口就收不掉":"Once the queue forms, he’ll never close the stall",
+  "档口收不掉 我就走不了":"And if the stall can’t close, I can never leave",
+  "（阿婆）糖水落少少 豆味在後頭":"Cantonese: Just a little syrup — the bean aroma comes after",
+  "The moon is round, 瓷勺沉进碗底":"The moon is round; the porcelain spoon sinks in the bowl",
+  "我们看着同一碗 想着各自的路":"Looking at the same bowl, thinking of different roads",
+  "唔好掛燈籠 不要给他灯笼（Let me think）":"Don’t hang the lantern (Let me think)",
+  "一盏灯笼挂上去 天天有人排队（Let me think）":"People will queue every day (Let me think)",
+  "屠妖节的灯 一路亮到小印度":"Deepavali lamps shining all the way to Little India",
+  "今晚全家吃螃蟹":"Tonight the whole family eats crab",
+  "儿子 你手上拿的是什么信?":"Son, what is that letter in your hand?",
+  "下个月就要报到":"I’m due to report next month",
+  "我本来想吃完螃蟹才讲":"I meant to wait till we finished the crab",
+  "Spicy! Spicy! 辣到眼泪流下来":"Spicy! Hot enough to bring tears down",
+  "（陈伯）你走了 摊子怎么办?":"(Uncle Tan) If you go, what happens to the stall?",
+  "（阿姨）哎呀 信上滴到酱啦!":"(Aunties) Eh, chilli sauce is dripping on the letter!",
+  "四十年 一把扇子 一盆炭":"Forty years, one palm fan, one basin of charcoal",
+  "你出生那天 我都没有收摊":"I didn’t even close the day you were born",
+  "那边的螃蟹 有没有辣椒酱?":"Over in that cold place, do crabs even come with chilli sauce?",
+  "敲! 敲! 敲开壳!":"Crack, crack, crack the shell!",
+  "（余怒未消）馒头 再来一份!":"(Still fuming) Another plate of fried buns!",
+  "榴莲 外面都是刺":"A durian is all spines on the outside",
+  "拿不好 手会被扎到":"Hold it wrong and it pricks your hand",
+  "有人说它臭 有人说它香":"Some call it foul, some call it fragrant",
+  "我说 跟我一样":"I’d say it’s a lot like me",
+  "小姐 你今天话很少":"Miss, you’ve said very little tonight",
+  "十一月 雨季来了 你想家吧":"November rain is here — missing home, aren’t you?",
+  "我十九岁那年 也想走":"When I was nineteen, I wanted to leave too",
+  "一把吉他 一张车票 要去台北唱歌":"One guitar and a ticket to go sing in Taipei",
+  "那时候 我们在学校的树下":"Back then, under the trees at school",
+  "写自己的歌 唱自己的街":"We wrote our own songs and sang our own streets",
+  "后来我爸爸老了":"Then my father grew old",
+  "扇子交到我手里 我就没有放下":"The fan was placed in my hand, and I never set it down",
+  "外面都是刺 里面很甜":"Spines on the outside, sweet within",
+  "隔着一条街 都闻得见":"You can smell it from a street away",
+  "顺着那条白线 轻轻一掰":"Follow the pale seam on the husk and part it gently",
+  "扎过手的人 才吃到里面":"Only the hand that’s been pricked tastes what’s inside",
+  "没有后悔 只是有时候 下雨的晚上":"No regrets — only on certain rainy nights",
+  "会想 台北的雨":"I wonder whether the rain in Taipei",
+  "是不是也这么准时":"Arrives as punctually as ours",
+  "（木吉他尾音里叮嘱）吃完榴莲 不要喝冰水哦":"Remember: don’t drink ice water after durian",
+  "第一天 我就认出是你":"I knew it was you from the very first day",
+  "没人像你 把纸巾放得那么端正":"Nobody else sets a packet of tissues down that neatly",
+  "今晚盐重一点 档口就不挂灯笼":"A heavier hand with salt tonight means no lantern on the stall",
+  "没有灯笼 明天他就可以飞":"Without the lantern, tomorrow my son can fly",
+  "爸 九月那天 我也求过她":"Dad — back in September, I begged her too",
+  "求她千万别给你写好":"Begged her not to write a good review for you",
+  "（拿起一串吃完）这串我吃完了 一点都不咸":"(Finishes a stick) I ate the whole skewer — not salty at all",
+  "你烤了四十年 手从来没抖过":"Forty years at the fire, and your hand has never slipped",
+  "五根 五月 恐龙山那么高":"Five sticks, May — the Milo mountain piled high",
+  "六根 六月 水獭偷走了包":"Six sticks, June — the otters ran off with the bag",
+  "七根 七月 海边的船开出去":"Seven sticks, July — ships heading out to sea",
+  "八根 八月 烟花 小岛 大岛":"Eight sticks, August — fireworks, small island, big island",
+  "九根 九月 豆花和灯笼":"Nine sticks, September — tau huay and paper lanterns",
+  "十根 十月 螃蟹吵到天亮":"Ten sticks, October — arguing over chilli crab",
+  "十一根 十一月 榴莲很甜":"Eleven sticks, November — durian sweet inside",
+  "十二根……":"Twelve sticks…",
+  "一年 就像一个很长很长的下午":"A whole year feels like one long afternoon",
+  "早上九点的飞机 穿过云层向北":"The nine o’clock plane climbed north through the clouds",
+  "我爸今天没开炉 坐在桌边看报纸":"My dad didn’t light the stove today; he’s reading the paper at a table",
+  "我换上背心 拿起那把旧蒲扇":"I put on the singlet and picked up his old palm fan",
+  "原来炭火要扇得很慢 才不会起黑烟":"You have to fan charcoal slowly so it doesn’t smoke",
+  "三点五十九分 天还是蓝的":"At 3:59 the sky is still blue",
+  "四点一到 雨就落下来 把十二块花砖洗亮":"At four sharp a shower washes all twelve tiles bright",
+  "我走到那张红凳前 掏出一包没拆的纸巾":"I walk to the red stool and take out an unopened pack of tissues",
+  "歪歪地 放在你坐过十二次的那半边":"Setting it crookedly on the half where you sat twelve times",
+  "这次不数十五分钟 也不数半年":"Not counting fifteen minutes this time, nor half a year",
+  "哪天你飞回来 这半边还算你的":"Whenever you fly back, this half is still yours",
+  "Last order! Last order! 甘蔗再压最后一遍":"Last order! Press the sugarcane one final time",
+  "铁板还在响 面团再甩上天":"The griddle still sizzles, dough spins into the air",
+  "Kopi-O, teh-C, 恐龙堆成山":"Black kopi, evaporated-milk tea, Milo piled into a peak",
+  "炭火还红着 蒲扇再扇两下":"The embers are still glowing — two more waves of the fan",
+  "从东到西四十块 今晚我不嫌它小":"Forty dollars east to west — tonight the island feels big enough",
+  "Chope! Chope! 一包纸巾占住一张椅":"Save the chair with a packet of tissues",
+  "捞起! 捞起! Hujan jam empat 准时落下来":"Toss high! The four o’clock rain arrives on the dot",
+  "Mari menari, 做伙唱落去":"Malay & Hokkien: Come dance, and sing on together",
+  "Small island! Big island! 同一张桌!":"Small island, big island — sharing the same table!",
+  "吃完榴莲不要喝冰水!":"Don’t drink ice water after durian!",
+  "Five little otters 排成一排走过!":"Five otters trotting past in a row!",
+  "十二个星期五 连成一个下午":"Twelve Fridays folded into one long afternoon",
+  "Half the chair is yours, 纸巾我先替你放":"Half the chair is yours — I’ll put the tissues down for you",
+  "（对摊主）Uncle, one more plate of 蚝煎, please":"(To the stallholder) Uncle, one more plate of oyster omelette, please",
+  "啪! Land on the griddle":"Slap! Down onto the hot griddle",
+  "啪! Flip over again":"Slap! Flip it over once more"
+};
+
+function renderLyrics(items){
+  const map=en()?GLOSS_EN:GLOSS_ZH;
+  return items.map(item=>{
+    if(item.cue) return `<div class="lib-cue">${en()?(CUE_EN[item.cue]||item.cue):item.cue}</div>`;
+    const who=en()?(WHO_EN[item.who]||item.who):item.who;
+    const rows=item.lines.map(l=>{
+      const g=map[l]||"";
+      return g
+        ? `<div class="lib-row"><div class="lib-orig">${l}</div><div class="lib-gloss">${g}</div></div>`
+        : `<div class="lib-row single"><div class="lib-orig">${l}</div></div>`;
+    }).join("");
+    return `<div class="lib-block"><div class="lib-who ${item.cls||""}">${who}</div><div class="lib-lines">${rows}</div></div>`;
+  }).join("");
+}
+
+const floor=document.getElementById("floor"),
+      stool=document.getElementById("stool"),
+      monthEl=document.getElementById("month"),
+      menuEl=document.getElementById("menu-board");
+stool.innerHTML=STOOL;
+
+const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+MONTHS.forEach((m,i)=>{
+  const b=document.createElement("button");
+  b.type="button";
+  b.className="tile";
+  b.setAttribute("aria-label",`${MON[i]} ${m.dish} / ${m.dishEn}, ${m.song}`);
+  b.innerHTML=(m.paw?pawOverlay():"")+`<img class="dish" alt="" src="${DISH_SRC[i]}"><span class="no">${MON[i]}</span>`+(i===5||i===11?`<span class="act-mark" aria-hidden="true"></span>`:"");
+  b.addEventListener("click",()=>pick(i));
+  floor.appendChild(b);
+});
+floor.appendChild(stool);
+
+let current=0;
+let userBets={};
+try{userBets=JSON.parse(localStorage.getItem("nc-bets")||"{}")||{};}catch(e){}
+
+function renderBoard(i){
+  const boardEl=document.getElementById("board");
+  if(!boardEl) return;
+  const data=boardData(i);
+  const phase="m"+i;
+  const pickedId=userBets[phase]||null;
+  let activeReply="";
+  const groupsHtml=(data.groups||[]).map(g=>{
+    const lis=g.items.map(it=>{
+      const isPicked=pickedId===it.id;
+      if(isPicked&&it.reply) activeReply=it.reply;
+      const cls=["bet-row",it.state||"",isPicked?"picked":""].filter(Boolean).join(" ");
+      const dis=it.state?"disabled":"";
+      return `<li><button type="button" class="${cls}" data-phase="${phase}" data-bet="${it.id}" ${dis}><span class="label-txt">${it.label}</span><span class="odds">${oddsText(it.odds)}</span></button></li>`;
+    }).join("");
+    return `<h3>${g.title}</h3><ul>${lis}</ul>`;
+  }).join("");
+  const linesHtml=(data.lines||[]).length?`<ul>${data.lines.map(line=>`<li><div class="chalk${line.strike?" strike":""}"><span>${line.text}</span><span class="mark">${line.mark||""}</span></div></li>`).join("")}</ul>`:"";
+
+  boardEl.innerHTML=`
+    <div class="board-kicker"><span>${tx("阿姨的黑板 · 粉笔账","The aunties’ chalkboard")}</span><span>${MON[i].toUpperCase()}</span></div>
+    <div class="board-top">
+      <span class="b-month">${String(i+1).padStart(2,"0")} ${en()?"· "+MONTHS[i].dishEn:"月 · "+MONTHS[i].dish}</span>
+      <span class="b-status">${data.status}</span>
+    </div>
+    ${groupsHtml}
+    ${linesHtml}
+    ${activeReply?`<div class="board-reply" id="board-reply">${activeReply}</div>`:""}
+    <small>${data.foot}</small>`;
+
+  boardEl.querySelectorAll(".bet-row:not(:disabled)").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const p=btn.dataset.phase, id=btn.dataset.bet;
+      userBets[p]=id;
+      try{localStorage.setItem("nc-bets",JSON.stringify(userBets));}catch(e){}
+      renderBoard(current);
+    });
+  });
+}
+
+function renderMenuBoard(){
+  if(!menuEl) return;
+  const renderAct=(slice,offset,title)=>{
+    const items=slice.map((m,idx)=>{
+      const k=offset+idx;
+      const d=tx(m.dish,m.dishEn);
+      return `<li class="menu-item"><button type="button" class="menu-btn${k===current?" active":""}" data-jump="${k}"><span class="m-no">${m.no}</span><span class="m-dish">${d}</span><span class="m-song">${m.song}</span></button></li>`;
+    }).join("");
+    return `<div class="menu-act"><h3>${title}</h3><ul class="menu-list">${items}</ul></div>`;
+  };
+  menuEl.innerHTML=`
+    <div class="menu-acts">
+      ${renderAct(MONTHS.slice(0,6),0,tx("上半场 · 一月至六月","Act I · Jan – Jun"))}
+      ${renderAct(MONTHS.slice(6,12),6,tx("下半场 · 七月至十二月","Act II · Jul – Dec"))}
+    </div>
+    <div class="menu-foot">
+      <span>${tx("终曲序列：《留下》 / 《回去》 → 《Last Order》","Finale: Stay / Go Home → Last Order")}</span>
+      <a href="#ending">${tx("跳去选结局 →","Choose the ending →")}</a>
+    </div>`;
+  menuEl.querySelectorAll(".menu-btn").forEach(btn=>{
+    btn.addEventListener("click",()=>pick(+btn.dataset.jump,true));
+  });
+}
+
+function notebookMeta(idx){
+  const ring=idx===11
+    ? `<svg class="nb-ring" viewBox="0 0 50 32" preserveAspectRatio="none" aria-hidden="true"><path d="M5,17 C4,6 21,3 36,5 C47,7 48,19 40,25 C29,31 9,29 5,18 C4,11 19,5 35,7" fill="none" stroke="#b4332c" stroke-width="1.35" stroke-linecap="round"/></svg>`
+    : `<svg class="nb-ring" viewBox="0 0 50 32" preserveAspectRatio="none" aria-hidden="true"><path d="M6,16 C6,6 22,4 36,6 C46,8 47,20 39,25 C28,30 8,28 6,16 Z" fill="none" stroke="#b4332c" stroke-width="1.25" stroke-linecap="round"/></svg>`;
+  let tag="", trace="";
+  if(idx===1) tag=`<s>${tx("物流","Logistics")}</s>${tx("第二盘","2nd plate")}`;
+  else if(idx===3){tag=tx("16:00 阵雨打湿页角","16:00 rain on corner");trace=`<span class="nb-trace rain" aria-hidden="true"></span>`;}
+  else if(idx===4) tag=tx("点单打赌：输","Ordering bet: lost");
+  else if(idx===5){
+    tag=tx("水獭拖走包，翻开了这一页","Opened by the otters");
+    trace=`<svg class="nb-trace paw" viewBox="0 0 70 52" aria-hidden="true"><g transform="translate(22 34) rotate(-24)" fill="#3b332b"><ellipse cx="0" cy="3" rx="5" ry="3.8"/><circle cx="-4.8" cy="-3" r="1.8"/><circle cx="0" cy="-4.6" r="1.9"/><circle cx="4.8" cy="-3" r="1.8"/></g><g transform="translate(48 18) rotate(-20)" fill="#3b332b"><ellipse cx="0" cy="3" rx="4.6" ry="3.5"/><circle cx="-4.4" cy="-2.8" r="1.6"/><circle cx="0" cy="-4.2" r="1.7"/><circle cx="4.4" cy="-2.8" r="1.6"/></g></svg>`;
+  }
+  else if(idx===8) tag=tx("#01-12 沙爹：暂缓","#01-12 satay: hold");
+  else if(idx===9){tag=tx("伦敦来信在桌边","London letter on table");trace=`<span class="nb-trace chilli" aria-hidden="true"></span>`;}
+  else if(idx===11) tag=tx("最后一页","Final page");
+  return {ring,tag,trace};
+}
+
+function paras(list){return list.map(p=>`<p>${p}</p>`).join("");}
+
+function pick(i,scrollPanel){
+  current=(i+12)%12;
+  document.documentElement.dataset.m=String(current);
+  const m=MONTHS[current];
+  const prevM=MONTHS[(current+11)%12];
+  const nextM=MONTHS[(current+1)%12];
+
+  stool.style.setProperty("--c",current%4);
+  stool.style.setProperty("--r",Math.floor(current/4));
+  garland(m.g);
+
+  document.querySelectorAll("#floor .tile").forEach((el,idx)=>{
+    el.classList.toggle("on",idx===current);
+    el.setAttribute("aria-pressed",idx===current?"true":"false");
+  });
+
+  const dish=tx(m.dish,m.dishEn);
+  const dishSub=tx(m.dishEn,m.dish);
+  const prevDish=tx(prevM.dish,prevM.dishEn);
+  const nextDish=tx(nextM.dish,nextM.dishEn);
+  const fest=tx(m.fest,m.festEn||m.fest);
+  const act=tx(m.act,m.actEn||m.act);
+  const tags=en()&&m.tagsEn?m.tagsEn:m.tags;
+  const note=en()&&m.noteEn?m.noteEn:m.note;
+  const scene=en()&&m.sceneEn?m.sceneEn:m.scene;
+  const isFinale=current===5||current===11;
+  const nb=notebookMeta(current);
+  const foot=current===5
+    ? tx("水獭掀翻了红本子，上半场到此暂停。","The otters have the red notebook. Act one stops here.")
+    : current===11
+      ? tx("十二根签子数完，阿姨喊出 Last order。","Twelve sticks counted. An auntie calls last order.")
+      : tx(`把红凳挪到下个月：${nextM.dish}（${nextM.song}）`,`Move the red stool on: ${nextM.dishEn} (${nextM.song})`);
+  const nextBtn=current===11
+    ? `<a class="jump-end" href="#ending">${tx("去选结局：留下，还是回去？ →","Choose the ending: stay, or go? →")}</a>`
+    : `<button type="button" class="mnav-btn" id="m-next-foot">${tx("下一个星期五","Next Friday")}：${nextDish} →</button>`;
+  monthEl.innerHTML=`
+    <div class="month-nav">
+      <button type="button" class="mnav-btn" id="m-prev">← ${String((current+11)%12+1).padStart(2,"0")} ${prevDish}</button>
+      <div class="mnav-mid">
+        <span>${tx(`第 ${String(current+1).padStart(2,"0")} / 12 个星期五`,`Friday ${String(current+1).padStart(2,"0")} / 12`)}</span>
+        <span class="act-badge ${isFinale?"finale":""}">${act}</span>
+      </div>
+      <button type="button" class="mnav-btn" id="m-next">${String((current+1)%12+1).padStart(2,"0")} ${nextDish} →</button>
+    </div>
+
+    <div class="month-grid">
+      <div class="ledger-col">
+        <div class="nb-stack">
+        <figure class="nb-photo">
+          <img src="${DISH_SRC[current]}" alt="${tx("这个月的菜："+m.dish,"This month’s dish: "+m.dishEn)}" decoding="async">
+          <figcaption>${dish}</figcaption>
+        </figure>
+        <div class="notebook">
+          ${nb.trace}
+          <div class="nb-label"><span>${tx("阿夏的红笔记本","Summer’s red notebook")}</span><span>${m.no} · p.${String(current+1).padStart(2,"0")}</span></div>
+          <div class="nb-score-row">
+            <div class="nb-score" aria-label="${tx(dish+" "+m.score+" 分",dish+" "+m.score+" out of 10")}">${nb.ring}<b>${m.score}</b><span>${tx("分","/ 10")}</span></div>
+            ${nb.tag?`<span class="nb-tag">${nb.tag}</span>`:""}
+          </div>
+          <blockquote>${note}</blockquote>
+        </div>
+        </div>
+        <div class="board" id="board"></div>
+      </div>
+
+      <div class="month-detail">
+        <div class="head">
+          <div class="m">${String(current+1).padStart(2,"0")}</div>
+          <div class="title-wrap">
+            <div class="dish-row">
+              <div class="t">${dish}</div>
+              <span class="dish-sub">${dishSub}</span>
+            </div>
+            <div class="songline">
+              <span class="stall-sign">${m.no}</span>
+              <div class="song">${m.song}</div>
+              ${listenLinks(MONTH_AUDIO[current],m.song)}
+            </div>
+            <div class="fest-line">
+              ${miniFestIcon(m.g)}
+              <span>${fest}</span>
+            </div>
+            <div class="genre-pills">${tags.map(t=>`<span class="pill">${t}</span>`).join("")}</div>
+          </div>
+        </div>
+
+        <div class="blocks">
+          <div class="prose">${paras(scene)}</div>
+
+          <details class="lyrics">
+            <summary><span>${tx("歌词 · 双栏场刊本","Lyrics · bilingual playbill")}</span><span class="ly-hint">${tx("左原词 · 右旁注","sung text + margin gloss")}</span></summary>
+            <div class="libretto">${renderLyrics(m.lyrics)}</div>
+          </details>
+
+          <div class="month-foot">
+            <span>${foot}</span>
+            ${nextBtn}
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  document.getElementById("m-prev").onclick=()=>pick(current-1,true);
+  document.getElementById("m-next").onclick=()=>pick(current+1,true);
+  const nf=document.getElementById("m-next-foot");
+  if(nf) nf.onclick=()=>pick(current+1,true);
+
+  renderBoard(current);
+  renderMenuBoard();
+  try{localStorage.setItem("nc-month",current);}catch(e){}
+  if(scrollPanel){
+    monthEl.scrollIntoView({behavior:"smooth",block:"start"});
+  }
+}
+
+/* Keyboard navigation for months */
+document.addEventListener("keydown",e=>{
+  if(e.target.closest("input,textarea,select")) return;
+  if(e.key==="ArrowRight") pick(current+1);
+  if(e.key==="ArrowLeft") pick(current-1);
+});
+
+let start=0;
+try{const s=+localStorage.getItem("nc-month"); if(s>=0&&s<12) start=s;}catch(e){}
+pick(start);
+
+/* Day (16:00 after rain) / Night (21:00 hawker lights) toggle */
+const modeBtn=document.getElementById("mode-btn"), modeLabel=document.getElementById("mode-label");
+function isDark(){
+  const t=document.documentElement.dataset.theme;
+  if(t==="dark") return true;
+  if(t==="light") return false;
+  return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+}
+function syncModeLabel(){
+  const dark=isDark();
+  modeLabel.textContent=dark?tx("夜市 21:00","Night market, 21:00"):tx("雨后 16:00","After the rain, 16:00");
+  modeBtn.setAttribute("aria-label",tx("切换雨后下午与夜市","Switch between late afternoon and the night market"));
+  modeBtn.setAttribute("aria-pressed",dark?"true":"false");
+}
+modeBtn.onclick=()=>{
+  const next=isDark()?"light":"dark";
+  document.documentElement.dataset.theme=next;
+  try{localStorage.setItem("nc-theme",next);}catch(e){}
+  syncModeLabel();
+};
+syncModeLabel();
+
+/* Dual ending: mirror reprise (13A Stay / 13B Go Home) + shared full-company curtain call (14 Last Order) */
+const LAST_ORDER_LYRICS=[
+  {cue:"厨房铃连响两声；压蔗机、铁板、长勺敲杯、猛火锅铲依次叠入"},
+  {who:"四位阿姨",cls:"aunty",lines:["Last order! Last order! 甘蔗再压最后一遍","铁板还在响 面团再甩上天","Kopi-O, teh-C, 恐龙堆成山","Before we pull the shutter down, sit down eat one round!"]},
+  {who:"陈伯 / 阿杰",cls:"uncle",lines:["炭火还红着 蒲扇再扇两下","从东到西四十块 今晚我不嫌它小"]},
+  {who:"阿夏",lines:["Twelve Fridays on a lime-washed wall","One plate holds four languages, and we tasted them all"]},
+  {who:"全场合唱",cls:"all",lines:["Chope! Chope! 一包纸巾占住一张椅","捞起! 捞起! Hujan jam empat 准时落下来","Mari menari, 做伙唱落去","No winter on this island, only lanterns in the trees!"]},
+  {who:"对唱呼应",cls:"all",lines:["Can or not? — Can lah!","Small island! Big island! 同一张桌!","吃完榴莲不要喝冰水!","Five little otters 排成一排走过!"]},
+  {who:"全场合唱",cls:"all",lines:["Chope! Chope! 一包纸巾放上去","十二个星期五 连成一个下午","Half the chair is yours, 纸巾我先替你放","Newton’s lights are still on — see you next Friday!"]},
+  {cue:"十二个档口的厨房乐器一起收住，最后玻璃杯轻轻一碰"}
+];
+
+const ENDS={
+  stay:{
+    kicker:["结局 A · 留下 · STAY","Ending A · Stay"],
+    prose:["她留下来，把这一年写成一本美食指南。阿杰去了伦敦。陈伯一周只开三晚炭炉，摊子还替儿子留着。每个星期五下午四点，雨一停，她就坐到那张红凳上，在阿杰那半边端端正正放一包新纸巾，等阿杰从有冬天的地方放假回来。","She stays and turns the red notebook into a food guide. Kelvin flies to London. Uncle Tan lights the stove three nights a week, keeping the stall warm for his son. Every Friday after the four o’clock rain, she sits on the red stool and sets a fresh packet of tissues on Kelvin’s half, waiting for his winter holiday."],
+    note:["黑板收盘：押「她会留下」的一赔三赢了。桌上的纸巾是阿夏放的——这里再也没人提十五分钟的规矩。","The blackboard closes: 1-to-3 on her staying wins. Summer placed the tissues — nobody here mentions the fifteen-minute rule anymore."],
+    songTitle:["13A · 留下","13A · Stay"],
+    songSub:"Stay (Reprise)",
+    songMeta:["钢鼓与立式钢琴重唱 · 呼应《Chope》 · 96 BPM","Steel pan & upright piano reprise · 96 BPM"],
+    lyrics:[
+      {cue:"立式钢琴与轻柔钢鼓呼应《Chope》动机，雨声渐歇"},
+      {who:"阿夏",lines:["His plane took off at nine, into a sky with winter","At four o’clock the rain came down and washed the tiles clean","Uncle only lights the charcoal three nights a week now","And saves the best sticks at the corner of the grill"]},
+      {who:"阿夏",lines:["My red notebook is full, the last page is dry","I know how to order kopi without looking up","I put one fresh packet of tissues on your half of the stool","Nobody here says fifteen minutes anymore"]},
+      {who:"两人合唱",cls:"all",lines:["Chope! Chope! 一包纸巾放上去","（阿姨轻声）One bet three, she stayed lah","This half is mine, the other half waits","Until your winter takes a holiday"]},
+      {who:"陈伯",cls:"uncle",lines:["（陈伯轻扇一下蒲扇）Girl ah, satay ready — tonight no extra salt"]},
+      {cue:"钢鼓的尾音接进《Last Order》"}
+    ]
+  },
+  go:{
+    kicker:["结局 B · 回去 · GO HOME","Ending B · Go home"],
+    prose:["她坐上早上九点的飞机。阿杰没有走，换上背心接过了父亲的炭炉和旧蒲扇；陈伯头一回坐在桌边看报纸。星期五下午四点，一场雨把十二块花砖洗亮，阿杰在她坐过十二次的那半边红凳上歪歪放下一包没拆的纸巾。","She takes the nine o’clock plane. Kelvin stays, puts on the singlet, and takes over his father’s stove and palm fan while Uncle Tan sits reading the paper. At four sharp on Friday, after rain washes all twelve tiles bright, Kelvin places an unopened packet of tissues crookedly on her half of the stool."],
+    note:["黑板收盘：押「她会离开」的一赔一赢了。十二个星期五过去，轮到阿杰打破自己定的十五分钟规矩，学会了用纸巾占座。","The blackboard closes: even-money on her leaving wins. After twelve Fridays, Kelvin breaks his own fifteen-minute rule and saves a seat with tissues."],
+    songTitle:["13B · 回去","13B · Go Home"],
+    songSub:"Go Home (Reprise)",
+    songMeta:["尼龙吉他与蒲扇节奏重唱 · 呼应《Four O’Clock Rain》 · 96 BPM","Nylon guitar & palm-fan pulse reprise · 96 BPM"],
+    lyrics:[
+      {cue:"尼龙吉他呼应《Four O’Clock Rain》，蒲扇轻扇炭火，冰块叮当"},
+      {who:"阿杰",lines:["早上九点的飞机 穿过云层向北","我爸今天没开炉 坐在桌边看报纸","我换上背心 拿起那把旧蒲扇","原来炭火要扇得很慢 才不会起黑烟"]},
+      {who:"阿杰",lines:["三点五十九分 天还是蓝的","四点一到 雨就落下来 把十二块花砖洗亮","我走到那张红凳前 掏出一包没拆的纸巾","歪歪地 放在你坐过十二次的那半边"]},
+      {who:"两人合唱",cls:"all",lines:["Chope! Chope! 一包纸巾放上去","（阿姨轻声）One bet one, look who learned lah","这次不数十五分钟 也不数半年","哪天你飞回来 这半边还算你的"]},
+      {who:"阿姨",cls:"aunty",lines:["（阿姨笑）Eh boy, kopi-o kosong peng, on the house lah!"]},
+      {cue:"甘美兰铃声接进《Last Order》"}
+    ]
+  }
+};
+/* finale takes on Suno (generated 2026-11-25, two takes each) */
+const END_AUDIO={
+  stay:[["505cd6ea-138c-4db7-9ce6-f9d16105aafb","1:31"],["ad96551e-9744-45e9-b926-b599ae5a89ba","1:25"]],
+  go:[["7cde1117-0ce4-4703-b74d-2c1dfa68569b","1:18"],["f7eac4ff-0040-425c-809b-7dea027ca736","1:24"]],
+  last:[["4de49edd-9848-4a4b-853d-2462d65ce739","1:40"],["f93bf5cf-e027-4b0d-a5fd-b68923e63fe8","1:42"]]
+};
+function listenRow(takes,name){
+  return `<div class="listen-row">${listenLinks(takes,name)}</div>`;
+}
+const bs=document.getElementById("end-stay"),
+      bg=document.getElementById("end-go"),
+      ew=document.getElementById("end-wrap");
+function end(k){
+  bs.setAttribute("aria-pressed",k==="stay");
+  bg.setAttribute("aria-pressed",k==="go");
+  const d=ENDS[k];
+  ew.hidden=false;
+  ew.innerHTML=`
+    <div class="end-card">
+      <div class="mini-stool" aria-hidden="true">${makeStool("e")}</div>
+      <div>
+        <div class="ec-kicker">${tx(d.kicker[0],d.kicker[1])}</div>
+        <p class="ec-prose">${tx(d.prose[0],d.prose[1])}</p>
+        <p class="ec-note">${tx(d.note[0],d.note[1])}</p>
+      </div>
+    </div>
+    <div class="end-song">
+      <div class="end-song-head">
+        <b>${tx(d.songTitle[0],d.songTitle[1])}<em>${d.songSub}</em></b>
+        <span>${tx(d.songMeta[0],d.songMeta[1])}</span>
+      </div>
+      ${listenRow(END_AUDIO[k],d.songSub)}
+      <div class="libretto" style="margin-top:0;margin-bottom:14px">${renderLyrics(d.lyrics)}</div>
+      <details class="end-curtain">
+        <summary>
+          <span>${tx("14 · 收摊之前 · Last Order（全员谢幕大合唱）","14 · Last Order (Full-company curtain call)")}</span>
+          <span class="ly-hint">${tx("十二档厨房打击乐齐奏 · 126 BPM","12-stall percussion · 126 BPM")}</span>
+        </summary>
+        <div style="margin-top:10px">${listenRow(END_AUDIO.last,"Last Order")}</div>
+        <div class="libretto">${renderLyrics(LAST_ORDER_LYRICS)}</div>
+      </details>
+    </div>`;
+  try{localStorage.setItem("nc-end",k);}catch(e){}
+}
+bs.onclick=()=>end("stay");
+bg.onclick=()=>end("go");
+try{const e=localStorage.getItem("nc-end"); if(e in ENDS) end(e);}catch(e){}
+
+function setLang(l){
+  document.documentElement.dataset.lang=l==="en"?"en":"zh";
+  document.documentElement.lang=l==="en"?"en":"zh-Hans";
+  document.title=l==="en"?"Newton Circus · Twelve Fridays":"Newton Circus · 十二个星期五";
+  try{localStorage.setItem("nc-lang",document.documentElement.dataset.lang);}catch(e){}
+  document.getElementById("lang-zh").setAttribute("aria-pressed",l==="zh"?"true":"false");
+  document.getElementById("lang-en").setAttribute("aria-pressed",l==="en"?"true":"false");
+  document.getElementById("floor").setAttribute("aria-label",tx("十二个星期五，点一块花砖切换月份","Twelve Fridays. Choose a tile to change the month."));
+  syncModeLabel();
+  pick(current);
+  try{const saved=localStorage.getItem("nc-end"); if(saved in ENDS) end(saved);}catch(e){}
+}
+document.getElementById("lang-zh").onclick=()=>setLang("zh");
+document.getElementById("lang-en").onclick=()=>setLang("en");
+setLang(document.documentElement.dataset.lang==="en"?"en":"zh");
+
+/* Copy prompt */
+document.getElementById("copy").onclick=async e=>{
+  const t=document.getElementById("prompt").textContent;
+  try{await navigator.clipboard.writeText(t); e.target.textContent=tx("已复制","Copied");}
+  catch(_){
+    const r=document.createRange();r.selectNodeContents(document.getElementById("prompt"));
+    const s=getSelection();s.removeAllRanges();s.addRange(r);e.target.textContent=tx("已选中，按复制键","Selected — press copy");
+  }
+};
+</script>
+
+</body>
+</html>
