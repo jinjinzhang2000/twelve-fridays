@@ -438,7 +438,7 @@ html[data-lang="en"] .pl-meta b{font-family:var(--en);font-weight:400}
 .pl-seek::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--stool);border:0}
 .pl-seek:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .pl-lyrics{
-  list-style:none;margin:0;padding:18px 16px 22px;max-height:232px;overflow-y:auto;position:relative;
+  list-style:none;margin:0;padding:18px 16px 22px;max-height:300px;overflow-y:auto;position:relative;
   border-top:1px dashed var(--rule);overscroll-behavior:contain;scrollbar-width:thin;
   -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 18px,#000 calc(100% - 26px),transparent 100%);
           mask-image:linear-gradient(to bottom,transparent 0,#000 18px,#000 calc(100% - 26px),transparent 100%);
@@ -446,14 +446,17 @@ html[data-lang="en"] .pl-meta b{font-family:var(--en);font-weight:400}
 .pl-lyrics li{font-size:15px;line-height:1.6;padding:4px 10px;margin:0 -10px;border-left:2px solid transparent;color:var(--ink-2);cursor:pointer;border-radius:0 2px 2px 0;transition:color .25s,border-color .25s,background-color .25s}
 .pl-lyrics li:hover{color:var(--ink)}
 .pl-lyrics li.on{color:var(--ink);border-left-color:var(--stool);background:var(--plaster-2)}
-.pl-lyrics li.est::after{content:"≈";font-family:var(--mono);font-size:11px;color:var(--ink-2);opacity:.7;margin-left:8px}
+.pl-orig,.pl-gl{display:block}
+.pl-gl{font-size:12.5px;line-height:1.5;margin-top:1px;opacity:.72}
+.pl-lyrics li.on .pl-gl{opacity:.85;color:var(--ink-2)}
+html[data-lang="en"] .pl-gl{font-style:italic}
+.pl-lyrics li.cue{font-family:var(--mono);font-size:11.5px;line-height:1.6;letter-spacing:.02em;border-left-style:dashed}
 .pl-lyrics li.pl-who{cursor:default;background:none;border-left-color:transparent;font-family:var(--zh);font-size:12px;font-weight:600;letter-spacing:.05em;line-height:1.4;color:var(--stool);padding-top:10px;padding-bottom:0}
 .pl-lyrics li.pl-who:first-child{padding-top:2px}
 .pl-lyrics li.pl-who.aunty{color:var(--cobalt)}
 .pl-lyrics li.pl-who.uncle{color:var(--mustard)}
 .pl-lyrics li.pl-who.all{color:var(--celadon)}
-.pl-note{padding:0 16px 12px;font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--ink-2)}
-@media (max-width:640px){.pl-lyrics{max-height:200px}.pl-lyrics li{font-size:14.5px}}
+@media (max-width:640px){.pl-lyrics{max-height:260px}.pl-lyrics li{font-size:14.5px}}
 
 .month h3,.lyrics summary{font-family:var(--zh);font-weight:600;font-size:15px;letter-spacing:.1em;margin:22px 0 8px}
 .month .prose{margin-top:12px}
@@ -1063,8 +1066,8 @@ const MONTHS=[
   c:["cobalt","celadon","coral"],n:4,act:"上半场 · Act I",
   tags:["印尼情歌 · 钢琴与尼龙吉他","塑料袋冰块声","76 BPM"],
   score:8,
-  note:"冰咖啡装在透明塑料袋里，用红橡皮筋扎口，插一根吸管。咖啡是深褐色，炼乳在里面拉出一条浅色。袋子一晃，冰块就响，袋外全是水珠。苦味收得干净，甜味只在那一条奶里。笔记本的纸角被雨打湿了。明天四点，我不带伞。",
-  noteEn:"The iced coffee is in a clear plastic bag, tied with a red rubber band, with one straw. The coffee is dark brown, and the evaporated milk makes a pale streak through it. Shake the bag and the ice rattles. The outside of the bag is covered in water. The bitterness finishes cleanly. The sweetness is only in that streak of milk. Rain wet the corner of my notebook. Tomorrow at four, I will not bring an umbrella.",
+  note:"冰咖啡装在透明塑料袋里，用红橡皮筋扎口，插一根吸管。咖啡是深褐色，炼乳在里面拉出一条浅色。袋子一晃，冰块就响，袋外全是水珠。第一口是苦的，吸到炼乳那一条才甜。笔记本的纸角被雨打湿了。明天四点，我不带伞。",
+  noteEn:"The iced coffee is in a clear plastic bag, tied with a red rubber band, with one straw. The coffee is dark brown, and the evaporated milk makes a pale streak through it. Shake the bag and the ice rattles. The outside of the bag is covered in water. The first sip is bitter. It only turns sweet when the straw reaches the milk. Rain wet the corner of my notebook. Tomorrow at four, I will not bring an umbrella.",
   scene:[
     "季风转换的那几个星期，雨常常下午四点来，来得快，去得也快。三点五十九分，天还是蓝的。四点整，雨下来了，一秒不差。阿夏站在车站，没带伞。手里那袋冰咖啡还是老样子，扎着口，插着吸管，晃来晃去。",
     "阿杰说，这里的雨比地铁准时，也比老板准时。他的伞还有一半空着，叫她站进来。他又说咖啡要「拉」：两只壶拉开距离来倒，才会起泡，喝起来才滑。她想，人和人也是这样，隔开一点距离反而好。雨停之前，两个人都没再说话，只听见袋子里的冰块响。她说，明天也不带伞。这首歌很慢，钢琴和吉他和着雨声。"
@@ -1322,8 +1325,8 @@ const MONTH_AUDIO=[
  [["00197909-d10f-45c1-b187-2f6984d253cd","3:17"],["b30d118d-9057-4dda-81d0-256172f09e5d","3:20"]]
 ];
 /* Self-hosted takes with line-synced lyrics (Suno aligned_lyrics, read 2026-11-26).
-   Each line: [start s, end s, sung text, singer when it changes]. Lines with a "~" start time are estimates:
-   Suno could not align them because that take was generated from mis-encoded Chinese. */
+   Each line: [start s, end s, sung text, singer when it changes]. The Sentosa take was generated from
+   mis-encoded Chinese, so its Chinese passages are sung as gibberish; "〔…〕" lines stand in for them. */
 const TRACKS={
  2:{src:"audio/03-can-or-not.mp3",suno:"775795cb-ae1c-40c8-bf1f-4c7851899a0b",take:"v4b",lines:[
   [17.47,20.28,"Come come come, place your bets!","阿姨"],
@@ -1390,11 +1393,8 @@ const TRACKS={
   [40.10,43.15,"Mari menari, mari menari","众人"],
   [43.22,46.02,"Come and dance, come and dance"],
   [46.47,50.79,"The sand is hot and the sea is blue"],
-  ["~50.9",54.5,"Sentosa, Sentosa, 一天刚刚好"],
-  ["~56",61,"你说这里像天堂","阿杰"],
-  ["~63",68,"我从小来 来了一百次"],
-  ["~70",75,"同一片海 同一座桥"],
-  ["~77",82,"这个岛 骑车一天就绕完"],
+  [50.90,54.50,"Sentosa, Sentosa, ……"],
+  [55.00,83.50,"〔主歌乱码〕","阿杰"],
   [84.20,91.72,"You go round the map, I go round the days","阿夏"],
   [91.86,97.46,"Every day there’s something new to eat"],
   [99.25,104.78,"Look at that aunty singing in the sea"],
@@ -1402,14 +1402,11 @@ const TRACKS={
   [114.26,117.22,"Mari menari, mari menari","众人"],
   [117.39,120.23,"Come and dance, come and dance"],
   [120.61,123.92,"The sand is hot and the sea is blue"],
-  [124.10,129.71,"Sentosa, Sentosa, 一天刚刚好"],
-  ["~131",136,"有时候我站在海边","阿杰"],
-  ["~138",143,"看那些船 一艘一艘开出去"],
-  ["~145",150,"我想知道 它们去的地方"],
-  ["~152",157,"有没有冬天"],
+  [124.10,129.71,"Sentosa, Sentosa, ……"],
+  [130.00,158.50,"〔桥段乱码〕","阿杰"],
   [159.83,162.80,"Mari menari, mari menari","众人"],
   [162.96,165.91,"Come and dance, come and dance"],
-  [166.51,169.44,"Boats sail out, 我们留下"],
+  [166.51,169.44,"Boats sail out, ……"],
   [169.44,173.33,"Sentosa, Sentosa, see you next year"],
   [174.95,176.75,"Terima kasih, laut"],
   [179.09,180.71,"See you next year"],
@@ -1442,6 +1439,100 @@ const TRACKS={
   [132.02,134.80,"Let me think","阿夏"]
  ]}
 };
+/* Player glosses: sung line → [中文, English]. null = the line is already in that language.
+   When both are given (mixed, Cantonese or Malay lines) the gloss follows the page language. */
+const TRACK_GLOSS={
+ "Come come come, place your bets!":["来来来，下注了！",null],
+ "This year got one mystery person, secretly come give marks":["今年来了个神秘人，偷偷来打分",null],
+ "Eat one stall, write one line":["吃一档，写一行",null],
+ "好也好 坏也好 we all must know":["好也好，坏也好，我们都要知道","Good or bad, we all must know"],
+ "Can or not? Can or not?":["行不行？成不成？",null],
+ "猜中有钱拿 猜错请喝茶":[null,"Guess right, you collect; guess wrong, you buy the tea"],
+ "One bet two! One bet four! One bet nine!":["一赔二！一赔四！一赔九！",null],
+ "Number one, that tourist with the big camera":["一号，背大相机的游客",null],
+ "Take everything, eat nothing, 一赔二":["什么都拍，什么都不吃，一赔二","Shoots everything, eats nothing, two to one"],
+ "Number two, Mr Lim, come every day":["二号，林先生，天天来",null],
+ "Eat also must read newspaper, 一赔四":["吃饭也要看报纸，一赔四","Reads the paper even while he eats, four to one"],
+ "Number three, that girl from far far away":["三号，从很远很远来的那个女生",null],
+ "一包纸巾占座 one person eat three plates":["一包纸巾占座，一个人吃三盘","Saves a seat with tissues, eats three plates alone"],
+ "Don’t look like one leh, 一赔九":["看起来不像啊，一赔九","Doesn’t look like one, nine to one"],
+ "Me? I’m just very hungry!":["我？我只是很饿！",null],
+ "面团甩一圈 甩两圈 甩上天":[null,"Swing the dough once, twice, up to the sky"],
+ "Answer still not landed, nobody say anything":["答案还没落地，谁都别出声",null],
+ "啪! Land on the griddle":["啪！落到铁板上","Slap! Down onto the hot griddle"],
+ "啪! Flip over again":["啪！再翻一面","Slap! Flip it over once more"],
+ "Can or not? Can lah!":["行不行？行啦！",null],
+ "Can or not? Cannot lah!":["行不行？不行啦！",null],
+ "One bet nine! One bet nine!":["一赔九！一赔九！",null],
+
+ "三点五十九分 天还很蓝":[null,"At 3:59 the sky is still blue"],
+ "四点整 雨就落下来 一秒都不差":[null,"Four on the dot the rain comes down, not a second late"],
+ "我站在巴士站 没有带伞":[null,"I’m at the bus stop without an umbrella"],
+ "冰咖啡在袋子里 慢慢地晃":[null,"The iced coffee swings slowly in its bag"],
+ "新加坡的雨 是全世界最准时的":[null,"Singapore rain is the most punctual in the world"],
+ "比地铁准 比老板准":[null,"More punctual than the MRT, more punctual than a boss"],
+ "我有一把伞 还空着一半":[null,"I have an umbrella, and half of it is free"],
+ "你要不要 站进来一点":[null,"Do you want to step in a little?"],
+ "Four o’clock rain 四点的雨":["四点的雨，四点钟的雨","Four o’clock rain, the rain at four"],
+ "来得很急 走得也急":[null,"It comes in a rush and leaves in a rush"],
+ "Four o’clock rain 半把伞的距离":["四点的雨，半把伞的距离","Four o’clock rain, half an umbrella apart"],
+ "刚好 听见你在笑":[null,"Close enough to hear you laugh"],
+ "你说咖啡要拉 拉得高高的":[null,"You say coffee has to be pulled, poured from up high"],
+ "从一个壶 倒进另一个壶":[null,"From one pot into the other"],
+ "才会起泡 才会变得滑":[null,"That’s how it foams, that’s how it turns smooth"],
+ "我想 有些人也是这样":[null,"I think some people are like that too"],
+ "雨停之前 我们都不说话":[null,"Until the rain stops, neither of us speaks"],
+ "只听冰块 在袋子里 叮当 叮当":[null,"Only the ice in the bag, clink, clink"],
+ "Four o’clock rain 明天还会来":["四点的雨，明天还会来","Four o’clock rain, it will come again tomorrow"],
+ "四点整 一秒都不差":[null,"Four on the dot, not a second late"],
+ "Four o’clock rain 我明天 不带伞":["四点的雨，我明天不带伞","Four o’clock rain — tomorrow I won’t bring an umbrella"],
+
+ "It’s July, school’s out, the whole island is on holiday":["七月放暑假，整座岛都在度假",null],
+ "Take a ride, cross the bridge":["坐上车，过了桥",null],
+ "And there’s the beach":["海滩就在眼前",null],
+ "Nasi lemak wrapped in a leaf, one for each of us":["叶子包的椰浆饭，一人一包",null],
+ "Mari menari, mari menari":["马来语：来跳舞吧，来跳舞吧","Malay: come and dance, come and dance"],
+ "Come and dance, come and dance":["来跳舞吧，来跳舞吧",null],
+ "The sand is hot and the sea is blue":["沙子烫脚，海是蓝的",null],
+ "Sentosa, Sentosa, ……":["后半句唱成了乱码，原词是「一天刚刚好」","The rest is sung as gibberish. The written words: “a day is just right”"],
+ "You go round the map, I go round the days":["你绕着地图走，我绕着日子走",null],
+ "Every day there’s something new to eat":["每天都有新的东西吃",null],
+ "Look at that aunty singing in the sea":["看那个在海里唱歌的阿姨",null],
+ "And the otters are on holiday too":["水獭也在放假",null],
+ "Boats sail out, ……":["船开出去了，后半句是乱码，原词是「我们留下」","Boats sail out — the rest is gibberish. The written words: “we stay”"],
+ "Sentosa, Sentosa, see you next year":["圣淘沙，圣淘沙，明年见",null],
+ "Terima kasih, laut":["马来语：谢谢你，大海","Malay: thank you, sea"],
+ "See you next year":["明年见",null],
+ "〔主歌乱码〕":["这段主歌 Suno 唱成了乱码。原词：你说这里像天堂／我从小来，来了一百次／同一片海，同一座桥／这个岛骑车一天就绕完","Suno sang this verse as gibberish. The written words: You say this place is paradise / I’ve come here since I was small, a hundred times / The same sea, the same bridge / You can cycle round this island in a day"],
+ "〔桥段乱码〕":["这段桥段 Suno 唱成了乱码。原词：有时候我站在海边／看那些船一艘一艘开出去／我想知道它们去的地方／有没有冬天","Suno sang this bridge as gibberish. The written words: Sometimes I stand by the sea / Watching the boats go out one by one / I want to know if the places they go / Have winter"],
+
+ "中秋晚上 燈籠掛滿晒":["中秋夜里，灯笼挂满了","Mid-Autumn night, lanterns hung everywhere"],
+ "兔仔 楊桃 仲有一盞係飛機":["兔子、杨桃，还有一盏是飞机","Rabbits, starfruit, and one shaped like a plane"],
+ "我提住佢 行到你枱前":["我提着它，走到你桌前","I carry it over to your table"],
+ "豆腐花 我請你":["豆花，我请你","The tau huay is on me"],
+ "我有件事 好難開口":["我有件事，很难开口","There’s something I find hard to say"],
+ "好似豆腐花 一郁就散":["像豆花一样，一碰就散","Like tau huay, it falls apart if you touch it"],
+ "嗰檔沙嗲 係我爸爸嘅":["那档沙爹，是我爸爸的","That satay stall is my father’s"],
+ "你可唔可以 畀佢一個唔好嘅評價":["你可不可以，给它一个不好的评价","Could you give it a bad review?"],
+ "唔好畀佢燈籠 唔好畀佢燈籠":["别给它灯笼，别给它灯笼","Don’t give it a lantern, don’t give it a lantern"],
+ "一盞燈籠掛上去 日日有人排隊":["一盏灯笼挂上去，天天有人排队","Hang one lantern up and there’s a queue every day"],
+ "排隊嘅人多咗 檔口就閂唔到":["排队的人多了，档口就关不了","More people queue, and the stall can never close"],
+ "檔口閂唔到 我就走唔到":["档口关不了，我就走不了","If the stall can’t close, I can’t leave"],
+ "You know I can’t lie":["你知道我不能撒谎",null],
+ "That’s the best satay I’ve ever had":["那是我吃过最好的沙爹",null],
+ "You’re asking me to write it’s not good":["你要我写它不好吃",null],
+ "It’s like asking me to write that tonight’s moon isn’t round enough":["就像要我写，今晚的月亮不够圆",null],
+ "豆腐花好滑 説話好難講":["豆花很滑，话很难讲","The tau huay is smooth; the words are hard to say"],
+ "The moon is round, and we’re both thinking":["月亮很圆，我们都在想",null],
+ "各自嘅遠方":["各自的远方","of our own faraway places"],
+ "Let me think":["让我想想",null]
+};
+function trackGloss(text){
+  const g=TRACK_GLOSS[text];
+  if(!g) return "";
+  if(g[0]&&g[1]) return en()?g[1]:g[0];
+  return g[0]||g[1];
+}
 const WHO_CLS={"阿姨":"aunty","阿姨与食客":"aunty","四位阿姨":"aunty","陈伯":"uncle","众人":"all","两人合唱":"all","两人对唱":"all","轻声对唱":"all"};
 
 function listenLinks(takes,name){
@@ -2124,18 +2215,18 @@ const audio=new Audio();
 audio.preload="none";
 let audioMonth=-1, userScrollAt=0;
 const TRACK_DUR={2:140,3:200,6:190.8,8:167.6};
-function lineStart(l){return typeof l[0]==="string"?parseFloat(l[0].slice(1)):l[0];}
+function lineStart(l){return l[0];}
 function fmt(s){s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0");}
 
 function playerHtml(i){
   const t=TRACKS[i];
   if(!t) return "";
   const m=MONTHS[i];
-  let est=false;
   const items=t.lines.map((l,k)=>{
     const who=l[3]?`<li class="pl-who ${WHO_CLS[l[3]]||""}" aria-hidden="true">${tx(l[3],WHO_EN[l[3]]||l[3])}</li>`:"";
-    const isEst=typeof l[0]==="string"; if(isEst) est=true;
-    return who+`<li data-k="${k}" class="${isEst?"est":""}" tabindex="-1">${l[2]}</li>`;
+    const gl=trackGloss(l[2]);
+    if(l[2].startsWith("〔")) return who+`<li data-k="${k}" class="cue">${gl}</li>`;
+    return who+`<li data-k="${k}"><span class="pl-orig">${l[2]}</span>${gl?`<span class="pl-gl">${gl}</span>`:""}</li>`;
   }).join("");
   return `<div class="player" id="player">
     <div class="pl-bar">
@@ -2144,7 +2235,6 @@ function playerHtml(i){
       <input class="pl-seek" type="range" min="0" max="${TRACK_DUR[i]}" step="0.1" value="0" aria-label="${tx("播放进度","Seek")}">
     </div>
     <ol class="pl-lyrics" aria-label="${tx("同步歌词（点一句跳到那里）","Synced lyrics (click a line to jump)")}">${items}</ol>
-    ${est?`<div class="pl-note">${tx("≈ 这几句的时间是估算的","≈ timing for these lines is approximate")}</div>`:""}
   </div>`;
 }
 
