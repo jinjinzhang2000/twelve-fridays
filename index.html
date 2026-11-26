@@ -590,6 +590,22 @@ h2{font-family:var(--zh);font-weight:600;font-size:22px;letter-spacing:.12em;mar
 .m-play.playing .ia{display:block}
 .menu-foot .foot-play{display:inline-flex;align-items:center;gap:8px}
 .menu-foot .m-play{width:24px;height:24px}
+/* stall list: lyrics panel opened by ▶ (synced) or ≡ (text only, audio not ready) */
+.menu-item{flex-wrap:wrap}
+.m-play .il{width:10px;height:1.5px;background:currentColor;box-shadow:0 -3.5px 0 currentColor,0 3.5px 0 currentColor}
+.m-ly{border-style:dashed}
+.m-ly:hover,.m-ly[aria-expanded="true"]{background:var(--stool);color:#fff;border-style:solid}
+.m-panel{flex-basis:100%;min-width:0;padding:2px 0 12px}
+.m-panel .player{margin:0;max-width:none}
+.m-panel .pl-lyrics{max-height:250px}
+.m-static{background:var(--paper);border:1px solid var(--rule);border-left:3px solid var(--acc);border-radius:3px;padding:12px 16px;max-height:320px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.m-soon{margin:0 0 4px;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink-2)}
+.m-panel .lib-block{grid-template-columns:1fr;gap:2px;margin:10px 0}
+.m-panel .lib-row{grid-template-columns:1fr;gap:1px}
+.m-panel .lib-lines{font-size:14.5px;line-height:1.7}
+.m-close{all:unset;box-sizing:border-box;display:block;margin:6px 0 0 auto;min-height:32px;padding:6px 4px;cursor:pointer;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink-2)}
+.m-close:hover{color:var(--stool);text-decoration:underline}
+.m-close:focus-visible,.m-ly:focus-visible{outline:2px solid var(--cobalt);outline-offset:2px}
 @media (max-width:640px){
   .menu-item{gap:4px}
   .menu-item .menu-btn{grid-template-columns:3.2em max-content minmax(6px,1fr) minmax(0,auto);gap:2px 6px;padding:7px 2px}
@@ -901,7 +917,7 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
 
       <div>
         <h2><span class="zh">十二个档口</span><span class="en">Twelve stalls</span></h2>
-        <p class="h2en"><span class="zh">按月份排的曲目 · 点一首就跳到那个星期五</span><span class="en">The year’s menu · select any stall to visit that Friday</span></p>
+        <p class="h2en"><span class="zh">按月份排的曲目 · 点 ▶ 听歌看词，点店名跳到那个星期五</span><span class="en">The year’s menu · ▶ plays with lyrics; select a stall to visit that Friday</span></p>
         <div class="menu-board" id="menu-board"></div>
       </div>
     </div>
@@ -2518,7 +2534,8 @@ function lineStart(l){return l[0];}
 function fmt(s){s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0");}
 const END_TITLES={stay:["留下","Stay"],go:["回去","Go Home"],last:["收摊之前","Last Order"]};
 function trackTitle(key){return END_TITLES[key]?END_TITLES[key][1]:MONTHS[key].song;}
-function playerEl(key){return document.querySelector(`.player[data-key="${key}"]`);}
+/* The same song can have two players on the page (month scene + stall list); keep them all in step. */
+function playerEls(key){return document.querySelectorAll(`.player[data-key="${key}"]`);}
 
 function playerHtml(key){
   const t=TRACKS[key];
@@ -2540,13 +2557,13 @@ function playerHtml(key){
 }
 
 function resetPlayerUI(key){
-  const p=playerEl(key);
-  if(!p) return;
+  playerEls(key).forEach(p=>{
   p.classList.remove("playing");
   p.querySelector(".pl-btn").setAttribute("aria-label",tx(`播放《${trackTitle(key)}》`,`Play “${trackTitle(key)}”`));
   p.querySelector(".pl-time").textContent=`0:00 / ${fmt(TRACK_DUR[key])}`;
   const seek=p.querySelector(".pl-seek"); seek.value=0; seek.style.setProperty("--p","0%");
   const on=p.querySelector("li.on"); if(on) on.classList.remove("on");
+  });
 }
 
 function loadTrack(key){
@@ -2564,8 +2581,9 @@ function loadTrack(key){
 
 function syncPlayer(){
   if(audioKey===null) return;
-  const p=playerEl(audioKey);
-  if(!p) return;
+  playerEls(audioKey).forEach(syncOne);
+}
+function syncOne(p){
   const t=audio.currentTime, d=audio.duration||TRACK_DUR[audioKey];
   p.classList.toggle("playing",!audio.paused);
   p.querySelector(".pl-btn").setAttribute("aria-label",audio.paused?tx(`播放《${trackTitle(audioKey)}》`,`Play “${trackTitle(audioKey)}”`):tx("暂停","Pause"));
@@ -2597,8 +2615,9 @@ function syncPlayer(){
    A song keeps playing when you move to another month; its ▶ in the stall list shows ❚❚. */
 function bindPlayer(key){
   key=String(key);
-  const p=playerEl(key);
-  if(!p) return;
+  playerEls(key).forEach(p=>{
+  if(p.dataset.bound) return;
+  p.dataset.bound="1";
   const box=p.querySelector(".pl-lyrics");
   p.querySelector(".pl-btn").onclick=()=>{
     loadTrack(key);
@@ -2620,6 +2639,7 @@ function bindPlayer(key){
     userScrollAt=0;
   };
   ["wheel","touchmove"].forEach(ev=>box.addEventListener(ev,()=>{userScrollAt=Date.now();},{passive:true}));
+  });
   if(audioKey===key) syncPlayer();
 }
 
@@ -2693,17 +2713,21 @@ function renderBoard(i){
 
 /* Recommended songs: April (Four O’Clock Rain), September (Lanterns), November (新谣) */
 const PICKS=[3,8,10];
-function renderMenuBoard(){
+let menuOpen=null;   // month index (string) whose lyrics panel is open in the stall list
+function renderMenuBoard(reveal){
   if(!menuEl) return;
   const renderAct=(slice,offset,title)=>{
     const items=slice.map((m,idx)=>{
       const k=offset+idx;
       const d=tx(m.dish,m.dishEn);
+      const open=menuOpen===String(k);
+      const aria=`aria-expanded="${open}" aria-controls="mly-${k}"`;
       const play=TRACKS[k]
-        ? `<button type="button" class="m-play" data-play="${k}" aria-label="${tx(`播放《${m.song}》`,`Play “${m.song}”`)}"><span class="ip"></span><span class="ia"></span></button>`
-        : `<span class="m-play none" aria-hidden="true"></span>`;
+        ? `<button type="button" class="m-play" data-play="${k}" ${aria} aria-label="${tx(`播放《${m.song}》`,`Play “${m.song}”`)}"><span class="ip"></span><span class="ia"></span></button>`
+        : `<button type="button" class="m-play m-ly" data-ly="${k}" ${aria} aria-label="${tx(`看《${m.song}》歌词（音频即将上线）`,`Lyrics for “${m.song}” (audio coming soon)`)}"><span class="il"></span></button>`;
       const pick=PICKS.includes(k)?`<span class="m-pick">${tx("推荐","Pick")}</span>`:"";
-      return `<li class="menu-item"><button type="button" class="menu-btn${k===current?" active":""}" data-jump="${k}"><span class="m-no">${m.no}</span><span class="m-dish">${d}</span><span class="m-dots" aria-hidden="true"></span><span class="m-song">${pick}${m.song}</span></button>${play}</li>`;
+      const panel=open?`<div class="m-panel" id="mly-${k}">${TRACKS[k]?playerHtml(k):`<div class="m-static"><p class="m-soon">${tx("音频即将上线 · 先看歌词","Audio coming soon · lyrics for now")}</p>${renderLyrics(m.lyrics)}</div>`}<button type="button" class="m-close" data-close="${k}">${tx("收起歌词","Hide lyrics")}</button></div>`:"";
+      return `<li class="menu-item${open?" open":""}"><button type="button" class="menu-btn${k===current?" active":""}" data-jump="${k}"><span class="m-no">${m.no}</span><span class="m-dish">${d}</span><span class="m-dots" aria-hidden="true"></span><span class="m-song">${pick}${m.song}</span></button>${play}${panel}</li>`;
     }).join("");
     return `<div class="menu-act"><h3>${title}</h3><ul class="menu-list">${items}</ul></div>`;
   };
@@ -2722,6 +2746,13 @@ function renderMenuBoard(){
   menuEl.querySelectorAll(".m-play[data-play]").forEach(btn=>{
     btn.addEventListener("click",()=>{
       const key=btn.dataset.play;
+      /* A stall's ▶ opens its synced lyrics under the row and starts the song (one panel at a time). */
+      if(TRACKS[key] && !END_TITLES[key] && menuOpen!==key){
+        menuOpen=key;
+        if(audioKey!==key || audio.paused){ loadTrack(key); audio.play().catch(()=>{}); }
+        renderMenuBoard(true);
+        return;
+      }
       if(audioKey===key){
         if(audio.paused) audio.play().catch(()=>{}); else audio.pause();
         return;
@@ -2730,6 +2761,29 @@ function renderMenuBoard(){
       audio.play().catch(()=>{});
     });
   });
+  menuEl.querySelectorAll(".m-ly").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      menuOpen=menuOpen===btn.dataset.ly?null:btn.dataset.ly;
+      renderMenuBoard(menuOpen!==null);
+    });
+  });
+  menuEl.querySelectorAll(".m-close").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const k=btn.dataset.close;
+      menuOpen=null;
+      renderMenuBoard();
+      const b=menuEl.querySelector(`[aria-controls="mly-${k}"]`);
+      if(b) b.focus({preventScroll:true});
+    });
+  });
+  if(menuOpen!==null && TRACKS[menuOpen]) bindPlayer(menuOpen);
+  if(reveal){
+    const panel=menuEl.querySelector(".m-panel");
+    if(panel){
+      const reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+      panel.scrollIntoView({block:"nearest",behavior:reduce?"auto":"smooth"});
+    }
+  }
   syncMenuPlay();
 }
 /* Menu ▶ buttons show ❚❚ for the song that is playing */
