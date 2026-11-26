@@ -467,6 +467,28 @@ html[data-lang="en"] .pl-meta b{font-family:var(--en);font-weight:400}
 .pl-seek::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--stool);margin-top:-4.5px;border:0}
 .pl-seek::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--stool);border:0}
 .pl-seek:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+/* volume: mute button + slider, to the right of the seek bar */
+.pl-bar{grid-template-columns:auto minmax(0,1fr) auto}
+.pl-meta{grid-column:2 / span 2}
+.pl-seek{grid-column:2;grid-row:2}
+.pl-vol{grid-column:3;grid-row:2;display:flex;align-items:center;gap:2px}
+.pl-mute{all:unset;box-sizing:border-box;width:32px;height:32px;display:grid;place-items:center;cursor:pointer;color:var(--ink-2);border-radius:50%}
+.pl-mute:hover{color:var(--stool)}
+.pl-mute:focus-visible{outline:2px solid var(--ink);outline-offset:1px}
+.pl-mute svg{width:18px;height:18px}
+.pl-mute .spk{fill:currentColor}
+.pl-mute .wave,.pl-mute .cross{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+.pl-mute .cross{display:none}
+.pl-mute.muted .wave{display:none}
+.pl-mute.muted .cross{display:block}
+.pl-volr{width:68px;margin:0;height:18px;background:transparent;cursor:pointer;-webkit-appearance:none;appearance:none;--p:100%}
+.pl-volr::-webkit-slider-runnable-track{height:3px;border-radius:2px;background:linear-gradient(to right,var(--ink-2) var(--p),var(--rule) var(--p))}
+.pl-volr::-moz-range-track{height:3px;border-radius:2px;background:linear-gradient(to right,var(--ink-2) var(--p),var(--rule) var(--p))}
+.pl-volr::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border-radius:50%;background:var(--ink-2);margin-top:-4px;border:0}
+.pl-volr::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:var(--ink-2);border:0}
+.pl-volr:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.no-vol .pl-volr{display:none}
+@media (max-width:640px){.pl-volr{width:54px}}
 .pl-lyrics{
   list-style:none;margin:0;padding:18px 16px 22px;max-height:300px;overflow-y:auto;position:relative;
   border-top:1px dashed var(--rule);overscroll-behavior:contain;scrollbar-width:thin;
@@ -588,7 +610,9 @@ h2{font-family:var(--zh);font-weight:600;font-size:22px;letter-spacing:.12em;mar
 .m-play .ia{display:none;width:8px;height:9px;border-left:3px solid currentColor;border-right:3px solid currentColor}
 .m-play.playing .ip{display:none}
 .m-play.playing .ia{display:block}
-.menu-foot .foot-play{display:inline-flex;align-items:center;gap:8px}
+.menu-foot .foot-play{display:inline-flex;align-items:center;flex-wrap:wrap;gap:6px 8px}
+.menu-foot .fp{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.m-static .listen-row{margin:6px 0 4px}
 .menu-foot .m-play{width:24px;height:24px}
 /* stall list: lyrics panel opened by ▶ (synced) or ≡ (text only, audio not ready) */
 .menu-item{flex-wrap:wrap}
@@ -625,7 +649,7 @@ h2{font-family:var(--zh);font-weight:600;font-size:22px;letter-spacing:.12em;mar
 .menu-btn .m-song{font-family:var(--en);font-size:15px;color:var(--stool);text-align:right;white-space:nowrap}
 .m-pick,.pick-tag{
   display:inline-block;font-family:var(--zh);font-weight:600;letter-spacing:.06em;
-  color:#fff;background:#3f7a6b;border-radius:2px;vertical-align:middle;
+  color:#fff;background:#af362c;border-radius:2px;vertical-align:middle;
 }
 .m-pick{font-size:10.5px;line-height:1;padding:3px 5px 2px;margin-right:6px;transform:translateY(-2px)}
 .pick-tag{font-size:11.5px;line-height:1;padding:4px 7px 3px;align-self:center}
@@ -858,6 +882,52 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
 }
 .tile:focus-visible,.ends button:focus-visible,.copy-btn:focus-visible,.mode-btn:focus-visible,.langs button:focus-visible,.mnav-btn:focus-visible,.bet-row:focus-visible,.menu-btn:focus-visible{outline:2px solid var(--cobalt);outline-offset:2px}
 @media (prefers-reduced-motion:reduce){.stool,.tile .dish,.cast .photo,.garland.swap,body{transition:none;animation:none}}
+
+.title-space{display:none}
+.floor-caption,.first-listen{display:flex;align-items:center;gap:10px}
+.floor-caption{justify-content:space-between;margin:8px 0 0;color:var(--ink-2);font-size:13px}
+#floor-caption{font-weight:600;color:var(--ink)}
+.tile .no{opacity:1;font:600 12px/1.2 var(--mono);transform:none;color:#603e31}
+.tile.on .no{color:#a32823}
+.first-listen{background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--rule);padding:6px 0;min-height:44px;margin:4px 0 0;font:inherit;font-size:14px;cursor:pointer}
+.first-listen strong{font:400 19px var(--en)}
+.listen-icon{display:grid;place-items:center;border:1px solid currentColor;border-radius:50%;width:28px;height:28px;color:var(--stool);font-size:11px}
+.first-listen:hover .listen-icon{background:var(--stool);color:var(--plaster)}
+.cast p strong{display:block;color:var(--ink);font-weight:600}
+@media(min-width:861px){.cast{grid-template-columns:1fr 1fr .93fr 1.07fr;column-gap:14px}.cast>div:nth-child(3){padding-left:18px}}
+.keyart{margin-bottom:26px}
+.ending-page{max-width:600px;box-sizing:border-box;margin:0 auto;padding:26px 18px 16px;text-align:center;border-block:1px solid var(--rule);background:repeating-linear-gradient(transparent 0 31px,var(--rule) 32px)}
+.ending-page .h2en{margin-bottom:12px}
+.ending-page .ends{grid-template-columns:1fr 1fr;gap:0}
+.ending-page .ends button{position:relative;border:0;text-align:center;padding:10px 4px}
+.ending-page .ends button b span{font:inherit;color:var(--ink)}
+#ending .ends button[aria-pressed="true"]{background:transparent;box-shadow:none;color:var(--ink)}
+#ending .ends button[aria-pressed="true"] span{color:var(--ink);opacity:1}
+.ending-page .ends button[aria-pressed="true"]::after{content:"";position:absolute;inset:3% 10%;border:2px solid var(--stool);border-radius:49% 53% 45% 51%;transform:rotate(-4deg);pointer-events:none}
+@media(max-width:860px){
+  .hero{gap:12px}
+  .hero>div:first-child{display:contents}
+  .hero .kicker,.hero h1,.hero .zhname,.hero .lede{grid-column:1;margin-block:0}
+  .hero .floor-box{grid-column:1;grid-row:5}
+  .hero .meta{grid-column:1;grid-row:6}
+  .hero .lede{max-width:32em}
+}
+@media(max-width:720px){
+  .garland-wrap{height:52px;min-height:0}
+  .garland{height:52px;width:100%;margin:0;transform:none}
+  .hero{gap:8px}
+  .hero h1 br{display:none}
+  .hero .title-space{display:inline}
+  .hero h1{font-size:clamp(38px,10vw,62px);line-height:1.07}
+  .hero .zhname{font-size:21px}
+  .hero .lede{line-height:1.65;margin-bottom:4px}
+  .month-detail,.month-detail .blocks{display:contents}
+  .month-detail .head{grid-row:1}
+  .month-detail .player{grid-row:2}
+  .ledger-col{grid-row:2}
+  .month-grid:has(.month-detail .player) .ledger-col{grid-row:3}
+  .tile .no{font-size:11px}
+}
 </style>
 </head>
 <body>
@@ -886,19 +956,19 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
   <div class="hero">
     <div>
       <div class="kicker"><span class="zh">Singapore · 一座小贩中心 · 一个座位</span><span class="en">Singapore · one hawker centre · one seat</span></div>
-      <h1>Newt<span class="o">o</span>n<br>Circus</h1>
+      <h1>Newt<span class="o">o</span>n<span class="title-space"> </span><br>Circus</h1>
       <p class="zhname"><span class="zh">十二个星期五</span><span class="en">Twelve Fridays</span></p>
-      <p class="lede"><span class="zh">阿夏来新加坡当一年美食评审，身份不能让人知道。每个月她挑一个星期五去 Newton 小贩中心，给一个摊打分，每次都用一包纸巾占同一张凳子。新加坡没有四季，分月份就看头顶挂的东西：过年挂红灯笼，斋月挂新月，国庆挂小旗，圣诞挂星星灯。</span><span class="en">Summer comes to Singapore for a year as a food critic, and no one is supposed to know who she is. Once a month, on a Friday, she returns to Newton Food Centre, reviews one stall, and keeps the same stool with a packet of tissues. Singapore has no spring or winter, so the year is marked by whatever is hung overhead.</span></p>
+      <p class="lede"><span class="zh">阿夏用一包纸巾占了座。等她端着甘蔗水回来，凳子上已经坐了一个人。</span><span class="en">Summer saves a seat with a packet of tissues. When she returns with her sugarcane juice, someone’s already sitting there.</span></p>
       <div class="meta"><span class="zh">原创音乐剧</span><span class="en">An original musical</span><span>华语 · English · Singlish</span><span class="zh">12 首歌 · 双结局</span><span class="en">12 songs · two endings</span></div>
     </div>
     <div class="floor-box">
       <div class="floor" id="floor" role="group" aria-label="十二个星期五，点一块花砖切换月份"></div>
       <div class="stool" id="stool" aria-hidden="true"></div>
-      <div class="hint">
-        <span class="zh">点一块花砖，红凳就挪到那个星期五，头顶的挂饰和这一幕都跟着换。</span>
-        <span class="en">Tap a tile. The red stool moves to that Friday, and the garland and the scene go with it.</span>
-        <span class="kbd"><span class="zh">← / → 翻月</span><span class="en">← / → change month</span></span>
+      <div class="floor-caption">
+        <span id="floor-caption" aria-live="polite"></span>
+        <span class="zh">点花砖换月</span><span class="en">Tap a tile to change month</span>
       </div>
+      <button class="first-listen" type="button" id="first-listen"><span class="listen-icon" aria-hidden="true">▶</span><span class="zh">先听一首</span><span class="en">Listen first</span><strong>Four O’Clock Rain</strong></button>
     </div>
   </div>
 
@@ -910,7 +980,7 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
         <h2><span class="zh">故事</span><span class="en">The story</span></h2>
         <p class="h2en"><span class="zh">一月到十二月</span><span class="en">January to December</span></p>
         <div class="story">
-          <p><span class="zh">一月，阿夏排完队回来，那张用纸巾占住的凳子上已经坐了阿杰。两人吵了一架，最后一人坐一半。阿杰家在这里卖沙爹，档主是他爸爸陈伯。阿姨们早听说今年有评审要来，在黑板上开了赌局：背大相机的游客一赔二，天天看报纸的林先生一赔四，从外地来、一个人吃三盘的阿夏一赔九。阿夏每次吃完，都在一本红笔记本上写几行。</span><span class="en">In January, Summer comes back from the queue to find Kelvin sitting on the stool she saved with her tissues. They argue, and end up sharing it. Kelvin’s family runs the satay stall here; his father, Uncle Tan, works the grill. The aunties have heard a critic is coming this year, and they open a book on the blackboard: the tourist with the big camera at two to one, Mr Lim with his newspaper at four to one, and Summer, from far away and eating three plates on her own, at nine to one. After every meal Summer writes a few lines in a red notebook.</span></p>
+          <p><span class="zh">阿夏来新加坡当一年秘密美食评审。每个月，她挑一个星期五回到 Newton，给一个档口打分。头顶的挂饰从红灯笼换成新月、小旗和星星灯，一年就这么过去。到这里的第一个星期五，阿夏排完队回来，那张用纸巾占住的凳子上已经坐了阿杰。两人吵了一架，最后一人坐一半。阿杰家在这里卖沙爹，档主是他爸爸陈伯。阿姨们早听说今年有评审要来，在黑板上开了赌局：背大相机的游客一赔二，天天看报纸的林先生一赔四，从外地来、一个人吃三盘的阿夏一赔九。阿夏每次吃完，都在一本红笔记本上写几行。</span><span class="en">Summer has a year in Singapore as an undercover food critic. One Friday each month she returns to Newton to review a stall. Overhead, red lanterns give way to crescents, flags and Christmas stars. On her first Friday, Summer comes back from the queue to find Kelvin sitting on the stool she saved with her tissues. They argue, and end up sharing it. Kelvin’s family runs the satay stall here; his father, Uncle Tan, works the grill. The aunties have heard a critic is coming this year, and they open a book on the blackboard: the tourist with the big camera at two to one, Mr Lim with his newspaper at four to one, and Summer, from far away and eating three plates on her own, at nine to one. After every meal Summer writes a few lines in a red notebook.</span></p>
           <p><span class="zh">六月，一家水獭冲进小贩中心，拖走了阿夏的包。红笔记本掉出来，赔率一赔九的那一注中了，大家这才知道她就是评审。九月中秋，阿杰提着灯笼请她吃豆花，求她给自家沙爹写一个差评。好评一出来，档口挂上推荐灯笼，队就会排起来，摊子关不掉，他也就走不成。</span><span class="en">In June a family of otters rushes into the hawker centre and drags off Summer’s bag. Her red notebook falls out. The long-shot bet, at one to nine, wins, and everyone sees that she is the critic. At the Mid-Autumn Festival, Kelvin brings her a lantern and a bowl of tau huay, and asks her to give the family satay a bad review. Once that review is public, the queue will start, the stall will be unable to close, and he will be unable to leave.</span></p>
             <p><span class="zh">十二月最后一个星期五，轮到沙爹摊。陈伯其实第一天就认出了她。今晚他故意把沙爹烤咸，好让儿子能去伦敦。父子俩都瞒着对方，都在为对方放手。</span><span class="en">On the last Friday in December, it is the satay stall’s turn. Uncle Tan recognised her on the first day. Tonight he salts the satay on purpose, so his son can go to London. Father and son each hide this from the other, and each is trying to let the other go.</span></p>
         </div>
@@ -932,13 +1002,13 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
         <div class="frame"><img class="photo" src="people/sketch-xia-v4.jpg?v=4" alt="背影：年轻女子一手拿纸巾包、一手拿薄笔记本和笔"></div>
         <span class="tag"><span class="zh">座位 · 纸巾与红本子</span><span class="en">The seat · tissues and a red notebook</span></span>
         <b><span class="zh">阿夏</span><span class="en">Summer</span><i>Summer</i></b>
-        <p><span class="zh">从外地来的美食评审，不能暴露身份。她想留在这里。</span><span class="en">A food critic from abroad. No one can know who she is. She wants to stay.</span></p>
+        <p><span class="zh"><strong>她想留在这里。</strong>从外地来的美食评审，不能暴露身份。</span><span class="en"><strong>She wants to stay.</strong> A food critic from abroad. No one can know who she is.</span></p>
       </div>
       <div>
         <div class="frame"><img class="photo" src="people/sketch-jie-v4.jpg?v=4" alt="背影：穿背心和拖鞋的年轻人拿着蒲扇，脚边一缕炭烟"></div>
         <span class="tag"><span class="zh">蒲扇 · 炭烟里的背影</span><span class="en">The fan · a back in the charcoal smoke</span></span>
         <b><span class="zh">阿杰</span><span class="en">Kelvin</span><i>Kelvin</i></b>
-        <p><span class="zh">沙爹摊老板的儿子。他想离开新加坡。</span><span class="en">The satay man’s son. He wants to leave Singapore.</span></p>
+        <p><span class="zh"><strong>他想离开新加坡。</strong>沙爹摊老板的儿子。</span><span class="en"><strong>He wants to leave Singapore.</strong> The satay man’s son.</span></p>
       </div>
       <div>
         <div class="frame"><img class="photo" src="people/sketch-uncle-v5.jpg" alt="背影：微驼的老人肩搭毛巾，站在一盆木炭旁"></div>
@@ -964,20 +1034,22 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
     </figure>
   </section>
 
-  <section class="keyart">
+  <section class="keyart" id="poster">
     <figure>
-      <img src="art/key-art.jpg" width="1024" height="1280" loading="lazy" decoding="async"
+      <img src="art/key-art-pencil.jpg" width="1024" height="1280" loading="lazy" decoding="async"
            alt="海报：雨后的 Newton 小贩中心，十二个档口招牌围成一圈，阿夏把一包纸巾放在红凳上，五只水獭从前面走过 / Key art: Newton after the rain, twelve stall signs in a ring, Summer setting a packet of tissues on the red stool while five otters walk past">
       <figcaption><span class="zh">海报 · 一包纸巾，一张红凳</span><span class="en">Key art · one packet of tissues, one red stool</span></figcaption>
     </figure>
   </section>
 
   <section id="ending">
+    <div class="ending-page">
     <h2><span class="zh">结局由你选</span><span class="en">You choose the ending</span></h2>
     <p class="h2en">Last order. Stay, or go?</p>
     <div class="ends">
       <button type="button" id="end-stay" aria-pressed="false"><b><span class="zh">留下</span><span class="en">Stay</span></b><span class="zh">Stay</span></button>
       <button type="button" id="end-go" aria-pressed="false"><b><span class="zh">回去</span><span class="en">Go home</span></b><span class="zh">Go home</span></button>
+    </div>
     </div>
     <div class="end-wrap" id="end-wrap" hidden></div>
   </section>
@@ -2552,6 +2624,10 @@ function playerHtml(key){
       <button type="button" class="pl-btn" aria-label="${tx(`播放《${name}》`,`Play “${name}”`)}"><span class="i-play"></span><span class="i-pause"></span></button>
       <div class="pl-meta"><b>${tx("整首试听 · 歌词同步","Full song · synced lyrics")}</b><span class="pl-time">0:00 / ${fmt(TRACK_DUR[key])}</span></div>
       <input class="pl-seek" type="range" min="0" max="${TRACK_DUR[key]}" step="0.1" value="0" aria-label="${tx("播放进度","Seek")}">
+      <div class="pl-vol">
+        <button type="button" class="pl-mute" aria-pressed="false" aria-label="${tx("静音","Mute")}"><svg viewBox="0 0 20 20" aria-hidden="true"><path class="spk" d="M3 7.5h3l4-3.5v12l-4-3.5H3z"/><path class="wave" d="M13 7.2a3.6 3.6 0 0 1 0 5.6M15.2 5a6.6 6.6 0 0 1 0 10"/><path class="cross" d="M13 7.5l5 5m0-5l-5 5"/></svg></button>
+        <input class="pl-volr" type="range" min="0" max="1" step="0.05" value="1" aria-label="${tx("音量","Volume")}">
+      </div>
     </div>
     <ol class="pl-lyrics" aria-label="${tx("同步歌词（点一句跳到那里）","Synced lyrics (click a line to jump)")}">${items}</ol>
   </div>`;
@@ -2640,9 +2716,42 @@ function bindPlayer(key){
     userScrollAt=0;
   };
   ["wheel","touchmove"].forEach(ev=>box.addEventListener(ev,()=>{userScrollAt=Date.now();},{passive:true}));
+  p.querySelector(".pl-mute").onclick=()=>{
+    if(audio.muted||audio.volume===0){ audio.muted=false; if(audio.volume===0) audio.volume=0.6; }
+    else audio.muted=true;
+  };
+  p.querySelector(".pl-volr").oninput=e=>{ audio.volume=+e.target.value; audio.muted=audio.volume===0; };
+  syncVolUI(p);
   });
   if(audioKey===key) syncPlayer();
 }
+
+/* Volume: one setting for every player, remembered across visits.
+   iOS ignores audio.volume, so there only the mute button is shown. */
+const VOL_OK=(()=>{try{const a=new Audio();a.volume=0.5;return Math.abs(a.volume-0.5)<0.01;}catch(e){return false;}})();
+if(!VOL_OK) document.documentElement.classList.add("no-vol");
+try{
+  const v=parseFloat(localStorage.getItem("nc-vol"));
+  if(VOL_OK && v>=0 && v<=1) audio.volume=v;
+  audio.muted=localStorage.getItem("nc-mute")==="1";
+}catch(e){}
+function syncVolUI(only){
+  const silent=audio.muted||audio.volume===0;
+  (only?[only]:document.querySelectorAll(".player")).forEach(p=>{
+    const b=p.querySelector(".pl-mute"), r=p.querySelector(".pl-volr");
+    if(!b) return;
+    b.classList.toggle("muted",silent);
+    b.setAttribute("aria-pressed",String(silent));
+    b.setAttribute("aria-label",silent?tx("取消静音","Unmute"):tx("静音","Mute"));
+    const v=silent?0:audio.volume;
+    if(document.activeElement!==r) r.value=v;
+    r.style.setProperty("--p",(v*100)+"%");
+  });
+}
+audio.addEventListener("volumechange",()=>{
+  syncVolUI();
+  try{localStorage.setItem("nc-vol",String(audio.volume));localStorage.setItem("nc-mute",audio.muted?"1":"0");}catch(e){}
+});
 
 let rafId=0;
 function tick(){ syncPlayer(); rafId=audio.paused?0:requestAnimationFrame(tick); }
@@ -2714,7 +2823,25 @@ function renderBoard(i){
 
 /* Recommended songs: April (Four O’Clock Rain), September (Lanterns), November (新谣) */
 const PICKS=[3,8,10];
-let menuOpen=null;   // month index (string) whose lyrics panel is open in the stall list
+let menuOpen=null;   // key whose lyrics panel is open in the stall list: month index (string), or stay/go/last
+const FOOT_KEYS=["stay","go","last"];
+function menuName(k){return END_TITLES[k]?tx(END_TITLES[k][0],END_TITLES[k][1]):MONTHS[k].song;}
+/* ▶ when the song has a self-hosted take (synced lyrics), ≡ when only the text is ready */
+function menuBtn(k){
+  const name=menuName(k), open=menuOpen===String(k);
+  const aria=`aria-expanded="${open}" aria-controls="mly-${k}"`;
+  return TRACKS[k]
+    ? `<button type="button" class="m-play" data-play="${k}" ${aria} aria-label="${tx(`播放《${name}》`,`Play “${name}”`)}"><span class="ip"></span><span class="ia"></span></button>`
+    : `<button type="button" class="m-play m-ly" data-ly="${k}" ${aria} aria-label="${tx(`看《${name}》歌词（音频即将上线）`,`Lyrics for “${name}” (audio coming soon)`)}"><span class="il"></span></button>`;
+}
+function menuPanel(k){
+  k=String(k);
+  const foot=FOOT_KEYS.includes(k);
+  const body=TRACKS[k]
+    ? playerHtml(k)
+    : `<div class="m-static"><p class="m-soon">${foot?tx("本站音频即将上线 · 可先去 Suno 试听","Audio coming soon here · listen on Suno for now"):tx("音频即将上线 · 先看歌词","Audio coming soon · lyrics for now")}</p>${foot?listenRow(END_AUDIO[k],END_TITLES[k][1]):""}${renderLyrics(k==="last"?LAST_ORDER_LYRICS:foot?ENDS[k].lyrics:MONTHS[k].lyrics)}</div>`;
+  return `<div class="m-panel${foot?" m-panel-foot":""}" id="mly-${k}">${body}<button type="button" class="m-close" data-close="${k}">${tx("收起歌词","Hide lyrics")}</button></div>`;
+}
 function renderMenuBoard(reveal){
   if(!menuEl) return;
   const renderAct=(slice,offset,title)=>{
@@ -2722,13 +2849,8 @@ function renderMenuBoard(reveal){
       const k=offset+idx;
       const d=tx(m.dish,m.dishEn);
       const open=menuOpen===String(k);
-      const aria=`aria-expanded="${open}" aria-controls="mly-${k}"`;
-      const play=TRACKS[k]
-        ? `<button type="button" class="m-play" data-play="${k}" ${aria} aria-label="${tx(`播放《${m.song}》`,`Play “${m.song}”`)}"><span class="ip"></span><span class="ia"></span></button>`
-        : `<button type="button" class="m-play m-ly" data-ly="${k}" ${aria} aria-label="${tx(`看《${m.song}》歌词（音频即将上线）`,`Lyrics for “${m.song}” (audio coming soon)`)}"><span class="il"></span></button>`;
       const pick=PICKS.includes(k)?`<span class="m-pick">${tx("推荐","Pick")}</span>`:"";
-      const panel=open?`<div class="m-panel" id="mly-${k}">${TRACKS[k]?playerHtml(k):`<div class="m-static"><p class="m-soon">${tx("音频即将上线 · 先看歌词","Audio coming soon · lyrics for now")}</p>${renderLyrics(m.lyrics)}</div>`}<button type="button" class="m-close" data-close="${k}">${tx("收起歌词","Hide lyrics")}</button></div>`:"";
-      return `<li class="menu-item${open?" open":""}"><button type="button" class="menu-btn${k===current?" active":""}" data-jump="${k}"><span class="m-no">${m.no}</span><span class="m-dish">${d}</span><span class="m-dots" aria-hidden="true"></span><span class="m-song">${pick}${m.song}</span></button>${play}${panel}</li>`;
+      return `<li class="menu-item${open?" open":""}"><button type="button" class="menu-btn${k===current?" active":""}" data-jump="${k}"><span class="m-no">${m.no}</span><span class="m-dish">${d}</span><span class="m-dots" aria-hidden="true"></span><span class="m-song">${pick}${m.song}</span></button>${menuBtn(k)}${open?menuPanel(k):""}</li>`;
     }).join("");
     return `<div class="menu-act"><h3>${title}</h3><ul class="menu-list">${items}</ul></div>`;
   };
@@ -2738,10 +2860,10 @@ function renderMenuBoard(reveal){
       ${renderAct(MONTHS.slice(6,12),6,tx("下半场 · 七月至十二月","Act II · Jul – Dec"))}
     </div>
     <div class="menu-foot">
-      <span class="foot-play"><button type="button" class="m-play" data-play="stay" aria-expanded="${menuOpen==="stay"}" aria-controls="mly-stay" aria-label="${tx("播放《留下》","Play “Stay”")}"><span class="ip"></span><span class="ia"></span></button>${tx("终曲序列：《留下》 / 《回去》 → 《Last Order》","Finale: Stay / Go Home → Last Order")}</span>
+      <span class="foot-play">${tx("终曲序列：","Finale:")}<span class="fp">${menuBtn("stay")}${tx("《留下》","Stay")}</span>/<span class="fp">${menuBtn("go")}${tx("《回去》","Go Home")}</span>→<span class="fp">${menuBtn("last")}${tx("《Last Order》","Last Order")}</span></span>
       <a href="#ending">${tx("跳去选结局 →","Choose the ending →")}</a>
     </div>
-    ${menuOpen==="stay"&&TRACKS.stay?`<div class="m-panel m-panel-foot" id="mly-stay">${playerHtml("stay")}<button type="button" class="m-close" data-close="stay">${tx("收起歌词","Hide lyrics")}</button></div>`:""}`;
+    ${FOOT_KEYS.includes(menuOpen)?menuPanel(menuOpen):""}`;
   menuEl.querySelectorAll(".menu-btn").forEach(btn=>{
     btn.addEventListener("click",()=>pick(+btn.dataset.jump,true));
   });
@@ -2837,6 +2959,7 @@ function pick(i,scrollPanel){
   });
 
   const dish=tx(m.dish,m.dishEn);
+  document.getElementById("floor-caption").textContent=tx(`${current+1} 月 · ${dish}`,`${MON[current]} · ${dish}`);
   const dishSub=tx(m.dishEn,m.dish);
   const prevDish=tx(prevM.dish,prevM.dishEn);
   const nextDish=tx(nextM.dish,nextM.dishEn);
@@ -2936,6 +3059,16 @@ function pick(i,scrollPanel){
     monthEl.scrollIntoView({behavior:"smooth",block:"start"});
   }
 }
+
+document.getElementById("first-listen").onclick=()=>{
+  const april=3;
+  pick(april);
+  const button=monthEl.querySelector(".pl-btn");
+  loadTrack(april);
+  if(audio.paused) audio.play().catch(()=>{});
+  button.focus({preventScroll:true});
+  button.scrollIntoView({block:"center",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});
+};
 
 /* Keyboard navigation for months */
 document.addEventListener("keydown",e=>{
