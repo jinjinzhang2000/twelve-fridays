@@ -61,28 +61,28 @@ try{
 :root[data-m="11"]{--plaster:#f3eee6;--plaster-2:#e7dfd3}
 
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --plaster:#0f1b1c;--plaster-2:#142223;--paper:#162526;--ink:#e9efe8;--ink-2:#9db0aa;--rule:#2a3c3c;
-  --tile:#1b2a2b;--celadon:#7fb8a7;--cobalt:#7d9be0;--coral:#e98477;--mustard:#f0bf5a;--rose:#d79aa1;
-  --stool:#e04a3d;--stool-2:#b3352b;--tissue:#f4f4ef;
-  --board-bg:#0a1213;--board-fg:#edf2eb;--board-dim:rgba(237,242,235,.62);
-  --glow:rgba(240,191,90,.55);--shadow:rgba(0,0,0,.48);color-scheme:dark;
+  --plaster:#1c1814;--plaster-2:#261f1a;--paper:#2c261f;--ink:#f6f1e8;--ink-2:#cbbba8;--rule:#40362e;
+  --tile:#322b24;--celadon:#8fbfb0;--cobalt:#a9b7d4;--coral:#e08a78;--mustard:#e8b85a;--rose:#d7a3a8;
+  --stool:#e25a48;--stool-2:#b83a2e;--tissue:#f7f3ea;
+  --board-bg:#14110e;--board-fg:#f3eee4;--board-dim:rgba(243,238,228,.64);
+  --glow:rgba(232,184,90,.75);--shadow:rgba(0,0,0,.5);color-scheme:dark;
 }
-:root:not([data-theme="light"])[data-m="1"],:root:not([data-theme="light"])[data-m="9"]{--plaster:#141a1b;--plaster-2:#1b2223}
-:root:not([data-theme="light"])[data-m="3"],:root:not([data-theme="light"])[data-m="10"]{--plaster:#0d191d;--plaster-2:#132227}
-:root:not([data-theme="light"])[data-m="7"]{--plaster:#14181d;--plaster-2:#1b2027}
-:root:not([data-theme="light"])[data-m="11"]{--plaster:#141a18;--plaster-2:#1b2320}
+:root:not([data-theme="light"])[data-m="1"],:root:not([data-theme="light"])[data-m="9"]{--plaster:#221c16;--plaster-2:#2c241c}
+:root:not([data-theme="light"])[data-m="3"],:root:not([data-theme="light"])[data-m="10"]{--plaster:#1a1816;--plaster-2:#24211e}
+:root:not([data-theme="light"])[data-m="7"]{--plaster:#1e1b18;--plaster-2:#28241f}
+:root:not([data-theme="light"])[data-m="11"]{--plaster:#241c16;--plaster-2:#2e241c}
 }
 :root[data-theme="dark"]{
-  --plaster:#0f1b1c;--plaster-2:#142223;--paper:#162526;--ink:#e9efe8;--ink-2:#9db0aa;--rule:#2a3c3c;
-  --tile:#1b2a2b;--celadon:#7fb8a7;--cobalt:#7d9be0;--coral:#e98477;--mustard:#f0bf5a;--rose:#d79aa1;
-  --stool:#e04a3d;--stool-2:#b3352b;--tissue:#f4f4ef;
-  --board-bg:#0a1213;--board-fg:#edf2eb;--board-dim:rgba(237,242,235,.62);
-  --glow:rgba(240,191,90,.55);--shadow:rgba(0,0,0,.48);color-scheme:dark;
+  --plaster:#1c1814;--plaster-2:#261f1a;--paper:#2c261f;--ink:#f6f1e8;--ink-2:#cbbba8;--rule:#40362e;
+  --tile:#322b24;--celadon:#8fbfb0;--cobalt:#a9b7d4;--coral:#e08a78;--mustard:#e8b85a;--rose:#d7a3a8;
+  --stool:#e25a48;--stool-2:#b83a2e;--tissue:#f7f3ea;
+  --board-bg:#14110e;--board-fg:#f3eee4;--board-dim:rgba(243,238,228,.64);
+  --glow:rgba(232,184,90,.75);--shadow:rgba(0,0,0,.5);color-scheme:dark;
 }
-:root[data-theme="dark"][data-m="1"],:root[data-theme="dark"][data-m="9"]{--plaster:#141a1b;--plaster-2:#1b2223}
-:root[data-theme="dark"][data-m="3"],:root[data-theme="dark"][data-m="10"]{--plaster:#0d191d;--plaster-2:#132227}
-:root[data-theme="dark"][data-m="7"]{--plaster:#14181d;--plaster-2:#1b2027}
-:root[data-theme="dark"][data-m="11"]{--plaster:#141a18;--plaster-2:#1b2320}
+:root[data-theme="dark"][data-m="1"],:root[data-theme="dark"][data-m="9"]{--plaster:#221c16;--plaster-2:#2c241c}
+:root[data-theme="dark"][data-m="3"],:root[data-theme="dark"][data-m="10"]{--plaster:#1a1816;--plaster-2:#24211e}
+:root[data-theme="dark"][data-m="7"]{--plaster:#1e1b18;--plaster-2:#28241f}
+:root[data-theme="dark"][data-m="11"]{--plaster:#241c16;--plaster-2:#2e241c}
 
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
@@ -111,10 +111,15 @@ html[data-lang="en"] .zh{display:none!important}
 html[data-lang="en"]{
   --en:"Young Serif","Iowan Old Style",Georgia,"Songti SC","STSong",serif;
   --zh:"Young Serif","Iowan Old Style",Georgia,"Songti SC","STSong",serif;
-  --mono:"Young Serif","Iowan Old Style",Georgia,"Songti SC","STSong",serif;
 }
 html[data-lang="en"] body{font-family:var(--en)}
 html[data-lang="en"] .cast i{display:none}
+html[data-lang="en"] .board,
+html[data-lang="en"] .board h3,
+html[data-lang="en"] .board small,
+html[data-lang="en"] .board-reply,
+html[data-lang="en"] .board-top .b-status,
+html[data-lang="en"] .chalk{font-family:var(--mono)}
 
 /* subtle plaster grain on desktop */
 @media (min-width:900px) and (pointer:fine){
@@ -147,9 +152,9 @@ html[data-lang="en"] .cast i{display:none}
 .langs button[aria-pressed="true"]{background:var(--ink);color:var(--plaster)}
 
 /* garland */
-.garland-wrap{position:relative;margin-top:6px;min-height:68px}
-.garland{display:block;width:100%;height:auto;max-height:76px;overflow:visible}
-.garland .wire{fill:none;stroke:var(--ink-2);stroke-width:1;opacity:.5}
+.garland-wrap{position:relative;margin-top:8px;min-height:112px;width:100vw;margin-left:calc(50% - 50vw);overflow:hidden}
+.garland{display:block;width:100%;height:auto;max-height:none;overflow:visible}
+.garland .wire{fill:none;stroke:var(--ink-2);stroke-width:1.6;opacity:.62}
 .garland .lit{filter:drop-shadow(0 0 6px var(--glow))}
 @media (prefers-reduced-motion:no-preference){
   .garland.swap{animation:garland-in .45s ease}
@@ -174,8 +179,10 @@ h1 .o{color:var(--stool)}
   box-shadow:0 0 0 1px rgba(29,43,42,.16),0 30px 60px -30px var(--shadow);
   transition:filter .45s ease;
 }
-:root[data-theme="dark"] .floor{filter:brightness(.82) contrast(1.04) saturate(.94)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .floor{filter:brightness(.82) contrast(1.04) saturate(.94)}}
+:root[data-theme="dark"] .floor{filter:brightness(.94) contrast(1.04) saturate(1.08) sepia(.16)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .floor{filter:brightness(.94) contrast(1.04) saturate(1.08) sepia(.16)}}
+:root[data-theme="dark"] .floor::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:6;background:linear-gradient(180deg,rgba(255,186,92,.18),transparent 58%)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .floor::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:6;background:linear-gradient(180deg,rgba(255,186,92,.18),transparent 58%)}}
 
 .tile{
   all:unset;cursor:pointer;display:block;aspect-ratio:1;position:relative;overflow:hidden;
@@ -186,7 +193,7 @@ h1 .o{color:var(--stool)}
   position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;
   mix-blend-mode:multiply;opacity:.72;transition:opacity .3s ease;
 }
-.tile.on .paw-overlay{opacity:0}
+.tile.on .paw-overlay{opacity:.8}
 .tile .dish{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   opacity:0;z-index:2;pointer-events:none;
@@ -200,17 +207,19 @@ h1 .o{color:var(--stool)}
   box-shadow:inset 0 0 0 .6px rgba(29,43,42,.12);
 }
 .tile.on::after{
-  box-shadow:inset 0 0 0 2px rgba(251,250,244,.86),inset 0 0 0 3px rgba(29,43,42,.28);
+  box-shadow:inset 0 0 0 1.5px rgba(251,250,244,.92);
 }
 .tile .no{
   position:absolute;left:6px;bottom:5px;z-index:4;
   font-family:var(--mono);font-size:10.5px;line-height:1;letter-spacing:.02em;
   color:#1d2b2a;
   padding:3px 5px;border-radius:2px;
-  background:rgba(251,250,244,.88);
+  background:rgba(251,250,244,.9);
   backdrop-filter:blur(2px);
+  opacity:0;transition:opacity .18s ease;
 }
-.tile.on .no{color:#fff;background:rgba(20,28,27,.68)}
+.tile:hover .no,.tile:focus-visible .no,.tile.on .no{opacity:1}
+.tile.on .no{background:rgba(251,250,244,.96)}
 .tile .act-mark{
   position:absolute;right:6px;top:6px;z-index:4;
   width:5px;height:5px;border-radius:50%;background:var(--stool);opacity:.75;
@@ -222,7 +231,7 @@ h1 .o{color:var(--stool)}
   transform:translate(calc(var(--c,0)*100%),calc(var(--r,0)*100%));
   transition:transform .68s cubic-bezier(.55,.06,.22,1);
 }
-.stool svg{position:absolute;left:3%;top:3%;width:40%;height:40%;filter:drop-shadow(0 2px 3px rgba(20,24,22,.22))}
+.stool svg{position:absolute;left:24%;top:22%;width:52%;height:52%;filter:drop-shadow(0 3px 3px rgba(20,16,12,.38))}
 .hint{
   margin-top:11px;font-size:13px;color:var(--ink-2);
   display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;
@@ -260,7 +269,7 @@ h1 .o{color:var(--stool)}
 .notebook{
   --nb-line:30px;
   --nb-ink:#262322;
-  position:relative;overflow:hidden;
+  position:relative;overflow:visible;
   color:var(--nb-ink);
   background-color:#f5efe3;
   background-image:repeating-linear-gradient(
@@ -313,7 +322,8 @@ h1 .o{color:var(--stool)}
 }
 .notebook .nb-score span{font-family:inherit;font-size:15px;color:#b4332c}
 .notebook .nb-ring{
-  position:absolute;left:-2px;top:1px;width:calc(100% + 4px);height:28px;pointer-events:none;opacity:.82;
+  position:absolute;left:-10px;top:-7px;width:calc(100% + 18px);height:40px;pointer-events:none;opacity:.9;
+  transform:rotate(-8deg);
 }
 .notebook .nb-tag{
   font-size:13px;color:rgba(38,35,34,.58);
@@ -327,15 +337,15 @@ html[data-lang="en"] .notebook blockquote{font-size:17.5px}
 /* this month's dish, a snapshot taped onto the top of the notebook */
 .nb-stack{position:relative}
 .nb-photo{
-  position:relative;z-index:3;
-  width:62%;margin:6px 14px -12px auto;
+  float:right;position:relative;z-index:4;
+  width:52%;margin:-36px -4px 8px 12px;
   padding:7px 7px 4px;background:#fbf8f1;
-  rotate:2deg;
+  rotate:3deg;
   box-shadow:0 12px 20px -14px rgba(40,28,16,.55),0 1px 2px rgba(40,28,16,.18);
 }
 .nb-photo::before{
-  content:"";position:absolute;top:-9px;left:50%;width:66px;height:20px;
-  transform:translateX(-50%) rotate(-4deg);
+  content:"";position:absolute;top:2px;left:46%;width:72px;height:18px;
+  transform:translateX(-50%) rotate(-8deg);
   background:rgba(236,226,196,.78);
   box-shadow:0 1px 2px rgba(40,28,16,.12);
 }
@@ -370,8 +380,8 @@ html[data-lang="en"] .nb-photo figcaption{font-family:"Patrick Hand",cursive;fon
 .dish-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
 .month .t{font-family:var(--zh);font-weight:600;font-size:clamp(26px,3vw,36px);letter-spacing:.06em;line-height:1.2}
 .month .dish-sub{font-family:var(--en);font-size:16px;color:var(--ink-2)}
-.songline{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:6px}
-.month .song{font-family:var(--en);font-size:21px;line-height:1.2;color:var(--ink)}
+.songline{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 12px;margin-top:8px}
+.month .song{font-family:var(--en);font-size:clamp(26px,2.5vw,32px);line-height:1.15;color:var(--ink);flex:1;min-width:8em}
 .stall-sign{
   display:inline-flex;align-items:center;gap:6px;
   font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;
@@ -379,7 +389,7 @@ html[data-lang="en"] .nb-photo figcaption{font-family:"Patrick Hand",cursive;fon
   padding:2px 8px;border-radius:2px;color:var(--ink);
 }
 .fest-line{
-  display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin-top:8px;
+  display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin-top:4px;
   font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--ink-2);
 }
 .fest-ico{display:inline-flex;align-items:center;width:16px;height:16px;flex:none}
@@ -399,9 +409,54 @@ html[data-lang="en"] .nb-photo figcaption{font-family:"Patrick Hand",cursive;fon
 }
 .play:hover{background:var(--ink);color:var(--plaster)}
 .play .tri{width:0;height:0;border-left:7px solid currentColor;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent}
+.listen{position:relative;flex:none;align-self:center}
+.listen summary{list-style:none;cursor:pointer;font-family:var(--zh);font-size:13px;font-weight:600;letter-spacing:.06em;color:var(--ink);background:transparent;border:1px solid var(--ink);border-radius:99px;padding:6px 12px 6px 10px;display:inline-flex;align-items:center;gap:6px}
+.listen summary::-webkit-details-marker{display:none}
+.listen summary:hover,.listen[open] summary{background:var(--ink);color:var(--plaster)}
+.listen-pop{position:absolute;z-index:8;top:calc(100% + 6px);right:0;min-width:138px;background:var(--paper);border:1px solid var(--rule);padding:4px;box-shadow:0 14px 28px -16px var(--shadow)}
+.listen-pop a{display:block;text-decoration:none;font-family:var(--mono);font-size:12px;letter-spacing:.02em;padding:7px 10px;color:var(--ink)}
+.listen-pop a:hover{background:var(--plaster-2)}
+
+/* self-hosted take with line-synced lyrics */
+.player{margin-top:16px;max-width:46em;background:var(--paper);border:1px solid var(--rule);border-left:3px solid var(--stool);border-radius:3px}
+.pl-bar{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;column-gap:14px;row-gap:6px;align-items:center;padding:14px 16px 12px}
+.pl-btn{grid-row:1 / span 2;width:44px;height:44px;border-radius:50%;border:0;cursor:pointer;background:var(--stool);color:#fff;display:grid;place-items:center;flex:none;transition:background-color .2s}
+.pl-btn:hover{background:var(--stool-2)}
+.pl-btn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.pl-btn .i-play{width:0;height:0;border-left:13px solid currentColor;border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:4px}
+.pl-btn .i-pause{display:none;width:12px;height:14px;border-left:4px solid currentColor;border-right:4px solid currentColor}
+.player.playing .pl-btn .i-play{display:none}
+.player.playing .pl-btn .i-pause{display:block}
+.pl-meta{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink-2);min-width:0}
+.pl-meta b{font-family:var(--zh);font-weight:600;font-size:13px;letter-spacing:.06em;color:var(--ink)}
+html[data-lang="en"] .pl-meta b{font-family:var(--en);font-weight:400}
+.pl-time{font-variant-numeric:tabular-nums;white-space:nowrap}
+.pl-seek{width:100%;margin:0;height:18px;background:transparent;cursor:pointer;-webkit-appearance:none;appearance:none;--p:0%}
+.pl-seek::-webkit-slider-runnable-track{height:3px;border-radius:2px;background:linear-gradient(to right,var(--stool) var(--p),var(--rule) var(--p))}
+.pl-seek::-moz-range-track{height:3px;border-radius:2px;background:linear-gradient(to right,var(--stool) var(--p),var(--rule) var(--p))}
+.pl-seek::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--stool);margin-top:-4.5px;border:0}
+.pl-seek::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--stool);border:0}
+.pl-seek:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.pl-lyrics{
+  list-style:none;margin:0;padding:18px 16px 22px;max-height:232px;overflow-y:auto;position:relative;
+  border-top:1px dashed var(--rule);overscroll-behavior:contain;scrollbar-width:thin;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 18px,#000 calc(100% - 26px),transparent 100%);
+          mask-image:linear-gradient(to bottom,transparent 0,#000 18px,#000 calc(100% - 26px),transparent 100%);
+}
+.pl-lyrics li{font-size:15px;line-height:1.6;padding:4px 10px;margin:0 -10px;border-left:2px solid transparent;color:var(--ink-2);cursor:pointer;border-radius:0 2px 2px 0;transition:color .25s,border-color .25s,background-color .25s}
+.pl-lyrics li:hover{color:var(--ink)}
+.pl-lyrics li.on{color:var(--ink);border-left-color:var(--stool);background:var(--plaster-2)}
+.pl-lyrics li.est::after{content:"≈";font-family:var(--mono);font-size:11px;color:var(--ink-2);opacity:.7;margin-left:8px}
+.pl-lyrics li.pl-who{cursor:default;background:none;border-left-color:transparent;font-family:var(--zh);font-size:12px;font-weight:600;letter-spacing:.05em;line-height:1.4;color:var(--stool);padding-top:10px;padding-bottom:0}
+.pl-lyrics li.pl-who:first-child{padding-top:2px}
+.pl-lyrics li.pl-who.aunty{color:var(--cobalt)}
+.pl-lyrics li.pl-who.uncle{color:var(--mustard)}
+.pl-lyrics li.pl-who.all{color:var(--celadon)}
+.pl-note{padding:0 16px 12px;font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--ink-2)}
+@media (max-width:640px){.pl-lyrics{max-height:200px}.pl-lyrics li{font-size:14.5px}}
 
 .month h3,.lyrics summary{font-family:var(--zh);font-weight:600;font-size:15px;letter-spacing:.1em;margin:22px 0 8px}
-.month .prose{margin-top:18px}
+.month .prose{margin-top:12px}
 .month .prose p{font-family:var(--zh);font-size:16px;font-weight:400;line-height:1.88;margin:0 0 .9em;max-width:42em}
 .month .prose p:last-child{margin-bottom:0}
 
@@ -430,10 +485,10 @@ html[data-lang="en"] .nb-photo figcaption{font-family:"Patrick Hand",cursive;fon
 .lib-who.uncle{color:var(--mustard)}
 .lib-who.all{color:var(--celadon)}
 .lib-lines{font-size:15px;line-height:1.82;color:var(--ink);display:grid;gap:3px}
-.lib-row{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:2px 16px;align-items:baseline}
+.lib-row{display:grid;grid-template-columns:minmax(0,1fr) 11em;gap:1px 16px;align-items:baseline}
 .lib-row.single{grid-template-columns:minmax(0,1fr)}
 .lib-orig{min-width:0}
-.lib-gloss{min-width:0;font-size:13px;line-height:1.55;color:var(--ink-2);opacity:.86}
+.lib-gloss{min-width:0;font-size:12px;line-height:1.45;color:var(--ink-2);opacity:.68}
 html[data-lang="en"] .lib-gloss{font-style:italic}
 
 .month-foot{
@@ -479,7 +534,7 @@ h2{font-family:var(--zh);font-weight:600;font-size:22px;letter-spacing:.12em;mar
   border-radius:3px;padding:18px 20px 16px;
   box-shadow:0 16px 36px -28px var(--shadow);
 }
-.menu-acts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 22px}
+.menu-acts{display:grid;grid-template-columns:1fr;gap:16px}
 .menu-act h3{
   font-family:var(--mono);font-weight:500;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--ink-2);margin:0 0 8px;padding-bottom:6px;border-bottom:1px solid var(--rule);
@@ -489,15 +544,16 @@ h2{font-family:var(--zh);font-weight:600;font-size:22px;letter-spacing:.12em;mar
 .menu-item:last-child{border-bottom:0}
 .menu-btn{
   all:unset;box-sizing:border-box;width:100%;cursor:pointer;
-  display:grid;grid-template-columns:3.5em minmax(0,1fr) auto;gap:2px 8px;align-items:baseline;
+  display:grid;grid-template-columns:3.4em minmax(0,1fr) minmax(14px,.7fr) auto;gap:2px 8px;align-items:baseline;
   padding:7px 4px;border-radius:2px;transition:background-color .16s,color .16s;
 }
 .menu-btn:hover{background:var(--plaster-2)}
-.menu-btn.active{background:color-mix(in srgb,var(--stool) 10%,transparent)}
+.menu-btn.active{background:color-mix(in srgb,var(--stool) 14%,transparent)}
 .menu-btn .m-no{font-family:var(--mono);font-size:11px;color:var(--ink-2);font-variant-numeric:tabular-nums}
 .menu-btn.active .m-no{color:var(--stool);font-weight:500}
 .menu-btn .m-dish{font-size:14px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.menu-btn .m-song{font-family:var(--en);font-size:13px;color:var(--ink-2);text-align:right}
+.menu-btn .m-song{font-family:var(--en);font-size:15px;color:var(--stool);text-align:right;white-space:nowrap}
+.m-dots{border-bottom:1px dotted var(--ink-2);opacity:.4;transform:translateY(-4px);min-width:12px}
 .menu-foot{
   margin-top:12px;padding-top:10px;border-top:1px solid var(--rule);
   display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;
@@ -507,25 +563,25 @@ h2{font-family:var(--zh);font-weight:600;font-size:22px;letter-spacing:.12em;mar
 .menu-foot a:hover{text-decoration:underline}
 
 /* Cast: pencil sketches blended directly onto the limewash wall (no product-card frame) */
-.cast{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:36px 22px}
+.cast{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px 22px}
 .cast > div{padding-top:0;min-width:0}
 .cast .frame{
   position:relative;overflow:hidden;margin:0 0 10px;
   background:transparent;
 }
-.cast .photo{
+.cast .photo,.cast-otters .photo{
   display:block;width:100%;aspect-ratio:3/4;object-fit:contain;object-position:center bottom;
   mix-blend-mode:multiply;
   filter:contrast(1.04);
   transition:transform .35s ease,filter .35s ease;
 }
-:root[data-theme="dark"] .cast .photo{
+:root[data-theme="dark"] .cast .photo,:root[data-theme="dark"] .cast-otters .photo{
   mix-blend-mode:screen;
-  filter:invert(.92) sepia(.14) saturate(.35) brightness(.94);
+  filter:invert(1) contrast(1.45) brightness(1.06);
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cast .photo{
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cast .photo,:root:not([data-theme="light"]) .cast-otters .photo{
   mix-blend-mode:screen;
-  filter:invert(.92) sepia(.14) saturate(.35) brightness(.94);
+  filter:invert(1) contrast(1.45) brightness(1.06);
 }}
 .cast > div:hover .photo{transform:translateY(-2px)}
 .cast .tag{
@@ -534,7 +590,10 @@ h2{font-family:var(--zh);font-weight:600;font-size:22px;letter-spacing:.12em;mar
 }
 .cast b{display:block;font-weight:600;border-top:1px solid var(--rule);padding-top:10px}
 .cast i{font-style:normal;font-family:var(--en);font-size:14px;color:var(--ink-2);margin-left:6px}
-.cast p{margin:4px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink-2)}
+.cast p,.cast-otters p{margin:4px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink-2)}
+.cast-otters{margin-top:34px;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(200px,.7fr);gap:8px 28px;align-items:end}
+.cast-otters .photo{aspect-ratio:auto;width:100%;max-height:240px;object-fit:contain;object-position:left bottom}
+.cast-otters figcaption{min-width:0}
 
 /* dynamic aunties blackboard (paired right beneath the red notebook in each month) */
 .board{
@@ -599,6 +658,10 @@ h2{font-family:var(--zh);font-weight:600;font-size:22px;letter-spacing:.12em;mar
 .ends button span{font-family:var(--en);color:var(--ink-2);font-size:14px}
 .ends button[aria-pressed="true"]{background:var(--ink);color:var(--plaster)}
 .ends button[aria-pressed="true"] span{color:var(--plaster);opacity:.72}
+:root[data-theme="dark"] .ends button[aria-pressed="true"]{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--mustard)}
+:root[data-theme="dark"] .ends button[aria-pressed="true"] span{color:var(--mustard);opacity:1}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ends button[aria-pressed="true"]{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--mustard)}
+:root:not([data-theme="light"]) .ends button[aria-pressed="true"] span{color:var(--mustard);opacity:1}}
 
 .end-wrap{margin-top:22px;max-width:820px;display:grid;gap:18px}
 .end-wrap[hidden]{display:none!important}
@@ -669,13 +732,13 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
 @media (max-width:860px){
   .hero{grid-template-columns:1fr;gap:26px}
   .month .m{font-size:44px}
-  .cast{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 18px}
+  .cast{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 18px}
 }
 @media (max-width:720px){
   .bar{flex-wrap:wrap;align-items:center;gap:6px 12px;padding-block:10px 8px}
   .bar-r{width:100%;justify-content:space-between;gap:8px 14px}
-  .garland-wrap{min-height:54px}
-  .garland{height:54px;max-height:54px}
+  .garland-wrap{min-height:78px}
+  .garland{width:820px;max-width:none;height:auto;max-height:none;margin-left:50%;transform:translateX(-50%)}
   .hero{padding-block:10px 24px}
   .kicker{letter-spacing:.04em;line-height:1.6}
   .zhname{letter-spacing:.08em;margin-bottom:14px}
@@ -692,6 +755,7 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
   .menu-acts{grid-template-columns:1fr}
   section{margin-bottom:56px}
   .cast{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 16px}
+  .cast-otters{grid-template-columns:1fr;margin-top:18px}
   .cast i{display:block;margin:2px 0 0;font-size:13px}
   .board{padding:16px 16px}
   .tile .no{font-size:11px}
@@ -728,7 +792,7 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
   </header>
 
   <div class="garland-wrap">
-    <svg class="garland" id="garland" viewBox="0 0 1200 76" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+    <svg class="garland" id="garland" viewBox="0 0 1200 118" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
   </div>
 
   <div class="hero">
@@ -743,8 +807,8 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
       <div class="floor" id="floor" role="group" aria-label="十二个星期五，点一块花砖切换月份"></div>
       <div class="stool" id="stool" aria-hidden="true"></div>
       <div class="hint">
-        <span class="zh">点一块花砖，红凳就挪到那个星期五，头顶的挂饰、桌上的菜和这一幕都跟着换。</span>
-        <span class="en">Tap a tile. The red stool moves to that Friday, and the garland, the dish and the scene go with it.</span>
+        <span class="zh">点一块花砖，红凳就挪到那个星期五，头顶的挂饰和这一幕都跟着换。</span>
+        <span class="en">Tap a tile. The red stool moves to that Friday, and the garland and the scene go with it.</span>
         <span class="kbd"><span class="zh">← / → 翻月</span><span class="en">← / → change month</span></span>
       </div>
     </div>
@@ -756,19 +820,11 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
     <div class="story-board-grid">
       <div>
         <h2><span class="zh">故事</span><span class="en">The story</span></h2>
-        <p class="h2en"><span class="zh">The story</span><span class="en">At the start</span></p>
+        <p class="h2en"><span class="zh">六月之后</span><span class="en">After June</span></p>
         <div class="story">
-          <p><span class="zh">阿夏第一次来 Newton。她把一包纸巾放在凳子上占座，然后去买甘蔗水。回来时，本地人阿杰已经坐在那里。他说，纸巾占座只算十五分钟。两个人为这条规矩吵了一架，最后一人坐半张椅子。</span><span class="en">The first time Summer comes to Newton, she puts a packet of tissues on a stool to save it, then goes to buy sugarcane juice. When she comes back, Kelvin, who lives here, is already sitting down. He says a packet of tissues only holds a seat for fifteen minutes. They argue the rule out, and end up sharing the chair.</span></p>
-          <p><span class="zh">阿杰是沙爹摊老板陈伯的儿子。他觉得新加坡很小，从东边到西边坐出租车只要四十块，所以一心想去伦敦。阿夏觉得这里很大，光一盘炒粿条就混着四种语言，一年都吃不完。陈伯烤了四十年沙爹，手里那把蒲扇一直没放下。</span><span class="en">Kelvin is the son of Uncle Tan, who runs the satay stall. Singapore feels small to him: a taxi from east to west costs forty dollars, and he wants to go to London. To Summer it feels large. One plate of noodles holds four languages, and a year is not enough to eat through them. Uncle Tan has grilled satay for forty years and has never put down his fan.</span></p>
-          <p><span class="zh">四位阿姨分别管饮料、端盘子、看天气和收摊。她们在黑板上打赌：小贩中心里藏着一个美食评审，到底是谁。水獭一家有两只大的、三只小的。它们会跟着唱歌，也会把没人看着的包拖走。</span><span class="en">Four aunties look after drinks, plates, the weather and closing time. On the blackboard they are betting on who the hidden food critic is. The otter family is two adults and three young. They sing along, and they also drag off any bag left unwatched.</span></p>
-        </div>
-        <details class="spoiler-fold">
-          <summary><span class="zh">后来的事（有剧透）</span><span class="en">The later part, including the turns</span></summary>
-          <div class="sp-body">
-            <p><span class="zh">六月，一家水獭冲进小贩中心，拖走了阿夏的包。红笔记本掉出来，赔率一赔九的那一注中了，大家这才知道她就是评审。九月中秋，阿杰提着灯笼请她吃豆花，求她给自家沙爹写一个差评。好评一出来，档口挂上推荐灯笼，队就会排起来，摊子关不掉，他也就走不成。</span><span class="en">In June a family of otters rushes into the hawker centre and drags off Summer’s bag. Her red notebook falls out. The long-shot bet, at one to nine, wins, and everyone sees that she is the critic. At the Mid-Autumn Festival, Kelvin brings her a lantern and a bowl of tau huay, and asks her to give the family satay a bad review. Once that review is public, the queue will start, the stall will be unable to close, and he will be unable to leave.</span></p>
+          <p><span class="zh">六月，一家水獭冲进小贩中心，拖走了阿夏的包。红笔记本掉出来，赔率一赔九的那一注中了，大家这才知道她就是评审。九月中秋，阿杰提着灯笼请她吃豆花，求她给自家沙爹写一个差评。好评一出来，档口挂上推荐灯笼，队就会排起来，摊子关不掉，他也就走不成。</span><span class="en">In June a family of otters rushes into the hawker centre and drags off Summer’s bag. Her red notebook falls out. The long-shot bet, at one to nine, wins, and everyone sees that she is the critic. At the Mid-Autumn Festival, Kelvin brings her a lantern and a bowl of tau huay, and asks her to give the family satay a bad review. Once that review is public, the queue will start, the stall will be unable to close, and he will be unable to leave.</span></p>
             <p><span class="zh">十二月最后一个星期五，轮到沙爹摊。陈伯其实第一天就认出了她。今晚他故意把沙爹烤咸，好让儿子能去伦敦。父子俩都瞒着对方，都在为对方放手。</span><span class="en">On the last Friday in December, it is the satay stall’s turn. Uncle Tan recognised her on the first day. Tonight he salts the satay on purpose, so his son can go to London. Father and son each hide this from the other, and each is trying to let the other go.</span></p>
-          </div>
-        </details>
+        </div>
       </div>
 
       <div>
@@ -807,13 +863,14 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
         <b><span class="zh">四位阿姨</span><span class="en">The Aunties</span><i>The Aunties</i></b>
         <p><span class="zh">记得每个人的咖啡怎么点。看天气比预报还准。什么都敢赌。</span><span class="en">They remember how everyone takes their coffee. They read the weather better than the forecast. They will bet on anything.</span></p>
       </div>
-      <div>
-        <div class="frame"><img class="photo" src="people/sketch-otters-v4.jpg?v=4" alt="两只大水獭带着三只小水獭拖走帆布包，笔记本从包口滑出"></div>
+    </div>
+
+    <figure class="cast-otters">
+<div class="frame"><img class="photo" src="people/sketch-otters-v4.jpg?v=4" alt="两只大水獭带着三只小水獭拖走帆布包，笔记本从包口滑出"></div>
         <span class="tag"><span class="zh">河道 · 两大三小</span><span class="en">The river · two big, three small</span></span>
         <b><span class="zh">水獭一家</span><span class="en">The Otters</span><i>The Otters</i></b>
         <p><span class="zh">两只大的，三只小的。在剧里负责合唱，也会偷包。</span><span class="en">Two adults and three young. In the show they sing with the company, and they also steal bags.</span></p>
-      </div>
-    </div>
+    </figure>
   </section>
 
   <section id="ending">
@@ -1061,8 +1118,8 @@ const MONTHS=[
   c:["coral","cobalt","mustard"],n:8,paw:true,act:"上半场终 · Act I Finale",
   tags:["马来 Zapin · 探案拨弦","香蕉叶焦响","118 BPM"],
   score:8,
-  note:"整条魔鬼鱼铺在香蕉叶上，叶子边烤焦了。上面的叁巴辣椒酱磨得很粗，颜色亮红，还能看见籽，辣味是慢慢上来的。鱼边有焦黑，肉是白的，很结实。我写下：辣得刚好，只差一点。后来水獭把这一页摊开，所有人都看见了。",
-  noteEn:"The whole stingray is laid on a banana leaf, and the edge of the leaf is burnt. The sambal on top is coarse and bright red, with the seeds still visible, and the heat comes on slowly. The rim of the fish is charred. The flesh is white and firm. I wrote: spicy just right, only a little short. Later the otters opened this page, and everyone saw it.",
+  note:"整条魔鬼鱼铺在香蕉叶上，叶子边烤焦了。上面的叁巴磨得很粗，红的，里面有籽，辣是慢慢上来的。鱼边焦了，肉白，结实。我写下：辣得刚好，只差一点。后来水獭把这一页摊开，所有人都看见了。",
+  noteEn:"The whole stingray is laid on a banana leaf, and the edge of the leaf is burnt. The sambal on top is coarsely ground, red, with the seeds still in it, and the heat comes on slowly. The rim of the fish is charred. The flesh is white and firm. I wrote: spicy just right, only a little short. Later the otters opened this page, and everyone saw it.",
   scene:[
     "半年过去了。黑板上写满了名字：游客、老师、外地来的女生。魔鬼鱼铺在香蕉叶上，叁巴抹得很厚，叶子一揭开，辣味就上来。阿杰盯着她说：你每个月只来一次，每次都换一个没吃过的摊，字写得很快，写完就合上，而且你那本笔记本是红的。",
     "她说红笔记本满街都是，他爱管闲事，也不等于他是警察。这些年水獭沿着河走进小贩中心，人们赶它们，也把它们当成城里的一景。阿姨忽然喊：水獭进来了。一家水獭拖起她的包就跑，从一排排桌子前窜过去。包掉在地上，笔记本翻开，那一页写着：魔鬼鱼，辣得刚好，只差一点。这句话写得太平，一看就是专业的口气。所有人都看向她，一赔九那注中了。阿姨说，今晚她请客。这首歌是马来舞曲，节奏越来越紧，像在追查谁是评审。上半场到这里结束。"
@@ -1090,8 +1147,8 @@ const MONTHS=[
   c:["celadon","cobalt","rose"],n:6,act:"下半场 · Act II",
   tags:["马来 Joget · 乌克丽丽","手鼓与海浪","124 BPM"],
   score:8,
-  note:"香蕉叶还是温的。饭是白的，有椰子香，并不油。半个煎蛋，蛋白边是脆的，蛋黄还亮。江鱼仔又小又脆，花生还带着皮，三片黄瓜是凉的，叁巴辣椒酱抹在叶子角上。他看着海上的船，第一次问我：船开去的地方有没有冬天。",
-  noteEn:"The banana leaf is still warm. The rice is white, smells of coconut, and is not greasy. Half a fried egg, with a crisp edge and a yolk that is still bright. The anchovies are tiny and crisp, the peanuts still have their skins, the three slices of cucumber are cool, and the sambal is smeared in the corner of the leaf. He looks at the boats and asks me, for the first time, whether there is winter where they are going.",
+  note:"香蕉叶是温的。饭白，有椰子香，不油。半个煎蛋，蛋白边脆了，蛋黄没干。江鱼仔小，一咬就碎。花生没去皮。黄瓜三片，凉的。叁巴酱抹在叶子角上。他看着海上的船，第一次问我：船开去的地方有没有冬天。",
+  noteEn:"The banana leaf is warm. The rice is white, tastes of coconut, and isn't greasy. Half a fried egg: the white is crisp at the edge, and the yolk isn't dry. The anchovies are small and shatter when you bite them. The peanuts still have their skins. Three slices of cucumber, cool. The sambal is smeared in the corner of the leaf. He looks at the boats and asks me, for the first time, whether there is winter where they are going.",
   scene:[
     "七月学校放假，整座岛都在休假。椰浆饭用香蕉叶包好带走，里面有椰子饭、参巴、江鱼仔、花生、黄瓜和蛋，一人一包。过一座桥就是圣淘沙。第一次去的人看到的是风景，从小去到大的人，看到的还是那片海。阿夏说，这里像天堂。",
     "阿杰说他从小去到大，去过一百次了，同一片海，同一座桥，这个岛骑自行车一天就绕完。阿夏说，他绕的是地图，她过的是日子，每天都还有没吃过的东西。他站在海边看船开出去，想知道船去的地方有没有冬天。船走了，他还站在岸上。也是在这片海边，他第一次说出口：这个岛太小了。这首歌很晴朗，用乌克丽丽、小提琴和手鼓伴奏，一群人跟着唱，合唱里有人用马来语谢谢这片海，说明年见。"
@@ -1116,8 +1173,8 @@ const MONTHS=[
   c:["coral","celadon","mustard"],n:5,act:"下半场 · Act II",
   tags:["闽南歌台流行 · 电子合成器","猛火锅铲声","132 BPM"],
   score:9,
-  note:"炒粿条的河粉很宽，酱油黑得发亮，站在两米外就闻得到锅气。虾是粉色的，腊肠切得薄，有点甜，豆芽还是脆的，蛋碎在面里。要趁热吃，凉了锅气就没了。我们各唱各的。他说这座岛小，我说这座岛大。",
-  noteEn:"The rice noodles in the char kway teow are wide, and the soy is so dark it shines. You can smell the wok from two metres away. The prawns are pink, the sausage is sliced thin and a little sweet, the bean sprouts are still crisp, and the egg is broken through the noodles. It has to be eaten hot. Once it cools, the breath of the wok is gone. We each sang our own words. He said the island is small. I said the island is big.",
+  note:"河粉很宽，酱油黑，两米外就闻得到锅气。虾是粉的，腊肠切得薄，有点甜，豆芽没炒烂，蛋碎在面里。要趁热吃，凉了就没有锅气。我们各唱各的。他说这座岛小，我说这座岛大。",
+  noteEn:"The noodles are wide and the soy is black. You can smell the wok from two metres away. The prawns are pink, the sausage is sliced thin and a little sweet, the bean sprouts aren't overcooked, and the egg is broken through the noodles. It has to be eaten hot. Once it cools, the wok smell is gone. We each sang our own words. He said the island is small. I said the island is big.",
   scene:[
     "八月九日是国庆，红白两色的烟火升起来，大家一起唱。同一晚，中元节的歌台搭在空地和组屋楼下。主持人嗓门很大，台上的人穿亮片，台下真的有人跟着唱。炒粿条是福建档口的猛火菜：宽河粉、黑酱油、虾和腊肠，一盘面里混着好几种语言的叫法。从东到西坐出租车四十块，本地人常拿这个价钱说这座岛有多小。阿杰学着主持人的嗓门问：吃饱了没有？他一转身就碰上老同学，觉得这里的一切早就被安排好了，想去一个没人叫得出他名字的地方。",
     "他说岛小。她说岛大，吃三十年也吃不完，每个转角都还有她没试过的档口。她想留下来。这首歌就是歌台的声音：电子鼓、亮闪闪的合成器，火一猛锅铲就越敲越密，两个人的句子也越抢越快。一个唱小，一个唱大，谁也不肯改词。他问：我走了以后，谁陪你吃粿条？"
@@ -1196,8 +1253,8 @@ const MONTHS=[
   c:["cobalt","rose","celadon"],n:6,act:"下半场 · Act II",
   tags:["慢布鲁斯 → 1980s 新谣","指弹木吉他 · 掰开榴莲壳","76 BPM"],
   score:8,
-  note:"榴莲壳又厚又多刺，拿错了会扎手。顺着壳上那条浅白线掰开，肉是亮黄色的，像软膏，有一瓣已经松了。有人觉得臭，有人觉得香。吃进嘴里是甜的，有一点酒味和奶油味，籽要吐掉。我这才知道，陈伯十九岁时也有过一张去台北的票。他说，吃完榴莲不要喝冰水。",
-  noteEn:"The durian husk is thick and covered in spines. Hold it wrong and it pricks you. Split it along the pale seam and the flesh inside is bright yellow, like a soft paste, with one pod already loose. Some find it foul, some fragrant. In the mouth it is sweet, with a hint of wine and cream, and you spit out the seed. Only now do I learn that Uncle Tan, at nineteen, also held a ticket to Taipei. He says: after durian, do not drink ice water.",
+  note:"榴莲壳又厚又多刺，拿错了会扎手。顺着壳上那条浅白线掰开，肉是黄的，软，有一瓣已经松了。有人说臭，有人说香。吃起来甜，有一点酒味和奶油味，籽要吐掉。我这才知道，陈伯十九岁时也有过一张去台北的票。他说，吃完榴莲不要喝冰水。",
+  noteEn:"The durian husk is thick and covered in spines. Hold it wrong and it pricks you. Split it along the pale seam and the flesh is yellow and soft, with one pod already loose. Some say it stinks, some say it smells good. It tastes sweet, with a little wine and cream, and you spit out the seed. Only now do I learn that Uncle Tan, at nineteen, also held a ticket to Taipei. He says: after durian, do not drink ice water.",
   scene:[
     "十一月是雨季，下午和夜里都会下雨。榴莲把人分成两拨：一拨说香，一拨说臭到整节车厢都不能待。壳上全是刺，拿错会扎手，顺着壳缝那条白线掰开，里面是甜的。陈伯说，这跟他自己一样。阿夏今天话很少。他问她是不是想家。",
     "他说自己十九岁也想离开。那时他有一把吉他，一张去台北的票，想去那边唱歌。那会儿的年轻人在学校的树下写自己的歌，唱自己的街道，后来这种歌叫新谣。父亲老了，扇子交到他手里，他就再也没放下。他当年没用上的那张台北的票，和阿杰现在捏在手里的伦敦机票，其实是同一回事。这首歌先是沙哑的慢布鲁斯，换一把吉他，就变成他年轻时在树下弹的指弹木吉他。他只唱剥壳、闻味、扎手，没有讲一句大道理。阿夏问他后不后悔。他说没有，只是下雨的晚上会想，台北的雨是不是也这么准时。吃完，他还是叮嘱：不要喝冰水。"
@@ -1224,8 +1281,8 @@ const MONTHS=[
   c:["celadon","coral","mustard"],n:8,act:"终场 · Finale",
   tags:["爪哇甘美兰 · 铁片琴","扇炭火的呼吸","88 BPM"],
   score:4,
-  note:"沙爹一共八串。边上烤焦了，里面还嫩，有炭火的香味，肉不柴。花生酱又厚又咸，不会甜得发腻。旁边是压紧的白米饭糕、凉黄瓜和带辣味的生洋葱。可是肉本身是咸的。这个摊四十年都没有咸过。我写下：今晚太咸。我在这里吃了十二个星期五，沙爹从来不是这样。<u>请把这个位子留给我。</u>",
-  noteEn:"There are eight sticks of satay. The edges are charred, the inside is still tender, it smells of charcoal, and the meat is not dry. The peanut sauce is thick and salty, not so sweet that it cloys. Beside it are pressed white rice cakes, cool cucumber, and raw onion with a bite. But the meat itself is salty. This stall has not been salty in forty years. I wrote: too salty tonight. I have eaten here for twelve Fridays, and the satay was never like this. <u>Please keep this seat for me.</u>",
+  note:"沙爹一共八串。边是焦的，里面嫩，有炭味，肉不柴。花生酱厚，咸，没有甜到腻。旁边是压紧的白米饭糕、凉黄瓜，还有带辣的生洋葱。可是肉本身是咸的。这个摊四十年都没有咸过。我写下：今晚太咸。我在这里吃了十二个星期五，沙爹从来不是这样。<u>请把这个位子留给我。</u>",
+  noteEn:"Eight sticks of satay. The edges are burnt, the inside is tender, it smells of charcoal, and the meat isn't dry. The peanut sauce is thick and salty, not sweet enough to cloy. Beside it: pressed white rice cakes, cool cucumber, and raw onion with some heat. But the meat itself is salty. This stall has not been salty in forty years. I wrote: too salty tonight. I have eaten here for twelve Fridays, and the satay was never like this. <u>Please keep this seat for me.</u>",
   scene:[
     "十二月不下雪，圣诞灯挂在棕榈树上。沙爹从爪哇传来，在炭火上烤，师傅用扇子一下一下把火扇匀。签子吃完可以拿来数。这是最后一个星期五，也是最后一个摊。阿夏坐回那张椅子，纸巾已经有人替她放好了。她咬一口，是咸的。这个摊四十年没有咸过。她抬头看陈伯，陈伯不看她。",
     "她把签子当成月份来数，从一月的甘蔗一直数到十一月的榴莲，数到第十二根停住。陈伯这才开口：第一天看她把纸巾放得那么端正，就认出了她；今晚盐放重一点，档口不挂灯笼，明天儿子就可以飞。阿杰拿起一串咸沙爹，一口气吃完，没喝水。他说九月他也求过她，别把沙爹写好；又说这串一点都不咸，爸烤了四十年，手从来没抖过。阿夏在红本子最后一页写下：今晚太咸，但十二个星期五从来不是这样，请把这个位子留给我。全场合唱：这里没有冬天，一年就像一个很长的下午。阿姨敲响厨房铃，喊出 Last order。留下还是回去，由你来选。"
@@ -1264,8 +1321,132 @@ const MONTH_AUDIO=[
  [["a92c87da-2359-408d-88ed-dedf2bf91c81","3:27"],["e46f05b0-ff32-408d-b42d-9db1577117e2","4:07"]],
  [["00197909-d10f-45c1-b187-2f6984d253cd","3:17"],["b30d118d-9057-4dda-81d0-256172f09e5d","3:20"]]
 ];
+/* Self-hosted takes with line-synced lyrics (Suno aligned_lyrics, read 2026-11-26).
+   Each line: [start s, end s, sung text, singer when it changes]. Lines with a "~" start time are estimates:
+   Suno could not align them because that take was generated from mis-encoded Chinese. */
+const TRACKS={
+ 2:{src:"audio/03-can-or-not.mp3",suno:"775795cb-ae1c-40c8-bf1f-4c7851899a0b",take:"v4b",lines:[
+  [17.47,20.28,"Come come come, place your bets!","阿姨"],
+  [20.89,26.36,"This year got one mystery person, secretly come give marks"],
+  [27.66,30.25,"Eat one stall, write one line"],
+  [30.95,33.88,"好也好 坏也好 we all must know"],
+  [34.42,37.77,"Can or not? Can or not?","阿姨与食客"],
+  [37.77,40.72,"猜中有钱拿 猜错请喝茶"],
+  [41.29,43.79,"Can or not? Can or not?"],
+  [44.59,47.51,"One bet two! One bet four! One bet nine!"],
+  [54.45,57.55,"Number one, that tourist with the big camera","阿姨"],
+  [57.81,61.25,"Take everything, eat nothing, 一赔二"],
+  [61.25,64.17,"Number two, Mr Lim, come every day"],
+  [64.81,67.16,"Eat also must read newspaper, 一赔四"],
+  [68.03,71.20,"Number three, that girl from far far away"],
+  [71.43,74.80,"一包纸巾占座 one person eat three plates"],
+  [74.90,77.55,"Don’t look like one leh, 一赔九"],
+  [77.60,80.67,"Me? I’m just very hungry!","阿夏"],
+  [82.02,85.37,"Can or not? Can or not?","阿姨与食客"],
+  [85.37,88.22,"猜中有钱拿 猜错请喝茶"],
+  [88.83,91.25,"Can or not? Can or not?"],
+  [92.20,95.55,"One bet two! One bet four! One bet nine!"],
+  [95.55,98.97,"面团甩一圈 甩两圈 甩上天","煎饼师傅"],
+  [98.99,102.14,"Answer still not landed, nobody say anything"],
+  [102.38,104.08,"啪! Land on the griddle"],
+  [104.13,105.96,"啪! Flip over again"],
+  [115.93,118.50,"Can or not? Can lah!","众人"],
+  [119.30,122.51,"Can or not? Cannot lah!"],
+  [122.66,125.96,"Can or not? Can or not?"],
+  [126.11,130.69,"One bet nine! One bet nine!"]
+ ]},
+ 3:{src:"audio/04-four-oclock-rain.mp3",suno:"b5926e85-205a-431c-a911-8c98dab6a99c",take:"v1",lines:[
+  [16.04,20.00,"三点五十九分 天还很蓝","阿夏"],
+  [22.95,27.33,"四点整 雨就落下来 一秒都不差"],
+  [31.29,35.24,"我站在巴士站 没有带伞"],
+  [37.85,42.37,"冰咖啡在袋子里 慢慢地晃"],
+  [44.92,50.07,"新加坡的雨 是全世界最准时的","阿杰"],
+  [50.92,52.94,"比地铁准 比老板准"],
+  [53.26,56.42,"我有一把伞 还空着一半"],
+  [57.01,59.56,"你要不要 站进来一点"],
+  [60.45,63.35,"Four o’clock rain 四点的雨","两人合唱"],
+  [64.13,67.09,"来得很急 走得也急"],
+  [68.04,71.29,"Four o’clock rain 半把伞的距离"],
+  [72.57,75.49,"刚好 听见你在笑"],
+  [91.18,94.40,"你说咖啡要拉 拉得高高的","阿夏"],
+  [94.71,97.35,"从一个壶 倒进另一个壶"],
+  [98.39,101.46,"才会起泡 才会变得滑"],
+  [102.21,104.77,"我想 有些人也是这样"],
+  [105.72,108.55,"Four o’clock rain 四点的雨","两人合唱"],
+  [109.32,112.30,"来得很急 走得也急"],
+  [113.24,117.01,"Four o’clock rain 半把伞的距离"],
+  [117.76,120.61,"刚好 听见你在笑"],
+  [122.68,127.36,"雨停之前 我们都不说话","轻声对唱"],
+  [128.58,135.23,"只听冰块 在袋子里 叮当 叮当"],
+  [150.76,154.36,"Four o’clock rain 明天还会来","两人合唱"],
+  [154.62,157.17,"四点整 一秒都不差"],
+  [158.28,163.02,"Four o’clock rain 我明天 不带伞"]
+ ]},
+ 6:{src:"audio/07-sentosa.mp3",suno:"4e2614bb-8c67-4c21-9c15-70c62ba8d742",take:"v4",lines:[
+  [16.24,22.97,"It’s July, school’s out, the whole island is on holiday","阿夏"],
+  [24.10,27.19,"Take a ride, cross the bridge"],
+  [27.45,29.11,"And there’s the beach"],
+  [31.23,38.44,"Nasi lemak wrapped in a leaf, one for each of us"],
+  [40.10,43.15,"Mari menari, mari menari","众人"],
+  [43.22,46.02,"Come and dance, come and dance"],
+  [46.47,50.79,"The sand is hot and the sea is blue"],
+  ["~50.9",54.5,"Sentosa, Sentosa, 一天刚刚好"],
+  ["~56",61,"你说这里像天堂","阿杰"],
+  ["~63",68,"我从小来 来了一百次"],
+  ["~70",75,"同一片海 同一座桥"],
+  ["~77",82,"这个岛 骑车一天就绕完"],
+  [84.20,91.72,"You go round the map, I go round the days","阿夏"],
+  [91.86,97.46,"Every day there’s something new to eat"],
+  [99.25,104.78,"Look at that aunty singing in the sea"],
+  [106.94,112.32,"And the otters are on holiday too"],
+  [114.26,117.22,"Mari menari, mari menari","众人"],
+  [117.39,120.23,"Come and dance, come and dance"],
+  [120.61,123.92,"The sand is hot and the sea is blue"],
+  [124.10,129.71,"Sentosa, Sentosa, 一天刚刚好"],
+  ["~131",136,"有时候我站在海边","阿杰"],
+  ["~138",143,"看那些船 一艘一艘开出去"],
+  ["~145",150,"我想知道 它们去的地方"],
+  ["~152",157,"有没有冬天"],
+  [159.83,162.80,"Mari menari, mari menari","众人"],
+  [162.96,165.91,"Come and dance, come and dance"],
+  [166.51,169.44,"Boats sail out, 我们留下"],
+  [169.44,173.33,"Sentosa, Sentosa, see you next year"],
+  [174.95,176.75,"Terima kasih, laut"],
+  [179.09,180.71,"See you next year"],
+  [182.53,184.31,"Terima kasih, laut"],
+  [186.63,188.29,"See you next year"]
+ ]},
+ 8:{src:"audio/09-lanterns.mp3",suno:"1083888e-b706-4548-a348-dff4c7aa78b9",take:"v4b",lines:[
+  [17.02,21.06,"中秋晚上 燈籠掛滿晒","阿杰"],
+  [21.56,24.66,"兔仔 楊桃 仲有一盞係飛機"],
+  [25.78,29.34,"我提住佢 行到你枱前"],
+  [29.95,32.95,"豆腐花 我請你"],
+  [34.48,37.16,"我有件事 好難開口"],
+  [37.45,41.11,"好似豆腐花 一郁就散"],
+  [42.33,44.96,"嗰檔沙嗲 係我爸爸嘅"],
+  [45.30,50.03,"你可唔可以 畀佢一個唔好嘅評價"],
+  [50.30,56.40,"唔好畀佢燈籠 唔好畀佢燈籠"],
+  [58.90,64.07,"一盞燈籠掛上去 日日有人排隊"],
+  [66.90,71.21,"排隊嘅人多咗 檔口就閂唔到"],
+  [71.48,75.37,"檔口閂唔到 我就走唔到"],
+  [75.93,78.98,"You know I can’t lie","阿夏"],
+  [79.78,83.31,"That’s the best satay I’ve ever had"],
+  [84.38,87.12,"You’re asking me to write it’s not good"],
+  [88.07,95.45,"It’s like asking me to write that tonight’s moon isn’t round enough"],
+  [101.31,105.37,"豆腐花好滑 説話好難講","两人对唱"],
+  [108.40,112.42,"The moon is round, and we’re both thinking"],
+  [113.82,116.92,"各自嘅遠方"],
+  [117.02,122.38,"唔好畀佢燈籠 唔好畀佢燈籠","阿杰"],
+  [122.88,124.74,"Let me think","阿夏"],
+  [125.71,130.78,"一盞燈籠掛上去 日日有人排隊","阿杰"],
+  [132.02,134.80,"Let me think","阿夏"]
+ ]}
+};
+const WHO_CLS={"阿姨":"aunty","阿姨与食客":"aunty","四位阿姨":"aunty","陈伯":"uncle","众人":"all","两人合唱":"all","两人对唱":"all","轻声对唱":"all"};
+
 function listenLinks(takes,name){
-  return takes.map((t,i)=>`<a class="play" href="https://suno.com/song/${t[0]}" target="_blank" rel="noopener" aria-label="${tx(`在 Suno 试听《${name}》版本 ${"AB"[i]}（${t[1]}），新标签页打开`,`Listen to “${name}” take ${"AB"[i]} (${t[1]}) on Suno, opens in a new tab`)}"><span class="tri" aria-hidden="true"></span>${tx("试听","Listen")} ${"AB"[i]} · ${t[1]}</a>`).join("");
+  const items=takes.map((t,i)=>`<a href="https://suno.com/song/${t[0]}" target="_blank" rel="noopener" aria-label="${tx(`在 Suno 试听《${name}》版本 ${"AB"[i]}（${t[1]}），新标签页打开`,`Listen to “${name}” take ${"AB"[i]} (${t[1]}) on Suno, opens in a new tab`)}">${tx("版本","Take")} ${"AB"[i]} · ${t[1]}</a>`).join("");
+  return `<details class="listen"><summary><span class="tri" aria-hidden="true"></span>${tx("试听","Listen")}</summary><div class="listen-pop">${items}</div></details>`;
 }
 
 const DISH_SRC=[
@@ -1404,58 +1585,57 @@ function pawOverlay(){
 /* overhead red plastic hawker stool, drawn as a red-ink line sketch, with a crooked tissue pack */
 function makeStool(u){
   return `<svg viewBox="0 0 100 100" aria-hidden="true" data-u="${u}">
-<g style="fill:none;stroke-linecap:round;stroke-linejoin:round">
-  <path d="M50 11 C72 10 90 27 89 50 C88 73 71 90 49 89 C27 88 11 72 12 49 C13 28 29 12 50 11 Z" style="fill:#f8e4de;fill-opacity:.94;stroke:var(--stool);stroke-width:2.4"/>
-  <path d="M50 20 C67 20 80 33 80 50 C79 67 66 80 49 80 C33 79 20 66 21 49 C21 33 34 20 50 20" style="stroke:var(--stool);stroke-width:1;opacity:.7"/>
-  <path d="M41 24.5 Q50 22 59 24.5" style="stroke:var(--stool);stroke-width:2.8"/>
-  <path d="M23.5 62 l6 -4 M26 68 l6 -4 M30.5 73 l6 -4" style="stroke:var(--stool);stroke-width:.9;opacity:.6"/>
-  <path d="M71 26 l3 4 M75 31 l2.4 3.6" style="stroke:var(--stool);stroke-width:.8;opacity:.45"/>
-  <g transform="translate(55 55) rotate(-14)">
-    <path d="M-17 -10.5 C-8 -11.3 9 -11 17 -10.2 C17.6 -3 17.4 4 16.8 10.6 C8 11.2 -8 11 -16.8 10.4 C-17.5 3 -17.6 -4 -17 -10.5 Z" style="fill:#fffefb;stroke:#2b2b28;stroke-width:1.3"/>
-    <path d="M-9 .3 C-3 -.2 3 .3 9 0" style="stroke:#2b2b28;stroke-width:.9"/>
-    <path d="M-4 0 C-3 -5 3 -5.4 4.4 0" style="fill:#fffefb;stroke:#2b2b28;stroke-width:.9"/>
-    <path d="M-14 7 L-6 7" style="stroke:var(--cobalt);stroke-width:1.6"/>
+  <ellipse cx="50" cy="86" rx="28" ry="5" fill="rgba(20,16,12,.18)"/>
+  <circle cx="50" cy="50" r="42" fill="var(--stool)"/>
+  <circle cx="50" cy="50" r="42" fill="none" stroke="var(--stool-2)" stroke-width="3.5"/>
+  <circle cx="50" cy="50" r="32" fill="none" stroke="#f0a097" stroke-width="1.3" opacity=".75"/>
+  <ellipse cx="36" cy="34" rx="14" ry="8" fill="#fff" opacity=".22" transform="rotate(-32 36 34)"/>
+  <g transform="translate(56 54) rotate(-18)">
+    <rect x="-18" y="-12" width="36" height="22" rx="1.4" fill="#fffefb" stroke="#2b2b28" stroke-width="1.15"/>
+    <path d="M-10 0 H10" stroke="#2b2b28" stroke-width=".8"/>
+    <path d="M-4 -1 q4 -6 8 0" fill="#fffefb" stroke="#2b2b28" stroke-width=".8"/>
+    <path d="M-13 7 H-3" stroke="#2e4c86" stroke-width="1.7"/>
   </g>
-</g></svg>`;
+</svg>`;
 }
 const STOOL=makeStool("h");
 
 /* Distinct, refined overhead garlands for all 12 months */
 function garland(type){
-  const Y=t=>(1-t)*(1-t)*10+2*(1-t)*t*42+t*t*10;
+  const Y=t=>(1-t)*(1-t)*16+2*(1-t)*t*46+t*t*16;
   let s="", items=[];
   const wire=!["rain4","monsoon","waves"].includes(type);
   if(wire){
-    s+=`<path class="wire" d="M0,10 Q150,42 300,10 Q450,42 600,10 Q750,42 900,10 Q1050,42 1200,10"/>`;
+    s+=`<path class="wire" d="M0,16 Q150,46 300,16 Q450,46 600,16 Q750,46 900,16 Q1050,46 1200,16"/>`;
   }
-  for(let seg=0;seg<4;seg++) for(const t of [.22,.5,.78]) items.push([seg*300+t*300,Y(t),seg*3]);
+  for(let seg=0;seg<4;seg++) for(const t of [.22,.5,.78]) items.push([seg*300+t*300,Y(t)]);
   const shape={
-    bulbs:(x,y)=>`<line x1="${x}" y1="${y}" x2="${x}" y2="${y+6}" class="wire"/><rect x="${x-2}" y="${y+5}" width="4" height="3" style="fill:var(--ink-2)"/><circle class="lit" cx="${x}" cy="${y+12}" r="4.8" style="fill:var(--mustard)"/>`,
-    lantern:(x,y)=>`<line x1="${x}" y1="${y}" x2="${x}" y2="${y+6}" class="wire"/><rect x="${x-4.5}" y="${y+5}" width="9" height="3" rx="1" style="fill:var(--mustard)"/><ellipse class="lit" cx="${x}" cy="${y+18}" rx="10" ry="11" style="fill:var(--coral)"/><path d="M${x-4},${y+8} q-3,10 0,20 M${x+4},${y+8} q3,10 0,20" style="fill:none;stroke:var(--mustard);stroke-width:.7;opacity:.65"/><rect x="${x-3.5}" y="${y+28}" width="7" height="2.4" style="fill:var(--mustard)"/><line x1="${x}" y1="${y+30}" x2="${x}" y2="${y+40}" style="stroke:var(--mustard);stroke-width:1.2"/>`,
+    bulbs:(x,y)=>`<line x1="${x}" y1="${y}" x2="${x}" y2="${y+10}" class="wire"/><rect x="${x-3.2}" y="${y+8}" width="6.4" height="5" style="fill:var(--ink-2)"/><circle class="lit" cx="${x}" cy="${y+20}" r="9" style="fill:var(--mustard)"/>`,
+    lantern:(x,y)=>`<line x1="${x}" y1="${y}" x2="${x}" y2="${y+8}" class="wire"/><rect x="${x-8}" y="${y+6}" width="16" height="5" rx="1" style="fill:var(--mustard)"/><ellipse class="lit" cx="${x}" cy="${y+28}" rx="16" ry="18" style="fill:var(--coral)"/><path d="M${x-6},${y+12} q-5,16 0,32 M${x+6},${y+12} q5,16 0,32" style="fill:none;stroke:var(--mustard);stroke-width:1.2;opacity:.75"/><rect x="${x-6}" y="${y+44}" width="12" height="3.4" style="fill:var(--mustard)"/><line x1="${x}" y1="${y+47}" x2="${x}" y2="${y+62}" style="stroke:var(--mustard);stroke-width:1.6"/>`,
     crescent:(x,y,idx)=>idx%2===0
-      ? `<line x1="${x}" y1="${y}" x2="${x}" y2="${y+6}" class="wire"/><path class="lit" d="M${x+2},${y+7} a9,9 0 1,0 0,18 a7,7 0 1,1 0,-18z" style="fill:var(--mustard)"/>`
-      : `<line x1="${x}" y1="${y}" x2="${x}" y2="${y+6}" class="wire"/><polygon points="${x},${y+6} ${x+8},${y+15} ${x},${y+24} ${x-8},${y+15}" style="fill:var(--celadon);stroke:var(--tile);stroke-width:.8"/><path d="M${x-3},${y+12} L${x+3},${y+18} M${x+3},${y+12} L${x-3},${y+18}" style="stroke:var(--tile);stroke-width:.7;opacity:.75"/>`,
-    rain4:(x)=>{const yy=8+((x*7)%26);return `<line x1="${x+6}" y1="${yy}" x2="${x-4}" y2="${yy+26}" style="stroke:var(--cobalt);stroke-width:1.3;stroke-linecap:round;opacity:.55"/><line x1="${x+28}" y1="${yy+10}" x2="${x+20}" y2="${yy+32}" style="stroke:var(--celadon);stroke-width:1;stroke-linecap:round;opacity:.45"/>`},
+      ? `<line x1="${x}" y1="${y}" x2="${x}" y2="${y+8}" class="wire"/><path class="lit" d="M${x+4},${y+10} a16,16 0 1,0 0,32 a12,12 0 1,1 0,-32z" style="fill:var(--mustard)"/>`
+      : `<line x1="${x}" y1="${y}" x2="${x}" y2="${y+8}" class="wire"/><polygon points="${x},${y+8} ${x+14},${y+24} ${x},${y+40} ${x-14},${y+24}" style="fill:var(--celadon);stroke:var(--tile);stroke-width:1.2"/><path d="M${x-5},${y+18} L${x+5},${y+30} M${x+5},${y+18} L${x-5},${y+30}" style="stroke:var(--tile);stroke-width:1.1"/>`,
+    rain4:(x)=>{const yy=8+((x*5)%16);return `<line x1="${x+12}" y1="${yy}" x2="${x-16}" y2="${yy+72}" style="stroke:var(--cobalt);stroke-width:2.7;stroke-linecap:round;opacity:.88"/><line x1="${x+40}" y1="${yy+12}" x2="${x+14}" y2="${yy+70}" style="stroke:var(--celadon);stroke-width:1.8;stroke-linecap:round;opacity:.75"/>`},
     none:()=>"",
     intermission:(x,y,idx)=>idx%3===1
-      ? `<g transform="translate(${x} ${y+14}) rotate(-18)" style="fill:var(--ink-2);opacity:.7"><ellipse cx="0" cy="2" rx="3" ry="2.2"/><circle cx="-2.8" cy="-1.6" r="1"/><circle cx="0" cy="-2.6" r="1"/><circle cx="2.8" cy="-1.6" r="1"/></g>`
-      : `<line x1="${x}" y1="${y}" x2="${x}" y2="${y+6}" class="wire"/><circle class="lit" cx="${x}" cy="${y+11}" r="4.2" style="fill:var(--coral)"/>`,
-    waves:(x)=>`<path d="M${x-26},36 q13,-10 26,0 t26,0" style="fill:none;stroke:var(--celadon);stroke-width:1.8;stroke-linecap:round;opacity:.85"/><path d="M${x-14},46 q10,-6 20,0" style="fill:none;stroke:var(--cobalt);stroke-width:1.1;stroke-linecap:round;opacity:.45"/>`,
-    flags:(x,y,idx)=>`<path d="M${x-10},${y-1} L${x+10},${y-1} L${x},${y+22}z" style="fill:${idx%2?"var(--coral)":"var(--tile)"};stroke:var(--coral);stroke-width:1"/>`,
+      ? `<g transform="translate(${x} ${y+22}) rotate(-18)" style="fill:var(--ink-2)"><ellipse cx="0" cy="3" rx="5.2" ry="3.8"/><circle cx="-4.6" cy="-2.4" r="1.7"/><circle cx="0" cy="-4.2" r="1.8"/><circle cx="4.6" cy="-2.4" r="1.7"/></g>`
+      : `<line x1="${x}" y1="${y}" x2="${x}" y2="${y+8}" class="wire"/><circle class="lit" cx="${x}" cy="${y+18}" r="8" style="fill:var(--coral)"/>`,
+    waves:(x)=>`<path d="M${x-48},42 q22,-18 44,0 t44,0" style="fill:none;stroke:var(--celadon);stroke-width:3.2;stroke-linecap:round"/><path d="M${x-28},62 q18,-12 36,0" style="fill:none;stroke:var(--cobalt);stroke-width:2;stroke-linecap:round;opacity:.7"/>`,
+    flags:(x,y,idx)=>`<path d="M${x-18},${y} L${x+18},${y} L${x},${y+40}z" style="fill:${idx%2?"var(--coral)":"var(--tile)"};stroke:var(--coral);stroke-width:1.6"/>`,
     moon:(x,y,idx)=>idx%2===0
-      ? `<line x1="${x}" y1="${y}" x2="${x}" y2="${y+6}" class="wire"/><circle class="lit" cx="${x}" cy="${y+18}" r="10.5" style="fill:var(--mustard)"/><path d="M${x},${y+8} v20 M${x-6},${y+10} q-4,8 0,16 M${x+6},${y+10} q4,8 0,16" style="fill:none;stroke:var(--coral);stroke-width:.9;opacity:.75"/>`
-      : `<line x1="${x}" y1="${y}" x2="${x}" y2="${y+8}" class="wire"/><polygon class="lit" points="${x},${y+8} ${x+11},${y+16} ${x},${y+24} ${x-11},${y+16}" style="fill:var(--rose);stroke:var(--coral);stroke-width:.8"/>`,
-    diya:(x,y)=>`<line x1="${x}" y1="${y}" x2="${x}" y2="${y+8}" class="wire"/><path d="M${x-10},${y+20} q10,11 20,0z" style="fill:var(--coral)"/><path class="lit" d="M${x},${y+8} q4.5,6 0,12 q-4.5,-6 0,-12z" style="fill:var(--mustard)"/>`,
-    monsoon:(x)=>{const yy=4+((x*11)%20);return `<line x1="${x+10}" y1="${yy}" x2="${x-8}" y2="${yy+36}" style="stroke:var(--cobalt);stroke-width:1.5;stroke-linecap:round;opacity:.62"/><line x1="${x+34}" y1="${yy+12}" x2="${x+18}" y2="${yy+44}" style="stroke:var(--ink-2);stroke-width:1;stroke-linecap:round;opacity:.4"/>`},
+      ? `<line x1="${x}" y1="${y}" x2="${x}" y2="${y+8}" class="wire"/><circle class="lit" cx="${x}" cy="${y+30}" r="18" style="fill:var(--mustard)"/><path d="M${x},${y+14} v34 M${x-10},${y+18} q-7,14 0,28 M${x+10},${y+18} q7,14 0,28" style="fill:none;stroke:var(--coral);stroke-width:1.4;opacity:.8"/>`
+      : `<line x1="${x}" y1="${y}" x2="${x}" y2="${y+10}" class="wire"/><polygon class="lit" points="${x},${y+10} ${x+16},${y+26} ${x},${y+42} ${x-16},${y+26}" style="fill:var(--rose);stroke:var(--coral);stroke-width:1.2"/>`,
+    diya:(x,y)=>`<line x1="${x}" y1="${y}" x2="${x}" y2="${y+10}" class="wire"/><path d="M${x-18},${y+32} q18,18 36,0z" style="fill:var(--coral)"/><path class="lit" d="M${x},${y+12} q8,10 0,22 q-8,-12 0,-22z" style="fill:var(--mustard)"/>`,
+    monsoon:(x)=>{const yy=6+((x*7)%18);return `<line x1="${x+14}" y1="${yy}" x2="${x-18}" y2="${yy+84}" style="stroke:var(--cobalt);stroke-width:2.8;stroke-linecap:round;opacity:.9"/><line x1="${x+46}" y1="${yy+16}" x2="${x+16}" y2="${yy+88}" style="stroke:var(--ink-2);stroke-width:1.7;stroke-linecap:round;opacity:.55"/>`},
     stars:(x,y,idx)=>{
-      let p=[];for(let i=0;i<10;i++){const r=i%2?3.6:9.5,a=Math.PI/5*i-Math.PI/2;p.push((x+r*Math.cos(a)).toFixed(1)+","+(y+15+r*Math.sin(a)).toFixed(1));}
+      let p=[];for(let i=0;i<10;i++){const r=i%2?6.2:17,a=Math.PI/5*i-Math.PI/2;p.push((x+r*Math.cos(a)).toFixed(1)+","+(y+26+r*Math.sin(a)).toFixed(1));}
       const fill=idx%3===0?"var(--celadon)":"var(--mustard)";
-      return `<line x1="${x}" y1="${y}" x2="${x}" y2="${y+5}" class="wire"/><polygon class="lit" points="${p.join(" ")}" style="fill:${fill}"/>`;
+      return `<line x1="${x}" y1="${y}" x2="${x}" y2="${y+8}" class="wire"/><polygon class="lit" points="${p.join(" ")}" style="fill:${fill}"/>`;
     }
   }[type];
   items.forEach(([x,y],idx)=>{s+=shape(x,y,idx);});
   if(type==="none"){
-    s+=`<text x="600" y="64" text-anchor="middle" style="font-family:var(--mono);font-size:12.5px;fill:var(--ink-2)">${tx("五月 · 没有节日，头顶什么都不挂","May. No festival. Nothing hangs overhead.")}</text>`;
+    s+=`<text x="600" y="74" text-anchor="middle" style="font-family:var(--mono);font-size:22px;letter-spacing:.03em;fill:var(--ink-2)">${tx("五月 · 没有节日，头顶什么都不挂","May. No festival. Nothing hangs overhead.")}</text>`;
   }
   const el=document.getElementById("garland");
   el.classList.remove("swap");
@@ -1939,6 +2119,108 @@ function renderLyrics(items){
   }).join("");
 }
 
+/* ---- player with line-synced lyrics ---- */
+const audio=new Audio();
+audio.preload="none";
+let audioMonth=-1, userScrollAt=0;
+const TRACK_DUR={2:140,3:200,6:190.8,8:167.6};
+function lineStart(l){return typeof l[0]==="string"?parseFloat(l[0].slice(1)):l[0];}
+function fmt(s){s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0");}
+
+function playerHtml(i){
+  const t=TRACKS[i];
+  if(!t) return "";
+  const m=MONTHS[i];
+  let est=false;
+  const items=t.lines.map((l,k)=>{
+    const who=l[3]?`<li class="pl-who ${WHO_CLS[l[3]]||""}" aria-hidden="true">${tx(l[3],WHO_EN[l[3]]||l[3])}</li>`:"";
+    const isEst=typeof l[0]==="string"; if(isEst) est=true;
+    return who+`<li data-k="${k}" class="${isEst?"est":""}" tabindex="-1">${l[2]}</li>`;
+  }).join("");
+  return `<div class="player" id="player">
+    <div class="pl-bar">
+      <button type="button" class="pl-btn" aria-label="${tx(`播放《${m.song}》`,`Play “${m.song}”`)}"><span class="i-play"></span><span class="i-pause"></span></button>
+      <div class="pl-meta"><b>${tx("整首试听 · 歌词同步","Full song · synced lyrics")}</b><span class="pl-time">0:00 / ${fmt(TRACK_DUR[i])}</span></div>
+      <input class="pl-seek" type="range" min="0" max="${TRACK_DUR[i]}" step="0.1" value="0" aria-label="${tx("播放进度","Seek")}">
+    </div>
+    <ol class="pl-lyrics" aria-label="${tx("同步歌词（点一句跳到那里）","Synced lyrics (click a line to jump)")}">${items}</ol>
+    ${est?`<div class="pl-note">${tx("≈ 这几句的时间是估算的","≈ timing for these lines is approximate")}</div>`:""}
+  </div>`;
+}
+
+function loadTrack(i){
+  if(audioMonth===i) return;
+  audio.src=TRACKS[i].src;
+  audioMonth=i;
+  if("mediaSession" in navigator){
+    try{navigator.mediaSession.metadata=new MediaMetadata({title:MONTHS[i].song,artist:"Newton Circus · 十二个星期五",album:tx(MONTHS[i].dish,MONTHS[i].dishEn),artwork:[{src:DISH_SRC[i],sizes:"512x512",type:"image/jpeg"}]});}catch(e){}
+  }
+}
+
+function syncPlayer(){
+  const p=document.getElementById("player");
+  if(!p||audioMonth!==current) return;
+  const t=audio.currentTime, d=audio.duration||TRACK_DUR[current];
+  p.classList.toggle("playing",!audio.paused);
+  const btn=p.querySelector(".pl-btn");
+  btn.setAttribute("aria-label",audio.paused?tx(`播放《${MONTHS[current].song}》`,`Play “${MONTHS[current].song}”`):tx("暂停","Pause"));
+  p.querySelector(".pl-time").textContent=`${fmt(t)} / ${fmt(d)}`;
+  const seek=p.querySelector(".pl-seek");
+  if(document.activeElement!==seek){seek.max=d;seek.value=t;}
+  seek.style.setProperty("--p",(t/d*100)+"%");
+  const lines=TRACKS[current].lines;
+  let k=-1;
+  for(let j=0;j<lines.length;j++){ if(lineStart(lines[j])<=t+0.15) k=j; else break; }
+  if(k>=0 && t>lines[k][1]+2.5) k=-1;           // instrumental gap: nothing lit
+  const box=p.querySelector(".pl-lyrics");
+  const prev=box.querySelector("li.on");
+  const next=k>=0?box.querySelector(`li[data-k="${k}"]`):null;
+  if(prev!==next){
+    if(prev) prev.classList.remove("on");
+    if(next){
+      next.classList.add("on");
+      if(Date.now()-userScrollAt>2500){
+        const top=next.offsetTop-box.clientHeight*0.38;
+        const reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+        box.scrollTo({top:Math.max(0,top),behavior:reduce?"auto":"smooth"});
+      }
+    }
+  }
+}
+
+function bindPlayer(i){
+  if(audioMonth!==-1 && audioMonth!==i && !audio.paused) audio.pause();
+  const p=document.getElementById("player");
+  if(!p) return;
+  const box=p.querySelector(".pl-lyrics");
+  p.querySelector(".pl-btn").onclick=()=>{
+    loadTrack(i);
+    if(audio.paused) audio.play().catch(()=>{}); else audio.pause();
+  };
+  const seek=p.querySelector(".pl-seek");
+  seek.oninput=()=>{
+    loadTrack(i);
+    seek.style.setProperty("--p",(seek.value/seek.max*100)+"%");
+    p.querySelector(".pl-time").textContent=`${fmt(seek.value)} / ${fmt(audio.duration||TRACK_DUR[i])}`;
+  };
+  seek.onchange=()=>{ loadTrack(i); audio.currentTime=+seek.value; syncPlayer(); };
+  box.onclick=e=>{
+    const li=e.target.closest("li[data-k]");
+    if(!li) return;
+    loadTrack(i);
+    audio.currentTime=Math.max(0,lineStart(TRACKS[i].lines[+li.dataset.k])-0.3);
+    audio.play().catch(()=>{});
+    userScrollAt=0;
+  };
+  ["wheel","touchmove"].forEach(ev=>box.addEventListener(ev,()=>{userScrollAt=Date.now();},{passive:true}));
+  syncPlayer();
+}
+
+let rafId=0;
+function tick(){ syncPlayer(); rafId=audio.paused?0:requestAnimationFrame(tick); }
+audio.addEventListener("play",()=>{ if(!rafId) rafId=requestAnimationFrame(tick); });
+["pause","ended","seeked","loadedmetadata"].forEach(ev=>audio.addEventListener(ev,syncPlayer));
+
 const floor=document.getElementById("floor"),
       stool=document.getElementById("stool"),
       monthEl=document.getElementById("month"),
@@ -1951,7 +2233,7 @@ MONTHS.forEach((m,i)=>{
   b.type="button";
   b.className="tile";
   b.setAttribute("aria-label",`${MON[i]} ${m.dish} / ${m.dishEn}, ${m.song}`);
-  b.innerHTML=(m.paw?pawOverlay():"")+`<img class="dish" alt="" src="${DISH_SRC[i]}"><span class="no">${MON[i]}</span>`+(i===5||i===11?`<span class="act-mark" aria-hidden="true"></span>`:"");
+  b.innerHTML=(m.paw?pawOverlay():"")+`<span class="no">${MON[i]}</span>`+(i===5||i===11?`<span class="act-mark" aria-hidden="true"></span>`:"");
   b.addEventListener("click",()=>pick(i));
   floor.appendChild(b);
 });
@@ -2007,7 +2289,7 @@ function renderMenuBoard(){
     const items=slice.map((m,idx)=>{
       const k=offset+idx;
       const d=tx(m.dish,m.dishEn);
-      return `<li class="menu-item"><button type="button" class="menu-btn${k===current?" active":""}" data-jump="${k}"><span class="m-no">${m.no}</span><span class="m-dish">${d}</span><span class="m-song">${m.song}</span></button></li>`;
+      return `<li class="menu-item"><button type="button" class="menu-btn${k===current?" active":""}" data-jump="${k}"><span class="m-no">${m.no}</span><span class="m-dish">${d}</span><span class="m-dots" aria-hidden="true"></span><span class="m-song">${m.song}</span></button></li>`;
     }).join("");
     return `<div class="menu-act"><h3>${title}</h3><ul class="menu-list">${items}</ul></div>`;
   };
@@ -2027,8 +2309,8 @@ function renderMenuBoard(){
 
 function notebookMeta(idx){
   const ring=idx===11
-    ? `<svg class="nb-ring" viewBox="0 0 50 32" preserveAspectRatio="none" aria-hidden="true"><path d="M5,17 C4,6 21,3 36,5 C47,7 48,19 40,25 C29,31 9,29 5,18 C4,11 19,5 35,7" fill="none" stroke="#b4332c" stroke-width="1.35" stroke-linecap="round"/></svg>`
-    : `<svg class="nb-ring" viewBox="0 0 50 32" preserveAspectRatio="none" aria-hidden="true"><path d="M6,16 C6,6 22,4 36,6 C46,8 47,20 39,25 C28,30 8,28 6,16 Z" fill="none" stroke="#b4332c" stroke-width="1.25" stroke-linecap="round"/></svg>`;
+    ? `<svg class="nb-ring" viewBox="0 0 72 42" preserveAspectRatio="none" aria-hidden="true"><path d="M9,24 C5,11 18,3 36,6 C54,8 66,15 62,27 C57,38 40,41 22,36 C10,32 4,28 10,20" fill="none" stroke="#b4332c" stroke-width="1.5" stroke-linecap="round"/><path d="M14,30 C26,37 48,35 60,26" fill="none" stroke="#b4332c" stroke-width=".7" opacity=".6" stroke-linecap="round"/></svg>`
+    : `<svg class="nb-ring" viewBox="0 0 72 42" preserveAspectRatio="none" aria-hidden="true"><path d="M12,23 C8,12 22,4 40,8 C56,11 64,18 58,28 C52,38 34,40 18,34 C8,29 5,26 12,19" fill="none" stroke="#b4332c" stroke-width="1.25" stroke-linecap="round"/></svg>`;
   let tag="", trace="";
   if(idx===1) tag=`<s>${tx("物流","Logistics")}</s>${tx("第二盘","2nd plate")}`;
   else if(idx===3){tag=tx("16:00 阵雨打湿页角","16:00 rain on corner");trace=`<span class="nb-trace rain" aria-hidden="true"></span>`;}
@@ -2093,13 +2375,13 @@ function pick(i,scrollPanel){
     <div class="month-grid">
       <div class="ledger-col">
         <div class="nb-stack">
-        <figure class="nb-photo">
-          <img src="${DISH_SRC[current]}" alt="${tx("这个月的菜："+m.dish,"This month’s dish: "+m.dishEn)}" decoding="async">
-          <figcaption>${dish}</figcaption>
-        </figure>
         <div class="notebook">
           ${nb.trace}
           <div class="nb-label"><span>${tx("阿夏的红笔记本","Summer’s red notebook")}</span><span>${m.no} · p.${String(current+1).padStart(2,"0")}</span></div>
+          <figure class="nb-photo">
+          <img src="${DISH_SRC[current]}" alt="${tx("这个月的菜："+m.dish,"This month’s dish: "+m.dishEn)}" decoding="async">
+          <figcaption>${dish}</figcaption>
+          </figure>
           <div class="nb-score-row">
             <div class="nb-score" aria-label="${tx(dish+" "+m.score+" 分",dish+" "+m.score+" out of 10")}">${nb.ring}<b>${m.score}</b><span>${tx("分","/ 10")}</span></div>
             ${nb.tag?`<span class="nb-tag">${nb.tag}</span>`:""}
@@ -2125,13 +2407,13 @@ function pick(i,scrollPanel){
             </div>
             <div class="fest-line">
               ${miniFestIcon(m.g)}
-              <span>${fest}</span>
+              <span>${[fest,...tags].filter(Boolean).join(" · ")}</span>
             </div>
-            <div class="genre-pills">${tags.map(t=>`<span class="pill">${t}</span>`).join("")}</div>
           </div>
         </div>
 
         <div class="blocks">
+          ${playerHtml(current)}
           <div class="prose">${paras(scene)}</div>
 
           <details class="lyrics">
@@ -2152,6 +2434,7 @@ function pick(i,scrollPanel){
   const nf=document.getElementById("m-next-foot");
   if(nf) nf.onclick=()=>pick(current+1,true);
 
+  bindPlayer(current);
   renderBoard(current);
   renderMenuBoard();
   try{localStorage.setItem("nc-month",current);}catch(e){}
