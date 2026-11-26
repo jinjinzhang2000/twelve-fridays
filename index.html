@@ -622,9 +622,14 @@ html[data-lang="en"] .m-pick,html[data-lang="en"] .pick-tag{font-family:var(--mo
 .cast b{display:block;font-weight:600;border-top:1px solid var(--rule);padding-top:10px}
 .cast i{font-style:normal;font-family:var(--en);font-size:14px;color:var(--ink-2);margin-left:6px}
 .cast p,.cast-otters p{margin:4px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink-2)}
-.cast-otters{margin-top:34px;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(200px,.7fr);gap:8px 28px;align-items:end}
-.cast-otters .photo{aspect-ratio:auto;width:100%;max-height:240px;object-fit:contain;object-position:left bottom}
-.cast-otters figcaption{min-width:0}
+.cast-otters{margin:44px auto 0;max-width:620px;text-align:center}
+.cast-otters .frame{margin:0 0 12px}
+.cast-otters .photo{aspect-ratio:auto;width:100%;height:auto;object-fit:contain}
+.cast-otters figcaption{max-width:26em;margin:0 auto}
+.cast-otters .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--ink-2);margin-bottom:4px}
+.cast-otters b{display:block;font-weight:600;border-top:1px solid var(--rule);padding-top:10px}
+.cast-otters i{font-style:normal;font-family:var(--en);font-size:14px;color:var(--ink-2);margin-left:6px}
+html[data-lang="en"] .cast-otters i{display:none}
 
 /* dynamic aunties blackboard (paired right beneath the red notebook in each month) */
 .board{
@@ -786,7 +791,7 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
   .menu-acts{grid-template-columns:1fr}
   section{margin-bottom:56px}
   .cast{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 16px}
-  .cast-otters{grid-template-columns:1fr;margin-top:18px}
+  .cast-otters{margin-top:24px}
   .cast i{display:block;margin:2px 0 0;font-size:13px}
   .board{padding:16px 16px}
   .tile .no{font-size:11px}
@@ -883,7 +888,7 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
         <p><span class="zh">沙爹摊老板的儿子。他想离开新加坡。</span><span class="en">The satay man’s son. He wants to leave Singapore.</span></p>
       </div>
       <div>
-        <div class="frame"><img class="photo" src="people/sketch-uncle-v4.jpg?v=4" alt="背影：微驼的老人肩搭毛巾，站在一盆木炭旁"></div>
+        <div class="frame"><img class="photo" src="people/sketch-uncle-v5.jpg" alt="背影：微驼的老人肩搭毛巾，站在一盆木炭旁"></div>
         <span class="tag"><span class="zh">炭炉 · 四十年没收摊</span><span class="en">The charcoal · forty years without closing</span></span>
         <b><span class="zh">陈伯</span><span class="en">Uncle Tan</span><i>Uncle Tan</i></b>
         <p><span class="zh">烤了四十年沙爹。想退休，又想把摊子留给儿子。</span><span class="en">He has grilled satay for forty years. He wants to retire, and he also wants to leave the stall to his son.</span></p>
@@ -897,10 +902,12 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
     </div>
 
     <figure class="cast-otters">
-<div class="frame"><img class="photo" src="people/sketch-otters-v4.jpg?v=4" alt="两只大水獭带着三只小水獭拖走帆布包，笔记本从包口滑出"></div>
+      <div class="frame"><img class="photo" src="people/sketch-otters-v5.jpg" alt="两只大水獭带着三只小水獭拖走帆布包，笔记本从包口滑出"></div>
+      <figcaption>
         <span class="tag"><span class="zh">河道 · 两大三小</span><span class="en">The river · two big, three small</span></span>
         <b><span class="zh">水獭一家</span><span class="en">The Otters</span><i>The Otters</i></b>
         <p><span class="zh">两只大的，三只小的。在剧里负责合唱，也会偷包。</span><span class="en">Two adults and three young. In the show they sing with the company, and they also steal bags.</span></p>
+      </figcaption>
     </figure>
   </section>
 
