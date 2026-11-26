@@ -6,6 +6,16 @@
 <!-- Newton Circus site mockup (design draft, not a live page). Fonts load from Google Fonts; the live site would self-host and subset them like the home page. -->
 <title>Newton Circus · 十二个星期五</title>
 <meta name="description" content="原创音乐剧《Newton Circus：十二个星期五》——一座新加坡小贩中心、十二道菜、一包纸巾占住的同一个座位。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jinjinzhang2000.github.io/twelve-fridays/">
+<meta property="og:title" content="Newton Circus · 十二个星期五">
+<meta property="og:description" content="原创音乐剧：一座新加坡小贩中心、十二道菜、一包纸巾占住的同一个座位。">
+<meta property="og:image" content="https://jinjinzhang2000.github.io/twelve-fridays/art/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="阿夏把一包纸巾放在小贩中心的红凳上">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jinjinzhang2000.github.io/twelve-fridays/art/og.jpg">
 <script>
 try{
   const t=localStorage.getItem("nc-theme");
@@ -641,6 +651,10 @@ html[data-lang="en"] .m-pick,html[data-lang="en"] .pick-tag{font-family:var(--mo
 .cast b{display:block;font-weight:600;border-top:1px solid var(--rule);padding-top:10px}
 .cast i{font-style:normal;font-family:var(--en);font-size:14px;color:var(--ink-2);margin-left:6px}
 .cast p,.cast-otters p{margin:4px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink-2)}
+/* key art poster */
+.keyart figure{margin:0 auto;max-width:600px}
+.keyart img{display:block;width:100%;height:auto;border-radius:3px;box-shadow:0 0 0 1px var(--rule),0 30px 60px -32px var(--shadow)}
+.keyart figcaption{margin-top:10px;text-align:center;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-2)}
 .cast-otters{margin:44px auto 0;max-width:620px;text-align:center}
 .cast-otters .frame{margin:0 0 12px}
 .cast-otters .photo{aspect-ratio:auto;width:100%;height:auto;object-fit:contain}
@@ -930,6 +944,14 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
         <b><span class="zh">水獭一家</span><span class="en">The Otters</span><i>The Otters</i></b>
         <p><span class="zh">两只大的，三只小的。在剧里负责合唱，也会偷包。</span><span class="en">Two adults and three young. In the show they sing with the company, and they also steal bags.</span></p>
       </figcaption>
+    </figure>
+  </section>
+
+  <section class="keyart">
+    <figure>
+      <img src="art/key-art.jpg" width="1024" height="1280" loading="lazy" decoding="async"
+           alt="海报：雨后的 Newton 小贩中心，十二个档口招牌围成一圈，阿夏把一包纸巾放在红凳上，五只水獭从前面走过 / Key art: Newton after the rain, twelve stall signs in a ring, Summer setting a packet of tissues on the red stool while five otters walk past">
+      <figcaption><span class="zh">海报 · 一包纸巾，一张红凳</span><span class="en">Key art · one packet of tissues, one red stool</span></figcaption>
     </figure>
   </section>
 
