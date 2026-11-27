@@ -7,15 +7,15 @@
 <title>Newton Circus · 十二个星期五</title>
 <meta name="description" content="原创音乐剧《Newton Circus · 十二个星期五》：一座新加坡小贩中心、十二道菜、一包纸巾占着的同一个座位。">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://jinjinzhang2000.github.io/twelve-fridays/">
+<meta property="og:url" content="https://gaussianmusic.com/singapore/">
 <meta property="og:title" content="Newton Circus · 十二个星期五">
 <meta property="og:description" content="原创音乐剧：一座新加坡小贩中心、十二道菜、一包纸巾占着的同一个座位。">
-<meta property="og:image" content="https://jinjinzhang2000.github.io/twelve-fridays/art/og.jpg">
+<meta property="og:image" content="https://gaussianmusic.com/singapore/art/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="阿夏把一包纸巾放在小贩中心的红凳上">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://jinjinzhang2000.github.io/twelve-fridays/art/og.jpg">
+<meta name="twitter:image" content="https://gaussianmusic.com/singapore/art/og.jpg">
 <script>
 try{
   const t=localStorage.getItem("nc-theme");
@@ -500,6 +500,8 @@ html[data-lang="en"] .nb-photo figcaption{font-family:"Patrick Hand",cursive;fon
 .pl-meta b{font-family:var(--zh);font-weight:600;font-size:13px;letter-spacing:.06em;color:var(--ink)}
 html[data-lang="en"] .pl-meta b{font-family:var(--en);font-weight:400}
 .pl-time{font-variant-numeric:tabular-nums;white-space:nowrap}
+.pl-status{margin:0 16px;font-size:13px;color:var(--ink)}
+.pl-status:not(:empty){margin-bottom:12px}
 .pl-seek{width:100%;margin:0;height:18px;background:transparent;cursor:pointer;-webkit-appearance:none;appearance:none;--p:0%}
 .pl-seek::-webkit-slider-runnable-track{height:3px;border-radius:2px;background:linear-gradient(to right,var(--stool) var(--p),var(--rule) var(--p))}
 .pl-seek::-moz-range-track{height:3px;border-radius:2px;background:linear-gradient(to right,var(--stool) var(--p),var(--rule) var(--p))}
@@ -989,6 +991,7 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
   .player .pl-expand.m-close{display:block;min-height:44px;margin:0 12px 0 auto;padding:4px 0}
   .player .pl-expand[aria-expanded="true"] + .pl-lyrics{max-height:none;overflow:visible}
   .pl-bar{padding-inline:10px;column-gap:8px}
+  .pl-seek{height:36px}
   .pl-volr{width:44px}
   .pl-mute{width:44px;height:44px}
   .menu-item{gap:4px 8px}
@@ -2664,7 +2667,7 @@ function renderLyrics(items){
 /* ---- player, keyed by month index or finale song ---- */
 const audio=new Audio();
 audio.preload="none";
-let audioKey=null, userScrollAt=0;
+let audioKey=null, userScrollAt=0, audioStatus="";
 const TRACK_DUR={0:154.8,1:134.4,2:140,3:200,4:160.8,5:139.6,6:190.8,8:167.6,9:145,10:247.2,11:200.5,stay:84.8,go:83.6};
 function lineStart(l){return l[0];}
 function fmt(s){s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0");}
@@ -2692,6 +2695,7 @@ function playerHtml(key){
         <input class="pl-volr" type="range" min="0" max="1" step="0.05" value="1" aria-label="${tx("音量","Volume")}">
       </div>
     </div>
+    <p class="pl-status" role="status"></p>
     ${t.lines?`<button type="button" class="m-close pl-expand" aria-expanded="false">${tx("展开全文歌词","Expand full lyrics")}</button>
     <ol class="pl-lyrics" aria-label="${tx("同步歌词（点一句跳到那里）","Synced lyrics (click a line to jump)")}">${items}</ol>`:""}
   </div>`;
@@ -2704,6 +2708,7 @@ function resetPlayerUI(key){
   p.querySelector(".pl-time").textContent=`0:00 / ${fmt(TRACK_DUR[key])}`;
   const seek=p.querySelector(".pl-seek"); seek.value=0; seek.style.setProperty("--p","0%");
   const on=p.querySelector("li.on"); if(on) on.classList.remove("on");
+  p.querySelector(".pl-status").textContent="";
   });
 }
 
@@ -2713,11 +2718,40 @@ function loadTrack(key){
   if(audioKey!==null){ audio.pause(); resetPlayerUI(audioKey); }
   audio.src=TRACKS[key].src;
   audioKey=key;
+  audioStatus="";
   if("mediaSession" in navigator){
     const art=END_TITLES[key]?"dishes/12-satay.jpg":DISH_SRC[key];
     const album=END_TITLES[key]?tx(END_TITLES[key][0],END_TITLES[key][1]):tx(MONTHS[key].dish,MONTHS[key].dishEn);
     try{navigator.mediaSession.metadata=new MediaMetadata({title:trackTitle(key),artist:"Newton Circus · 十二个星期五",album,artwork:[{src:art,sizes:"512x512",type:"image/jpeg"}]});}catch(e){}
   }
+}
+
+function syncAudioStatus(state=audioStatus){
+  audioStatus=state;
+  if(audioKey===null) return;
+  const message=state==="error"
+    ? tx("暂时无法播放，请再点一次播放。","Unable to play. Tap play to try again.")
+    : state==="loading"
+      ? tx("正在加载音频…","Loading audio…")
+      : audio.muted || audio.volume===0
+        ? tx("已静音，点扬声器恢复声音。","Muted. Tap the speaker to turn sound back on.")
+        : "";
+  playerEls(audioKey).forEach(player=>{
+    const status=player.querySelector(".pl-status");
+    if(status.textContent!==message) status.textContent=message;
+  });
+}
+
+function playTrack(key){
+  loadTrack(key);
+  if(!audio.paused && audioStatus!=="error") return;
+  if(audio.error || audioStatus==="error") audio.load();
+  const playingKey=audioKey;
+  syncAudioStatus("loading");
+  audio.play().catch(error=>{
+    if(playingKey!==audioKey || error.name==="AbortError") return;
+    syncAudioStatus("error");
+  });
 }
 
 function syncPlayer(){
@@ -2762,8 +2796,8 @@ function bindPlayer(key){
   p.dataset.bound="1";
   const box=p.querySelector(".pl-lyrics");
   p.querySelector(".pl-btn").onclick=()=>{
-    loadTrack(key);
-    if(audio.paused) audio.play().catch(()=>{}); else audio.pause();
+    if(audioKey===key && !audio.paused && audioStatus!=="error") audio.pause();
+    else playTrack(key);
   };
   if(box){
     const expand=p.querySelector(".pl-expand");
@@ -2780,9 +2814,8 @@ function bindPlayer(key){
     box.onclick=e=>{
       const li=e.target.closest("li[data-k]");
       if(!li) return;
-      loadTrack(key);
+      playTrack(key);
       audio.currentTime=Math.max(0,lineStart(TRACKS[key].lines[+li.dataset.k])-0.3);
-      audio.play().catch(()=>{});
       userScrollAt=0;
     };
     ["wheel","touchmove"].forEach(ev=>box.addEventListener(ev,()=>{userScrollAt=Date.now();},{passive:true}));
@@ -2801,17 +2834,19 @@ function bindPlayer(key){
   p.querySelector(".pl-volr").oninput=e=>{ audio.volume=+e.target.value; audio.muted=audio.volume===0; };
   syncVolUI(p);
   });
-  if(audioKey===key) syncPlayer();
+  if(audioKey===key){
+    syncPlayer();
+    syncAudioStatus();
+  }
 }
 
-/* Volume: one setting for every player, remembered across visits.
+/* Remember audible volume across visits. Mute applies to the current visit.
    iOS ignores audio.volume, so there only the mute button is shown. */
 const VOL_OK=(()=>{try{const a=new Audio();a.volume=0.5;return Math.abs(a.volume-0.5)<0.01;}catch(e){return false;}})();
 if(!VOL_OK) document.documentElement.classList.add("no-vol");
 try{
   const v=parseFloat(localStorage.getItem("nc-vol"));
-  if(VOL_OK && v>=0 && v<=1) audio.volume=v;
-  audio.muted=localStorage.getItem("nc-mute")==="1";
+  if(VOL_OK && v>0 && v<=1) audio.volume=v;
 }catch(e){}
 function syncVolUI(only){
   const silent=audio.muted||audio.volume===0;
@@ -2828,9 +2863,14 @@ function syncVolUI(only){
 }
 audio.addEventListener("volumechange",()=>{
   syncVolUI();
-  try{localStorage.setItem("nc-vol",String(audio.volume));localStorage.setItem("nc-mute",audio.muted?"1":"0");}catch(e){}
+  syncAudioStatus();
+  try{if(audio.volume>0) localStorage.setItem("nc-vol",String(audio.volume));}catch(e){}
 });
 
+audio.addEventListener("waiting",()=>{if(!audio.paused) syncAudioStatus("loading");});
+audio.addEventListener("playing",()=>syncAudioStatus(""));
+audio.addEventListener("pause",()=>{if(audio.paused && audioStatus!=="error") syncAudioStatus("");});
+audio.addEventListener("error",()=>{if(audio.error) syncAudioStatus("error");});
 let rafId=0;
 function tick(){ syncPlayer(); rafId=audio.paused?0:requestAnimationFrame(tick); }
 audio.addEventListener("play",()=>{ if(!rafId) rafId=requestAnimationFrame(tick); });
@@ -2951,16 +2991,12 @@ function renderMenuBoard(reveal){
       /* A stall's (or the finale's) ▶ opens its lyrics under the row and starts the song (one panel at a time). */
       if(TRACKS[key] && menuOpen!==key){
         menuOpen=key;
-        if(audioKey!==key || audio.paused){ loadTrack(key); audio.play().catch(()=>{}); }
+        playTrack(key);
         renderMenuBoard(true);
         return;
       }
-      if(audioKey===key){
-        if(audio.paused) audio.play().catch(()=>{}); else audio.pause();
-        return;
-      }
-      loadTrack(key);
-      audio.play().catch(()=>{});
+      if(audioKey===key && !audio.paused && audioStatus!=="error") audio.pause();
+      else playTrack(key);
     });
   });
   menuEl.querySelectorAll(".m-ly").forEach(btn=>{
@@ -2969,7 +3005,7 @@ function renderMenuBoard(reveal){
       renderMenuBoard(menuOpen!==null);
     });
   });
-  menuEl.querySelectorAll(".m-close").forEach(btn=>{
+  menuEl.querySelectorAll("[data-close]").forEach(btn=>{
     btn.addEventListener("click",()=>{
       const k=btn.dataset.close;
       menuOpen=null;
@@ -3138,10 +3174,9 @@ function pick(i,scrollPanel){
 
 document.getElementById("first-listen").onclick=()=>{
   const april=3;
+  playTrack(april);
   pick(april);
   const button=monthEl.querySelector(".pl-btn");
-  loadTrack(april);
-  if(audio.paused) audio.play().catch(()=>{});
   button.focus({preventScroll:true});
   button.scrollIntoView({block:"center",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});
 };

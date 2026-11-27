@@ -1,0 +1,17 @@
+{
+  "name": "singapore-twelve-fridays",
+  "main": "worker.js",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": false,
+  "routes": [
+    { "pattern": "gaussianmusic.com/singapore", "zone_name": "gaussianmusic.com" },
+    { "pattern": "gaussianmusic.com/singapore/*", "zone_name": "gaussianmusic.com" }
+  ],
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none",
+    "run_worker_first": ["/singapore", "/singapore/audio/*"]
+  }
+}

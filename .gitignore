@@ -47,3 +47,8 @@
 !/art/key-art-pencil.jpg
 !/art/og.jpg
 !/art/newton-eaves.jpg
+!/deploy/
+/deploy/*
+!/deploy/build.py
+!/deploy/worker.js
+!/deploy/wrangler.jsonc
