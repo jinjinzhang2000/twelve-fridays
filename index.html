@@ -480,13 +480,6 @@ html[data-lang="en"] .nb-photo figcaption{font-family:"Patrick Hand",cursive;fon
 }
 .play:hover{background:var(--ink);color:var(--plaster)}
 .play .tri{width:0;height:0;border-left:7px solid currentColor;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent}
-.listen{position:relative;flex:none;align-self:center}
-.listen summary{list-style:none;cursor:pointer;font-family:var(--zh);font-size:13px;font-weight:600;letter-spacing:.06em;color:var(--ink);background:transparent;border:1px solid var(--ink);border-radius:99px;padding:6px 12px 6px 10px;display:inline-flex;align-items:center;gap:6px}
-.listen summary::-webkit-details-marker{display:none}
-.listen summary:hover,.listen[open] summary{background:var(--ink);color:var(--plaster)}
-.listen-pop{position:absolute;z-index:8;top:calc(100% + 6px);right:0;min-width:138px;background:var(--paper);border:1px solid var(--rule);padding:4px;box-shadow:0 14px 28px -16px var(--shadow)}
-.listen-pop a{display:block;text-decoration:none;font-family:var(--mono);font-size:12px;letter-spacing:.02em;padding:7px 10px;color:var(--ink)}
-.listen-pop a:hover{background:var(--plaster-2)}
 
 /* self-hosted take with line-synced lyrics */
 .player{margin-top:16px;max-width:46em;background:var(--paper);border:1px solid var(--rule);border-left:3px solid var(--acc);border-radius:3px}
@@ -653,7 +646,6 @@ h2{font-family:var(--zh);font-weight:600;font-size:22px;letter-spacing:.12em;mar
 .m-play.playing .ia{display:block}
 .menu-foot .foot-play{display:inline-flex;align-items:center;flex-wrap:wrap;gap:6px 8px}
 .menu-foot .fp{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
-.m-static .listen-row{margin:6px 0 4px}
 .menu-foot .m-play{width:24px;height:24px}
 /* stall list: lyrics panel opened by ▶ (synced) or ≡ (text only, audio not ready) */
 .menu-item{flex-wrap:wrap}
@@ -837,7 +829,6 @@ html[data-lang="en"] .cast-otters i{display:none}
 .end-song-head b em{font-style:normal;font-family:var(--en);font-weight:400;color:var(--ink-2);margin-left:8px}
 .end-song-head span{font-family:var(--mono);font-size:11.5px;color:var(--ink-2)}
 .end-curtain{border-top:1px solid var(--rule);padding-top:4px}
-.listen-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
 a.play{text-decoration:none;min-height:32px}
 .end-curtain summary{
   cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;
@@ -998,7 +989,7 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
   .menu-btn .m-dots{display:none}
   .menu-item .menu-btn .m-dish{font-size:15px;line-height:1.4;white-space:normal;overflow:visible}
   .menu-item .menu-btn .m-song{font-size:15px;line-height:1.4;text-align:left;white-space:normal;overflow-wrap:anywhere}
-  .menu-item .m-play,.menu-foot .m-play,.mnav-btn,.listen summary,a.play,.m-close{min-height:44px}
+  .menu-item .m-play,.menu-foot .m-play,.mnav-btn,a.play,.m-close{min-height:44px}
   .menu-item .m-play,.menu-foot .m-play{min-width:44px}
   .mnav-mid{font-size:11px}
   .month-nav .mnav-btn{line-height:1.35}
@@ -1555,21 +1546,6 @@ const MONTHS=[
   ]}
 ];
 
-/* v4b takes on Suno for the twelve Fridays (two takes each; links collected 2026-11-25) */
-const MONTH_AUDIO=[
- [["f8d7be46-b746-48c3-ad60-554507e411d8","2:42"],["e8919168-2177-4705-b587-aba4f9a7b87c","2:44"]],
- [["8259f498-144f-4209-94a3-f5928ede3caa","2:09"],["f283f758-5212-4854-95f2-15158cdb14a8","2:14"]],
- [["cbeea20c-ec3f-4d4e-a91e-ca81fecab97e","1:56"],["775795cb-ae1c-40c8-bf1f-4c7851899a0b","2:20"]],
- [["3666b70b-e4c1-448e-9c91-483ef18de806","2:54"],["8d4643d7-2925-4fc7-9a23-20f4aace0e5b","3:16"]],
- [["61bec14e-19dc-4065-a439-8464de659897","2:24"],["47188483-1b6f-462c-b084-8841a1daaebf","2:25"]],
- [["81111625-7e5d-42a5-8024-3b2c7bf4eeeb","2:12"],["3546716f-c99a-4c63-925a-28395b43a92f","2:13"]],
- [["452323b8-7dd7-4381-9310-1e60db3250a9","2:38"],["1fae7962-b09c-4960-90ac-165bd29d5caa","2:49"]],
- [["4ed82670-2965-4751-bc40-e87b03e4056f","2:04"],["fc1f163c-a04b-4195-810b-c46fc3bf2d32","2:10"]],
- [["1083888e-b706-4548-a348-dff4c7aa78b9","2:48"],["0daae1ea-fadd-4f0f-b717-100da0b06606","2:57"]],
- [["5dfe3602-9d31-4712-81ed-68f527daa592","1:44"],["009d7909-042c-40cb-8be9-969b9427911e","2:25"]],
- [["a92c87da-2359-408d-88ed-dedf2bf91c81","3:27"],["e46f05b0-ff32-408d-b42d-9db1577117e2","4:07"]],
- [["00197909-d10f-45c1-b187-2f6984d253cd","3:17"],["b30d118d-9057-4dda-81d0-256172f09e5d","3:20"]]
-];
 /* Self-hosted takes. Where available, lyrics use Suno line timing (read 2026-11-26).
    Each line: [start s, end s, sung text, singer when it changes]. Some v4 takes were generated from
    mis-encoded Chinese; lines sung as gibberish are left out, and "……" marks a half-line. */
@@ -2004,11 +1980,6 @@ function trackGloss(text){
   return g[0]||g[1];
 }
 const WHO_CLS={"阿姨":"aunty","陈伯 / 阿夏":"uncle","两人与阿姨":"all","两人笑着合唱":"all","半拍摇摆":"all","四声部叠唱":"all","众人翻倍加速":"all","阿姨与食客":"aunty","四位阿姨":"aunty","陈伯":"uncle","众人":"all","两人合唱":"all","两人对唱":"all","轻声对唱":"all"};
-
-function listenLinks(takes,name){
-  const items=takes.map((t,i)=>`<a href="https://suno.com/song/${t[0]}" target="_blank" rel="noopener" aria-label="${tx(`在 Suno 试听《${name}》版本 ${"AB"[i]}（${t[1]}），新标签页打开`,`Listen to “${name}” take ${"AB"[i]} (${t[1]}) on Suno, opens in a new tab`)}">${tx("版本","Take")} ${"AB"[i]} · ${t[1]}</a>`).join("");
-  return `<details class="listen"><summary><span class="tri" aria-hidden="true"></span>${tx("试听","Listen")}</summary><div class="listen-pop">${items}</div></details>`;
-}
 
 const DISH_SRC=[
  "dishes/01-sugarcane.jpg",
@@ -2934,8 +2905,8 @@ function menuBtn(k){
 function menuPanel(k){
   k=String(k);
   const foot=FOOT_KEYS.includes(k);
-  const announcement=TRACKS[k]?"":`<p class="m-soon">${foot?tx("本站音频即将上线 · 可先去 Suno 试听","Audio coming soon here · listen on Suno for now"):tx("音频即将上线 · 先看歌词","Audio coming soon · lyrics for now")}</p>`;
-  const libretto=TRACKS[k]?.lines?"":`<div class="m-static">${announcement}${foot&&!TRACKS[k]?listenRow(END_AUDIO[k],END_TITLES[k][1]):""}${renderLyrics(k==="last"?LAST_ORDER_LYRICS:foot?ENDS[k].lyrics:MONTHS[k].lyrics)}</div>`;
+  const announcement=TRACKS[k]?"":`<p class="m-soon">${tx("音频即将上线 · 先看歌词","Audio coming soon · lyrics for now")}</p>`;
+  const libretto=TRACKS[k]?.lines?"":`<div class="m-static">${announcement}${renderLyrics(k==="last"?LAST_ORDER_LYRICS:foot?ENDS[k].lyrics:MONTHS[k].lyrics)}</div>`;
   const body=playerHtml(k)+libretto;
   return `<div class="m-panel${foot?" m-panel-foot":""}" id="mly-${k}">${body}<button type="button" class="m-close" data-close="${k}">${tx("收起歌词","Hide lyrics")}</button></div>`;
 }
@@ -3098,7 +3069,6 @@ function pick(i,scrollPanel){
               <span class="stall-sign">${m.no}</span>
               ${PICKS.includes(current)?`<span class="pick-tag">${tx("推荐曲目","Recommended")}</span>`:""}
               <div class="song">${m.song}</div>
-              ${listenLinks(MONTH_AUDIO[current],m.song)}
             </div>
             <div class="fest-line">
               ${miniFestIcon(m.g)}
@@ -3245,15 +3215,6 @@ const ENDS={
     ]
   }
 };
-/* finale takes on Suno (generated 2026-11-25, two takes each) */
-const END_AUDIO={
-  stay:[["505cd6ea-138c-4db7-9ce6-f9d16105aafb","1:31"],["ad96551e-9744-45e9-b926-b599ae5a89ba","1:25"]],
-  go:[["7cde1117-0ce4-4703-b74d-2c1dfa68569b","1:18"],["f7eac4ff-0040-425c-809b-7dea027ca736","1:24"]],
-  last:[["4de49edd-9848-4a4b-853d-2462d65ce739","1:40"],["f93bf5cf-e027-4b0d-a5fd-b68923e63fe8","1:42"]]
-};
-function listenRow(takes,name){
-  return `<div class="listen-row">${listenLinks(takes,name)}</div>`;
-}
 const bs=document.getElementById("end-stay"),
       bg=document.getElementById("end-go"),
       ew=document.getElementById("end-wrap");
@@ -3276,7 +3237,6 @@ function end(k){
         <b>${tx(d.songTitle[0],d.songTitle[1])}<em>${d.songSub}</em></b>
         <span>${tx(d.songMeta[0],d.songMeta[1])}</span>
       </div>
-      ${listenRow(END_AUDIO[k],d.songSub)}
       ${TRACKS[k]?`<div style="margin:-2px 0 14px">${playerHtml(k)}</div>`:""}
       ${TRACKS[k]?.lines?"":`<div class="libretto" style="margin-top:0;margin-bottom:14px">${renderLyrics(d.lyrics)}</div>`}
       <details class="end-curtain">
@@ -3284,7 +3244,6 @@ function end(k){
           <span>${tx("14 · 收摊之前 · Last Order（全员谢幕大合唱）","14 · Last Order (Full-company curtain call)")}</span>
           <span class="ly-hint">${tx("十二档厨房打击乐齐奏 · 126 BPM","12-stall percussion · 126 BPM")}</span>
         </summary>
-        <div style="margin-top:10px">${listenRow(END_AUDIO.last,"Last Order")}</div>
         ${TRACKS.last?`<div style="margin-top:10px">${playerHtml("last")}</div>`:`<div class="libretto">${renderLyrics(LAST_ORDER_LYRICS)}</div>`}
       </details>
     </div>`;
