@@ -51,6 +51,9 @@ try{
   --board-fg:#edf2eb;
   --board-dim:rgba(237,242,235,.64);
   --glow:transparent;
+  --eaves-filter:none;--eaves-blend:multiply;--eaves-opacity:.65;--lamp-opacity:0;
+  --wet-floor:linear-gradient(90deg,transparent 12%,#ffffffb3 25%,transparent 43%) 0 33.33% / 100% 2px,
+    linear-gradient(0deg,transparent 40%,#ffffffbd 67%,transparent 88%) 75% 0 / 2px 100%;
   --shadow:rgba(29,43,42,.18);
   --en:"Young Serif","Iowan Old Style",Georgia,serif;
   --zh:"Noto Serif SC","Songti SC","STSong",serif;
@@ -76,6 +79,8 @@ try{
   --tile:#322b24;--celadon:#8fbfb0;--cobalt:#a9b7d4;--coral:#e08a78;--mustard:#e8b85a;--rose:#d7a3a8;
   --stool:#e25a48;--stool-2:#b83a2e;--tissue:#f7f3ea;
   --board-bg:#14110e;--board-fg:#f3eee4;--board-dim:rgba(243,238,228,.64);
+  --eaves-filter:invert(1);--eaves-blend:screen;--eaves-opacity:.55;--lamp-opacity:1;
+  --wet-floor:var(--night-reflection);
   --glow:rgba(232,184,90,.75);--shadow:rgba(0,0,0,.5);color-scheme:dark;
 }
 :root:not([data-theme="light"])[data-m="1"],:root:not([data-theme="light"])[data-m="9"]{--plaster:#221c16;--plaster-2:#2c241c}
@@ -88,6 +93,8 @@ try{
   --tile:#322b24;--celadon:#8fbfb0;--cobalt:#a9b7d4;--coral:#e08a78;--mustard:#e8b85a;--rose:#d7a3a8;
   --stool:#e25a48;--stool-2:#b83a2e;--tissue:#f7f3ea;
   --board-bg:#14110e;--board-fg:#f3eee4;--board-dim:rgba(243,238,228,.64);
+  --eaves-filter:invert(1);--eaves-blend:screen;--eaves-opacity:.55;--lamp-opacity:1;
+  --wet-floor:var(--night-reflection);
   --glow:rgba(232,184,90,.75);--shadow:rgba(0,0,0,.5);color-scheme:dark;
 }
 :root[data-theme="dark"][data-m="1"],:root[data-theme="dark"][data-m="9"]{--plaster:#221c16;--plaster-2:#2c241c}
@@ -183,7 +190,17 @@ html[data-lang="en"] .chalk{font-family:var(--mono)}
 
 /* garland */
 .garland-wrap{position:relative;margin-top:8px;min-height:112px;width:100vw;margin-left:calc(50% - 50vw);overflow:hidden}
-.garland{display:block;width:100%;height:auto;max-height:none;overflow:visible}
+.eaves{position:absolute;inset:0;pointer-events:none;
+  mask-image:linear-gradient(to bottom,#000 84%,transparent)}
+.eaves::before,.eaves::after{content:"";position:absolute;inset:0}
+.eaves::before{background:url("art/newton-eaves.jpg") center/100% 100% no-repeat;
+  filter:var(--eaves-filter);opacity:var(--eaves-opacity);mix-blend-mode:var(--eaves-blend)}
+.eaves::after{opacity:var(--lamp-opacity);
+  background:radial-gradient(ellipse 4% 5% at 20% 73%,#e4f8ffb0,transparent),
+    radial-gradient(ellipse 5% 5% at 91% 67%,#e4f8ffad,transparent),
+    radial-gradient(ellipse 4% 12% at 80% 87%,#fc983874,transparent)}
+.eaves{background:var(--plaster)}
+.garland{position:relative;display:block;width:100%;height:auto;max-height:none;overflow:visible}
 .garland .wire{fill:none;stroke:var(--ink-2);stroke-width:1.6;opacity:.62}
 .garland .lit{filter:drop-shadow(0 0 6px var(--glow))}
 @media (prefers-reduced-motion:no-preference){
@@ -209,10 +226,15 @@ h1 .o{color:var(--stool)}
   box-shadow:0 0 0 1px rgba(29,43,42,.16),0 30px 60px -30px var(--shadow);
   transition:filter .45s ease;
 }
-:root[data-theme="dark"] .floor{filter:brightness(.94) contrast(1.04) saturate(1.08) sepia(.16)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .floor{filter:brightness(.94) contrast(1.04) saturate(1.08) sepia(.16)}}
-:root[data-theme="dark"] .floor::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:6;background:linear-gradient(180deg,rgba(255,186,92,.18),transparent 58%)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .floor::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:6;background:linear-gradient(180deg,rgba(255,186,92,.18),transparent 58%)}}
+.floor::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:1;background:var(--wet-floor);background-repeat:no-repeat
+}
+:root{
+  --night-reflection:radial-gradient(ellipse 42% 14% at 26% 12%,#d4efff8a,transparent),
+    linear-gradient(166deg,transparent 43%,#b6e5ff48 46%,transparent 50%),
+    radial-gradient(ellipse 28% 20% at 92% 86%,#e787334f,transparent),
+    linear-gradient(#13283b26,#10182142);
+}
 
 .tile{
   all:unset;cursor:pointer;display:block;aspect-ratio:1;position:relative;overflow:hidden;
@@ -409,9 +431,26 @@ html[data-lang="en"] .nb-photo figcaption{font-family:"Patrick Hand",cursive;fon
 .month .head{display:flex;gap:16px;align-items:flex-start}
 .month .m{font-family:var(--en);font-size:58px;line-height:.92;color:color-mix(in srgb,var(--acc) 78%,var(--ink));transition:color .3s ease;font-variant-numeric:tabular-nums;padding-top:2px}
 .month .title-wrap{min-width:0;flex:1}
-.dish-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
-.month .t{font-family:var(--zh);font-weight:600;font-size:clamp(26px,3vw,36px);letter-spacing:.06em;line-height:1.2}
-.month .dish-sub{font-family:var(--en);font-size:16px;color:var(--ink-2)}
+/* Enamel, painted timber and dark griddle boards around the courtyard. */
+[data-stall="1"]{--board:#e1ead2;--letter:#33583a}
+[data-stall="2"]{--board:#243c4a;--letter:#fff2c9;--edge:double}
+[data-stall="3"]{--board:#ffde92;--letter:#742e21}
+[data-stall="4"]{--board:#fff0d4;--letter:#973528;--edge:double}
+[data-stall="5"]{--board:#1b5949;--letter:#fff0c8}
+[data-stall="6"]{--board:#774237;--letter:#ffebbd}
+[data-stall="7"]{--board:#d9e6cf;--letter:#245845;--edge:double}
+[data-stall="8"]{--board:#30332e;--letter:#fff0d4}
+[data-stall="9"]{--board:#ededdf;--letter:#364e72;--edge:double}
+[data-stall="10"]{--board:#963f31;--letter:#fff4d9}
+[data-stall="11"]{--board:#eacf86;--letter:#3a4931}
+[data-stall="12"]{--board:#302d29;--letter:#efc36c;--edge:double}
+.dish-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 13px;width:fit-content;max-width:100%;
+  padding:6px 15px 8px;background:var(--board);color:var(--letter);border:3px var(--edge,solid) currentColor;
+  border-radius:3px;box-shadow:1px 2px 0 var(--shadow)}
+.month .t{font-family:var(--hand);font-weight:600;font-size:clamp(26px,3vw,36px);letter-spacing:.06em;line-height:1.15}
+.month .dish-sub{font:19px/1.2 "Patrick Hand",var(--hand);color:inherit}
+[data-stall="4"] .t{font-family:var(--zh);letter-spacing:-.04em}
+[data-stall="12"] .t{transform:rotate(-2deg);text-shadow:1px 1px #9b723a}
 .songline{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 12px;margin-top:8px}
 .month .song{font-family:var(--en);font-size:clamp(26px,2.5vw,32px);line-height:1.15;color:var(--ink);flex:1;min-width:8em}
 .stall-sign{
@@ -648,7 +687,7 @@ h2{font-family:var(--zh);font-weight:600;font-size:22px;letter-spacing:.12em;mar
 .menu-btn.active{background:color-mix(in srgb,var(--stool) 14%,transparent)}
 .menu-btn .m-no{font-family:var(--mono);font-size:11px;color:var(--ink-2);font-variant-numeric:tabular-nums}
 .menu-btn.active .m-no{color:var(--stool);font-weight:500}
-.menu-btn .m-dish{font-size:14px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.menu-btn .m-dish{border-inline-start:3px solid var(--letter);background:var(--board);padding:1px 5px;font-size:14px;font-weight:600;color:var(--letter);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .menu-btn .m-song{font-family:var(--en);font-size:15px;color:var(--stool);text-align:right;white-space:nowrap}
 .m-pick,.pick-tag{
   display:inline-block;font-family:var(--zh);font-weight:600;letter-spacing:.06em;
@@ -916,7 +955,7 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
   .hero .lede{max-width:32em}
 }
 @media(max-width:720px){
-  .garland-wrap{height:52px;min-height:0}
+  .garland-wrap{height:74px;min-height:0}
   .garland{height:52px;width:100%;margin:0;transform:none}
   .hero{gap:8px}
   .hero h1 br{display:none}
@@ -988,6 +1027,7 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
   </header>
 
   <div class="garland-wrap">
+    <div class="eaves" aria-hidden="true"></div>
     <svg class="garland" id="garland" viewBox="0 0 1200 118" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
   </div>
 
@@ -2900,7 +2940,7 @@ function renderMenuBoard(reveal){
       const d=tx(m.dish,m.dishEn);
       const open=menuOpen===String(k);
       const pick=PICKS.includes(k)?`<span class="m-pick">${tx("推荐","Pick")}</span>`:"";
-      return `<li class="menu-item${open?" open":""}"><button type="button" class="menu-btn${k===current?" active":""}" data-jump="${k}"><span class="m-no">${m.no}</span><span class="m-dish">${d}</span><span class="m-dots" aria-hidden="true"></span><span class="m-song">${pick}${m.song}</span></button>${menuBtn(k)}${open?menuPanel(k):""}</li>`;
+      return `<li class="menu-item${open?" open":""}"><button type="button" class="menu-btn${k===current?" active":""}" data-jump="${k}"><span class="m-no">${m.no}</span><span class="m-dish" data-stall="${k+1}">${d}</span><span class="m-dots" aria-hidden="true"></span><span class="m-song">${pick}${m.song}</span></button>${menuBtn(k)}${open?menuPanel(k):""}</li>`;
     }).join("");
     return `<div class="menu-act"><h3>${title}</h3><ul class="menu-list">${items}</ul></div>`;
   };
@@ -3043,7 +3083,7 @@ function pick(i,scrollPanel){
         <div class="head">
           <div class="m">${String(current+1).padStart(2,"0")}</div>
           <div class="title-wrap">
-            <div class="dish-row">
+            <div class="dish-row" data-stall="${current+1}">
               <div class="t">${dish}</div>
               <span class="dish-sub">${dishSub}</span>
             </div>
