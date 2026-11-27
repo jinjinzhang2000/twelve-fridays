@@ -43,11 +43,13 @@
 !/audio/12-count-the-sticks.m4a
 !/audio/13a-stay.mp3
 !/audio/13b-go-home.mp3
+!/audio/intro-1min.mp4
 !/art/
 /art/*
 !/art/key-art.jpg
 !/art/key-art-pencil.jpg
 !/art/og.jpg
+!/art/intro-poster.jpg
 !/art/newton-eaves.jpg
 !/deploy/
 /deploy/*

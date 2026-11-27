@@ -956,6 +956,15 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
 .first-listen strong{font:400 18px var(--en);margin-left:auto;color:var(--stool)}
 .listen-icon{display:grid;place-items:center;border:1px solid currentColor;border-radius:50%;width:26px;height:26px;color:var(--stool);font-size:10px;flex:none;transition:background-color .2s,color .2s}
 .first-listen:hover .listen-icon{background:var(--stool);color:var(--plaster)}
+/* one-minute intro video: a button under "Listen first", played in a modal so nothing loads until asked */
+.intro-btn{margin-top:8px}
+.intro-btn strong{font:500 14px var(--mono)}
+.intro-dlg{padding:0;border:0;background:transparent;overflow:visible;max-width:none;max-height:none}
+.intro-dlg::backdrop{background:rgba(12,14,14,.82)}
+.intro-dlg video{display:block;width:min(94vw,calc(86vh * 9 / 16));aspect-ratio:9/16;height:auto;background:#141818;border-radius:10px;box-shadow:0 30px 80px -20px rgba(0,0,0,.7)}
+.intro-x{all:unset;cursor:pointer;position:absolute;right:0;bottom:calc(100% + 10px);font:500 12.5px var(--mono);letter-spacing:.04em;color:#f3f0e3;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:99px;padding:5px 12px}
+.intro-x:hover,.intro-x:focus-visible{background:rgba(255,255,255,.24)}
+.intro-dlg[open]{margin:auto;margin-top:max(48px,calc((100vh - 86vh) / 2 + 20px))}
 .cast p strong{display:block;color:var(--ink);font-weight:600}
 @media(min-width:861px){.cast{grid-template-columns:1fr 1fr .93fr 1.07fr;column-gap:14px}.cast>div:nth-child(3){padding-left:18px}}
 .keyart{margin-bottom:26px}
@@ -1075,6 +1084,7 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
         <span class="zh">点花砖切换月份</span><span class="en">Tap a tile to change month</span>
       </div>
       <button class="first-listen" type="button" id="first-listen"><span class="listen-icon" aria-hidden="true">▶</span><span class="zh">先听一首</span><span class="en">Listen first</span><strong>Four O’Clock Rain</strong></button>
+      <button class="first-listen intro-btn" type="button" id="intro-btn" aria-haspopup="dialog"><span class="listen-icon" aria-hidden="true">▶</span><span class="zh">一分钟看完这部戏</span><span class="en">The show in one minute</span><strong>1:03</strong></button>
     </div>
   </div>
 
@@ -1255,6 +1265,11 @@ No people, no hands, no text, no logos, no food.</pre>
     </details>
   </div>
 </div>
+
+<dialog class="intro-dlg" id="intro-dlg" aria-label="一分钟介绍视频 / One-minute intro">
+  <button type="button" class="intro-x" id="intro-x"><span class="zh">关闭</span><span class="en">Close</span> ✕</button>
+  <video id="intro-video" preload="none" playsinline controls poster="art/intro-poster.jpg"></video>
+</dialog>
 
 <div class="wrap"><footer>© 2026 Gaussian’s music · <span class="zh">设计稿，非正式页面</span><span class="en">a design draft, not the live page</span></footer></div>
 
@@ -3231,6 +3246,20 @@ function pick(i,scrollPanel){
     monthEl.scrollIntoView({behavior:"smooth",block:"start"});
   }
 }
+
+/* one-minute intro video */
+(()=>{
+  const dlg=document.getElementById("intro-dlg"), vid=document.getElementById("intro-video");
+  document.getElementById("intro-btn").onclick=()=>{
+    if(audioKey!==null && !audio.paused) audio.pause();
+    if(!vid.getAttribute("src")) vid.src="audio/intro-1min.mp4";
+    dlg.showModal();
+    vid.play().catch(()=>{});
+  };
+  document.getElementById("intro-x").onclick=()=>dlg.close();
+  dlg.addEventListener("click",e=>{ if(e.target===dlg) dlg.close(); });
+  dlg.addEventListener("close",()=>vid.pause());
+})();
 
 document.getElementById("first-listen").onclick=()=>{
   const april=3;
