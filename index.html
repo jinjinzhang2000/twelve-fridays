@@ -879,6 +879,13 @@ a.play{text-decoration:none;min-height:32px}
 pre{white-space:pre-wrap;font-family:var(--mono);font-size:12.5px;line-height:1.6;background:var(--tile);border:1px solid var(--rule);padding:16px 18px;border-radius:3px;margin:10px 0}
 .copy-btn{all:unset;cursor:pointer;font-family:var(--mono);font-size:12px;border:1px solid var(--ink-2);padding:5px 12px;border-radius:2px}
 .copy-btn:hover{background:var(--ink);color:var(--plaster)}
+.review-link{display:block;max-width:640px;margin:-24px auto 72px;padding:20px 24px;text-decoration:none;color:var(--ink);
+  background:var(--paper);border:1px solid var(--rule);border-left:4px solid var(--stool);border-radius:4px;transition:border-color .2s}
+.review-link:hover{border-color:var(--ink-2);border-left-color:var(--stool)}
+.review-link .rl-kicker{display:block;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--stool)}
+.review-link b{display:block;font-family:var(--zh);font-size:24px;font-weight:600;letter-spacing:.06em;margin:4px 0 2px}
+.review-link b::after{content:" →";color:var(--stool)}
+.review-link .rl-sub{display:block;font-size:14.5px;color:var(--ink-2)}
 footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px solid var(--rule)}
 
 @media (max-width:960px){
@@ -1141,6 +1148,12 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
     </div>
     <div class="end-wrap" id="end-wrap" hidden></div>
   </section>
+
+  <a class="review-link" href="review.html">
+    <span class="rl-kicker"><span class="zh">长评 · 十二节，一节一根签</span><span class="en">A long read · in Chinese</span></span>
+    <b>一包纸巾能占多久</b>
+    <span class="rl-sub"><span class="zh">这部戏的创作思路、藏在歌里的设计，和只有新加坡人才笑得出来的梗。</span><span class="en">How the show was built, the design hidden in the songs, and the Singapore jokes.</span></span>
+  </a>
 </div>
 
 <div class="notes-bar">

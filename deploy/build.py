@@ -6,7 +6,7 @@ import subprocess
 ROOT = Path(__file__).resolve().parent.parent
 PUBLIC = ROOT / "deploy" / "public" / "singapore"
 files = subprocess.check_output(
-    ["git", "ls-files", "-z", "--", "index.html", "art", "audio", "dishes", "people"],
+    ["git", "ls-files", "-z", "--", "index.html", "review.html", "art", "audio", "dishes", "people"],
     cwd=ROOT,
 ).decode().split("\0")
 
