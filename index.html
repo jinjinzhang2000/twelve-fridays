@@ -1570,10 +1570,14 @@ const MONTH_AUDIO=[
  [["a92c87da-2359-408d-88ed-dedf2bf91c81","3:27"],["e46f05b0-ff32-408d-b42d-9db1577117e2","4:07"]],
  [["00197909-d10f-45c1-b187-2f6984d253cd","3:17"],["b30d118d-9057-4dda-81d0-256172f09e5d","3:20"]]
 ];
-/* Self-hosted takes with line-synced lyrics (Suno aligned_lyrics, read 2026-11-26).
+/* Self-hosted takes. Where available, lyrics use Suno line timing (read 2026-11-26).
    Each line: [start s, end s, sung text, singer when it changes]. Some v4 takes were generated from
    mis-encoded Chinese; lines sung as gibberish are left out, and "……" marks a half-line. */
 const TRACKS={
+ 0:{src:"audio/01-chope.mp3",suno:"e3889d99-ef40-4c58-8fb9-7d537c51e8ca",take:"v2"},
+ 1:{src:"audio/02-what-do-you-do.mp3",suno:"f283f758-5212-4854-95f2-15158cdb14a8",take:"v4b"},
+ 11:{src:"audio/12-count-the-sticks.mp3",suno:"b30d118d-9057-4dda-81d0-256172f09e5d",take:"v4b"},
+ go:{src:"audio/13b-go-home.mp3",suno:"f7eac4ff-0040-425c-809b-7dea027ca736",take:"v4"},
  2:{src:"audio/03-can-or-not.mp3",suno:"775795cb-ae1c-40c8-bf1f-4c7851899a0b",take:"v4b",lines:[
   [17.47,20.28,"Come come come, place your bets!","阿姨"],
   [20.89,26.36,"This year got one mystery person, secretly come give marks"],
@@ -2676,11 +2680,11 @@ function renderLyrics(items){
   }).join("");
 }
 
-/* ---- player with line-synced lyrics (keyed by month index, or "stay" for the finale) ---- */
+/* ---- player, keyed by month index or finale song ---- */
 const audio=new Audio();
 audio.preload="none";
 let audioKey=null, userScrollAt=0;
-const TRACK_DUR={2:140,3:200,4:160.8,5:139.6,6:190.8,8:167.6,9:145,10:247.2,stay:84.8};
+const TRACK_DUR={0:154.8,1:134.4,2:140,3:200,4:160.8,5:139.6,6:190.8,8:167.6,9:145,10:247.2,11:200.5,stay:84.8,go:83.6};
 function lineStart(l){return l[0];}
 function fmt(s){s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0");}
 const END_TITLES={stay:["留下","Stay"],go:["回去","Go Home"],last:["收摊之前","Last Order"]};
@@ -2692,7 +2696,7 @@ function playerHtml(key){
   const t=TRACKS[key];
   if(!t) return "";
   const name=trackTitle(key);
-  const items=t.lines.map((l,k)=>{
+  const items=t.lines?.map((l,k)=>{
     const who=l[3]?`<li class="pl-who ${WHO_CLS[l[3]]||""}" aria-hidden="true">${tx(l[3],WHO_EN[l[3]]||l[3])}</li>`:"";
     const gl=trackGloss(l[2]);
     return who+`<li data-k="${k}"><span class="pl-orig">${l[2]}</span>${gl?`<span class="pl-gl">${gl}</span>`:""}</li>`;
@@ -2700,15 +2704,15 @@ function playerHtml(key){
   return `<div class="player" data-key="${key}">
     <div class="pl-bar">
       <button type="button" class="pl-btn" aria-label="${tx(`播放《${name}》`,`Play “${name}”`)}"><span class="i-play"></span><span class="i-pause"></span></button>
-      <div class="pl-meta"><b>${tx("整首试听 · 歌词同步","Full song · synced lyrics")}</b><span class="pl-time">0:00 / ${fmt(TRACK_DUR[key])}</span></div>
+      <div class="pl-meta"><b>${t.lines?tx("整首试听 · 歌词同步","Full song · synced lyrics"):tx("整首试听","Full song")}</b><span class="pl-time">0:00 / ${fmt(TRACK_DUR[key])}</span></div>
       <input class="pl-seek" type="range" min="0" max="${TRACK_DUR[key]}" step="0.1" value="0" aria-label="${tx("播放进度","Seek")}">
       <div class="pl-vol">
         <button type="button" class="pl-mute" aria-pressed="false" aria-label="${tx("静音","Mute")}"><svg viewBox="0 0 20 20" aria-hidden="true"><path class="spk" d="M3 7.5h3l4-3.5v12l-4-3.5H3z"/><path class="wave" d="M13 7.2a3.6 3.6 0 0 1 0 5.6M15.2 5a6.6 6.6 0 0 1 0 10"/><path class="cross" d="M13 7.5l5 5m0-5l-5 5"/></svg></button>
         <input class="pl-volr" type="range" min="0" max="1" step="0.05" value="1" aria-label="${tx("音量","Volume")}">
       </div>
     </div>
-    <button type="button" class="m-close pl-expand" aria-expanded="false">${tx("展开全文歌词","Expand full lyrics")}</button>
-    <ol class="pl-lyrics" aria-label="${tx("同步歌词（点一句跳到那里）","Synced lyrics (click a line to jump)")}">${items}</ol>
+    ${t.lines?`<button type="button" class="m-close pl-expand" aria-expanded="false">${tx("展开全文歌词","Expand full lyrics")}</button>
+    <ol class="pl-lyrics" aria-label="${tx("同步歌词（点一句跳到那里）","Synced lyrics (click a line to jump)")}">${items}</ol>`:""}
   </div>`;
 }
 
@@ -2748,6 +2752,7 @@ function syncOne(p){
   if(document.activeElement!==seek){seek.max=d;seek.value=t;}
   seek.style.setProperty("--p",(t/d*100)+"%");
   const lines=TRACKS[audioKey].lines;
+  if(!lines) return;
   let k=-1;
   for(let j=0;j<lines.length;j++){ if(lineStart(lines[j])<=t+0.15) k=j; else break; }
   if(k>=0 && t>lines[k][1]+2.5) k=-1;           // instrumental gap: nothing lit
@@ -2779,17 +2784,28 @@ function bindPlayer(key){
     loadTrack(key);
     if(audio.paused) audio.play().catch(()=>{}); else audio.pause();
   };
-  const expand=p.querySelector(".pl-expand");
-  expand.onclick=()=>{
-    const open=expand.getAttribute("aria-expanded")!=="true";
-    expand.setAttribute("aria-expanded",String(open));
-    expand.textContent=open?tx("收起全文歌词","Collapse full lyrics"):tx("展开全文歌词","Expand full lyrics");
-    if(!open){
-      const active=box.querySelector("li.on");
-      if(active) box.scrollTop=Math.max(0,active.offsetTop-box.clientHeight*.38);
-    }
-    expand.scrollIntoView({block:"nearest",behavior:"instant"});
-  };
+  if(box){
+    const expand=p.querySelector(".pl-expand");
+    expand.onclick=()=>{
+      const open=expand.getAttribute("aria-expanded")!=="true";
+      expand.setAttribute("aria-expanded",String(open));
+      expand.textContent=open?tx("收起全文歌词","Collapse full lyrics"):tx("展开全文歌词","Expand full lyrics");
+      if(!open){
+        const active=box.querySelector("li.on");
+        if(active) box.scrollTop=Math.max(0,active.offsetTop-box.clientHeight*.38);
+      }
+      expand.scrollIntoView({block:"nearest",behavior:"instant"});
+    };
+    box.onclick=e=>{
+      const li=e.target.closest("li[data-k]");
+      if(!li) return;
+      loadTrack(key);
+      audio.currentTime=Math.max(0,lineStart(TRACKS[key].lines[+li.dataset.k])-0.3);
+      audio.play().catch(()=>{});
+      userScrollAt=0;
+    };
+    ["wheel","touchmove"].forEach(ev=>box.addEventListener(ev,()=>{userScrollAt=Date.now();},{passive:true}));
+  }
   const seek=p.querySelector(".pl-seek");
   seek.oninput=()=>{
     loadTrack(key);
@@ -2797,15 +2813,6 @@ function bindPlayer(key){
     p.querySelector(".pl-time").textContent=`${fmt(seek.value)} / ${fmt(audio.duration||TRACK_DUR[key])}`;
   };
   seek.onchange=()=>{ loadTrack(key); audio.currentTime=+seek.value; syncPlayer(); };
-  box.onclick=e=>{
-    const li=e.target.closest("li[data-k]");
-    if(!li) return;
-    loadTrack(key);
-    audio.currentTime=Math.max(0,lineStart(TRACKS[key].lines[+li.dataset.k])-0.3);
-    audio.play().catch(()=>{});
-    userScrollAt=0;
-  };
-  ["wheel","touchmove"].forEach(ev=>box.addEventListener(ev,()=>{userScrollAt=Date.now();},{passive:true}));
   p.querySelector(".pl-mute").onclick=()=>{
     if(audio.muted||audio.volume===0){ audio.muted=false; if(audio.volume===0) audio.volume=0.6; }
     else audio.muted=true;
@@ -2916,7 +2923,7 @@ const PICKS=[3,8,10];
 let menuOpen=null;   // key whose lyrics panel is open in the stall list: month index (string), or stay/go/last
 const FOOT_KEYS=["stay","go","last"];
 function menuName(k){return END_TITLES[k]?tx(END_TITLES[k][0],END_TITLES[k][1]):MONTHS[k].song;}
-/* ▶ when the song has a self-hosted take (synced lyrics), ≡ when only the text is ready */
+/* ▶ for a self-hosted recording, ≡ for the libretto alone */
 function menuBtn(k){
   const name=menuName(k), open=menuOpen===String(k);
   const aria=`aria-expanded="${open}" aria-controls="mly-${k}"`;
@@ -2927,9 +2934,9 @@ function menuBtn(k){
 function menuPanel(k){
   k=String(k);
   const foot=FOOT_KEYS.includes(k);
-  const body=TRACKS[k]
-    ? playerHtml(k)
-    : `<div class="m-static"><p class="m-soon">${foot?tx("本站音频即将上线 · 可先去 Suno 试听","Audio coming soon here · listen on Suno for now"):tx("音频即将上线 · 先看歌词","Audio coming soon · lyrics for now")}</p>${foot?listenRow(END_AUDIO[k],END_TITLES[k][1]):""}${renderLyrics(k==="last"?LAST_ORDER_LYRICS:foot?ENDS[k].lyrics:MONTHS[k].lyrics)}</div>`;
+  const announcement=TRACKS[k]?"":`<p class="m-soon">${foot?tx("本站音频即将上线 · 可先去 Suno 试听","Audio coming soon here · listen on Suno for now"):tx("音频即将上线 · 先看歌词","Audio coming soon · lyrics for now")}</p>`;
+  const libretto=TRACKS[k]?.lines?"":`<div class="m-static">${announcement}${foot&&!TRACKS[k]?listenRow(END_AUDIO[k],END_TITLES[k][1]):""}${renderLyrics(k==="last"?LAST_ORDER_LYRICS:foot?ENDS[k].lyrics:MONTHS[k].lyrics)}</div>`;
+  const body=playerHtml(k)+libretto;
   return `<div class="m-panel${foot?" m-panel-foot":""}" id="mly-${k}">${body}<button type="button" class="m-close" data-close="${k}">${tx("收起歌词","Hide lyrics")}</button></div>`;
 }
 function renderMenuBoard(reveal){
@@ -2960,7 +2967,7 @@ function renderMenuBoard(reveal){
   menuEl.querySelectorAll(".m-play[data-play]").forEach(btn=>{
     btn.addEventListener("click",()=>{
       const key=btn.dataset.play;
-      /* A stall's (or the finale's) ▶ opens its synced lyrics under the row and starts the song (one panel at a time). */
+      /* A stall's (or the finale's) ▶ opens its lyrics under the row and starts the song (one panel at a time). */
       if(TRACKS[key] && menuOpen!==key){
         menuOpen=key;
         if(audioKey!==key || audio.paused){ loadTrack(key); audio.play().catch(()=>{}); }
@@ -3104,7 +3111,7 @@ function pick(i,scrollPanel){
           ${playerHtml(current)}
           <div class="prose">${paras(scene)}</div>
 
-          ${TRACKS[current]?"":`<details class="lyrics">
+          ${TRACKS[current]?.lines?"":`<details class="lyrics">
             <summary><span>${tx("歌词 · 双栏场刊本","Lyrics · bilingual playbill")}</span><span class="ly-hint">${tx("左原词 · 右旁注","sung text + margin gloss")}</span></summary>
             <div class="libretto">${renderLyrics(m.lyrics)}</div>
           </details>`}
@@ -3270,9 +3277,8 @@ function end(k){
         <span>${tx(d.songMeta[0],d.songMeta[1])}</span>
       </div>
       ${listenRow(END_AUDIO[k],d.songSub)}
-      ${TRACKS[k]
-        ? `<div style="margin:-2px 0 14px">${playerHtml(k)}</div>`
-        : `<div class="libretto" style="margin-top:0;margin-bottom:14px">${renderLyrics(d.lyrics)}</div>`}
+      ${TRACKS[k]?`<div style="margin:-2px 0 14px">${playerHtml(k)}</div>`:""}
+      ${TRACKS[k]?.lines?"":`<div class="libretto" style="margin-top:0;margin-bottom:14px">${renderLyrics(d.lyrics)}</div>`}
       <details class="end-curtain">
         <summary>
           <span>${tx("14 · 收摊之前 · Last Order（全员谢幕大合唱）","14 · Last Order (Full-company curtain call)")}</span>
