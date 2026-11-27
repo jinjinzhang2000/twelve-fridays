@@ -879,6 +879,13 @@ a.play{text-decoration:none;min-height:32px}
 pre{white-space:pre-wrap;font-family:var(--mono);font-size:12.5px;line-height:1.6;background:var(--tile);border:1px solid var(--rule);padding:16px 18px;border-radius:3px;margin:10px 0}
 .copy-btn{all:unset;cursor:pointer;font-family:var(--mono);font-size:12px;border:1px solid var(--ink-2);padding:5px 12px;border-radius:2px}
 .copy-btn:hover{background:var(--ink);color:var(--plaster)}
+.hero-review{margin:18px 0 0}
+.hero-review a{display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;text-decoration:none;color:var(--ink);
+  font-family:var(--zh);font-size:17px;font-weight:600;border-bottom:1.5px solid var(--stool);padding-bottom:3px;transition:color .2s}
+.hero-review a:hover{color:var(--stool)}
+.hero-review .hr-tag{font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:.08em;color:#fff;background:var(--stool);border-radius:3px;padding:1px 7px;align-self:center}
+.hero-review .hr-more{font-weight:400;font-size:14px;color:var(--ink-2)}
+html[data-lang="en"] .hero-review a{font-family:var(--en);font-weight:400;font-size:16px}
 .review-link{display:block;max-width:640px;margin:-24px auto 72px;padding:20px 24px;text-decoration:none;color:var(--ink);
   background:var(--paper);border:1px solid var(--rule);border-left:4px solid var(--stool);border-radius:4px;transition:border-color .2s}
 .review-link:hover{border-color:var(--ink-2);border-left-color:var(--stool)}
@@ -1055,6 +1062,10 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
       <p class="zhname"><span class="zh">十二个星期五</span><span class="en">Twelve Fridays</span></p>
       <p class="lede"><span class="zh">阿夏用一包纸巾占了座。等她端着甘蔗水回来，凳子上已经坐了一个人。</span><span class="en">Summer saves a seat with a packet of tissues. When she returns with her sugarcane juice, someone’s already sitting there.</span></p>
       <div class="meta"><span class="zh">原创音乐剧</span><span class="en">An original musical</span><span>华语 · English · Singlish</span><span class="zh">12 首歌 · 双结局</span><span class="en">12 songs · two endings</span></div>
+      <p class="hero-review">
+        <a class="zh" href="review.html"><span class="hr-tag">长评</span>一包纸巾能占多久<span class="hr-more">创作思路、设计与新加坡的梗 →</span></a>
+        <a class="en" href="review-en.html"><span class="hr-tag">Long read</span>How long can a packet of tissues hold a seat?<span class="hr-more">The ideas, the design and the Singapore jokes →</span></a>
+      </p>
     </div>
     <div class="floor-box">
       <div class="floor" id="floor" role="group" aria-label="十二个星期五，点一块花砖切换月份"></div>
@@ -1149,10 +1160,15 @@ footer{padding-block:28px 40px;font-size:13px;color:var(--ink-2);border-top:1px 
     <div class="end-wrap" id="end-wrap" hidden></div>
   </section>
 
-  <a class="review-link" href="review.html">
-    <span class="rl-kicker"><span class="zh">长评 · 十二节，一节一根签</span><span class="en">A long read · in Chinese</span></span>
+  <a class="review-link zh" href="review.html">
+    <span class="rl-kicker">长评 · 十二节，一节一根签</span>
     <b>一包纸巾能占多久</b>
-    <span class="rl-sub"><span class="zh">这部戏的创作思路、藏在歌里的设计，和只有新加坡人才笑得出来的梗。</span><span class="en">How the show was built, the design hidden in the songs, and the Singapore jokes.</span></span>
+    <span class="rl-sub">这部戏的创作思路、藏在歌里的设计，和只有新加坡人才笑得出来的梗。</span>
+  </a>
+  <a class="review-link en" href="review-en.html">
+    <span class="rl-kicker">A long read · twelve sections, one stick each</span>
+    <b>How Long Can a Packet of Tissues Hold a Seat?</b>
+    <span class="rl-sub">How the show was built, the design hidden in the songs, and the jokes only Singaporeans get.</span>
   </a>
 </div>
 

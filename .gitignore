@@ -4,6 +4,7 @@
 !/.nojekyll
 !/index.html
 !/review.html
+!/review-en.html
 !/dishes/
 /dishes/*
 !/people/

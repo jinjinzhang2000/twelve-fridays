@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How Long Can a Packet of Tissues Hold a Seat? · Newton Circus long read</title>
+<meta name="description" content="A long read on Newton Circus · Twelve Fridays: a packet of tissues, twelve Fridays, two endings, the design hidden in the songs, and the Singapore jokes.">
+<link rel="alternate" hreflang="zh-Hans" href="review.html">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://gaussianmusic.com/singapore/review-en">
+<meta property="og:title" content="How Long Can a Packet of Tissues Hold a Seat? · On Newton Circus · Twelve Fridays">
+<meta property="og:description" content="How long can a packet of tissues hold a seat? Twelve Fridays, two endings, the design in the songs and the Singapore jokes.">
+<meta property="og:image" content="https://gaussianmusic.com/singapore/art/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script>
+try{const t=localStorage.getItem("nc-theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t;}catch(e){}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=DM+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;600;700&family=LXGW+WenKai+TC&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Patrick+Hand&display=swap">
+<style>
+:root{
+  --plaster:#f3f0e3;--paper:#faf6ed;--ink:#1d2b2a;--ink-2:#55635f;--rule:#d4d3c4;
+  --celadon:#6fa596;--cobalt:#2e4c86;--coral:#d9675b;--mustard:#d6a136;--stool:#d23a2f;
+  --board-bg:#1b2625;--board-fg:#edf2eb;--board-dim:rgba(237,242,235,.64);
+  --en:"Young Serif","Iowan Old Style",Georgia,serif;
+  --zh:"Noto Serif SC","Songti SC","STSong",serif;
+  --mono:"DM Mono",ui-monospace,Menlo,monospace;
+  --hand:"LXGW WenKai TC","Kaiti SC","STKaiti","KaiTi",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --plaster:#1c1814;--paper:#2c261f;--ink:#f6f1e8;--ink-2:#cbbba8;--rule:#40362e;
+  --celadon:#8fbfb0;--cobalt:#a9b7d4;--coral:#e08a78;--mustard:#e8b85a;--stool:#e25a48;
+  --board-bg:#14110e;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --plaster:#1c1814;--paper:#2c261f;--ink:#f6f1e8;--ink-2:#cbbba8;--rule:#40362e;
+  --celadon:#8fbfb0;--cobalt:#a9b7d4;--coral:#e08a78;--mustard:#e8b85a;--stool:#e25a48;
+  --board-bg:#14110e;color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--plaster);color:var(--ink);font-family:var(--zh);font-size:17px;line-height:1.95;
+  -webkit-font-smoothing:antialiased;padding-inline:max(18px,env(safe-area-inset-left,0px));}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cobalt);outline-offset:3px}
+[hidden]{display:none!important}
+.wrap{max-width:1120px;margin:0 auto}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:16px;font-size:14px;color:var(--ink-2);
+  border-bottom:1px solid color-mix(in srgb,var(--rule) 55%,transparent)}
+.bar b{font-family:var(--en);font-weight:400;color:var(--ink);font-size:16px}
+.bar a{text-decoration:none}
+.bar a:hover{color:var(--stool)}
+.back{font-family:var(--mono);font-size:12px;letter-spacing:.04em}
+
+/* masthead: a tile-floor strip, then the title */
+.mast{max-width:760px;margin:56px auto 40px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--stool);text-transform:uppercase}
+h1{font-family:var(--zh);font-weight:700;font-size:clamp(34px,6vw,56px);line-height:1.2;letter-spacing:.04em;margin:14px 0 10px}
+.sub{font-size:19px;color:var(--ink-2);margin:0 0 22px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 16px;font-family:var(--mono);font-size:12px;color:var(--ink-2);
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:10px 0}
+.meta .spoil{color:var(--stool)}
+.layout{display:grid;grid-template-columns:minmax(0,760px) 220px;gap:56px;justify-content:center}
+article{min-width:0}
+article p{margin:0 0 1.2em;text-align:justify}
+.intro p:first-child::first-letter{font-size:2.6em;float:left;line-height:1;margin:.08em .12em 0 0;color:var(--stool);font-weight:700}
+
+
+/* each section is one satay stick */
+.stick{margin-top:72px;scroll-margin-top:24px}
+.stick header{display:grid;grid-template-columns:auto 1fr;column-gap:14px;align-items:end;margin-bottom:22px}
+.sk{grid-row:span 2;width:12px;height:64px;position:relative}
+.sk::before{content:"";position:absolute;left:5px;top:0;bottom:0;width:2px;background:#b98a52;border-radius:2px}
+.sk::after{content:"";position:absolute;left:0;top:6px;width:12px;height:30px;border-radius:5px;
+  background:repeating-linear-gradient(180deg,#9c4a26 0 9px,#7a3519 9px 10px);box-shadow:inset 0 0 0 1px #0002}
+.num{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--stool)}
+.stick h2{font-family:var(--zh);font-weight:700;font-size:26px;line-height:1.35;letter-spacing:.04em;margin:0}
+
+/* figures */
+.fig{margin:30px 0 34px}
+.fig figcaption{font-family:var(--hand);font-size:15.5px;color:var(--ink-2);margin-top:10px}
+.cal ol{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.cal li{background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:8px 8px 7px;line-height:1.35;font-size:14px;min-height:86px}
+.cal li b{display:block;font-family:var(--mono);font-weight:500;font-size:12px;color:var(--stool)}
+.cal li span{display:block;margin:3px 0}
+.cal li i{font-style:normal;font-size:12px;color:var(--ink-2)}
+.cal li.rain{border-color:color-mix(in srgb,var(--cobalt) 45%,var(--rule))}
+.cal li.empty{background:transparent;border-style:dashed}
+.cal li.empty span{color:var(--ink-2)}
+
+.notebook{background:#fdfbf4;color:#22303a;border-radius:3px;padding:18px 18px 12px;
+  background-image:repeating-linear-gradient(180deg,transparent 0 31px,#c9d6e4 31px 32px);
+  box-shadow:0 1px 0 #0001,0 8px 20px -14px #0006;border-left:5px solid var(--stool)}
+.notebook ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:10px 8px}
+.notebook li{text-align:center;font-family:var(--hand);font-size:13px;line-height:1.3}
+.notebook li b{display:grid;place-items:center;width:40px;height:40px;margin:0 auto 4px;font-family:var(--hand);font-size:22px;
+  border:1.6px solid #2f4f8f;border-radius:50% 46% 52% 48%;color:#2f4f8f}
+.notebook li.hi b{border-color:#c0392b;color:#c0392b}
+.notebook li.lo b{border:none;color:#c0392b;text-decoration:underline 2px;text-underline-offset:4px}
+.notebook figcaption{color:#4b5a66}
+
+.kopi{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:22px 18px 16px;text-align:center}
+.kopi .order{font-family:var(--en);font-size:clamp(26px,5vw,38px);display:flex;justify-content:center;gap:.25em;flex-wrap:wrap}
+.kopi .order span:nth-child(odd){color:var(--cobalt)}
+.kopi .order span:nth-child(even){color:var(--stool)}
+.kopi .gloss{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px;font-size:14px;line-height:1.4}
+.kopi .gloss b{display:block;font-family:var(--mono);font-weight:400;font-size:11px;color:var(--ink-2)}
+
+.music .scroll{overflow-x:auto}
+.music table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.45;min-width:620px}
+.music th{font-family:var(--mono);font-weight:400;font-size:11.5px;color:var(--ink-2);text-align:left;border-bottom:1.5px solid var(--ink);padding:6px 6px}
+.music td{padding:7px 6px;border-bottom:1px solid var(--rule);vertical-align:middle}
+.music td.n{font-family:var(--mono);color:var(--stool);width:2em}
+.music td.o{color:var(--ink-2);font-size:13px}
+.music tr.slow td{background:color-mix(in srgb,var(--cobalt) 9%,transparent)}
+.music td.bpm{width:120px;white-space:nowrap}
+.music .tb{display:inline-block;height:8px;width:calc(var(--w) * .7);background:var(--mustard);border-radius:2px;vertical-align:middle;margin-right:6px}
+.music tr.slow .tb{background:var(--cobalt)}
+.music td.bpm b{font-family:var(--mono);font-weight:500;font-size:12.5px}
+.music tfoot td{border-bottom:none;color:var(--ink-2);font-size:13px}
+.music tfoot .tb{background:var(--stool)}
+
+.tissue ol{list-style:none;margin:0;padding:0 0 0 22px;border-left:2px dashed var(--rule)}
+.tissue li{position:relative;margin:0 0 12px;line-height:1.6}
+.tissue li::before{content:"";position:absolute;left:-31px;top:5px;width:16px;height:12px;background:#fff;border:1px solid #c9c7bb;border-radius:2px;
+  box-shadow:inset 0 -3px 0 #e9e6da}
+.tissue li b{font-family:var(--mono);font-weight:500;font-size:12px;color:var(--stool);margin-right:10px}
+.tissue li.a::before{transform:rotate(0)}
+.tissue li.b::before{transform:rotate(-14deg)}
+.tissue em{font-style:normal;font-family:var(--hand);font-size:18px}
+
+.board .chalk{background:var(--board-bg);color:var(--board-fg);border-radius:6px;padding:20px 22px 12px;font-family:var(--hand);
+  box-shadow:inset 0 0 0 6px #6b4a2e,inset 0 0 40px #0008}
+.board h4{font-family:var(--hand);font-weight:400;font-size:15px;color:var(--board-dim);margin:10px 0 4px;border-bottom:1px dashed #ffffff33}
+.board h4:first-child{margin-top:0}
+.board p{display:flex;justify-content:space-between;gap:12px;margin:0 0 4px;font-size:17px;text-align:left}
+.board p b{font-weight:400;color:#f3d27a;white-space:nowrap}
+.board p.won span{text-decoration:underline wavy #f3d27a88;text-underline-offset:5px}
+
+.meme{border-top:1px solid var(--rule);padding-top:12px;margin-bottom:14px}
+.meme h4{font-family:var(--zh);font-size:17px;margin:0 0 2px;color:var(--stool)}
+.meme p{margin:0}
+
+/* two endings */
+.endings{margin:34px 0 10px;background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:22px 22px 8px}
+.end-ask{font-family:var(--hand);font-size:17px;color:var(--ink-2);margin:0 0 12px!important}
+.end-tabs{display:flex;gap:10px;margin-bottom:18px}
+.end-tabs button{all:unset;cursor:pointer;flex:1;border:1px solid var(--rule);border-radius:6px;padding:10px 14px;display:flex;align-items:baseline;gap:10px;background:var(--plaster)}
+.end-tabs button b{font-size:20px}
+.end-tabs button span{font-family:var(--en);font-size:14px;color:var(--ink-2)}
+.end-tabs button[aria-pressed="true"]{border-color:var(--stool);box-shadow:inset 0 0 0 1px var(--stool)}
+.end-tabs button:hover{border-color:var(--ink-2)}
+.end-kicker{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--stool);margin:0 0 8px!important}
+.verdict{text-align:center;margin:44px 0 0}
+.stars{font-size:28px;letter-spacing:.2em;color:var(--mustard)}
+.ps{font-family:var(--hand);font-size:19px;color:var(--stool);text-align:center!important;transform:rotate(-1.2deg)}
+
+/* receipt */
+.receipt{max-width:340px;margin:64px auto 30px;background:#fffdf7;color:#222;font-family:var(--mono);font-size:13px;line-height:1.7;
+  padding:22px 22px 26px;box-shadow:0 10px 26px -16px #0007;
+  -webkit-mask:radial-gradient(circle 6px at 50% 100%,#0000 98%,#000) 0 0/14px 100% repeat-x;
+  mask:radial-gradient(circle 6px at 50% 100%,#0000 98%,#000) 0 0/14px 100% repeat-x;padding-bottom:34px}
+.receipt p{margin:0;text-align:center}
+.r-head{font-weight:500;letter-spacing:.06em}
+.r-sub{color:#666;border-bottom:1px dashed #999;padding-bottom:8px;margin-bottom:8px!important}
+.receipt ul{list-style:none;margin:0;padding:0}
+.receipt li,.r-total{display:flex;justify-content:space-between;gap:10px;text-align:left!important}
+.receipt li span{font-family:var(--zh)}
+.receipt b{font-weight:500;white-space:nowrap}
+.receipt li.free b{color:#c0392b}
+.r-total{border-top:1px dashed #999;margin-top:8px!important;padding-top:6px;font-weight:500}
+.r-total span{font-family:var(--zh)}
+.r-foot{margin-top:14px!important;color:#666;font-family:var(--zh)}
+
+/* side rail: the plate of sticks + contents */
+.rail{position:sticky;top:24px;align-self:start;margin-top:72px}
+.plate{display:block;width:200px;height:auto}
+.plate-label{font-family:var(--mono);font-size:12px;color:var(--ink-2);margin:4px 0 16px;text-align:center}
+.toc{list-style:none;padding:0;margin:0;font-size:13.5px;line-height:1.5}
+.toc a{display:flex;gap:8px;text-decoration:none;color:var(--ink-2);padding:3px 0}
+.toc a:hover{color:var(--ink)}
+.toc .n{font-family:var(--mono);font-size:11px;min-width:1.6em;color:var(--rule)}
+.toc a.done .n{color:var(--stool)}
+.toc a.here{color:var(--ink)}
+.mini{display:none}
+footer{max-width:760px;margin:40px auto 0;padding-block:24px 44px;font-size:13px;color:var(--ink-2);border-top:1px solid var(--rule);
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{color:var(--stool)}
+@media (max-width:980px){
+  .layout{grid-template-columns:minmax(0,760px)}
+  .rail{display:none}
+  .mini{display:flex;align-items:center;gap:8px;position:fixed;right:14px;bottom:14px;z-index:5;background:var(--paper);border:1px solid var(--rule);
+    border-radius:99px;padding:5px 12px 5px 6px;font-family:var(--mono);font-size:12px;color:var(--ink-2);box-shadow:0 4px 14px -8px #0006}
+  .mini svg{width:46px;height:28px}
+}
+@media (max-width:640px){
+  body{font-size:16.5px}
+  .mast{margin-top:36px}
+  .cal ol,.notebook ol{grid-template-columns:repeat(3,1fr)}
+  .kopi .gloss{grid-template-columns:repeat(2,1fr)}
+  .stick h2{font-size:22px}
+  .end-tabs{flex-direction:column}
+}
+
+/* language switch in the top bar */
+.bar-r{display:flex;align-items:center;gap:16px}
+.lang-link{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;text-decoration:none;border:1px solid var(--rule);border-radius:99px;padding:4px 11px;background:var(--paper);color:var(--ink)}
+.lang-link:hover{border-color:var(--ink-2)}
+/* English edition: a reading serif, ragged right, tighter tracking */
+html[lang="en"]{--zh:"Source Serif 4","Iowan Old Style",Georgia,serif}
+html[lang="en"] body{line-height:1.72;font-size:18px}
+html[lang="en"] article p{text-align:left}
+html[lang="en"] h1{letter-spacing:0;font-weight:600;font-size:clamp(32px,5.2vw,50px)}
+html[lang="en"] .stick h2{letter-spacing:0;font-weight:600}
+html[lang="en"] .intro p:first-child::first-letter{font-size:3.1em;margin-top:.04em}
+html[lang="en"] .cal li,html[lang="en"] .music table{font-size:13.5px}
+html[lang="en"] .fig figcaption,html[lang="en"] .end-ask,html[lang="en"] .ps{font-family:var(--zh);font-style:italic}
+html[lang="en"] .board .chalk,html[lang="en"] .board h4,html[lang="en"] .notebook li,html[lang="en"] .notebook li b{font-family:"Patrick Hand","LXGW WenKai TC",cursive}
+html[lang="en"] .tissue em{font-family:var(--zh);font-style:italic;font-size:inherit}
+@media (max-width:640px){html[lang="en"] body{font-size:17px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="bar">
+    <b><a href="https://gaussianmusic.com/">Gaussian’s music</a></b>
+    <div class="bar-r">
+      <a class="back" href="./">← Newton Circus · Twelve Fridays</a>
+      <a class="lang-link" href="review.html" hreflang="zh" id="lang-link">中文</a>
+    </div>
+  </header>
+
+  <div class="mast">
+    <div class="kicker">Five-Foot Way · Weekend long read</div>
+    <h1>How Long Can a Packet of Tissues Hold a Seat?</h1>
+    <p class="sub">On Newton Circus · Twelve Fridays</p>
+    <div class="meta"><span>Twelve sections · one stick each</span><span>About 5,200 words</span><span class="spoil">Contains spoilers</span></div>
+  </div>
+
+  <div class="layout">
+    <article>
+      <div class="intro"><p>In a Singapore hawker centre, a packet of tissues can hold a stool for you. Nobody made this rule and nobody enforces it, but if you leave a packet on a seat and go off to queue for food, the seat is usually still yours when you come back.</p><p>Newton Circus · Twelve Fridays opens with one of those packets. Summer lands at four in the afternoon, just as the rain stops, and the lights at Newton Food Centre come on one stall at a time. The first thing the drinks auntie teaches her is to save a seat with tissues before she queues. Singaporeans call this "chope". When Summer comes back with her sugarcane juice, someone is sitting on her red stool.</p><p>It is Kelvin. He tells her tissues only hold a seat for fifteen minutes, and she has been in the satay queue for half an hour. Summer wants to know which rulebook says so. She has flown halfway round the world, and all she wants is to borrow one chair for a year.</p><p>Their argument is the question the whole show asks. How long can a packet of tissues hold a seat: fifteen minutes, a year, longer? Who gets to hold one, and who are they holding it for?</p><p>The show is an original musical in two acts, with twelve songs and two endings, sung in Mandarin, English and Singlish. Everything happens in one hawker centre. Summer is an undercover food critic from abroad. For one year she comes to Newton on one Friday each month, eats at one stall and writes a few lines in a red notebook. Kelvin's family has sold satay here for forty years, and his father, Uncle Tan, still works the grill. Summer wants to stay. Kelvin wants to leave. Over twelve Fridays a family of otters gives away her identity, a letter from London gets chilli crab sauce on it, and on the last Friday it is finally the satay stall's turn. That night the satay is salty.</p><p>When you eat satay in Singapore, the stall owner counts the empty skewers on your plate to work out the bill. The last song in the show is called "Count the Sticks", so this review counts sticks too: twelve sections, one stick each. It gives away both endings, so it is best read after hearing the songs.</p></div>
+      <section class="stick" id="s1" data-i="1"><header><span class="sk" aria-hidden="true"></span><span class="num">Stick One</span><h2>Chope: An Unwritten Contract</h2></header><p>"Chope" is Singlish. It probably comes from the English "chop", as in stamping something to mark it as yours. In a hawker centre the stamp can be a packet of tissues, an umbrella or a staff pass on a lanyard. The rule is written down nowhere, and it works because everyone goes along with it. Singaporeans argue about it all the time. Some say it is kiasu, the local word for being so afraid of losing out that you grab everything first. Others say it keeps things orderly, since nobody has to stand around holding a tray.</p><p>When Kelvin sings "Tissue paper cannot chope forever one", he is stating what every local knows: tissues only hold a seat for a little while. Summer wants more than a stool. "Just lend me one chair for one year," she sings. What she is really asking for is a year in which she belongs here.</p><p>The January argument ends like this. The drinks auntie drags over a low stool from the satay stall, Kelvin gives Summer back the red one and sits across from her, and Summer pushes the tissues into the middle of the table. "Half the table each, then. Keep your plates on your side." The packet that saved her seat is now a border. Over the next eleven months it will be used in several other ways, and in the end it holds a seat for someone who isn't there. You could say the show is about how a packet of tissues goes from meaning "this is mine" to meaning "I'm keeping this for you".</p></section><section class="stick" id="s2" data-i="2"><header><span class="sk" aria-hidden="true"></span><span class="num">Stick Two</span><h2>Small Island, Big Island</h2></header><p>The two leads want opposite things. Summer, who comes from elsewhere, wants to stay. Kelvin, who grew up here, wants to go.</p><p>On National Day, 9 August, there is also a Hungry Ghost Festival getai stage downstairs, and the two of them start arguing in front of it. Kelvin sings "Small island": a taxi from one end of the country to the other costs forty dollars, you can't turn round without bumping into an old classmate, and your whole life feels planned already. Summer sings "Big island": there is a stall she hasn't tried on every corner, and thirty years wouldn't be enough to eat her way through it. By the last chorus they are singing over each other, one shouting small and the other shouting big, and neither will give way.</p><p>The Daoist book Zhuangzi has a line that fits. Roughly: measure by difference, and if you call a thing big because something else is smaller, then everything is big; if you call it small because something else is bigger, then everything is small. The same island is as big as whatever you measure it with. In July, at Sentosa, Summer says it more plainly: "You go round the map, I go round the days." By the map, Kelvin's island is soon used up. Day by day, Summer's never is.</p><p>The show doesn't say who is right. The getai singer only offers "Some people want go, some people want stay", and then "Tonight no big no small, 做伙唱": tonight it doesn't matter, everybody sing. But the show is clear about why Kelvin wants to leave. In Hokkien he sings that he wants to go somewhere he doesn't know what tomorrow will bring. In July, watching ships head out to sea, he wonders whether the places they are going have a winter. He wants somewhere with seasons, and a future that hasn't been arranged for him.</p></section><section class="stick" id="s3" data-i="3"><header><span class="sk" aria-hidden="true"></span><span class="num">Stick Three</span><h2>A Calendar Without Winter</h2></header><p>Singapore has no seasons, so how does an audience know the year is moving? You look up.</p><p>In January bare bulbs hang overhead. In February, for Lunar New Year, there are red lanterns. In March, during Ramadan, there are crescent moons. August brings flags, September brings rabbit and starfruit lanterns for the Mid-Autumn Festival, October brings oil lamps for Deepavali, and in December the Christmas lights are wound round palm trees. In Singapore the year is marked by festivals rather than weather, and they belong in turn to the Chinese, the Malay Muslims, the Indians and the Christians. Each month, one community hangs its lights from the same ceiling.</p><figure class="fig cal" aria-label="What hangs overhead each month"><ol><li class=""><b>Jan</b><span>Bare bulbs</span><i>Just landed</i></li><li class=""><b>Feb</b><span>Red lanterns</span><i>Lunar New Year</i></li><li class=""><b>Mar</b><span>Crescent moons</span><i>Ramadan</i></li><li class="rain"><b>Apr</b><span>Four o&#x27;clock rain</span><i>Monsoon change</i></li><li class="empty"><b>May</b><span>(nothing)</span><i>No festival</i></li><li class=""><b>Jun</b><span>Intermission</span><i>Halfway</i></li><li class=""><b>Jul</b><span>Waves</span><i>School holidays</i></li><li class=""><b>Aug</b><span>Flags</span><i>National Day · getai</i></li><li class=""><b>Sep</b><span>Rabbit, starfruit, plane</span><i>Mid-Autumn</i></li><li class=""><b>Oct</b><span>Oil lamps</span><i>Deepavali</i></li><li class="rain"><b>Nov</b><span>Monsoon rain</span><i>Rainy season</i></li><li class=""><b>Dec</b><span>Star lights</span><i>Christmas</i></li></ol><figcaption>What hangs overhead tells you the month. Only May is empty.</figcaption></figure><p>Only May has nothing overhead. (A pedantic Singaporean would point out that May has Vesak Day. The show leaves the month empty on purpose.) With no festival to look at, Summer and Kelvin look at each other instead, and compete over who can order coffee like a local. "No festival in May, no fireworks," they sing in "Dinosaur", "只有我们两个在这里吵架", just the two of us here, arguing. Their feelings for each other grow in the emptiest month of the year.</p><p>The show has another clock, and that is the rain. In the weeks when the monsoon changes direction, the afternoon storm arrives at four o'clock sharp. Kelvin says Singapore's rain is more punctual than the MRT and more punctual than your boss, which always gets a laugh from a Singaporean audience. The April rain puts the two of them under one umbrella. In both endings the four o'clock rain comes again and washes the twelve floor tiles clean.</p><p>Time here is counted by repetition: the same rain, the same Friday, the same red stool. That is why the company sings, at the end, that a year is like one very long afternoon. Without a winter, a year doesn't get older, only longer. The website builds this into its look. The colour of the limewashed wall warms a little each month, from a rainy afternoon in January to the glow of charcoal in December.</p></section><section class="stick" id="s4" data-i="4"><header><span class="sk" aria-hidden="true"></span><span class="num">Stick Four</span><h2>The One Who Gives Marks</h2></header><p>A food critic's first rule is to stay anonymous. If you want to judge a place, you have to remain an outsider there, so Summer's job means she can't belong.</p><p>Yet in this hawker centre the people who know the food best never give marks. The aunties look after these tables every day. They know who likes what, who comes how often and which stall is best, better than any food guide. "I stand here thirty years lah," the drinks auntie sings in May, "你们两个点什么我都知道", I know what you two will order. The aunties don't score anything. They remember.</p><p>The "recommended lantern" in the show is made up, but the story behind it is real. In 2016 the Michelin Guide gave stars to two Singapore hawker stalls for the first time, one selling soya sauce chicken rice and the other minced pork noodles. Singaporeans know what happened next: longer queues, owners who could hardly take a day off, one expanding into a chain, others worn out. For a hawker, a good review sets off a chain of consequences. In September Kelvin sings out each link in the chain. Hang a lantern on the stall and the queues start. Once the queues start, the stall can't close. If the stall can't close, he can't leave.</p><p>Summer won't lie. It is the best satay she has ever eaten, and writing that it's bad would be like writing that tonight's moon isn't round. In December Uncle Tan solves the problem for her by salting the satay on purpose. Summer writes "Tonight's satay is too salty", every word of it true, and it is exactly the review he wanted. Kelvin's father added the salt, so she doesn't have to lie.</p><p>Then she writes something no critic should write: "Please keep this seat for me." She underlines it hard. The line that gave her away back in June was "Stingray, spicy just right, just a little short", cool and precise, obviously the work of a professional. The last page in December sounds nothing like that. By the time she writes her request, she is no longer an outsider, and her report reads more like a letter.</p><p>Here are the scores in the red notebook, month by month, out of ten: 7, 9, 8, 8, 7, 8, 8, 9, 7, 9, 8, 4. The three nines fall in February, August and October. Those are the nights she is grilled about her job at New Year, the night of the small-island, big-island fight at the getai, and the night Uncle Tan's family fights over the London letter. They are the noisiest nights of the year. The lowest score, a four, goes to the best satay she has ever eaten. Clearly she was not only marking the food.</p><figure class="fig notebook" aria-label="Twelve scores in the red notebook"><ol><li class=""><b>7</b><span>Jan · Sugarcane</span></li><li class="hi"><b>9</b><span>Feb · Oyster omelette</span></li><li class=""><b>8</b><span>Mar · Prata</span></li><li class=""><b>8</b><span>Apr · Iced coffee</span></li><li class=""><b>7</b><span>May · Milo dinosaur</span></li><li class=""><b>8</b><span>Jun · Stingray</span></li><li class=""><b>8</b><span>Jul · Nasi lemak</span></li><li class="hi"><b>9</b><span>Aug · Char kway teow</span></li><li class=""><b>7</b><span>Sep · Tau huay</span></li><li class="hi"><b>9</b><span>Oct · Chilli crab</span></li><li class=""><b>8</b><span>Nov · Durian</span></li><li class="lo"><b>4</b><span>Dec · Satay</span></li></ol><figcaption>The red notebook: all three 9s fall on the noisiest nights, and the lowest score, a 4, goes to the best satay.</figcaption></figure></section><section class="stick" id="s5" data-i="5"><header><span class="sk" aria-hidden="true"></span><span class="num">Stick Five</span><h2>Two People Letting Go at Once</h2></header><p>In O. Henry's story "The Gift of the Magi", a wife sells her hair to buy a chain for her husband's watch, and the husband sells his watch to buy combs for her hair. Their sacrifices cancel each other out.</p><p>The show uses the same pattern with the opposite result. In September Kelvin goes behind his father's back to beg Summer for a bad review. In December Uncle Tan goes behind his son's back and salts the satay. Each is quietly trying to set the other free, and both want the same thing: no lantern on the stall. Their sacrifices don't cancel out. They add up.</p><p>In that scene Kelvin picks up a salty skewer and eats the whole thing without a sip of water. It isn't salty at all, he says; his father has grilled satay for forty years and his hand has never once slipped. He is covering for his father, and he is also telling him, I know you did it on purpose. The father has told a lie, and the son answers with one of his own.</p><p>We learn why Uncle Tan does it in November. At nineteen he wanted to leave too, with a guitar and a ticket to Taipei, where he hoped to sing. If he has been grilling for forty years, that was around 1986, the peak of xinyao, the Singapore campus-folk movement. Secondary school and university students sat under the trees writing their own songs about their own streets, and quite a few of them later went to work in Taiwan's record industry. Uncle Tan never went. His father grew old and handed him the palm-leaf fan, and he has held it ever since.</p><p>So the salt in December is Uncle Tan buying his son the ticket he never used himself. The November song starts as a gravelly slow blues and turns into bright fingerpicked acoustic guitar, as if he is drifting back under that tree while he talks. Summer asks if he regrets it. He says no, only that on rainy nights he sometimes wonders whether the rain in Taipei is this punctual too.</p></section><section class="stick" id="s6" data-i="6"><header><span class="sk" aria-hidden="true"></span><span class="num">Stick Six</span><h2>One Plate, Four Languages</h2></header><p>The show assigns languages by character instead of alternating a line of Chinese with a line of English. The aunties speak Singlish with Hokkien mixed in. Summer mostly speaks English. Kelvin speaks Mandarin with some Singlish. The auntie who sells tau huay hums in Cantonese. Malay appears only in a few catchy hooks, such as "Hujan jam empat" (four o'clock rain) and "Mari menari" (come and dance).</p><p>There is a second rule: neighbouring lines never translate each other. When Singaporeans switch languages mid-conversation, it is because a word sounds better in one language, not because they are translating for anyone. The "one" at the end of "Tissue paper cannot chope forever one" is the Mandarin particle 的 carried into English. "Can or not?" is the Chinese 行不行, can you or can't you.</p><p>The May coffee-ordering contest is where the languages are most tangled. In "Kopi-O kosong peng", kopi is Malay for coffee, O is Hokkien for black, kosong is Malay for zero (no sugar), and peng is Hokkien for ice. Four words from three languages add up to an iced black coffee, no sugar. Summer fires back with "Teh-C siew dai". Teh is Hokkien for tea, C means evaporated milk (one story says it comes from the Carnation brand), and siew dai means less sweet. Competing over who orders more like a local means competing over who speaks the island's language better. In the end the drinks auntie wins, because she remembers every drink the two of them ordered.</p><figure class="fig kopi" aria-label="One coffee order, taken apart"><div class="order"><span>Kopi</span><span>-O</span><span>kosong</span><span>peng</span></div><div class="gloss"><span><b>Malay</b>coffee</span><span><b>Hokkien</b>black</span><span><b>Malay</b>zero (no sugar)</span><span><b>Hokkien</b>ice</span></div><figcaption>Four words, three languages: an iced black coffee, no sugar.</figcaption></figure><p>In August someone sings "One plate of kway teow, four languages inside". "Kway teow" is itself a Hokkien word, and Singapore has four official languages, so one plate of fried noodles can hold the whole island. Chinese dialects have their own place in the show. From 1979 the Speak Mandarin Campaign gradually pushed dialects off television and radio, and the getai became one of the few places where people could still sing in Hokkien at full volume. The tau huay auntie in September hums Cantonese hits from the sixties. The older generation's languages turn up once on the loudest night of the year and once on the gentlest.</p></section><section class="stick" id="s7" data-i="7"><header><span class="sk" aria-hidden="true"></span><span class="num">Stick Seven</span><h2>Where the Dish Comes From, the Song Comes From</h2></header><p>Most of the twelve songs take their style from where the dish comes from.</p><p>Oyster omelette comes from the Teochew and Hokkien kitchens, so it gets a Teochew folk tune with erhu and suona. Prata comes from South India, so it gets Tamil kuthu drumming. Milo dinosaur and kopi come from the Hainanese coffee shop, so they get the swing that played in 1950s Nanyang coffee shops. Stingray and nasi lemak are Malay dishes, so they get the Malay dances zapin and joget. Char kway teow is a Hokkien hawker dish, so it gets getai pop. Tau huay is a Cantonese dessert, so it gets sixties Cantonese pop. Satay comes from Java, so it gets Javanese gamelan.</p><p>The other four styles were chosen for the story. January's sugarcane juice gets calypso and steel pan. Calypso comes from Trinidad, once a sugar-plantation colony, and the steel pan was invented there from old oil drums, so a glass of sugarcane juice is tied to history on the other side of the world. April's iced coffee gets an Indonesian love song, because that is when the two of them fall for each other in the rain. October's chilli crab gets eighties Singapore pop-rock: chilli crab was invented in the fifties by a Singaporean couple selling from a pushcart, so a local invention gets local pop. November's durian gets xinyao, the music of Uncle Tan's youth.</p><p>Each song also takes its rhythm from a kitchen sound: the hand-cranked sugarcane press, the sizzle of the griddle, prata dough slapped onto the hot plate, ice in a plastic bag, a long spoon against a glass, a banana leaf crackling over the fire, a spatula on a wok, a porcelain spoon against a bowl, a mallet cracking a crab shell, the crack of a durian husk, and the steady rise and fall of a palm-leaf fan over charcoal. In the curtain call, "Last Order", these sounds come in one after another until the whole hawker centre sounds like a band.</p><p>The tempos are planned too. The lively songs run from 124 to 150 beats per minute, and the fastest is October's family argument at 150. When the story turns, the music slows: the April rain at 76, the September lanterns at 84, the November durian at 76, the December satay at 88. The things that matter most are said in the slow songs. Both ending songs are at 96, the same speed, so the music doesn't hint that one ending is happier.</p><figure class="fig music" aria-label="Twelve songs: the dish, its origin, the style, the kitchen sound and the tempo"><div class="scroll"><table><thead><tr><th>Mo.</th><th>Dish</th><th>Origin</th><th>Style</th><th>Kitchen sound</th><th>Tempo (BPM)</th></tr></thead><tbody><tr class=""><td class="n">1</td><td>Sugarcane juice</td><td class="o">Story: sugar and Trinidad</td><td>Calypso · steel pan</td><td>Hand-cranked press</td><td class="bpm"><span class="tb" style="--w:75%"></span><b>112</b></td></tr><tr class=""><td class="n">2</td><td>Oyster omelette</td><td class="o">Teochew-Hokkien</td><td>Teochew folk · erhu, suona</td><td>Griddle sizzle</td><td class="bpm"><span class="tb" style="--w:83%"></span><b>124</b></td></tr><tr class=""><td class="n">3</td><td>Prata</td><td class="o">South Indian</td><td>Tamil kuthu</td><td>Dough slap</td><td class="bpm"><span class="tb" style="--w:93%"></span><b>140</b></td></tr><tr class="slow"><td class="n">4</td><td>Iced coffee</td><td class="o">Story: a rainy day</td><td>Indonesian love song</td><td>Ice in a plastic bag</td><td class="bpm"><span class="tb" style="--w:51%"></span><b>76</b></td></tr><tr class=""><td class="n">5</td><td>Milo dinosaur</td><td class="o">Hainanese kopitiam</td><td>1950s Nanyang swing</td><td>Spoon on glass</td><td class="bpm"><span class="tb" style="--w:93%"></span><b>140</b></td></tr><tr class=""><td class="n">6</td><td>Stingray</td><td class="o">Malay</td><td>Zapin · pizzicato</td><td>Banana-leaf crackle</td><td class="bpm"><span class="tb" style="--w:79%"></span><b>118</b></td></tr><tr class=""><td class="n">7</td><td>Nasi lemak</td><td class="o">Malay</td><td>Joget · ukulele</td><td>Frame drum, waves</td><td class="bpm"><span class="tb" style="--w:83%"></span><b>124</b></td></tr><tr class=""><td class="n">8</td><td>Char kway teow</td><td class="o">Hokkien</td><td>Hokkien getai pop</td><td>Spatula on wok</td><td class="bpm"><span class="tb" style="--w:88%"></span><b>132</b></td></tr><tr class="slow"><td class="n">9</td><td>Tau huay</td><td class="o">Cantonese</td><td>1960s Cantonese pop</td><td>Porcelain spoon</td><td class="bpm"><span class="tb" style="--w:56%"></span><b>84</b></td></tr><tr class=""><td class="n">10</td><td>Chilli crab</td><td class="o">Story: a local invention</td><td>1980s Singapore rock</td><td>Mallet on crab shell</td><td class="bpm"><span class="tb" style="--w:100%"></span><b>150</b></td></tr><tr class="slow"><td class="n">11</td><td>Durian</td><td class="o">Story: Uncle Tan's youth</td><td>Slow blues → xinyao</td><td>Durian husk cracking</td><td class="bpm"><span class="tb" style="--w:51%"></span><b>76</b></td></tr><tr class="slow"><td class="n">12</td><td>Satay</td><td class="o">Javanese</td><td>Gamelan</td><td>Fan over charcoal</td><td class="bpm"><span class="tb" style="--w:59%"></span><b>88</b></td></tr></tbody><tfoot><tr><td></td><td colspan="4">Both ending reprises, Stay and Go Home, are at 96; the curtain call, Last Order, is at 126 with all twelve kitchen sounds</td><td class="bpm"><span class="tb" style="--w:64%"></span><b>96</b></td></tr></tfoot></table></div><figcaption>Each song's style follows where its dish comes from. The four blue rows are the slow songs, and they are where the story turns: rain, lanterns, durian, satay.</figcaption></figure></section><section class="stick" id="s8" data-i="8"><header><span class="sk" aria-hidden="true"></span><span class="num">Stick Eight</span><h2>A Year in the Life of a Packet of Tissues</h2></header><p>If you follow the packet of tissues through the year, you can see how the show is built.</p><figure class="fig tissue" aria-label="A year in the life of a packet of tissues"><ol><li class=""><b>Jan</b>Saves a seat: “This seat is mine.”</li><li class=""><b>Jan</b>Pushed to the middle of the table as a border: “Keep your plates on your side.”</li><li class=""><b>Oct</b>Handed to a father and son with chilli on their hands, for their tears.</li><li class=""><b>Dec</b>Someone has already left a packet on her stool.</li><li class="a"><b>End A</b>Summer leaves it on Kelvin's half, <em>perfectly straight</em>.</li><li class="b"><b>End B</b>Kelvin leaves it on Summer's half, <em>at an angle</em>.</li></ol><figcaption>From “this is mine” to “I'm keeping this for you”.</figcaption></figure><p>In January the tissues save a seat and then become the line down the middle of the table. In October Kelvin and his father have chilli sauce all over their hands, and their eyes are red from the heat, but they can't wipe them. Summer hands them tissues again, this time for their tears. In December Summer goes to her usual place and finds that someone has already left a packet on the red stool for her. Uncle Tan later says he recognised her on her first day, because nobody else lays tissues down so neatly. In the endings, the tissues are left on the half of the table where an absent person used to sit.</p><p>That neatness is worth noticing. Summer always sets the packet down perfectly straight. It is a critic's habit, and it is how Uncle Tan spotted her. In Ending A she still sets it down straight. In Ending B it is Kelvin who leaves the packet, and he puts it down at an angle. He is copying her habit and not quite getting it right, which is its own kind of tenderness.</p><p>Tissues matter so much in Singapore partly because hawker centres don't supply napkins, so everyone carries a packet. Elderly people often go from table to table selling them, and buying a packet is a small way of helping out.</p><p>The other props change with the story as well. The red notebook picks up marks: a crossed-out fake job in February, a corner blurred by rain in April, otter footprints in June, two drops of chilli oil in October, and a heavy underline in December. In September Kelvin brings an aeroplane-shaped lantern, because in his head he has already left. In October the letter from London gets chilli crab sauce on it, so the letter that will take him away from home is marked first with the taste of home. Then there is the palm-leaf fan, handed down to Uncle Tan by his own father decades ago. In Ending B, when Kelvin takes it, he finds out that you have to fan charcoal slowly or it smokes.</p></section><section class="stick" id="s9" data-i="9"><header><span class="sk" aria-hidden="true"></span><span class="num">Stick Nine</span><h2>The Physics in the Names</h2></header><p>Newton Circus is a real place in Singapore. In British English a circus is a round junction where several roads meet, like Piccadilly Circus in London. Kelvin wants to go to London, so he is moving from one Circus to another. Go all the way round a roundabout and you are back where you started, which is the shape of the show: twelve months make a full circle, and the cast's last words are "see you next Friday". A circus is also a circus, of course. With prata dough flying through the air, aunties running a betting board and otters charging in to steal a bag, this hawker centre is lively enough to be one.</p><p>Newton is also Isaac Newton. Uncle Tan has not closed his stall once in forty years, not even on the day his son was born, which looks a lot like inertia. In October father and son push against each other. One says "You never ask what I want", the other asks who will run the stall if he goes, and that is action and reaction. By December they are finally pushing in the same direction.</p><p>Kelvin is also a unit of temperature that starts at absolute zero, and Kelvin is the boy who longs for a place with winter. Summer is the only season Singapore has, and it is the name of the outsider who wants to stay. The one who wants to leave is named after cold, and the one who wants to stay is named after the local weather. (Kelvin is also a very common English name for Singaporean Chinese men of his generation.)</p><p>Uncle Tan's surname is Tan, and one of the critic suspects is Mr Lim. Tan and Lim are Singapore's two most common surnames, a little like Smith and Jones. In Ending B, Uncle Tan finally has time to sit at a table and read the paper, which is exactly what Mr Lim does every day. The stall owner has become an ordinary customer.</p><p>The twelve stalls are numbered #01-01 to #01-12, the way Singapore writes addresses: after the hash comes the floor, then the unit number. Twelve months, twelve units on the ground floor.</p></section><section class="stick" id="s10" data-i="10"><header><span class="sk" aria-hidden="true"></span><span class="num">Stick Ten</span><h2>Jokes Only Singaporeans Will Get</h2></header><p>You can follow the show without these, but you will laugh more if you know them.</p><div class="meme"><h4>"What do you do?"</h4><p>Singaporeans meeting someone new soon ask what they do for a living, and relatives ask even more at New Year. Summer panics and makes things up: she is in logistics, no, a primary school teacher, no, a night-shift nurse, and at weekends she counts orchids at the Botanic Gardens. The Singapore Botanic Gardens really does have a National Orchid Garden.</p></div><div class="meme"><h4>Lo hei and "Huat ah!"</h4><p>At Lunar New Year everyone at the table tosses the yusheng salad high with their chopsticks, shouting good-luck phrases; the higher you toss, the better your year. The custom is usually said to have been popularised by a group of Singapore chefs in the 1960s. "Huat" is Hokkien for prosper.</p></div><div class="meme"><h4>"Can or not?"</h4><p>Singlish's all-purpose question: can you, or can't you? The aunties will bet on anything. The blackboard reads two to one, four to one and nine to one, and the nine-to-one outsider wins.</p></div><div class="meme"><h4>Coffee in a plastic bag.</h4><p>Takeaway drinks come in a clear plastic bag tied at the top with a straw stuck in, so you can carry them by the string. That is what Summer is swinging in April, and the clink of ice inside became the shaker in that song.</p></div><div class="meme"><h4>Milo dinosaur.</h4><p>A glass of iced Milo with a mountain of dry Milo powder piled on top. Add a scoop of ice cream and it becomes a Milo Godzilla.</p></div><div class="meme"><h4>Otters.</h4><p>Singapore's otters are local celebrities. They follow rivers and canals into the city centre, fans keep track of the different otter families, and they have made the news for raiding koi ponds. Nobody in the show gives Summer away. Five otters do it for them.</p></div><div class="meme"><h4>Sentosa.</h4><p>The name means peace and tranquillity in Malay. Singaporean children go there more times than they can count, so the place Summer calls paradise is, to Kelvin, an island you can cycle round in a day.</p></div><div class="meme"><h4>The front row at the getai.</h4><p>During the seventh lunar month, the Hungry Ghost Festival, stages go up beneath the housing blocks and singers in sequins perform Hokkien songs. The front row of chairs is usually left empty for the "good brothers", the wandering spirits. It may be the most solemn kind of chope in Singapore: a seat kept for someone you can't see. The show sets its August song at a getai without mentioning this, but it lines up neatly with the packet of tissues in both endings.</p></div><div class="meme"><h4>Chilli crab and fried mantou.</h4><p>When you eat chilli crab, you mop up the sauce with fried buns. Crabs walk sideways, and that night father and son never quite say anything straight either.</p></div><div class="meme"><h4>No durians on the MRT.</h4><p>Singapore's trains really do have signs banning durians. Older people say durian is "heaty" and come with all kinds of rules about what not to have after eating it; everyone's list is different. Uncle Tan's rule is no iced water. In the curtain call the whole company shouts it together.</p></div><div class="meme"><h4>Counting the sticks.</h4><p>When you finish your satay, the stall owner counts the skewers on your plate to work out the bill. Nobody counts while you eat. It all gets added up at the end.</p></div><div class="meme"><h4>"Last order!"</h4><p>What hawkers call out before they close for the night. When the auntie shouts it in the show, she is also asking the audience: stay, or go home?</p></div><div class="meme"><h4>Newton and Crazy Rich Asians.</h4><p>In the 2018 film Crazy Rich Asians, the heroine from New York is taken to Newton for satay on her first night in Singapore. This show's outsider also ends up at Newton on her first day, but here there is no rich family, only a satay stall and a son who wants to leave.</p></div><p>In 2020 Singapore's hawker culture was added to UNESCO's list of the Intangible Cultural Heritage of Humanity. This show is about the most ordinary parts of it: a stool, a packet of tissues, a call of "last order".</p></section><section class="stick" id="s11" data-i="11"><header><span class="sk" aria-hidden="true"></span><span class="num">Stick Eleven</span><h2>Two Endings, One Set of Odds</h2></header><p>At the end, the audience chooses: stay, or go home?</p><p>Put the two endings side by side and you notice that in neither of them do Summer and Kelvin end up together. In Ending A, Summer stays and Kelvin flies to London. In Ending B, Summer flies away and Kelvin stays to take over the fan. What the audience really chooses is who leaves and who stays behind to wait. Both endings close with the same gesture: someone leaves a packet of tissues on the other person's half of the table.</p><p>By now each of them has broken January's fifteen-minute rule. In Ending A, Summer sings "Nobody here says fifteen minutes anymore". In Ending B, Kelvin, who cared most about that rule, sings that this time he isn't counting fifteen minutes, or half a year either. Saving a seat has become waiting for someone.</p><p>The aunties had a book open on all this from the start. In January they offered three to one on whether these two would end up sharing a chair. When the board closes at the end, staying pays three to one and leaving pays even money, and whichever ending you pick is the bet that wins. The aunties have seen plenty of people come and go, so leaving is the favourite and staying is the long shot. When you press the button, you are placing a bet too.</p><figure class="fig board" aria-label="The aunties' betting board"><div class="chalk"><h4>March · Who&#x27;s the critic?</h4><p class=""><span>Tourist with the big camera</span><b>2 to 1</b></p><p class=""><span>Mr Lim with his newspaper</span><b>4 to 1</b></p><p class="won"><span>Girl from far away who eats three plates</span><b>9 to 1 ✓</b></p><h4>January · Will these two share a chair?</h4><p class=""><span>Yes</span><b>3 to 1</b></p><h4>Final book</h4><p class=""><span>She stays</span><b>3 to 1</b></p><p class=""><span>She leaves</span><b>Evens</b></p></div><figcaption>The aunties have seen plenty of people come and go, so leaving is the favourite and staying the long shot.</figcaption></figure><p>The two ending songs mirror each other. "Stay" uses steel pan and piano and goes back to the January song, "Chope". "Go Home" uses nylon-string guitar and goes back to April's "Four O'Clock Rain". In Ending A, Uncle Tan only lights the grill three nights a week, keeps the best skewers at the side of the grill, gives the charcoal one wave of the fan and says there's no extra salt tonight. He only salted the satay that once. In Ending B, Uncle Tan sits reading the paper, and the auntie brings Kelvin a kopi-O kosong peng on the house. It is the order Kelvin used in May to test Summer, and now someone remembers it for him.</p><p>In November Summer sang: "When I'm homesick, I come here / Because here someone remembers how I order." For this show, if someone remembers how you take your coffee, you belong.</p><p>Nine hundred years ago the poet Su Shi met a woman who had followed her master into exile in Lingnan, the hot far south of China, and asked whether life there had been hard. She answered, "Wherever my heart is at peace, that is my home." In those days Lingnan was the steamy south where nobody wanted to be sent. In Ending A, Summer's heart settles in a place where someone remembers her order. In Ending B, Kelvin's heart settles on a fan that has to be waved slowly.</p><p>Both endings lead into the curtain call, "Last Order". The key goes up, the kitchen sounds of all twelve stalls play together, and everyone sings: "Newton's lights are still on — see you next Friday!"</p></section><section class="stick" id="s12" data-i="12"><header><span class="sk" aria-hidden="true"></span><span class="num">Stick Twelve</span><h2>Counting the Sticks</h2></header><p>In "Count the Sticks", Summer counts the skewers as if they were months: one, January, the sugarcane so sweet; two, February, the yusheng tossed so high; three, March, nine to one on the blackboard; four, April, half an umbrella in the rain. She keeps counting through November's durian, reaches "twelve" and stops without finishing. The company answers: "Last order? Not yet, not yet."</p><p>You count the sticks after you have finished the satay, and a year can only be counted once it is over.</p><p>Back to the question from the beginning: how long can a packet of tissues hold a seat? Kelvin was right in January. Tissues can't hold a seat forever. But as long as someone puts down a fresh packet every Friday, the seat stays taken. What really keeps your seat is the person who keeps coming back to replace the tissues.</p>
+<div class="endings" id="endings">
+  <p class="end-ask" id="end-ask">This section ends two ways, depending on the ending you pick:</p>
+  <div class="end-tabs" role="group" aria-label="Choose an ending">
+    <button type="button" data-end="stay" aria-pressed="false"><b>Stay</b><span>留下</span></button>
+    <button type="button" data-end="go" aria-pressed="false"><b>Go home</b><span>回去</span></button>
+  </div>
+  <div class="end-body" data-end="stay" hidden><p class="end-kicker">Ending A · Stay</p><p>You chose Stay. Here is the last picture of the year. At four o'clock the rain stops, Summer sits on the red stool and sets a fresh packet of tissues, perfectly straight, on the other side of the table. Uncle Tan's handful of salt put his son on the plane to London. Summer's packet of tissues keeps a place for him to come back to. In January she only wanted to borrow a chair for a year. Twelve Fridays later, nobody thinks of that chair as borrowed.</p></div>
+  <div class="end-body" data-end="go" hidden><p class="end-kicker">Ending B · Go home</p><p>You chose Go home. Here is the last picture of the year. At four o'clock the rain stops, and Kelvin takes out an unopened packet of tissues and puts it down at an angle on the half of the table where Summer sat twelve times. Uncle Tan salted the satay so his son could leave. Now Kelvin is free to go, and he stays. Uncle Tan stayed because he had to. Kelvin stays because he chooses to. In the end, what the salt gave him was a choice.</p></div>
+</div>
+<div class="verdict"><span class="stars" aria-label="Five stars">★★★★★</span><p class="ps">On the last line of the notebook, in red pen: except the satay page. Too salty.</p></div></section>
+      <aside class="receipt" aria-label="The bill"><p class="r-head">NEWTON CIRCUS<br>#01-12 · TAN'S SATAY</p><p class="r-sub">Fridays · from 16:00, after the rain</p><ul><li><span>Sugarcane juice (pressed twice)</span><b>×1</b></li><li><span>Oyster omelette (second plate noted)</span><b>×2</b></li><li><span>Prata</span><b>×1</b></li><li><span>Iced coffee (in a bag, no umbrella)</span><b>×1</b></li><li><span>Milo dinosaur (first to laugh pays)</span><b>×1</b></li><li><span>Stingray (just a little short)</span><b>×1</b></li><li><span>Nasi lemak</span><b>×2</b></li><li><span>Char kway teow (four languages)</span><b>×1</b></li><li><span>Tau huay (page left blank)</span><b>×1</b></li><li><span>Chilli crab</span><b>×1</b></li><li><span>Fried mantou, one more</span><b>×2</b></li><li><span>Durian (no iced water)</span><b>×1</b></li><li><span>Satay (a bit salty)</span><b>×8</b></li><li class="free"><span>Tissues</span><b>free</b></li></ul><p class="r-total"><span>Sticks</span><b>12</b></p><p class="r-total"><span>Total</span><b>one year</b></p><p class="r-foot">Thank you · see you next Friday</p></aside>
+    </article>
+    <nav class="rail" aria-label="Contents">
+      <svg class="plate" id="plate" viewBox="0 0 200 120" aria-hidden="true"></svg>
+      <p class="plate-label" id="plate-label">Nothing eaten yet</p>
+      <ol class="toc" id="toc"><li><a href="#s1"><span class="n">1</span>Chope: An Unwritten Contract</a></li><li><a href="#s2"><span class="n">2</span>Small Island, Big Island</a></li><li><a href="#s3"><span class="n">3</span>A Calendar Without Winter</a></li><li><a href="#s4"><span class="n">4</span>The One Who Gives Marks</a></li><li><a href="#s5"><span class="n">5</span>Two People Letting Go at Once</a></li><li><a href="#s6"><span class="n">6</span>One Plate, Four Languages</a></li><li><a href="#s7"><span class="n">7</span>Where the Dish Comes From, the Song Comes From</a></li><li><a href="#s8"><span class="n">8</span>A Year in the Life of a Packet of Tissues</a></li><li><a href="#s9"><span class="n">9</span>The Physics in the Names</a></li><li><a href="#s10"><span class="n">10</span>Jokes Only Singaporeans Will Get</a></li><li><a href="#s11"><span class="n">11</span>Two Endings, One Set of Odds</a></li><li><a href="#s12"><span class="n">12</span>Counting the Sticks</a></li></ol>
+    </nav>
+  </div>
+  <div class="mini" id="mini" aria-hidden="true"><svg id="plate-mini" viewBox="0 0 200 120"></svg><span id="mini-label">0 / 12</span></div>
+
+  <footer><span>© 2026 Gaussian’s music · Five-Foot Way is an imaginary magazine</span><a href="./#ending">Back to choose an ending →</a></footer>
+</div>
+<script>
+/* switching edition also switches the main site's language */
+document.getElementById("lang-link").addEventListener("click",()=>{try{localStorage.setItem("nc-lang","zh");}catch(e){}});
+try{localStorage.setItem("nc-lang","en");}catch(e){}
+
+/* plate of satay sticks: one stick per section read */
+const NS="http://www.w3.org/2000/svg";
+function drawPlate(svg,n){
+  svg.innerHTML='<ellipse cx="100" cy="78" rx="92" ry="34" fill="var(--paper)" stroke="var(--rule)"/>'+
+    '<ellipse cx="100" cy="76" rx="70" ry="23" fill="none" stroke="var(--rule)" stroke-dasharray="3 4"/>';
+  for(let i=0;i<n;i++){
+    const x=40+i*10.5, tilt=(i%3-1)*4, y=58+(i%2)*6;
+    const g=document.createElementNS(NS,"g");
+    g.setAttribute("transform",`rotate(${-18+tilt} ${x} ${y})`);
+    g.innerHTML=`<line x1="${x}" y1="${y-30}" x2="${x}" y2="${y+22}" stroke="#b98a52" stroke-width="2" stroke-linecap="round"/>`;
+    svg.appendChild(g);
+  }
+}
+const secs=[...document.querySelectorAll(".stick")];
+const tocLinks=[...document.querySelectorAll("#toc a")];
+const label=document.getElementById("plate-label"), mini=document.getElementById("mini-label");
+let shown=-1;
+function update(){
+  const vh=innerHeight;let read=0,here=0;
+  secs.forEach((s,i)=>{const r=s.getBoundingClientRect(); if(r.bottom<vh*.55) read=i+1; if(r.top<vh*.4) here=i;});
+  if(innerHeight+scrollY>=document.body.scrollHeight-4) read=12;
+  tocLinks.forEach((a,i)=>{a.classList.toggle("done",i<read);a.classList.toggle("here",i===here);});
+  if(read===shown) return; shown=read;
+  drawPlate(document.getElementById("plate"),read);
+  drawPlate(document.getElementById("plate-mini"),read);
+  label.textContent=read===0?"Nothing eaten yet":read===12?"Twelve sticks. Last order":`${read} sticks done`;
+  mini.textContent=`${read} / 12`;
+}
+addEventListener("scroll",update,{passive:true});addEventListener("resize",update);update();
+
+/* the last stick follows the ending chosen on the main page */
+const ask=document.getElementById("end-ask");
+const tabs=[...document.querySelectorAll(".end-tabs button")];
+function showEnd(k,save){
+  tabs.forEach(b=>b.setAttribute("aria-pressed",b.dataset.end===k));
+  document.querySelectorAll(".end-body").forEach(d=>d.hidden=d.dataset.end!==k);
+  ask.textContent=save?"Or try the other ending:":"The ending you chose on the main page:";
+  if(save) try{localStorage.setItem("nc-end",k);}catch(e){}
+}
+tabs.forEach(b=>b.onclick=()=>showEnd(b.dataset.end,true));
+try{const e=localStorage.getItem("nc-end");
+  if(e==="stay"||e==="go") showEnd(e,false);
+  else ask.textContent="This section ends two ways. You haven't chosen an ending on the main page yet, so pick one here:";
+}catch(e){}
+</script>
+</body>
+</html>
